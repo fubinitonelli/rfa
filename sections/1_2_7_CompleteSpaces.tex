@@ -1,0 +1,89 @@
+%!TEX root = ../main.tex
+\subsubsection{Complete spaces}
+
+Another property for metric spaces is completeness. To define such property we have to consider the sequences that do not \textit{oscillate} nor \textit{diverge}: those sequences are the following:
+
+\begin{defn}
+    Let $(X,d)$ be a metric space.\\
+     A sequence$\{x_n\} \subset X$ is a \emph{fundamental sequence} (or Cauchy sequence) if:
+    $$\forall \varepsilon > 0 \quad \exists \, \bar n  = \bar n (\varepsilon): \ m,n > \bar n \implies d(x_m, x_n) < \varepsilon \quad \forall n$$
+    or, equivalently, considering $m=n+p$:
+    $$\forall \varepsilon > 0 \quad \exists \, \bar n  = \bar n (\varepsilon): \ m,n > \bar n \, \wedge\, p \in \NN \implies d(x_n, x_{n+p}) < \varepsilon \quad \forall p.$$
+\end{defn}
+
+From this we can make some considerations. As a converging sequence tends to get closer and closer to a point, we wonder what is the relation between converging and fundamental sequences
+
+\begin{prop}
+	Let $(X,d)$ be a metric space.\\
+	If the sequence $\{x_n\} \subset X$ converges, then it is a fundamental sequence.\\
+	The converse is not true.
+\end{prop}
+Moreover we have:
+
+\begin{prop}
+	Any fundamental sequence is bounded.
+\end{prop}
+\begin{prop}
+	A fundamental sequence is convergent if and only if exists a convergent subsequence.
+\end{prop}
+The reader should prove that proposition: it's really simple!
+
+We have to understand why some fundamental sequences does not converges. Sequences can be seen as a subset of elements, and for convergence we need a notion of distance: we have to investigate into the metric space in which sequence are defined.
+\begin{defn} \label{complete-space-defn}
+    A metric space $(X,d)$ is \emph{complete} if every fundamental sequence in $X$ converges to a limit in $X$. 
+\end{defn}
+
+So, if a space is not complete, the problem can lie in the set or in the distance. Consider the following examples.
+
+\begin{exam}
+    The metric space $(\RR, d_e)$ is complete, while $(\QQ,d_e)$ is not; consider the sequence $(1+\frac 1 n)^n$. This sequence is fundamental and for $n \to \infty$ it converges to  $e \notin \QQ$.
+    
+    The metric space $((0,1), d_e)$ is not complete because $\frac 1 n \xrightarrow{n \to \infty} 0 \notin (0,1)$. 
+\end{exam}
+
+\begin{exam}
+    The metric space $(\RR, d)$ with $d(x,y)=|e^x-e^y|$ is not complete. 
+    Here the problem lies in the distance.
+    
+    Consider the sequence $\{x_n\}$ with $x_n=-n$.
+    The sequence is fundamental indeed:
+    $$ d(x_n, x_{n+p}) \xrightarrow{n \to +\infty} 0 \quad \forall p.$$
+    
+    However, it is not convergent:
+    if $x_n \xrightarrow{d} x_0$ we expect that $d(x_n,x_0) \to 0$
+    but we have
+    $$d(x_n,x_0) = |e^{-n}-e^{x_0}|\to e^{x_0} \neq 0 \quad \forall x_0 \in \RR.$$
+\end{exam}
+
+\todo{insert ref to the exercises, in which we discuss completeness of functional set}
+
+Any metric space $(X,d)$ admits a ``completion'' $(\tilde X, d)$. This is a complete metric space such that $X$ is dense in $\tilde X$.
+
+The following theorem characterize the subspaces of complete metric spaces.
+
+\begin{prop}
+    Let $(X,d)$ be a complete metric space and $E\subset X$.\\
+    The metric space $(E,d)$ is complete if and only if $E$ is closed.   
+\end{prop}
+\begin{proof}
+	Recall that in metric space closure is equivalent to sequentially closure (see proposition \vref{sequentially-closed-spaces-proposition}).
+	
+	\textit{Necessary condition} $\implies$:\\
+    Let $\{x_n\}_n\subset E$ such that $x_n \to x^\star$. We have to prove $x^\star \in E$.\\
+    Since sequence converges, then is fundamental in $E$, which is, by hypothesis, complete with respect to $d$.\\
+    Than we have $x_n \to x^\star \in E$ so that $E$ is closed.
+    
+    \textit{Sufficient condition} $\impliedby$:\\
+    Let $\{x_n\}_n \subset E$ be fundamental in $(E, d)$, in particular $\{x_n\}_n$ is fundamental in $(X,d)$.\\
+    As $(X,d)$ is complete, it exists $x^\star$ such that $x_n\to x^\star \in X$.\\ 
+    But $E$ is closed, so $x^\star \in E$ and the thesis is proved.
+\end{proof}
+
+For the sake of a complete discussion, we present the first Cantor's intersection theorem, which is a characterizations, a necessary and sufficient condition to completeness.
+
+\begin{theo}[Cantor's intersection theorem I]
+    Let $(X,d)$ be a metric space.\\
+    It is complete if and only if:
+    \[\forall \{E_n\}_{n\in\NN} \subset \Pc(X) : \quad E_{n+1} \subset E_n \ \wedge \ \text{diam}(E_n) \xrightarrow{n\to \infty} \varnothing \]
+    \[ \exists \, x^\star \in X : \bigcap_{n\geq 1}E_n= \{x^\star\}.\]
+\end{theo}

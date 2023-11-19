@@ -1,0 +1,127 @@
+%!TEX root = ../main.tex
+\subsubsection{Derivative of a measure: definitions}\label{derivative-of-a-measure}
+
+\paragraph{Measures defined through measurable functions} Here we see how a positive measurable function can provide an alternative measure.
+
+\begin{theo}
+	Let  $\phi: \Omega \to \left[0, +\infty\right]$ be a measurable function. Consider:
+	$$\nu(E)\coloneqq\int_E \phi \,\de\mu \quad \text{for all } E \in \mm.$$
+	Then, for any measurable function $f : \Omega \to \left[0, +\infty\right]$, $\nu(E)$ is a measure on $\mm$, and we have:
+	$$\int_\Omega f \,\de\nu = \int_\Omega f \phi \,\de\mu.$$
+\end{theo}
+
+\begin{proof} \textit{Step 1, $\nu(E)$ is a measure on $\mm$}:\\
+	It is easy to see that $\nu(\varnothing)=0 < +\infty$.\\
+	Consider a sequence of mutually disjoint set $\{E_j\}_{j \in \NN} \subset\mm$ with $E=\bigcup_{j \in \NN}E_j$; using the monotone convergence for series (see corollary \vref{theo-beppo-series}), we have:
+	\begin{align*}
+		\nu(E) &= \int_E\phi \,\de\mu
+		= \int_\Omega \phi \Ind_E \,\de\mu
+		= \int_\Omega \sum_{j\in \NN}\phi \Ind_{E_j} \,\de\mu\\
+		&= \sum_{j\in \NN} \int_\Omega \phi \Ind_{E_j} \,\de\mu
+		= \sum_{j \in \NN} \int_{E_j} \phi \, \de \mu
+		= \sum_{j\in \NN} \nu(E_j)
+		;
+	\end{align*}
+	
+	thus $\nu$ is countably additive.
+	
+	\textit{Step 2, exchange of measures}:\\
+	Now let us focus on the second thesis of the theorem. It is enough to prove it when $f=\Ind_E$ with $E \in \mm$; then it can be easily extended to simple function and finally to positive functions by its approximation property. We have:
+	$$
+	\int_\Omega\Ind_E \,\de\nu 
+	= \int_E d \nu 
+	= \nu(E) 
+	= \int_E \phi \,\de\mu 
+	= \int_\Omega \phi \Ind_E \,\de\mu;$$
+	that conclude the proof.
+\end{proof}
+
+In the first part of this proof we proved the following.
+\begin{coro}
+	Let $\phi$ be a positive and measurable function, and consider a sequence of disjoint sets $\{E_n\}_{n\in\NN}$. Then:
+	$$\int_{\cup_{n \in \NN} E_n} \phi\, \de\mu = \sum_{n\in\NN}\int_{E_n} \phi \, \de\mu.$$
+\end{coro}
+
+
+\paragraph{Radon--Nikodym derivative} Suppose to have two measure, and we need to represent one in terms of the other. Possibly through an integral. This is possible by the followings.
+\begin{defn}
+	Consider a complete measure space $(\Omega,\mm,\mu)$ and a non-negative measurable function $\phi: \Omega \to [0,+\infty]$. If $\nu$ is such that:
+	$$
+		\nu(E) 
+		= \int_E \phi \, \de \mu 
+		\quad \text{for all }  E
+	.
+	$$
+	Then $\phi$ is called \emph{Radon--Nikodym derivative} of $\nu$ with respect to $\mu$ and it is denoted by $\frac {\de\nu }{\de\mu}$.
+\end{defn}
+The integrand function is called ``derivative'' due to the analogy with the first fundamental theorem of calculus (see theorem \vref{theo-first-fundamental-calculus}) for which we have $F(x) = \int_a^x F'(t) \,\dt$.
+
+For any measurable function $f:\Omega \to \left[0,+\infty\right]$ we can write:
+\[
+	\int_E f \,\de\nu =\int_E f \phi \,\de\mu = \int_E f \, \frac{\de\nu}{\de\mu} \,\de\mu
+\]
+
+Since we give the definition of Radon--Nikodym derivative, we ask ourselves if such function exists positive and measurable. We start observing that whenever the measure $\mu$ is zero on a set $E$, $\nu(E)$ must be zero too (otherwise we would have a null denominator and a non-null denominator). Indeed, if $\int_E f \,\de\nu = \int_E f \, \tfrac{\de\nu}{\de\mu} \,\de\mu$, then we require:
+$$
+	\mu(E) 
+	= 0 
+	\implies 
+	\nu(E)
+	= 0 
+	\quad \text{for all } E \in \mm
+.
+$$
+This motivates the following definition.
+
+\begin{defn}
+	We say that a measure $\nu$ is \emph{absolutely continuous} with respect to $\mu$, and we write $\nu \ll \mu$, if:
+	$$
+		\mu(E) 
+		= 0 
+		\implies \nu(E)
+		= 0 
+		\quad \text{for any } E \in \mm
+	.
+	$$
+\end{defn}
+In plain language, a measure $\nu$ is absolutely continuous with respect to $\mu$ if on all the sets for which $\mu$ is zero, $\nu$ is also zero.
+
+This property holds when a measure can ``control'' the zero of another measure, it acquire a great meaning when considered with the previous definition: the measure $\mu$ controls the measure $\nu$ which was defined through $\mu$.
+
+However, the condition $\nu \ll \mu$ is not sufficient alone for the existence of $\frac{\de\nu}{\de\mu}$; a sufficient condition for its existence in stated by the following theorem.
+
+\begin{theo} [Radon--Nikodym] \label{theo-radon-nikodym}
+	Let $(\Omega, \mm,\mu)$ be a complete measure space, and $\nu$, $\mu$ two measures on $(\Omega, \mm)$.\\
+	If $\mu$ is $\sigma$-finite and $\nu\ll\mu$, then the Radon--Nikodym derivative $\frac{\de\nu}{\de\mu}$ exists.
+\end{theo} 
+
+See definition \vref{defn-positive-measure} for $\sigma$-finite. The theorem will be proved later on section \vref{proof-radon-nikodym}.
+
+If $\mu$ is not $\sigma$-finite, then the existence of $\frac{\de\nu}{\de\mu}$ is not guaranteed.\\	
+Indeed, consider the measure space $(\left[0,1\right],\Lc(\left[0,1\right]),\mu_c)$
+where $\mu$ is the counting measure and let $\nu =\lambda\ll\mu_c$.
+You can prove that there is no measure $\phi:\left[0,1\right] \to \left[0,+\infty\right]$ such that $\lambda(E) = \int_E \phi \, \de \mu_c \quad \forall E \in \Lc(\left[0,1]\right)$.
+	
+We will see that this is a powerful generalization of the second fundamental theorem of calculus (see theorem \vref{theo-2nd-found-calc}).
+%\todo{Consider the following points}
+%
+%!!!! It is placed here (after fatou's lemma) because it is natural the possibility of define a measure from a measure using the integral
+%
+%!!!! It is an extension of the second fundamental theorem of calculus
+%
+%
+%\begin{defn}
+%	We say that $\mu$ is \emph{$\sigma$-finite} if there exists a sequence $\{E_j\}_{j \in \NN} \subset \mm$ such that:
+%	$$\bigcup_{j\in\NN} E_j = \Omega \quad \text{and} \quad \mu(E_j) < +\infty \quad \forall j \in \NN$$
+%\end{defn}
+%
+%\medskip
+%\begin{exam}
+%	\begin{enumerate}
+%		\item The Lebesgue measure on $\RR^N$ is $\sigma$-finite;
+%		\item the counting measure on $(\NN, \Pc(\NN)) $ is $\sigma$-finite;
+%		\item the counting measure on $(\RR, \Lc(\RR)) $ is not $\sigma$-finite.
+%	\end{enumerate}
+%\end{exam}
+%
+%The following theorem states the sufficient conditions for the existence of $\frac{\de\nu}{\de\mu}$.

@@ -1,0 +1,254 @@
+%!TEX root = ../main.tex
+\subsubsection{Magnitude and Infinities}
+
+Here we provide a quote from Galileo's ``Two New Sciences'' in which a paradox caused by the common idea of infinity set is presented. The characters of this dialogue are: \textit{Simplicio}, who is the stereotype of scientist of his period, \textit{Salviati}, who is the voice of Galileo, and \textit{Sagredo}, who acts like a moderator:
+
+\begin{quote}
+	\textit{Simplicio}: Here a difficulty presents itself which appears to me insoluble. Since it is clear that we may have one line greater than another, each containing an infinite number of points, we are forced to admit that, within one and the same class, we may have something greater than infinity, because the infinity of points in the long line is greater than the infinity of points in the short line. This assigning to an infinite quantity a value greater than infinity is quite beyond my comprehension.\\
+	\textit{Salviati}: This is one of the difficulties which arise when we attempt, with our finite minds, to discuss the infinite, assigning to it those properties which we give to the finite and limited; but this I think is wrong, for we cannot speak of infinite quantities as being the one greater or less than or equal to another. To prove this I have in mind an argument which, for the sake of clearness, I shall put in the form of questions to Simplicio who raised this difficulty. I take it for granted that you know which of the numbers are squares and which are not.\\
+	\textit{Simplicio}: I am quite aware that a squared number is one which results from the multiplication of another number by itself; thus 4, 9, etc., are squared numbers which come from multiplying 2, 3, etc., by themselves.\\
+	\textit{Salviati}: Very well; and you also know that just as the products are called squares so the factors are called sides or roots; while on the other hand those numbers which do not consist of two equal factors are not squares. Therefore if I assert that all numbers, including both squares and non-squares, are more than the squares alone, I shall speak the truth, shall I not?\\
+	\textit{Simplicio}: Most certainly.\\
+	\textit{Salviati}: If I should ask further how many squares there are one might reply truly that there are as many as the corresponding number of roots, since every square has its own root and every root its own square, while no square has more than one root and no root more than one square.\\
+	\textit{Simplicio}: Precisely so.\\
+	\textit{Salviati}: But if I inquire how many roots there are, it cannot be denied that there are as many as the numbers because every number is the root of some square. This being granted, we must say that there are as many squares as there are numbers because they are just as numerous as their roots, and all the numbers are roots. Yet at the outset we said that there are many more numbers than squares, since the larger portion of them are not squares. Not only so, but the proportionate number of squares diminishes as we pass to larger numbers, Thus up to 100 we have 10 squares, that is, the squares constitute 1/10 part of all the numbers; up to 10000, we find only 1/100 part to be squares; and up to a million only 1/1000 part; on the other hand in an infinite number, if one could conceive of such a thing, he would be forced to admit that there are as many squares as there are numbers taken all together.\\
+	\textit{Sagredo}: What then must one conclude under these circumstances?\\
+	\textit{Salviati}: So far as I see we can only infer that the totality of all numbers is infinite, that the number of squares is infinite, and that the number of their roots is infinite; neither is the number of squares less than the totality of all the numbers, nor the latter greater than the former; and finally the attributes ``equal'', ``greater'', and ``less'', are not applicable to infinite, but only to finite, quantities. When therefore Simplicio introduces several lines of different lengths and asks me how it is possible that the longer ones do not contain more points than the shorter, I answer him that one line does not contain more or less or just as many points as another, but that each line contains an infinite number.
+	\begin{flushright}
+		{\footnotesize Galileo Galilei, Two New Sciences, 1638}
+	\end{flushright}
+\end{quote}
+
+\paragraph{Magnitude of sets}
+
+We introduce some definitions in order to construct a rigorous classification of sets based on their ``largeness''.
+
+\begin{defn}
+	We say that sets $X$ and $Y$ have the \emph{same power} or are \emph{equipotent}, and we write ``$A \sim B$'', if there exists a bijection  $f: X\to Y$.
+\end{defn}
+
+So when we can establish a one-to-one correspondence between two sets, these sets have the same power.
+
+Now we pose the problem: how to recognize if a set contains an infinite number of elements? Well, the answer is exactly the definition of infinite set, which was provide by Dedekind, like lots of other results in this area:
+
+\begin{defn}[by Dedekind]
+	A set $X$ is an \emph{infinite} set if it is equipotent to one or more of its proper subsets. Otherwise $X$ is called \emph{finite}.
+\end{defn}
+
+Notice that if two set are finite, they are equipotent if and only if they have the same number of elements.
+
+
+\begin{exam}
+The set $\NN$ is infinite, indeed $\PP=\{2n : n\in \NN\}\subsetneq \NN$, and 
+$$
+	f:\NN \to \PP,
+	\quad f:n \mapsto 2n
+$$ 
+is a bijection.
+\end{exam}
+\begin{exam}
+The set $\RR$ is infinite, indeed 
+$$
+	f\left(x\right)
+	=\frac 1 \pi \arctan \left(x\right)+\frac 1 2,
+	\quad x\in \RR,
+	\quad f: \RR \to \left(0,1\right)
+$$
+is a bijection.
+\end{exam}
+
+
+\paragraph{Countable and uncountable sets}
+Not all infinite sets contains the ``same number'' of elements: there are some infinite sets that are ``larger'' than others. Let's introduce a distinction between infinite sets:
+
+\begin{defn}[by Dedekind]
+	A set is \emph{countable}\footnotemark{} if it is equipotent to $\NN$ or to one of its subsets.\\ Otherwise, the set is called \emph{uncountable}.
+\end{defn}
+\footnotetext{\itatrasl{numerabile}}
+
+Then we can say that all finite sets are countable. As we will examine later, countably infinite sets are the ``smallest'' kind of infinite set. Indeed, one can prove the following:
+\begin{prop}
+	Every infinite set contains a countably infinite subset.
+\end{prop}
+
+\begin{exam}
+	The sets $\NN$, $\ZZ$, $\QQ$ are countable.
+\end{exam}
+\begin{exam}
+	The set of \emph{algebraic numbers} $\Ac$ is the set whose elements are roots of an algebraic polynomial with rational coefficients. This set is countable; to prove that, notice that countable unions of countable sets are also countable. See \vref{prop-algebraic-numbers-countable} for further reading.\\
+	Observe that $\QQ \subsetneq \Ac$, indeed $\sqrt{2}\in \Ac$ while $\sqrt{2}\notin \QQ$, it is enough to consider the polynomial $P(x)=x^2-2$.
+\end{exam}
+\begin{exam}
+	The set $\RR$ is uncountable. This is proved by contradiction: the proof is known as \textit{Cantor's argument}.
+\end{exam}
+\begin{exam}
+	The set $\RR \setminus \Ac$ is uncountable. The elements of this set, such as $\pi$ and $e$, are called \emph{transcendent numbers}.
+\end{exam}
+
+\paragraph{Cardinal numbers}
+
+As we understand that exists sets that are bigger than others and sets that are equal between them, we want to find a label that represent how big are the set. To do that we have to extend the notion of natural numbers:
+
+\begin{defn}
+	The \emph{cardinality} of a set $X$, or its \emph{cardinal number}, is the equivalence class of all the sets which are equipotent to $X$.
+	This is denoted by $m(X)$, where $m$ stands for magnitude.
+\end{defn}
+
+If $X$ is finite, them $m\left(X\right)$ is identified by the numbers of elements in $X$.\\
+As the cardinal numbers are a proper extension of the natural number, of course we are going to see if an ordering is possible also for cardinals.\\
+Now consider two sets, $A$ and $B$ such that either:
+\begin{itemize}
+	\item $A$ and $B$ are equipotent: $A \sim B$;
+	\item $A$ is in some sense ``smaller'' than $B$, that is: $$(\exists \, \tilde B \subset B : \tilde B \sim A) \wedge (\nexists \tilde A \subset A : \tilde A \sim B)$$ (that is, it does exists a subset of $B$ that is equipotent to $A$, but at the same time it does not exists a subset of $A$ that is equipotent to $A$);
+\end{itemize}
+in this case we can introduce a partial order in the set of cardinal number by setting: $$m(A) \preceq m(B).$$
+
+So we succeed in introducing a partial order, but can we introduce also a total ordering among the cardinals?
+\begin{theo}[Cantor--Bernstein] \label{cantor-bernstein-theorem}
+	These two propositions hold:
+	\begin{itemize}
+		\item 	if $(\exists \, \tilde B \subset B : \tilde B \sim A) \wedge (\exists \, \tilde A \subset A : \tilde A \sim B)$, then $m\left(A\right)=m\left(B\right)$;
+		\item 	it never happens that $(\nexists \tilde B \subset B : \tilde B \sim A) \wedge (\nexists \tilde A \subset A : \tilde A \sim B)$.
+	\end{itemize}
+\end{theo}
+
+The second point is not universal, it depends on which axioms are chosen during the development of the theory. Specifically, to have the second proposition, we assume the \textit{axiom of choice}, which will be discussed later (see definition \vref{axiom-of-choice}). By using this axiom, we can introduce a total order among the cardinals, as well as sum and multiplication operations:
+$$m\left(A\right)+m\left(B\right) \coloneqq m\left(A\cup B\right), \qquad m\left(A\right) \cdot m\left(B\right) \coloneqq m\left(A\times B\right).$$
+Those operation are associative and commutative.
+
+There is not an upper limit to the cardinal numbers, as there is not a ``largest set'': this because whatever set do you consider, its power set has a greater cardinality. This was proved by Cantor (see proposition \vref{magnitude-of-power-set}):
+
+\begin{theo}[Cantor]
+	For any set $X$:
+	$$m\left(X\right) \preceq m\left(\Pc\left(X\right)\right)\quad \text{ and }\quad m(X) \neq m(\Pc(X)).$$
+\end{theo}
+
+
+It can be proven that:
+\begin{prop} \label{magnitude-of-power-set}
+	Let $X$ be a set. The magnitude of $\Pc(X)$ is $2^{m(X)}$:
+	$$m(\Pc(X)) = 2^{m(X)}.$$
+\end{prop}
+
+\paragraph{Magnitude of $\NN$} We are now going to discuss the magnitude of two important numerical sets: the set of natural numbers and the set of real numbers. The ``smallest'' kind of infinite belongs to the set $\NN$ and has an appropriate name:
+\begin{defn} 
+	The magnitude of the set of natural numbers is called \emph{aleph-zero}:
+	$$\aleph_0 \coloneqq m(\NN).$$ \label{continuum}
+\end{defn}
+
+As we said before, it does always exists a larger set: it can be proven that the set of real numbers is equipotent to the power set of natural numbers, see proposition \vref{RR-equipotent-power-set-NN}. 
+
+\paragraph{Magnitude of $\RR$} Also the cardinality of the set of real numbers has its own symbol, first acknowledge this concept.
+
+\begin{prop}\label{RR-equipotent-power-set-NN}
+	The set or real numbers is equipotent to the power set of natural numbers:
+	$$\RR \sim \Pc(\NN).$$
+\end{prop}
+\begin{proof}
+	We have to prove that $|\Pc(\NN)| = |\RR|$.
+	
+	\textit{Proof of $|\RR|=|(0,1)|$}:\\
+	To prove this is sufficient considering the following bijective function and its inverse:
+	$$f(x) = \frac 1 \pi \arctan x + \frac 1 2 \qquad f^{-1}(x) = \tan(\pi(x-\frac 1 2)).$$
+	
+	\textit{Proof of $|(0,1)| = |[0,1]|$}:\\
+	See proposition \vref{prop-RR-open-intervals-equipotent-closed-intervals} for the general case.
+	
+	\textit{Proof of $|[0,1]|=|\Pc(\NN)|$}:\\
+	Consider $x\in [0,1]$, it's binary expression is the following:
+	$$z= \sum_{k=1}^{\infty} \alpha_k \frac1{2^k}$$
+	where  $\alpha_k \in \{0,1\} \quad \forall k$.\\
+	To determine $\alpha_k$ we divide $[0,1]$ into $2^k$ intervals of length $\frac 1 {2^k}$:
+	$$I_1{(k)}=\left[0, \frac 1 {2^k}\right), \, 
+	I_2^{(k)}=\left[\frac 1 {2^k}, \frac 2 {2^k}\right) \,
+	\cdots \,
+	I_j^{(k)} = \left[\frac {j-1} {2^k}, \frac j {2^k}\right)  \,
+	\cdots \,
+	I_{2^k}^{(k)} = \left[\frac {2^k -1} {2^k}, 1\right)$$
+	So it exists a unique $j$ such that $x\in I_j^{(k)}$ and we choose $\alpha_k = 0$ if $j$ is odd or $\alpha_k = 1$ if j is even.\\
+	Now we define the map:
+	\begin{align*}
+	f:[0,1] & \to \Pc(\NN)\\
+	x & \mapsto A = \{n \in \NN: \alpha_n = 1\}
+	\end{align*}
+	and this is a bijection that ends the proof.
+\end{proof}
+
+So the set of real numbers is far more larger than the set of natural numbers, they are not equipotent and so $\RR$ is not countable. The following is the definition of its cardinality.
+\begin{defn}
+	The magnitude the set of real numbers is called \emph{continuum}:
+	$$c \coloneqq m(\RR) = 2 ^ {\aleph_0}.$$
+\end{defn}
+
+Now, due to Cantor theorem, there will be a more ``powerful'' infinite than the continuum, consider the magnitude of $\Pc(\RR)$. An interesting question is about the existence of an ``intermediate'' infinite between $\aleph_0$ and the continuum. We will see the answer to this question later.
+
+\begin{prop}\label{prop-RR-open-intervals-equipotent-closed-intervals}
+	Let $a,\,b \in \RR$, with $a<b$. Then:
+	$$\left[a,b\right]\sim\left(a,b\right)\sim\left[a,b\right)\sim\left(a,b\right].$$
+\end{prop}
+% \begin{proof}
+% 	How can we construct a bijection between these sets? Let $A=\left[a,b\right]$ and $B=\left(a,b\right)$.\\
+% 	We have to find $A_1$ such that $A_1 \subset A$ and $A_1 \sim B$, and $B_1$ such that $B_1 \subset B$ and $B_1 \sim A$.
+	
+% 	First of all we take $A_1=B$: this way $(a,b) \subset [a,b]$, $B \sim B$, and the first condition is satisfied. \\
+% 	We now have to build a proper $B_1$. We take:
+% 	$$B_1=\left[a+\varepsilon,b-\varepsilon\right] \qquad\text{with }\varepsilon \in \left(0, \frac{b-a}{2}\right)$$
+% 	We can be proved that $B_1 \sim A$. \todo{find a reference}
+% 	This way both the conditions are fulfilled, and $A\sim B$.
+% \end{proof}
+% \todo{confronta questo con le attuali lezioni. - sta roba è da completare}
+In general, it is not easy to construct a bijection between an open and a closed set. Indeed, it would not be continuous, as continuous functions are the ones which map open sets into open sets.
+
+\paragraph{Ordinal numbers}
+
+With cardinal number we labeled set according to how ``big'' they are. Now we want to label set according also to their order.
+
+\begin{defn}
+	Let $A$, $B$ be two totally ordered sets: $(A, \le), (B, \preceq)$. \\
+	We say that these sets have the same \emph{order} or \emph{type} if there is a bijection $f : A \to B$ which preserves order, namely:
+	$$\forall x,y \in A, \quad x \le y \implies f(x) \preceq f(y).$$
+\end{defn}
+
+If $A$ and $B$ have the same order, by definition they also have the same power. In general, the converse is not true. For instance, $\NN$ can be totally ordered in an uncountable number of ways: if we choose $A = B = \NN$ but two different total orders, $A$ and $B$ have obviously the same power, but an appropriate $f$ does not exist.
+
+\begin{defn}
+	Let $A$ be a totally ordered set. \\
+	We say that $A$ is \emph{well-ordered} if any non-empty subset of $A$ has a minimum.
+\end{defn}
+
+For example, $\NN$ is well-ordered with respect to its canonical order: we can find a minimum for each of its subsets. Instead, $\ZZ$ is not well-ordered with respect to its canonical order: for example, any half-line such as $\{ z \le 2 : z \in \ZZ \}$ has no minimum.
+
+We will now introduce the concept of \textit{ordinal numbers}, as we did with cardinals.
+
+\begin{defn}
+	An \emph{ordinal number} is a equivalence class of well-ordered sets with the same order.
+\end{defn}
+
+As for cardinals, if a well-ordered set is finite then its ordinal can be identified with the number of its element.
+
+The difference between cardinal numbers and ordinals is the same as the difference between ``one, two, three ...'' and ``first, second, third ...''.
+
+Ordinal numbers of infinite well-ordered sets are called \textit{transfinite}. The transfinite associated to $(\NN, \preceq_{canonical})$ is called $\omega$.
+
+How to define a total order among the ordinals? It's sufficient, among well-ordered set, to compare their cardinal numbers. If two sets $A$ and $B$ are well-ordered, then we can compare $m(A)$ and $m(B)$: then either $m(A) \preceq m(B)$ or $m(B) \preceq m(A)$; now consider $A$ and $B$ as representatives of their respective equivalence classes, and introduce an order for ordinals based on the cardinality of those representatives.
+
+We could introduce the operations of sum and multiplication among ordinals, but unlike cardinals, they would not be commutative.
+
+Having find a total order for ordinals by comparing them with the cardinal and, in a certain sense, using the total order among the cardinal to obtain a total order for the ordinals, we now must remember that this was possible only if we include the \textit{axiom of choice} in our theory (see theorem \vref{cantor-bernstein-theorem}). Indeed there is a theorem that closes the circle, and this theorem need that axiom to be proved:
+\begin{theo} [Zermelo]
+	Any set can be well ordered.
+\end{theo} 
+
+\paragraph{Extension of $\RR$} The set of real numbers can be extended to include the infinities;
+$$
+	\RR^\star 
+	\coloneqq \RR \cup \{-\infty, +\infty\}
+;
+$$
+in this case, the conventional extension of the arithmetization is as follows, considering $a \in \RR$:
+$$ 
+	a+\infty = +\infty+a = +\infty
+	\qquad 0 \cdot +\infty = 0
+	\qquad a \cdot +\infty = +\infty \text{if } a>0
+$$ 
+the multiplication's sign rule holds also in this cases.

@@ -1,0 +1,102 @@
+%!TEX root = ../main.tex
+
+%\usepackage[a4paper, twoside, left=3cm, right=2cm, top=3cm, bottom=2.5cm, showframe]{geometry} %A4
+\usepackage[
+	paperwidth=17cm,
+	paperheight=24cm,
+	twoside,
+	left=2.5cm,
+	right=2cm,
+	top=2.5cm,
+	bottom=3cm,
+	%showframe
+]{geometry} %17 X 24
+
+\usepackage{fancyhdr}
+
+% https://tex.stackexchange.com/questions/286541/how-to-properly-add-appendices-to-the-toc
+\usepackage[page,toc,titletoc,title]{appendix}
+
+\usepackage{setspace}
+
+\usepackage{ifthen}
+
+\usepackage{amsmath}
+\allowdisplaybreaks
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+
+\usepackage[english]{babel}
+\usepackage[colorlinks=true]{hyperref}
+
+\AtBeginDocument{
+	\ifthenelse{\boolean{stampa}}{
+		\hypersetup{linkcolor=black,urlcolor=black}
+	}{
+		\hypersetup{linkcolor=blue,urlcolor=blue}
+	}
+}
+
+\usepackage[nospace]{varioref} % after the babel package! [https://ctan.mirror.garr.it/mirrors/ctan/macros/latex/required/tools/varioref.pdf]
+
+\usepackage{placeins} % allows for using the \FloatBarrier
+\usepackage[small,sf,bf]{titlesec}
+\usepackage[parfill]{parskip}
+
+\usepackage{cancel}
+
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{bookmark}
+\usepackage{mathtools}
+\usepackage{accents}
+\usepackage{centernot}
+\usepackage{dsfont} %per indicatrice
+\usepackage[scr=boondox]{mathalfa}
+\usepackage{marginnote}
+\usepackage[textsize=tiny, textwidth=1.5cm]{todonotes} %add disable to options to not show in pdf
+\usepackage{xcolor}
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{fp}
+\usepackage{nicefrac}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\pgfplotsset{compat=1.14}
+\usetikzlibrary{hobby,arrows,patterns,calc,intersections,arrows.meta}
+
+\newcommand\DrawBlock[3]{
+\ifx#1b\relax
+  \path[draw]
+    (lm\the\numexpr#2-1\relax) -- ++(0,0,#3) coordinate (blocklf)
+    (bm\the\numexpr#2-1\relax) -- ++(0,0,#3) coordinate (blocklb)
+    (lm#2) -- ++(0,0,#3) coordinate (blockrf)
+    (bm#2) -- ++(0,0,#3) coordinate (blockrb);
+  \filldraw[fill=white,draw=black]
+    (lm\the\numexpr#2-1\relax) -- (blocklf) -- (blocklb) -- (blockrb) -- (blockrf) -- (lm#2);
+\else  
+  \ifx#1f\relax
+    \path[draw]
+      (fm\the\numexpr#2-1\relax) -- ++(0,0,#3) coordinate (blocklf)
+      (lm\the\numexpr#2-1\relax) -- ++(0,0,#3) coordinate (blocklb)
+      (fm#2) -- ++(0,0,#3) coordinate (blockrf)
+      (lm#2) -- ++(0,0,#3) coordinate (blockrb);
+    \filldraw[fill=white,draw=black]
+      (fm\the\numexpr#2-1\relax) -- (blocklf) -- (blocklb) -- (blockrb) -- (blockrf) -- (fm#2);
+  \fi
+\fi
+\draw (blocklf) -- (blockrf);
+}
+
+% Load widebar without loading the entire mathabx
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{<-> mathx10}{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareMathAccent{\widebar}{0}{mathx}{"73}
+
+%aggiunti
+\usepackage[footnoteinside = false]{mdframed} %per box teoremi
+\usepackage{footnote} %testing GG
+\usepackage{tabto}
+\usepackage{subcaption}

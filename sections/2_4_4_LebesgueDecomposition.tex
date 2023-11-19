@@ -1,0 +1,183 @@
+%!TEX root = ../main.tex
+\subsubsection{Further results}
+
+\paragraph{A general version of the change of variable} With this new knowledge we can improve our tools:
+\begin{theo}
+	Consider a function $g:[a,b]\to [c,d] \in AC([a,b])$, such that it is strictly monotone.\\
+	Then, for any $f:[c,d] \to \infty \in L^1([c,d])$ then:
+	$$\int_c^d f(t) \, \dt =  \int_a^b f(g(\tau))|g'(\tau) \,\dt = \int_a^b f(g(\tau))\,\de \mu$$
+	where $\frac{\de \mu}{\de \tau} = |g'|$, the Radon--Nikodym derivative.
+\end{theo}
+
+Notice that the fact that the composition of function is still Lebesgue-integrable is a part of the theorem: the compound function$(f\circ g)|g'|$ is measurable and integrable as a consequence of the assumptions, indeed we have:
+$$f \in L^1([c,d]) \iff (f\circ g)|g'|\in L^1([a,b]).$$
+The theorem also holds for $f$ just measurable and non-negative. In this case, $f$ is integrable in $[c,d]$ if and only if $(f\circ G) \, |G'|$ is integrable in $[a,b]$.
+
+
+\paragraph{A sufficient condition for absolute continuity} The following result holds\footnote{For further discussion, see: W. Rudin, Real and Complex Analysis, 1987, page 149, theorem 7.21.}:
+\begin{theo}
+	Let $f:[a,b]\in\RR \to \RR$. If $f$ is differentiable everywhere in $[a,b]$ and $f' \in L^1([a,b])$, then $f \in AC([a,b])$.
+\end{theo}
+
+Consider for example the following function:
+$$f(x) = \begin{cases}
+x^{\frac 3 2} \sin \frac 1 x & \text{if }x \in \left(0,1\right]\\
+0& \text{if }x=0.
+\end{cases}$$
+Its derivative exists everywhere:
+$$f'(x)= \begin{cases}
+\frac 3 2 \sqrt x \sin \frac 1 x - \frac {1}{\sqrt{x}} \cos \frac 1 x & \text{if }x\in\left(0,1\right] \\
+0 & \text{if }x=0;
+\end{cases}$$
+In $0$ we computed separately: $\frac{f(h)-f(0)}{h} = \frac{h^{\frac 3 2 } \sin \frac 1 h }{h} \to 0$ for $h \to 0^+$.\\
+So $f'$ is not continuous, but it is integrable in $([0,1])$, and thus $f \in AC([0,1])$. Observer also that $f$ is not lipschitz continuous.
+
+What if we have that $f$ is continuous, $f'$ exists a.e., and $f'$ is integrable in $[a,b]$? In this case $f$ might not be $AC([a,b])$: consider for example the Vitali--Cantor function (see definition \vref{Vitali-Cantor-function}).
+
+\paragraph{Comparison between Lebesgue and Riemann integral} There are plenty of definitions for integrals: now we make a comparison between the two integral that we already know. Consider, in this paragraph, the space $(\RR, \Lc(\RR), \lambda)$.
+\begin{theo}
+	Let $f:(a,b)\subset \RR \to \RR$ bounded. \\
+	Then $f$ is Riemann-integrable in $(a,b)$ if and only if $f$ is continuous a.e. in $(a,b)$.
+\end{theo}\footnote{For further discussion, see: W. P. Ziemer, Modern Real Analysis, 2017, page 153, theorem 6.19.}
+
+Notice for example that $\Ind_{\QQ \cap (a,b)}$ is not Riemann integrable, because it is nowhere continuous. But $\Ind_{\QQ \cap (a,b)}=0$ a.e. in $(a,b)$, it is Lebesgue-integrable, and $\int_a^b \Ind_{\QQ \cap (a,b)} \dlam =0$.
+
+More in general, if $f: (a,b) \to \RR$ is Lebesgue-measurable and bounded, then $f$ is Lebesgue integrable: indeed, $f$ is measurable.
+
+\begin{theo}
+	Let $f:(a,b)\subset \RR \to \RR$ be bounded and continuous a.e. in $(a,b)$. Then the Riemann integral and the Lebesgue integral coincide,\footnotemark{} namely:
+	$$ \underbrace{\int_a^b f(t) \,\dt}_{\text{Riemann}}
+	= \underbrace{\int_a^b f(t) \,\dlam}_{\text{Lebesgue}}.$$
+\end{theo}
+\footnotetext{For the proof, see: A. N. Kolmogorov, S. V. Fomin, Introductory Real Analysis, 1975, pages 309-310, theorem 4.}
+
+Consider for example the generalized Cantor set $T_\varepsilon$ of Lebesgue measure $3\frac{1-\varepsilon}{3-2\varepsilon}$. Then $\Ind_{T_\varepsilon}$ is bounded but it is not Riemann integrable since it's discontinuities at each point. Indeed, the interior of $T_\varepsilon$ is empty and $\Ind_{T_\varepsilon}$ has no limit as $x\to x_0$ for any $x_0 \in T_\varepsilon$. Moreover $\Ind_{T_\varepsilon}$ is Lebesgue integrable in $[0,1]$ but it is not equal almost everywhere to any Riemann integrable function.
+
+Let us now focus on improper Riemann integrals:
+\begin{theo}
+	Let $f: (a,b) \subseteq \RR \to \RR$, with $a,b\in \RR^\star : a< b$.\\
+	If $f$ is Riemann integrable in $(a,b)$ in the improper sense and it changes its sign at most a finite number of times, then $f$ is Lebesgue integrable in $(a,b)$ and the two integrals coincide.
+\end{theo}
+
+If $f$ changes sign an infinite number of times then the Riemann improper integral can exists but $f$ might not be Lebesgue measurable. Consider the following function:
+$$f(t)
+=\frac {\sin t}{t}
+\quad t \in (0,+\infty).$$
+Then $f$ is Riemann-integrable as $\lim\limits_{a \to +\infty} \int_0^a f(t) \,\dt$ exists. However, it is not integrable, indeed:
+$$ \int_0^{+\infty} \left| \frac{ \sin t}{t} \right| \dlam 
+= \int_0^{+\infty}\frac 1 t \dlam
+= +\infty.$$
+	
+\begin{proof}
+	Suppose $f>0$. We can find two sequences, $\{a_n\}_{n\in \NN}$ and $\{b_n\}_{n\in \NN}$, such that $a_n < b_n$, $a_n \downarrow a$, $b_n \uparrow b$, and $(a,b)=\bigcup_{n\in \NN} (a_n,b_n)$. Suppose $f$ is bounded on $(a_n,b_n) \ \forall n \in \NN$.\\
+	Therefore $f$ is Riemann integrable on each $(a_n,b_n)$ and we have:
+	$$\underbrace{\int_{a_n}^{b_n} f(t) \,\dt}_{\text{Riemann}}
+	= \underbrace{\int_{a_n}^{b_n} f(t) \,\dlam}_{\text{Lebesgue}}
+	\quad \forall n \in \NN.
+	$$
+	Set $F_n = \bigcup_{j=0}^n (a_j,b_j)$ and $f_n = f \Ind_{F_n}$. Then $f_n \uparrow f$ and, using monotone convergence, we have:
+	$$\lim_{n \to \infty} \int_a^b f_n(t) \,\dlam
+	= \lim_{n \to \infty} \int_{a_n}^{b_n} f(t) \,\dlam
+	= \int_a^b f(t) \,\dlam.
+	$$
+	By definition of Riemann improper integral, we have:
+	$$\int_a^b f(t) \,\dt
+	= \lim_{n \to \infty} \int_{a_n}^{b_n} f(t) \,\dt.
+	$$
+	Putting all together, we get the thesis:
+	$$\lim_{n \to \infty} \int_a^b f_n(t) \,\dlam 
+	= \lim_{n \to \infty} \int_{a_n}^{b_n} f(t) \,\dt.
+	$$
+\end{proof}
+
+Consider now some examples: the function
+$$f(t)=\begin{cases}
+	\sin(t) & \text{if } t \in \RR \setminus \ZZ \\ 
+	+ \infty & \text{if } t \in \ZZ^+ \\ 
+	- \infty & \text{if } t \in \ZZ_-	
+	\end{cases} $$
+ is essentially bounded and continuous a.e. in $\RR$, and $f(t) = \sin(t)$ a.e. in $\RR$.
+
+The function
+	$$f(t)=\begin{cases} 
+	\sin(t) 		& \text{if } t \in \left[0,1\right]\cap \left(\RR \setminus \QQ \right) \\
+	+ \infty 	   &  \text{if } t \in \left[0,1\right]\cap \QQ
+	\end{cases}$$
+is nowhere continuous, bounded, and measurable. Then that $f$ is Lebesgue integrable, hence $\int_0^1 f(t) \,\dlam$ exists finite.\\
+Indeed, $f(t) = \sin (t)$ $a.e.$ in $\left[0,1\right]$, thus:
+	$$\int_0^1 f(t) d \lambda =\underbrace{\int_0^1 \sin t \,\dlam}_{\text{Lebesgue}}
+	=\underbrace{\int_0^1 \sin t \,\dt}_{\text{Riemann}}.$$
+
+
+\paragraph{Lebesgue decomposition of bounded variation functions} Any bounded variation function can be written as a sum of three proper function. Let's understand what kind of function they are.
+
+\begin{defn}
+	Let $\{x_n\}_{n\in\NN}$ and $\{x_n'\}_{n\in\NN}$ be two sequences of points in $[a,b]$. \\
+	Let also $\{h_n\}_{n\in\NN}$, $\{h_n'\}_{n\in\NN} \subset \RR$ such that:
+	$$
+	\sum_{n\in\NN} |h_n| 
+	< +\infty, 
+	\qquad \sum_{n\in \NN}|h_n'| 
+	< +\infty
+	.
+	$$
+	A function $f$ is called \emph{jump function} if it can be written as:
+	$$
+	f(x) 
+	= \sum_{\substack{n \in \NN:\\ x_n \vphantom{x_n' \le} < x }} h_n 
+	+ \sum_{\substack{n \in \NN:\\ x_n'\le x}} h'_n
+	.$$
+\end{defn}
+
+
+Notice that the first sum generates a function continuous from the left, the other one from the right.
+
+Jump functions are step function if the sequences $\{x_n\}$ and $\{x'_n\}$ are strictly increasing, but jump functions can be more general.
+
+There is another more explanatory form for writing a jump function $f:[a,b] \to \RR$ where $f(a)=0$. In such case we would have:
+$$f(x) = \sum_{n\in\NN}g_n(x) + \sum_{n\in\NN}g'_n(x),$$
+where:
+$$ g_n(x) = \begin{cases}
+0 & a \leq x \leq x_n\\
+h_n & x_n < x \leq b
+\end{cases} \qquad 
+g'_n(x)= \begin{cases}
+0 & a \leq x < x'_n\\
+h'_n & x_n \leq x \leq b.
+\end{cases}
+$$
+
+We can provide some example of jump functions. For instance we can define a jump function on $[0,1]$ by setting $x_n=\frac 1 n$ and $h_n = \frac{(-1)^n}{n^{\frac 3 2}}$ with $n \in \NN_0$.
+In that case we have $f(\frac{1}{100}) = \sum_{n=101}^{+\infty} \frac{(-1)^n}{n^{\frac 3 2}}$ or $f(\frac{1}{\sqrt{71}}) = \sum_{n=8}^{+\infty} \frac{(-1)^n}{n^{\frac 3 2}}$.
+
+Here an example of a jump function which is not a step function; let $\{x_n\}_{x \in \NN}$ be an enumeration of $\QQ$, and set $h_n = \frac 1 {2^n}$. Thus our function is:
+	$$f(x)=\sum_{x_n < x} \frac 1 {2^n}.$$
+It can be proven that $f$ is discontinuous at any $x \in \QQ$ and continuous at any $x \in \RR \setminus \QQ$.\footnote{For further discussion, see: A. N. Kolmogorov, S. V. Fomin, Introductory Real Analysis, 1975, pages 315-327.}
+
+
+Observe that any jump function $f:[a,b] \to \RR$ belongs to $BV([a,b])$,\footnote{What is its total variation?} therefore it is differentiable a.e. in $[a,b]$ and its derivative is zero a.e.. Moreover, as they are bounded, they are also Lebesgue-integrable. 
+
+There exists non-constant functions $f:[a,b] \to \RR$ which are continuous, non-decreasing with zero derivative a.e.; such functions are $BV$ but not $AC$ since the Calculus formula doesn't hold. A counterexample is again the Vitali--Cantor function (see definition \vref{Vitali-Cantor-function}).
+
+Thinking to such counterexample, we can define another kind of function.
+\begin{defn}
+	A non constant function $f:[a,b] \subset \RR \to \RR$ is a \emph{singular function} (or Cantor-like function) if:
+	\begin{itemize}
+		\item $f$ is continuous in $[a,b]$;
+		\item $f$ is non-decreasing;
+		\item $\exists \, f'$ a.e. and $f'=0$ a.e. in $[a,b]$.
+	\end{itemize}
+\end{defn}
+
+We see lot of kinds of functions: they are somehow related by the following result.
+\begin{theo}[Lebesgue decomposition of bounded variation functions]
+	Let $f\in BV([a,b])$. Then there exist three functions:
+	\begin{itemize}
+		\item a function $\phi_1 \in AC([a,b])$;
+		\item a singular function $\phi_2$;
+		\item a jump function $\phi_3$
+	\end{itemize}
+	such that $$f= \phi_1+\phi_2+\phi_3 \text{ in }[a,b].$$
+\end{theo}\footnote{For further discussion, see: G. Leoni, A First Course in Sobolev Spaces, 2017, page 104, theorem 3.89.}
+
+Notice that, if $f\in BV([a,b])$, then $f'=\phi_1'$ a.e. in $[a,b]$. Thus, as we already know, we cannot in general reconstruct a bounded variation function by integrating its derivative: the calculus formula only reconstructs the $AC$ function of the Lebesgue decomposition, see that if $f' = \phi'_1$ a.e. in $[a,b]$ then: $$\int_a^x f'(t) \dt = \phi_1(x) - \phi_1(a).$$

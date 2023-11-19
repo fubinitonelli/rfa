@@ -1,0 +1,65 @@
+%!TEX root = ../main.tex
+\section{Limits} \label{liminf-limsup-defn}
+
+Given a sequence $\{x_n\}_{n \in \NN}$ we define:
+
+$$
+\limsup_{n\to\infty} x_n 
+= \lim\limits_{n \to \infty} \left( \sup_{k \geq n} x_k \right)  
+= \inf_{n\geq 0} \left( \sup_{k \geq n} x_k \right)  
+,
+$$
+and
+$$
+\liminf_{n\to\infty} x_n 
+= \lim\limits_{n \to \infty} \left( \inf_{k \geq n} x_k \right)  
+= \sup_{n\geq 0} \left( \inf_{k \geq n} x_k \right)  
+.
+$$
+
+The limit exists if the $\liminf$ and $\limsup$ coincide, that is:
+$$
+\lim_{n \to \infty} x_n 
+= \limsup_{n \to \infty} x_n 
+= \liminf_{n \to \infty} x_n
+.
+$$
+
+Talking about functions, consider $f: (X,d) \to \RR^\star$, we define:
+$$ \limsup_{n\to \infty}f_n(x) \coloneqq \inf\limits_{n\geq0}\left(\sup\limits_{k\geq n} f_k(x) \right), \qquad \liminf_{n\to \infty}f_n(x) \coloneqq \sup\limits_{n\geq0}\left(\inf\limits_{k\geq n} f_k(x) \right).$$
+
+We can build the notion of liminf and limit in the same manner as we have done with sequences.
+
+For a more general context consider a sequence of sets $\{A_n\}_n$. The we can define:
+$$
+\limsup_{n \to \infty} A_n 
+= \bigcap_{n=1}^\infty \bigcup_{k>n} A_k
+\quad \text{ and } \quad
+\liminf_{n \to \infty} A_n 
+= \bigcup_{n=1}^\infty \bigcap_{k>n} A_k
+.
+$$
+
+\paragraph{Further results}
+
+One can prove that:
+$$
+\liminf( - \star)
+= - \limsup(\star)
+.
+$$
+
+Another result is the following: given two sequences $a_n, b_n$ then:
+$$
+\liminf_{n \to \infty} (a_n + b_n)
+\geq \liminf_{n \to \infty} (a_n) + \liminf_{n \to \infty}(b_n)
+;
+$$
+if $a_n$ converges to $a$ we have also that the equality holds:
+$$
+\liminf_{n \to \infty} (a_n + b_n)
+= a + \liminf_{n \to \infty}(b_n)
+.
+$$
+
+\todo{check the limsup case}

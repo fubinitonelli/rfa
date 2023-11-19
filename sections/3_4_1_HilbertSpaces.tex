@@ -1,0 +1,263 @@
+%!TEX root = ../main.tex
+Up until now we dealt with spaces, specifically Banach spaces, which are normed and have certain properties of convergence with respect to the norm. Now we will bring this to a step further, and we will introduce another operation, called scalar (or inner) product. This will lead us to Hilbert Spaces, which have very strong properties and are often a very good framework when solving partial differential equations. We will see that $\RR^2$ is a Hilbert space, and the scalar product which we will talk about, in that space is the well known euclidean inner product related to the notion of angle.
+
+\subsubsection{Hilbert spaces}
+
+Let's start from the very beginning. In this section consider $X$ as a vector space on $\RR$.
+
+\begin{defn}
+	An application $p: X \times X \to \RR$ is called \emph{scalar product} in $X$ if, for all $x$, $y$, $z \in X$ and for all $\alpha$, $\beta \in \RR$ the following properties hold:
+	\begin{itemize}
+		\item \emph{positivity}:
+		$$p(x,x) \geq 0;$$
+		\item \emph{annihilation}:
+		$$p(x,x) = 0 \iff x=0;$$
+		\item \emph{symmetry}:
+		$$p(x,y) = p(y,x);$$
+		\item \emph{linearity on the first component}:
+		$$p(\alpha x + \beta y, z) = \alpha p(x,z) + \beta p(y, z).$$
+	\end{itemize}
+	In this case we set $$\sca{x, y} = p(x,y).$$
+\end{defn}
+Scalar product is known also as \emph{inner product}.
+Observe that the first two properties are in case of both components are with the same argument. Moreover, thanks to symmetry property, linearity holds for both components.
+
+\begin{defn}
+	A vector space $X$ endowed with a scalar product, namely 
+	$$(H, \sca{\cdot, \cdot}),$$
+	is called \emph{pre-Hilbert space}, and their elements are called \emph{vectors}.
+\end{defn}
+
+On $\RR^2$ the scalar inner product is defined: $x \cdot y = \sca{x, y} \coloneqq x_1 y_1 + x_2 y_2$.
+
+This product allows us to define angles between vectors: letting $ a = (a_1, a_2), b = (b_1, b_2)$, we geometrically have $ a \cdot b = \norm{ a} \norm{ b} \cos(\theta)$. This motivates the following definition of angle through the scalar product:
+$$\cos(\theta) = \frac{ a \cdot b}{\sqrt{ a \cdot a \vphantom{b}}\sqrt{ b \cdot b}}.$$
+
+The following is a famous inequality we will use often from now on.
+
+\begin{prop}[Cauchy--Schwarz or Bunakowsky inequality]
+	\label{prop-cs-hilbert}
+	Let $(H, \sca{\cdot, \cdot})$ be a pre-Hilbert space.\\
+	Then:
+	$$ |\sca{x, y}| \leq \sqrt{\sca{x, x}}\sqrt{\sca{y, y}} \quad \forall x,y \in H.$$
+\end{prop}
+
+\begin{proof}
+	Fix two vectors $x$, $y \in X$ and consider the non-negative function
+	$$t \mapsto \sca{x+ty, x+ty}.$$
+	Then the inequality is given by the following, valid for all $t \in \RR$:
+	$$\sca{x+ ty, x+ty} = \sca{x, x} + 2t \sca{x, y} + t^2 \sca{y,y} \geq 0,$$
+	the discriminant should be negative so the inequality follows.
+\end{proof}
+
+\paragraph{Defining the Hilbert spaces} It's easy to understand that the scalar product has same properties in common with the norm, indeed, the scalar product of the same vector returns always a real non-negative number. Furthermore, if such vector is the null vector, the scalar product is zero. Using those properties is it possible to define a new norm from the scalar product?
+\begin{defn}
+	Let $x \in H$.
+	We define the \emph{norm induced by the scalar product} as follows:
+	$$\norm{x} \coloneqq \sqrt{\sca{x, x}}.$$
+\end{defn}
+To check that $\norm{\cdot}$ is actually a norm in $H$ (see definition \vref{defn-norm}), we have only to check the homogeneity, which is given by the linearity of the scalar product, and that the triangular inequality holds, namely $\norm{x+y} \leq \norm{x} + \norm{y}$, which is obtained from the Cauchy--Schwarz inequality as follows:
+$$
+\norm{x+y}^2
+=\sca{x,x} +\sca{y,y} + 2 \sca{x,y}
+\leq \norm{x} + \norm{y}  + \sqrt{\sca{x,x} }\sqrt{\sca{y,y} }
+.
+$$
+
+Having this definition we can rewrite the Cauchy--Schwarz inequality as follows:
+$$
+\abs{ \sca{x,y} }
+\leq \norm{x} \cdot \norm{y}
+,
+$$
+where the norm is induced by the scalar product.
+
+Now we can define the Hilbert spaces:
+
+\begin{defn}\label{defn-hilbert-spaces}
+	We say that a pre-Hilbert space is a \emph{Hilbert space} if it is complete with respect to the norm induced by its scalar product.
+\end{defn}
+
+Previously we argued the concept of angle. From Cauchy--Schwarz inequality, we have:
+$$-1 \leq \frac{\sca{x, y}}{\norm{x}\norm{y}} \leq 1 \quad \forall x,y \in H: x,y \neq 0.$$
+Thus there exists a unique angle $\theta \in [0, \pi]$ such that $\cos(\theta) = \frac{\sca{x, y}}{\norm{x}\norm{y}}$.\\
+This is an abstract generalization of the concept of angle between two or three dimensional vectors.
+
+\paragraph{Notable examples of Hilbert spaces} Here we present for some spaces a definition of scalar product which make the space an Hilbert one.
+\begin{itemize}
+	\item Consider the set  $\RR^N$: it becomes an Hilbert space when endowed with the \textit{Euclidean scalar product}:
+	$$ 
+	\sca{x, y} 
+	= \sum^N_{i=1} x_i y_i 
+	\quad \forall x, y \in \RR^N
+	.
+	$$
+	\item 	The space $L^2(\Omega, \mm, \mu)$ is a Hilbert space with:
+	$$
+	\sca{f, g} 
+	= \int_\Omega fg \, \de \mu
+	.
+	$$
+	\item	The space $l^2$ is a Hilbert space with:
+	$$
+	\sca{\{x_n\}_{n\in \NN} , \{y_n\}_{n \in \NN}} 
+	= \sum_{n \in \NN} x_n y_n
+	.
+	$$
+\end{itemize}
+
+Moreover, space of continuous functions $\Cc([0,1])$ is a \textit{pre-}Hilbert space with:
+$$
+\sca{f, g} 
+= \int_0^1 f g \, \dx
+.
+$$
+It is not complete with respect to the norm induced by this scalar product.
+
+
+\paragraph{Parallelogram identity and minimal distance} The following identity is a characterization of Hilbert spaces, as specified by the subsequent theorem.
+\begin{prop}[parallelogram identity]
+	Let $H$ be a pre-Hilbert space.\\
+	Then:
+	$$
+	\norm{x-y}^2 + \norm{x+y}^2 
+	= 2 \norm{x}^2 + 2 \norm{y}^2 
+	\quad \forall x, y \in H
+	.
+	$$
+\end{prop}
+
+\begin{theo}[Von Neumann]
+	Let $(X, \norm{\cdot})$ be a Banach-space.\\
+	If $\norm{\cdot}$ satisfies the parallelogram identity, then $\norm{\cdot}$ is induced by the following inner product:
+	$$
+	\sca{x, y} 
+	= \frac 1 2 ( \norm{x+y}^2+\norm{x}^2+\norm{y}^2)
+	$$
+	and $(X, \sca{\cdot,  \cdot})$ is a Hilbert space.\footnotemark{}
+\end{theo}
+\footnotetext{For further discussion and many more references, see: H. Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, 2010, page 144, ``Characterization of Hilbert spaces''.}
+
+The main difficulty of proving this results lays in proving that the one presented is actually an inner product, in particular that is linear. 
+
+Notice that, via parallelogram identity, every Hilbert space is uniformly convex and thus reflexive (see Milman-Pettis theorem \vref{theo-milman-pettis}), indeed since
+$$
+	\norm{x+y}^2 =2\underbrace{\norm{x}^2}_{\leq 1} +2\underbrace{\norm{y} ^2}_{\leq 1} +\underbrace{\left( -\norm{x-y}^2\right)}_{< -\varepsilon ^2} \leq 4-\varepsilon ^2
+$$
+then
+$$
+	\sqrt{\norm{\frac{x+y}2}^2} < \sqrt{1-\frac{\varepsilon ^2}{4}} =1-\delta ( \varepsilon )
+$$
+
+\begin{exam}
+	Consider $(C([0,1], \norm{\cdot}_\infty )$, this is a Banach space, but not an Hilbert space.\\
+	Indeed, take $f$ and $g$ as follows:
+	$$f(x) = 
+	\begin{cases}
+	4x & 0 \leq x \leq \frac 1 4\\
+	-4(x-\frac 1 2 ) & \frac 1 4 < x \leq \frac 1 2\\
+	0 & \frac 1 2 < x \leq 1
+	\end{cases}
+	\qquad 
+	g(x) = 
+	\begin{cases}
+	0 &0 \leq x \leq \frac 1 2 \\
+	4(x- \frac 1 2) & \frac 1 2 < x \geq \frac 3 4 \\
+	-4(x-1) & \frac 3 4 < x \geq 1
+	\end{cases}
+	$$
+	Then $\norm{f-g}_\infty = 1 = \norm{f + g}_\infty$, and $\norm{f}_\infty = \norm{g}_\infty = 1$: the parallelogram identity does not hold.
+\end{exam}
+
+The following theorem is a fundamental brick for the next development of the theory. First let's define a simple concept, the theorem will characterize it.
+
+\begin{defn}
+	Let $X$ be a normed vector space and $V \subset X$ one of his closed non-empty subsets.\\
+	For any $x \in X$ the \emph{minimal distance of $V$ from $x$} is:
+	$$
+	d(x,V) 
+	= \inf\limits_{v \in V} \norm{x-v}
+	.
+	$$
+\end{defn}
+
+This definition is very simple, the distance between a set and an element is the distance of the element from the closest element belonging to the set. Observe that the distance of a set from one of his point is zero.
+
+
+\begin{theo}[minimal distance] \label{theo-min-dist}
+	Let $(H, \sca{\cdot, \cdot})$ be a Hilbert space, and $V \subset H$ be a closed non-empty subspace.\\
+	Then for any $x \in H$ there exists a unique $\bar v \in V$ such that:
+	$$
+	d(x,V) 
+	= \norm{x-\bar v}
+	.
+	$$
+\end{theo}
+
+\begin{proof} We have to prove that $\bar v$ exists unique such that:
+	$$
+	\inf\limits_{v \in V} \norm{x-v} 
+	= \norm{x-\bar v}
+	.
+	$$
+	Take a point $x \in H$. We are looking for an element which realize the inferior.
+	
+	\textit{Existence}:\\
+	Consider a sequence $\{ v_n \}_{n \in \NN} \subset V$ such that:
+	$$ 
+	\lim\limits{n \to \infty} \norm{x - v_n}
+	= d(x, V)
+	.$$
+	Suppose $m > n$ and observe that $\frac{v_n + v_m}{2}\in V$ due to vector space structure.\\
+	Therefore:
+	$$
+	\norm{x - \frac{v_n + v_m}{2}} 
+	\geq d(x,V)
+	$$
+	which implies
+	$$
+	\norm{2x - (v_m + v_n)} 
+	\geq d(x,V)
+	$$
+	and then
+	$$
+	-\norm{2x - (v_m + v_n)}^2 
+	\leq -4 d(x,V)^2
+	.
+	$$
+	
+	Now we use this result as follows:
+	\begin{align*}
+		\norm{v_m - v_n}^2 
+		&= \norm{v_m -x +x -v_n}^2 \\
+		&= 2(\norm{x-v_m}^2 + \norm{x-v_n}^2) - \norm{2x - (v_m + v_n)}^2 \\
+		&\leq 2 ({\underbrace{\norm{x-v_n}}_{\to \,d}}^2 
+		+ {\underbrace{\norm{x+v_m}}_{\to \, d}}^2)-4d^2  \\
+		&\to 0
+	\end{align*}
+	as $m, n\to +\infty$. Observe that in the second equality the parallelogram identity has been used in the form $\norm{a+b}^2 = 2\norm{a}^2+2\norm{b}^2-\norm{a-b}^2$, where $a= x-v_m$ and $b = x-v_n$.
+	
+	Therefore $\{v_n\}_{n \in \NN} \subset V$ is a Cauchy sequence and it converges to a $\bar v \in V$, as $V$ is closed by hypothesis.
+	
+	By the continuity of the norm we have that the inferior is reached, namely:
+	$$\norm{x-v^\star}
+	= d(x,V).$$
+	
+	\textit{Uniqueness}:\\
+	Finally we have to prove that $\bar v$ is unique; suppose we have $\norm{x-\bar v_1}=d(x,V)$ and $\norm{x-\bar v_2}=d(x,V)$.\\
+	Using the parallelogram identity again we have:
+	$$\norm{\bar v_1 - \bar v_2}^2 
+	= \norm{\bar v_1 -x +x -\bar v_2}^2 
+	= 4 d^2 - \norm{2x - \bar v_1 + \bar v_2}^2 
+	\leq 0$$
+	and thus $\bar v_1 = \bar v_2$.
+\end{proof}
+
+This theorem holds even if $V$ is a convex, closed, non-empty subset of $H$.\\
+A space $V$ is convex if for all $u,v \in V$, for any $\lambda \in [0,1]$ we have:
+$$
+(1- \lambda)u + \lambda v 
+\in V
+.
+$$
+The proof argues exactly in the same way, with the only difference when we state that $\frac{v_{n}+v_{m}}{2}\in V$. In fact, in the original proof, this holds because we assume $V$ is a \textit{subspace}, but in reality \textit{convexity} is enough since if $v_{n},v_{m}\in V$ then choosing $\lambda=\frac{1}{2}$ we still obtain $\frac{1}{2} v_{n}+(1-\frac{1}{2})v_{m}=\frac{v_{n}+v_{m}}{2}\in V$.

@@ -1,0 +1,98 @@
+%!TEX root = ../main.tex
+\subsubsection{Dominated convergence theorem} \label{dominated-convergence}
+Having defined a general yet powerful notion of integral, our focus now is on building many tools that allow us to work on it. Some results are already been proved, the following result extend the monotone convergence (see \vref{monotone-convergence}) and the Fatou's lemma (see \vref{fatou-lemma}) to real valued functions.
+
+\begin{theo}[Lebesgue's dominate convergence theorem]
+	Let $(\Omega, \mm, \mu)$ measure space, $f_n : \Omega \to \RR$ measurable for all $n\in \NN$ such that:
+	\begin{itemize}
+		\item it point-wise converges $f_n(t) \to f(t)$ as $n \to +\infty$ for any $t \in \Omega$;
+		\item exists a dominating function, namely $g:\Omega \to \RR$, which is Lebesgue-integrable and such that $|f_n(t)| \leq g(t)$ for all $t \in \Omega$ and for all $n \in \NN$.
+	\end{itemize}
+	Then $f_n, f\in \Lc^1(\Omega, \mm, \mu )$, and we have:
+	$$\lim_{n\to \infty} \int_{\Omega} |f_n-f|\de\mu = 0$$
+\end{theo}
+
+Observe that the thesis implies the following:
+$$\lim_{n \to +\infty} \int_\Omega \, f_n \de\mu = \int_{\Omega}\, f \de\mu;$$
+indeed:
+$$\left| \int_\Omega f_n \de\mu - \int_{\Omega} f \de\mu \right|
+\leq \int_{\Omega}|f_n-f| \de\mu \to 0 \quad \text{as } n \to +\infty.$$
+This shows how powerful and general is this theorem. In general the issue emerging when using it is to find a proper dominating function.
+
+\begin{proof}
+	Using the fact that $|f_n(t)| \leq g(t)$, it is easy to check from the definition that $f_n \in \Lc^1(\Omega, \mm , \mu)$ for any $n \in \NN$.\\
+	In addiction, we know $f \in \Lc^1(\Omega, \mm , \mu)$, as $|f(t)| = \lim\limits_{n \to \infty}|f_n(t)|$ for all $n \in \NN$; this because: $$|\ |f(t)| -|f_n(t)|\ | \leq |f(t) - f_n(t)| \to 0.$$
+	
+	To prove the limit consider $\phi_n = 2g-|f_n-f|$.\\
+	We have that $\phi_n$ are measurable, non-negative and converging: $\phi_n(t) \to 2g(t)$ for any $t \in \Omega$.\\
+	Owing to Fatou's lemma we have:
+	\begin{align*}
+		0 \leq \int_{\Omega} 2 g \,\de\mu
+		&=\int_{\Omega} \lim_{n \to +\infty} \phi_n \,\de\mu\\
+		&\leq \liminf_{n \to +\infty} \int_{\Omega} \phi_n \,\de\mu\\
+		&=\int_\Omega 2 g \,\de\mu
+		+ \liminf_{n \to +\infty} \int_\Omega(-|f_n-f|) \,\de\mu.
+	\end{align*}
+	So we get:
+	$$ 0 \leq \liminf_{n \to +\infty} \int_\Omega -|f_n-f| \,\de\mu$$
+	which implies
+	$$ \limsup_{n \to +\infty} \int_\Omega |f_n-f| \,\de\mu \leq 0$$
+	and from this we can deduce the thesis:
+	$$ \lim_{n \to +\infty} \int_\Omega |f_n-f| \,\de\mu = 0. $$
+\end{proof}
+
+
+\paragraph{Case of series of functions} The theorem can be formulated also for series of function as follows. To deeply understand this results remember that a series can be seen as the sequence of partial sum.
+
+\begin{theo}[Dominate convergence theorem for series]
+	Consider a sequence of functions $\{f_n\}_{n \in \NN} \subset \Lc^1(\Omega, \mm, \mu)$ for any $n \in \NN$ such that the series $\sum_{n \in \NN} f_n(t)$ converges point-wise $\forall t \in \Omega$, namely:
+	$$\sum_{n\in \NN} \int_\Omega|f_n| \,\de\mu < +\infty.$$
+	If exists a function $g \in \Lc^1(\Omega, \mm, \mu)$ such that:
+	$$ \left|\sum_{j = 0}^n f_j(t)\right| 
+	\leq g(t)
+	\quad \forall n \in \NN
+	\quad \forall t \in \Omega,$$
+	then $\sum_{n\in\NN} f_n$ converges point-wise in $\Omega$ to a function $f\in \Lc^1(\Omega, \mm, \mu)$ and we have:
+	$$\int_\Omega f \,\de\mu 
+	= \int_\Omega \sum_{n \in \NN} f_n \, \de \mu 
+	= \sum_{n\in \NN} \int_\Omega f_n \,\de\mu$$
+\end{theo}
+
+
+
+\begin{proof}
+	Consider $\sum_{n\in \NN}|f_n|$ and observe that, by Beppo Levi's theorem:
+	$$
+		\int_\Omega \left(\sum_{n\in \NN} |f_n|\right) \,\de\mu 
+		= \sum_{n\in \NN} \int_\Omega |f_n| \,\de\mu 
+		< +\infty
+	.
+	$$
+	Then $\sum_{n\in \NN} |f_n|$ converges a.e. in $\Omega$ to a $\tilde f \in \Lc^1(\Omega, \mm, \mu)$.
+	Thus we also have that $\sum_{n\in \NN} f_n$ (absolutely) converges to some $f$ a.e. in $\Omega$, and moreover:
+	$$
+		\left| \sum_{n=0}^N f_n (t) \right|
+		\leq \sum_{n=0}^N |f_n (t)|
+		\leq \sum_{n=0}^{+\infty} |f_n (t)|
+		= \tilde f(t)
+	$$
+	For almost any $ t \in \Omega$ and for all $N$.
+	
+	Thus we can apply dominated convergence to 
+	$$
+		F_N(t) 
+		\coloneqq \sum_{n=0}^N f_n(t) \to f(t)
+	.
+	$$
+	We have that $f\in \Lc^1(\Omega, \mm, \mu)$, and:
+	$$
+		\int_\Omega f \,\de\mu
+		= \lim\limits_{N \to \infty} \int_\Omega F_N \,\de\mu
+		= \lim\limits_{N \to \infty} \sum_{n=0}^N \int_\Omega f_n \,\de\mu
+		= \sum_{n\in\NN} \int_\Omega f_n \,\de\mu
+	.
+	$$
+\end{proof}
+Notice that if $\int_\Omega \sum_{n \in \NN} |f_n| \,\de\mu < +\infty$ then $\sum_{n \in \NN} |f_n|$ is finite a.e. in $\Omega$ and $\sum f_n$ converges a.e. in $\Omega$.
+
+

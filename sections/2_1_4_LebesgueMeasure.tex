@@ -1,0 +1,324 @@
+%!TEX root = ../main.tex
+\subsubsection{Lebesgue measure}
+Our goal is to build a complete measure space on $\RR^N$.
+In particular we want a measure defined for all the sets of the Borel $\sigma$-algebra, so we have to define such measure on his $\sigma$-algebra $\mm(\RR^N) \supset \Bc(\RR^N)$.
+
+\paragraph{First attempt} In order to have a spendable definition, we need that our measure $\tilde{\lambda}$ satisfies three properties: first, the measure of rectangles is the product of the euclidean measure of its sides, namely:
+$$ 
+	\lambda(R) 
+	= \prod_{j=1}^{n}(b_j-a_j) 
+	\text{ for any } 
+	R = (a_1, b_1) \times \cdots \times (a_n, b_n)
+;
+$$
+second, the measure has to be invariant with respect to any translation, namely:
+$$
+	\lambda (E + x) 
+	= \lambda(E) 
+	\quad \forall x \in \RR^N 
+	\quad \forall E \in \mm(\RR^N)
+;
+$$
+and last, measure isn't \textit{concentrated} somewhere, namely:
+$$
+	\nexists \ E \in \mm(\RR^N) 
+	\quad \text{such that} \quad \lambda(E) > 0 
+	\quad \text{and} \quad \forall F \subsetneq E : \lambda(F) = 0
+.
+$$ 
+If such kind of measure does exist, by Dynkin's Lemma (\vref{dynkin}) we know that it is unique.
+
+Another questions is this, assuming that such measure exists, can we have that $\mm(\RR^N) = \Pc(\RR^N)$, that is every subset of $\RR^N$ is measurable? Well, the answer is no, and the explanation requires a little effort.
+
+\begin{defn}
+	Let $(\Omega, \mm, \mu)$ be a measure space. \\
+	A set $A$ is an \emph{atom} if it is a countable set, has $\mu(A) > 0$, and it does not contain any measurable subset $E$ such that $\mu(E) > 0$.
+\end{defn}
+\begin{exam}
+	Consider $(\Omega, \mm, \mu_t)$, where $\mu_t$ is the Dirac measure. Then $\{t\}$ is an atom.
+\end{exam}
+
+Taking account of the previous definition, due to its third property, our measure is surely \emph{non-atomic}. The following theorem is proven through the axiom of choice and the continuum hypothesis:
+\begin{theo}[Ulam] \label{theo-ulam}
+	The only non-atomic measure on $\Pc(\RR)$ is the \emph{zero measure} $\mu(E) = 0$ for all $E \in \Pc(\RR)$.
+\end{theo}
+This means that the $\sigma$-algebra on which our measure is built must be strictly smaller than $\Pc(\RR^N)$ and this answers the question. So there are some subsets of $\RR^N$ that can't be measured by a measure with those sole properties.
+
+\paragraph{Outer measure} For the sake of simplicity from now on we will deal with $\RR$ instead of $\RR^N$. It is easy to take the following results to the multidimensional case in which, as theory guarantee, they hold as well. To work around the problem our first step is the following, simpler, definition of something that is not a positive measure. 
+
+\begin{defn}
+	We define the \emph{outer measure} $\lambda^\star$ : $\Pc(\RR) \to [0,+\infty]$ as follows:
+	$$
+		\lambda^\star(E) 
+		\coloneqq \inf_{\{I_n\}_{n\in \NN}} \sum_{n \in \NN} \ell(I_n)
+	$$
+	where $I_n$ is an open interval for any $n$, $\ell(I_n)$ is its length, and $\bigcup_{n \in \NN} I_n \supset E$.
+\end{defn}
+Notice that it is defined on the power set of $\RR$.
+
+\begin{prop}[Main properties of the outer measure]
+	Let $\lambda^\star$ be the outer measure, then:
+	\begin{itemize}
+		\item the outer measure is monotone increasing, namely:
+			$$
+				E\subset F \implies \lambda^\star(E)\leq\lambda^\star(F)
+			;
+			$$
+		\item the outer measure is countably subadditive. \label{outer-measure-c-subadd}
+		\item for any countable $E \in \Pc(\RR)$, $\lambda^\star(E)=0$;
+	\end{itemize} 
+\end{prop}
+
+\begin{proof}[Proof of the countably subbaditivity]
+	Consider $\{E_n\}_{n \in \NN} \subset \Pc(\RR)$ and fix $\eps>0$. 
+	Then, by definition, for all $n \in \NN$ there exists a sequence $\{I_j^n\}_{j \in \NN}$ such that:
+	$$
+		\bigcup_{j \in \NN}I_j^n \supset E_n
+		\quad \text{and} \quad
+		\sum_{j \in \NN}\ell(I_j^n)\leq\lambda^\star(E_n)+\frac{\eps}{2^{n+1}}
+	.
+	$$
+	Now set $E \coloneqq \bigcup_{n \in \NN}E_n$, then we have $E \subset \bigcup_{n \in \NN}\bigcup_{j \in \NN}I_j^n$; we can observe that:
+	$$
+		\lambda^\star(E)
+		\leq\lambda^\star\left( \bigcup_{n \in \NN}\bigcup_{j \in \NN}I_j^n \right)  
+		\leq\sum_{n \in \NN}\sum_{j \in \NN}\ell(I_j^n)
+		\leq\sum_{n \in \NN}\left( \lambda^\star(E_n)+\frac{\eps}{2^{n+1}} \right)  
+		=\sum_{n \in \NN}\lambda^\star(E_n)+\eps
+	.
+	$$
+	Since $\eps$ is arbitrary, this gives us sub-additivity.
+\end{proof}
+
+\begin{proof}[Proof of measure of countable sets]
+	Let us prove that $\lambda^{\star}(\{x_0\})=0$, indeed:
+	$$
+		\lambda^{\star}(\{x_0\})=\inf_{\eps>0}(x_0+\eps-(x_0-\eps))=\inf_{\eps>0}2\eps=0
+	$$
+	Then using countable subadditivity we deduce that any countable set has outer measure zero.
+\end{proof}
+
+\paragraph{Carathéodory condition} Outer measure is not a positive measure as it is not finitely additive. If it was, it would be a non-atomic measure defined on $\Pc(\RR)$, this contradicts Ulam's theorem (\vref{theo-ulam}).\\
+To better understand this issue, consider $E \in \Pc(\RR)$ such that $\lambda^\star(E)> 0$, pick $x \in E$ and set $F=E \setminus \{x\}$. Notice that 
+$$
+	\lambda^\star(E) 
+	= \lambda^\star(F \cup \{x\}) \leq \lambda^\star(F) + \lambda^\star(\{x\}) 
+	= \lambda^\star(F)
+.
+$$
+Moreover, by monotonicity $\lambda(F)^* \leq \lambda(E)^*$ so $\lambda^\star(E) = \lambda^\star(F)$. This shown that the outer measure is not non-atomic.\\
+Anyway our $\lambda^\star$ has the properties we are looking for: $\lambda^\star((a,b))  = b - a \ \forall a , b \in \RR$ and it is invariant with respect to any translation; a willing reader can try to prove these properties.
+
+All of those remarks are giving us an hint: maybe to make $\lambda^\star$ a measure we only have to reduce the $\sigma$-algebra. So we could move our struggle from the definition of a the measure to a restriction of the $\sigma$-algebra. Indeed, by doing so, we can restore the finite additivity. This reasoning is completed in the following results.
+
+\begin{defn}
+	A set $E \in \Pc(\RR)$ satisfies the \emph{Carathéodory condition} if:
+	$$
+		\lambda^\star(T)
+		= \lambda^\star(T\cap E) + \lambda^\star(T\cap E\comp) 
+		\quad \text{for any } T \in \Pc(\RR)
+	.
+	$$
+\end{defn}
+Actually, ``$\ge$'' is enough in the condition because ``$\le$'' is already given by subadditivity.
+
+\begin{defn}\label{Lebesgue-sets}
+	The family of the sets that respect the Carathéodory condition is a $\sigma$-algebra and is called \emph{Lebesgue $\sigma$-algebra}:
+	$$\Lc(\RR) \coloneqq \{E \subset \Pc(\RR) : E \text{ satisfy the Carathéodory condition}\}.$$
+	Its elements are called \emph{Lebesgue sets}\footnotemark{}.
+\end{defn}
+\footnotetext{For the proof that $\Lc$ is a $\sigma$-algebra and many other results, see: H. L. Royden, Real Analysis, pages 251-253, section 12.1, theorem 1 .}
+
+The Lebesgue measure fits also for ``smaller'' sets: consider any set $\Omega \in \Lc(\RR)$. We can define $\Lc(\Omega)$ by selecting only the subset which satisfy the Carathéodory condition, and the Lebesgue measure on $\Omega$ is simply the restriction of the Lebesgue measure.
+
+\begin{defn}
+	The restriction of $\lambda^\star$ to $\Lc(\RR)$ is called \emph{Lebesgue measure}.	
+\end{defn}
+
+To conclude the discussion we come back to the main doubt: is the Lebesgue measure actually a measure? 
+Yes, and the following result confirm the conclusion of our quest.
+
+\begin{theo}
+	The Lebesgue measure is finitely additive. 
+\end{theo}
+\begin{proof}
+	Consider two disjoint sets $A, B \in \Lc(\RR)$, and let $T= A \cup B$. We have $$\lambda^\star(A\cup B) = \lambda^\star(T) \overset{\textit{CC}}{=} \lambda^\star(T\cap A) + \lambda^\star(T \cap A\comp) = \lambda^\star(A) + \lambda^\star(B).$$ This shows the thesis as it is trivial to extend this argument to any finite number of set.
+\end{proof}
+
+\paragraph{Properties and relevant facts about the Lebesgue measure} Here some proposition deduced by previous results to complete our discussion.
+
+\begin{prop}\label{Borel-sets-are-Lebesgue-sets}
+	The Lebesgue $\sigma$-algebra contains the Borel $\sigma$-algebra:
+	$$\Lc(\RR) \supset \Bc(\RR).$$
+\end{prop}
+\begin{proof} \textit{Step 0, the goal}:\\
+	To complete this proof, thanks to the generative properties of $\sigma$-algebras, is sufficient to prove that $(a,+\infty) \in \Lc(\RR)$, satisfying the Carathéodory condition.\\
+	\textit{Step 1, infinite sets}: \\
+	Now consider all the subset $T$ of $\RR$.
+	If $\lambda^\star(T)=+\infty$, then it is easy to see that $\lambda^\star(T) \geq \lambda^\star(T \cap (a, +\infty)) + \lambda^\star(T \cap (a, +\infty)\comp)$.\\
+	\textit{Step 2, finite sets}:\\
+	Consider now $T$ such that $\lambda^\star(T)<+\infty$ and fix $\eps > 0$; then there exists a sequence of set $\{I_n\}_{n \in \NN}$ such that:
+	$$
+		T \subset \bigcup_n I_n
+		\quad  \text{and} \quad
+		\sum_n \ell(I_n)
+		\leq \lambda^\star(T) + \eps
+	;
+	$$
+	by setting $I_n^1 \coloneqq I_n\cap (a,+\infty)$ and $I_n^2 \coloneqq I_n\cap (-\infty,a+\tfrac{\eps}{2^n})$ we have that:
+	$$
+		\ell(I_n)+\frac{\eps}{2^n}
+		\geq \ell(I_n^1)+\ell(I_n^2)
+	.
+	$$
+
+	Consider now the following two set:
+	$$
+		T_1
+		\coloneqq T\cap (a,+\infty) 
+		\text{ and } 
+		T_2
+		\coloneqq T\cap (-\infty,a]
+	.
+	$$
+	By the previous definition we have that $\bigcup_n I_n^1 \supset T_1$ and $\bigcup_n I_n^2 \supset T_2$. Thus, by monotonicity, $\lambda^\star(T_1)\leq \sum_n\ell(I_n^1)$ and $\lambda^\star(T_2)\leq \sum_n\ell(I_n^2)$.
+	
+	Summing up, we have:
+	\begin{align*}
+	\lambda^\star(T_1)+\lambda^\star(T_2) &\leq \sum_n\ell(I_n^1) + \sum_n\ell(I_n^2) \\
+	&\leq \sum_n\ell(I_n) + \sum_n\frac{\eps}{2^n} \\
+	&\leq \lambda^\star(T) + 2\eps.
+	\end{align*}
+	Taking $\eps \to 0$ we have that $\lambda^\star(T_1)+\lambda^\star(T_2)  \leq  \lambda^\star(T)$, and the Carathéodory condition holds for $(a, +\infty)$.
+\end{proof}
+
+The inclusion is strict, indeed it can be proven that the cardinality of $\Bc(\RR)$ is $2^{\aleph_0}$. However, we have that the \emph{Cantor set} (see definition \vref{Cantor-set}), which belongs to $\Bc(\RR)$ since in the construction we use operations which do not bring us outside the sigma algebra, is uncountable ($\aleph_1$) and L-measurable (zero measure). By completeness of the Lebesgue measure, all its subsets are measurable, hence $\Pc(\Cc)\in\Lc(\RR)$, but its cardinality is at least $2^{\aleph_1}=2^{2^{\aleph_0}}$, hence $\Pc(\Cc)$ cannot be contained in $\Bc(\RR)$.
+
+\begin{prop}
+	The Lebesgue measure space $(\RR,\Lc(\RR),\lambda^\star)$ is complete.
+\end{prop}
+\begin{proof}
+	Take $E$, $N$ such that $E \subset N$ and $\lambda(N)=0$. We need to prove that $E$ is measurable.\\
+	First of all, for all $T \in \Pc(\RR)$, we have that $T\cap E \subset T\cap N \subset N$, and thus $\lambda^\star(T\cap E)=0$ by monotonicity. \\
+	We also have that $T\cap E\comp \subset T$, and so $\lambda^\star(T\cap E\comp)\leq \lambda^\star(T)$.\\
+	Summing up, $\lambda^\star(T)\geq \lambda^\star(T\cap E) + \lambda^\star(T\cap E\comp)$, $E$ respects the Carathéodory condition, and thus it is measurable.
+\end{proof}
+In particular, $(\RR,\Lc(\RR),\lambda^\star)$ is the completion of $(\RR,\Bc(\RR),\lambda^\star)$.
+Indeed, the restriction of the measure to the Borel $\sigma$-algebra, namely $\lambda|_{\Bc(\RR)}$, is a Borel measure, but it is not complete.
+
+Let us clarify the relationship between Lebesgue and Borel sets (recall definition \vref{F-sigma-G-delta}).
+
+\begin{prop}
+	The following statements are equivalent:
+	\begin{enumerate}
+		\item $E \in \Lc(\RR)$;
+		\item for all $\eps>0$, there exists $A$ open set such that $A\supset E$ and $\lambda(A \setminus E)<\eps$;
+		\item for all $\eps>0$, there exists $C$ closed set such that $C\subset E$ and $\lambda(E \setminus C)<\eps$;
+		\item there exists a $G_\delta$ set $G \supset E$ such that $\lambda(G \setminus E)=0$;
+		\item there exists a $F_\sigma$ set $F \subset E$ such that $\lambda(E \setminus F)=0$. 
+	\end{enumerate} 
+\end{prop}
+
+Thus every Lebesgue set $E$ can be written as $E=F\cup(E \setminus F)$, where $F$ is a $F_\sigma$ set, and thus $F \in \Bc(\RR)$, $E \setminus F \in \Lc(\RR)$ and $\lambda(E \setminus F) = 0$.
+
+\begin{proof} We will proof that \texttt{1} implies \texttt{2} which implies \texttt{4} which implies \texttt{1}.
+	
+	\textit{Step 1, \texttt{1} implies \texttt{2}}:\\
+	Start by considering $\lambda(E)<+\infty$. Then, for all $\eps>0$ there exists a sequence $\{I_n\}_{n \in \NN} \subset \RR$ such that:
+	$$
+		\bigcup_{n \in \NN}I_n \subset E, 
+		\quad \sum_{n \in \NN}\lambda(I_n)
+		\leq \lambda(E) + \eps
+	.
+	$$ 
+	Set $A \coloneqq \bigcup_{n \in \NN}I_n$, then $A \supset E$ and $\lambda(A \setminus E)<\eps$.
+	As $\lambda(E)=+\infty$, by setting $E_n=E\cap [-n,n]$ we have $=\cup_{n \in \NN}E_n$ and $\lambda(E_n)<+\infty$.
+	
+	From the previous point we know that there exists an open set $A_n$ such that:
+	$$
+		\lambda(A_n \setminus E_n)
+		\leq\frac{\eps}{2^{n+1}}
+	.
+	$$
+	Set $A \coloneqq \bigcup_{n \in \NN}A_n \supset E$ and observe that:
+	$$
+		\lambda(A \setminus E)
+		\leq \sum_{n \in \NN}\lambda(A_n \setminus E_n)
+		\leq \sum_{n \in \NN}\frac{\eps}{2^{n+1}}
+		= \eps
+	.
+	$$
+	This proves the implication.
+	
+	\textit{Step 2, \texttt{2} implies \texttt{4}}:\\
+	Observe that for all $n \in \NN_0$, there exists an open set $A_n \subset E$ such that:
+	$$
+		\lambda(A_n \setminus E)
+		< \frac{1}{n}
+	.
+	$$
+	Set $G \coloneqq \bigcap_{n \in \NN_0}A_n$, then 
+	$$
+		\lambda(G \setminus E)
+		\leq\lambda(A_n \setminus E)<\frac{1}{n} 
+		\quad \forall n \in \NN_0
+	.
+	$$
+	Let $n \to +\infty$ to get $\lambda(G \setminus E) = 0$. This concludes this second proof.
+	
+	\textit{Step 3, \texttt{4} implies \texttt{1}}:\\
+	As we can write $E = G \setminus (G \setminus E)$, we have $E \in \Lc(\RR)$. This because $G \in \Bc(\RR)$ and $(G \setminus E) \in \Lc(\RR)$; in particular, we know that its measure is zero.
+	
+	\textit{Step $\infty$}:\\
+	You should prove that \texttt{1} implies \texttt{3} which implies \texttt{5} which implies \texttt{1}. To do this use the complements!
+\end{proof}
+
+Finally, observe that $\Lc(\RR) \nsubseteq \Pc(\RR)$ due to Ulam's theorem.
+
+We can extend our considerations about Lebesgue measure to $\RR^N$ and define the measure space $(\RR^N,\Lc(\RR^N),\lambda)$. In the construction of $\lambda^*$ we can simply consider multidimensional intervals and the euclidean $n$-volume:
+\begin{align*}
+I=(a_1,b_1)\times\cdots\times(a_N,b_N), \qquad V(I)=\prod_{i=1}^{N}(b_i-a_i).
+\end{align*}
+
+\paragraph{Vitali's theorem} This theorem conclude our discussion on the Lebesgue theory. It requires the axiom of choice!
+\begin{theo}[Vitali]
+	Any set $E \in\Lc(\RR)$ with $\lambda(E)>0$ contains a subset which is not Lebesgue-measurable.
+\end{theo}
+
+\begin{proof}
+	Without loss of generality, we will prove the theorem for the case $E=[0,1]$. 
+	
+	In $E=[0,1]$, consider the equivalence relation $a \sim b \iff a-b \in \QQ$ and
+	take the quotient set $\frac E \sim$. Obviously, one of the equivalence classes
+	in this quotient set contains any and all the rational numbers in $E$, because the difference of two rationals is rational, so they are equivalent. And in the other classes there are essentially an irrational and the rational translations. Using the axiom of choice, let us pick an element from each of the equivalence classes, and define $\Vc \subset E$ as the set composed of these picked elements. The set $\Vc$ is called \emph{Vitali set}.
+	
+	Then we have:
+	$$	
+		(\Vc+r) \cap (\Vc+s) 
+		= \varnothing 
+		\quad \forall r,s \in \QQ : r \neq s
+	,
+	$$ 
+	where $(\Vc+a)$ denotes the set created by translating the elements of $\Vc$ by $a$. \\
+	Otherwise, there would exist $a, b \in \Vc$, $a \neq b$ (namely $a-b\notin\QQ$) being representative of different classes, such that $a+r = b+s$, that is, $a-b=s-r \in \QQ$. Contradiction.
+	
+	Again by contradiction, suppose that $\Vc$ is $\lambda$-measurable. As $\RR = \bigcup_{r \in \QQ} (\Vc+r)$, which is a countable union of disjoint sets, we have:
+	\begin{align*}
+		+\infty &= \lambda(\RR)\\
+		& = \lambda \left(\bigcup_{r \in \QQ} (\Vc+r)\right) \\
+		& = \sum_{r \in \QQ} \lambda(\Vc+r) &\text{($\sigma$-additivity)}\\
+		& = \sum_{r \in \QQ} \lambda(\Vc). &\text{(properties of $\lambda$)}
+	\end{align*}
+	If $\lambda(\Vc)=0$ we get a contradiction and the proof is finished, let's proceed then with $\lambda(\Vc) > 0$.
+	
+	Now set $F \coloneqq \bigcup_{r \in \QQ \cap E} (\Vc+r) \subset[0,2]$. Via $\sigma$-additivity, one has:
+	$$
+		\lambda(F) = \sum_{r \in \QQ \cap E} \lambda(\Vc+r)
+		= \sum_{r \in \QQ \cap E} \lambda(\Vc) 
+		= + \infty
+	.
+	$$
+	But this is impossible, because $\lambda(F) \le \lambda([0,2]) = 2$ by monotonicity. Therefore, $\Vc$ cannot be $\lambda$-measurable. Hence we get a contradiction and the proof is finished.
+\end{proof}
+
+For further reading, try to think (or Google) what is the outer measure of a Vitali set.

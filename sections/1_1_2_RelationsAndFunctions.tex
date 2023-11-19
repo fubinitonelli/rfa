@@ -1,0 +1,261 @@
+%!TEX root = ../main.tex
+\subsubsection{Relations and functions}
+
+Now introduce the concept of functions, starting from the more general notion of relation.
+\begin{defn}
+	Consider two sets $X,\,Y \neq \varnothing $.\\
+	A \emph{binary relation} $r$ from $X$ to $Y$ is a subset of $X \times Y$.\\
+	The \emph{domain} of a relation is the set of all elements of $X$ that belongs to the relation:
+	$$
+		\dom(r) 
+		\coloneqq \{x \in X: (x,y) \in r \text{ for some } y \in Y\}
+	.
+	$$
+	The \emph{range} of a relation is the set of all elements of $Y$ that belongs to the relation:
+	$$ 
+		\rng(r) 
+		\coloneqq \{y \in Y: (x,y) \in r \text{ for some } x \in X\}
+	.
+	$$
+\end{defn}
+When $(x,y), (x,z) \in r \implies y = z$, then r is a single valued relation; this kind of relation plays an important role in mathematics, they are known also as functions:
+\begin{defn}\label{function}
+	A law (rule) $f:X\to Y$ is a \emph{function} (or mapping, map, transformation) if it associates to an element of $X$ one and only one element of $Y$.\\
+	If $X = \NN$, then this function is called \emph{sequence}. 
+\end{defn}
+
+This definition was formulated by Dirichlet as follows:
+\begin{quote}
+	$y$ is a function of a variable $x$ defined on the interval $a<x<b$ if to every value of the variable $x$ in this interval there corresponds a definite value of the variable $y$.  Also, it is irrelevant in what way this correspondence is established.\footnotemark{}
+\end{quote}
+\footnotetext{Cited in I. Kleiner, Evolution of the Function Concept: A Brief Survey, College Mathematics Journal vol.\ 20 iss.\ 4, page 291.}
+
+A function can be applied also to an entire set: consider for example $A \subset X$, then: 
+$$
+	f(A) 
+	\coloneqq \{y \in Y: (x,y) \in f \text{ for some } x \in \dom(f)\cap A\}
+.
+$$
+
+There exist different ways to write functions. If we want to highlight the relation to the elements instead, we will use one of those notation:
+$$
+	f:x\mapsto y, 
+	\quad y=f\left(x\right)
+$$
+which are equivalent to $(x,y) \in f$, where $y$ is the \emph{image} of $x$ and $x$ is the \emph{preimage}\footnotemark{}
+(or counterimage, inverse image)  of $y$.
+\footnotetext{\itatrasl{controimmagine}}
+
+In case we want to highlight how two set are related through a function $f$, then we will denote that as: $$f:X\to Y$$
+In this case the set $Y$ image of the set $X$, while $X$ is the preimage of $Y$.
+
+\begin{defn}
+	The \emph{inverse function} of a function $f:X \to Y$ is denoted by $f^{-1}$ and, if $B \subseteq Y$, is defined as:
+	$$
+		f^{-1}(B) 
+		= \{x \in X: x = f^{-1}(y) \text{ for some } y \in B\}
+	.
+	$$
+\end{defn}
+
+
+Here we state some properties with respect to union and intersection:
+\begin{prop} [Set function properties]
+	Consider the sets $A$, $A_j \subset X$ and $B_j \subset Y$ for $j=1,2$.\\
+	Then:
+	\begin{itemize}
+		\item $f^{-1}(A\comp) = (f^{-1}(A))\comp$;
+		\item $f\left(A_1\cup A_2\right)=f\left(A_1\right)\cup f\left(A_2\right) $;
+		\item $f\left(A_1\cap A_2\right)\subseteq f\left(A_1\right)\cap f\left(A_2\right) $;
+		\item $f^{-1}\left(B_1\cup B_2\right)=f^{-1}\left(B_1\right)\cup f^{-1}\left(B_2\right) $;
+		\item $f^{-1}\left(B_1\cap B_2\right)=f^{-1}\left(B_1\right)\cap f^{-1}\left(B_2\right) $.
+	\end{itemize}
+\end{prop} 
+
+
+Pay attention: the third property is not an equivalence like the other ones, but it states an inclusion. Let us give a counterexample.
+
+\begin{exam}
+	Let $f:\RR^2 \to \RR^2$, $f(x,y) \mapsto (x,0)$ be the function that projects on the $x$ axis. \\
+	Let also $A=\{(x,0): \; x \in \left[0,1\right]\}$, and $B=\{(x,1): \;x \in \left[0,1\right]\}$.
+	So we have $A\cap B= \varnothing$, and thus $f\left(A\cap B\right)=\varnothing$. \\
+	But $f\left(B\right)=A=f\left(A\right)$, and finally $f\left(A\right)\cap f\left(B\right) =A$.
+	\begin{figure}[htpb]
+		\centering
+		\begin{tikzpicture}[xscale=3,yscale=3]
+
+			\draw[stealth-stealth] (0,1.5) -- (0,0) -- (1.5,0);
+
+			\draw[ultra thick] (0,1) -- (1,1) node[midway, above] {$B$};
+			\draw[ultra thick] (0,0) -- (1,0) node[midway, above] {$A$};
+
+			\draw[dashed] (1,1) -- (1,0);
+
+			\node[left] at (0,1) {$1$};
+			\node[below left] at (0,0) {$0$};
+			\node[below] at (1,0) {$1$};
+
+		\end{tikzpicture}
+	\end{figure}
+	\FloatBarrier
+\end{exam}
+
+Functions can have different behavior with respect to how many times they relate each element of a set to another:
+
+\begin{defn}
+	A function $f: \dom(f) \to Y$ is:
+	\begin{itemize}
+		\item an \emph{injection} if $f(x) \neq f(\tilde{x})$ for $x\neq \tilde{x}$;
+		\item a \emph{surjection} if $\rng(f) = Y$ or equivalently $f(\dom(f)) = Y$;
+		\item a \emph{bijection} if it is both surjective and injective.
+	\end{itemize}
+\end{defn}
+
+Now consider the case in which we have a function $f: X \to Y$ and a function $g:Y \to Z$. If every image of $f$ is in the domain of $g$ than we can build a new function from $X$ to $Z$ through a composition of $f$ and $g$:
+\begin{defn}
+	Let $f: X \to Y$ and $g: Y \to Z$ be two functions.\\
+	Than the \emph{composition} of $g$ with $f$ is defined by:
+	$$
+		g \circ f 
+		\coloneqq \{(x,z)\in X \times Z :\ \exists \, y\in Y :\ (x,y) \in f \wedge (y,z)\in g \}
+	.
+	$$
+\end{defn}
+
+It is also possible to define a binary relation from a function:
+$$r(x,y) = f(x) - y, \quad r = \{(x,y) \in X \times Y : r(x,y) = 0\}.$$
+In this case $(x,y) \in r$ if and only if $f(x)-y =0$, that is $r(x,y) = 0$.
+
+
+\paragraph{Order relations}
+
+We have seen that the relations are a generalization of functions, so functions are a sort of special kind of relations. There exists also other notably kind of relations, one of those are used to define an order inside a set:
+\begin{defn}
+	Let $X \neq \varnothing$, $r \subseteq X \times X$ is an \emph{order relation} in $X$ if the following properties holds (let $x,\ y,\ z \in X$):
+	\begin{itemize}
+		\item \emph{reflexivity}: $$\left(x,x\right)\in r;$$
+		\item \emph{antisymmetry}: $$ \left( \left(x,y\right)\in r\wedge \left(y,x\right)\in r \right) \iff x=y;$$
+		\item \emph{transitivity}: $$\left(\left(x,y\right)\in r \wedge \left(y,z\right)\in r\right)\implies \left(x,z\right)\in r.$$
+	\end{itemize}
+	A generic order relation is denoted by $\preceq$.
+\end{defn}
+
+A famous order relation is the canonical order in $\NN$ or in $\QQ$ or in $\RR$: this order is the principle that allow as to say that a number is greater to another. This particular relation is denoted by $\leq$. For example: $3 \leq 5$ or $7 \geq 2$. Observe that the strict ``version'' of the symbol ($<$) doesn't represent an order as it isn't reflexive.
+
+With the canonical order we can always compare two number and say which is greater. This peculiarity doesn't belong to order relation in general:
+
+\begin{defn}
+	An order relation $r \subseteq X \times X$ is a \emph{total order} in $X$ if: 
+	$$
+		(x,y) \in r 
+		\vee (y,x) \in r 
+		\quad \forall x,y \in X
+	,
+	$$
+	otherwise $r$ is a \emph{partial order}.
+\end{defn} 
+
+If exists a total order relation in a set $X$, then $X$ is a totally ordered set.
+
+The inclusion between sets ($\subset$) is, for example, a partial order in $\Pc(X)$. Also the divisibility between two number in $\NN$, that is $n \preceq m$ if $n$ divides $m$ ($m$ is a multiple of $n$), is a partial order.
+
+
+\paragraph{Equivalence relation} Like order relation, it exists another kind of binary relation with wide applications:
+\begin{defn}
+	Let $X \neq \varnothing$, $r \subseteq X \times X$ is an \emph{equivalence relation} in $X$ if the following properties holds (let $x,\ y,\ z \in X$):
+	\begin{itemize}
+		\item \emph{reflexivity}: $$\left(x,x\right)\in r;$$
+		\item \emph{symmetry}: $$\left(x,y\right)\in r\iff\left(y,x\right)\in r;$$
+		\item \emph{transitivity}: $$\left(\left(x,y\right)\in r \wedge \left(y,z\right)\in r\right)\implies \left(x,z\right)\in r.$$
+	\end{itemize}
+	Equivalence relations are denoted by the symbol $\sim$.
+\end{defn}
+
+Those properties are similar to the ones of the equality symbol ($=$), but while the equality state that two element are the same, an equivalent relation states that two elements are equivalent with respect to a certain property. Here some examples of equivalent relations:
+\begin{exam}
+	Consider the set of all straight lines in a given planes. Than the parallelism of two lines is an equivalent relation in such set.
+\end{exam}		
+\begin{exam}
+	Fix $q \in \NN$, then 
+	$$
+		x\sim y 
+		\iff \exists \, k \in \ZZ: x-y = kq
+	$$
+	is an equivalence relation in $\ZZ$.
+\end{exam}		
+\begin{exam} 
+	The relation 
+	$$
+		(a,b) \sim (c,d) 
+		\iff a+d = b+c
+	$$
+	is an equivalence relation in $\NN \times \NN$.
+\end{exam}		
+\begin{exam}
+	The relation 
+	$$
+		(a,b) \sim (c,d) 
+		\iff ad=bc
+	$$
+	is an equivalence relation in $\ZZ \times \ZZ_0$.
+\end{exam}
+
+To sum up with all this kind of relations, consider these two proposition $(x,y) \in r$ and $(y,x) \in r$. If $r$ is an order relation then both proposition can be false at the same time. If $r$ is a total order, the at least one of the two can be true. If $r$ is an equivalence relation, then they must be both true or both false.
+
+\paragraph{Equivalence class} We said that an equivalence relation states that two elements are ``equivalent'' with respect to a certain property. Now consider if we need to dived the elements of a set with respect to this kind of equivalence. We would create a partition of our set where in each subset all the elements are equivalent:
+
+\begin{defn}\label{defn-equiv-class-quot-set}
+	Consider a set $X \neq \varnothing$ and an equivalence relation $\sim$  in $X \times X$.
+	
+	We define the \emph{equivalence class} of $x$ on $X$ with respect to $\sim$ as follows: $$\left[x\right]\coloneqq \{y \in X: y \sim x\}.$$
+	
+	The element $x$ is called the \emph{equivalence class representative} of $\left[x\right]$.
+	
+	We define the \emph{quotient set} of $X$ the collection of all the equivalence classes of $X$, and we denote as:
+	$$
+		\frac{X}{\sim}
+		\coloneqq \{\left[x\right]: \, x \in X \}
+	.
+	$$
+\end{defn}
+
+Let's do some considerations from these definition. If an element $y\in X$ is equivalent to $x\in X$, then they are both representative of the same class. Moreover if $y$ belongs to the equivalence class whose $x$ is the representative, again $x$ and $y$ are representative of the same class:
+$$ x \sim y \implies \left[x\right] = \left[y\right], \quad y \in \left[x\right] \implies \left[x\right] = \left[y\right].$$
+
+If two equivalence class aren't disjoint, then they are the same equivalence class. If two equivalence class are disjoint, then their representative are not in the equivalence relation:
+$$\left[x\right] \cap \left[y\right] \neq \varnothing \implies \left[x\right] = \left[y\right], \quad \left[x\right] \cap \left[y\right] = \varnothing \implies x \nsim y$$
+
+Another trivial result is that the union of all the equivalence class is the set $X$, and the elements of the quotient set are a partition of $X$.
+
+Recalling the previous example:
+
+\begin{exam}
+	Considering $\left[x\right]$ as the set of all straight lines parallel to $x$, the quotient set $\frac{X}{\sim}$ can be identified as the set of all the possible direction of the plane.
+\end{exam}		
+\begin{exam}
+	 Considering $\left[x\right]$ as the congruence class of $x$ modulo $q$, fixing for instance $q=5$ we have:
+	 $$
+	 	\ZZ_5
+	 	=\{[0],[1],[2],[3],[4]\}
+	 .
+	 $$
+\end{exam}		
+\begin{exam}
+	The set of integer numbers can be defined as follows: 
+	$$
+		\ZZ
+		\coloneqq \frac{\NN \times \NN}{\sim}
+	.
+	$$
+\end{exam}		
+\begin{exam}
+	Also the correct way to define the rational number set is through a quotient set: 
+	$$
+		\QQ 
+		\coloneqq \frac{\ZZ \times \ZZ_0}{\sim}
+	;
+	$$ 
+	indeed, there exist several representations of the same object: $\frac{p'}{q'} = \left[(p,q)\right]$.
+\end{exam}
+
+

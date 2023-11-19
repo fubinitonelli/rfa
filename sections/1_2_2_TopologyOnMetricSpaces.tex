@@ -1,0 +1,159 @@
+%!TEX root = ../main.tex
+\subsubsection{Topological structure and sequences on metric spaces}
+
+Thanks to the notion of metric and the definition of balls we can now build a topological structure on metric spaces:
+\begin{defn} \label{topological-structure-metric-spaces}
+	Let $\left(X,d\right)$ be a metric space, $A\subset X$, $x_0 \in X$. We say that:
+	\begin{itemize}
+		\item $x_0$ is an \emph{interior point} of $A$ if there exists $r > 0$:	
+			$$
+			B_r\left(x_0\right)\subset A
+			;
+			$$%\text{ and }B_d\left(x,y\right)=B_r\left(x\right);$$
+		\item $x_0$ is an \emph{exterior point} of $A$ if there exists $r>0$:
+			$$
+			B_r\left(x_0\right)
+			\subset \left(X \setminus A\right) 
+			= A\comp
+			;
+			$$
+		\item $x_0$ is a \emph{boundary point} of $A$ if it is neither interior nor exterior;
+		\item $x_0$ is a \emph{adherent point} of $A$ if for all $r>0$:
+			$$
+			B_r\left(x\right)\cap A 
+			\neq \varnothing
+			$$
+			so any point of $A$ is an adherence point of $A$;
+		\item $x_0$ is an \emph{accumulation point} (or limit point or cluster point) of $A$ if for all $r>0$ exists $x_n$:
+			$$
+			x_n 
+			\in \left\{B_r (x_0) \cap A\right\}\setminus\{x_0\}
+			;
+			$$
+		\item $x_0$ is an \emph{isolated point} of $A$ if:
+			$$
+			x_0 
+			\in A
+			\text{ and }
+			\exists \, r>0 : 
+			B_r\left(x_0\right)\cap A
+			=\{x_0\}
+			.
+			$$
+	\end{itemize}
+\end{defn}
+
+Moreover, the set of each ``kind'' of point can be identified with a proper name:
+\begin{defn} \label{notable-set-portions}
+	Let $\left(X,d\right)$ be a metric space, $A\subset X$, $x_0 \in X$, than:
+	\begin{itemize}
+		\item the \emph{interior} set of $A$ is defined as:
+					$$\mathring{A} = \text{int}\left(A\right) \coloneqq \{x_0 \in A : x_0 \text{ is an interior point of A}\};$$
+		\item the \emph{exterior} set of $A$ is defined as:
+					$$\ext\left(A\right) \coloneqq \{x_0 \in A: x_0\text{ is an exterior point of }A\};$$
+		\item the \emph{boundary} of $A$ is defined as:
+					$$\partial A \coloneqq \{x_0 \in A: x_0\text{ is a boundary point of }A\};$$
+		\item the \emph{closure} of $A$ is defined as:
+					$$\bar{A} \coloneqq \{x_0 \in A: x_0\text{ is an adherent point of }A\};$$
+		\item the \emph{derived} set of $A$ is defined as:
+					$$A'\coloneqq \{x_0 \in X: x_0\text{ is an accumulation point of }A\}.$$
+	\end{itemize}
+\end{defn}
+
+This allow us to specify whether a set is open or closed:
+\begin{defn}\label{open-close-set-metric-spaces}
+	The set $A$ is \emph{open} if $A=\mathring{A}$; that is every $x\in A$ is an interior point.\\
+	The set $A$ is \emph{closed} if $X\setminus A$ (or $A\comp$) is open.
+\end{defn}
+
+With these new concepts we can extend the notion of disjoint sets (see definition \vref{main-set-operations}):
+\begin{defn}
+	We say that two sets, $A$ and $B$, are \emph{almost disjoint}, or disjoint except for boundaries, if $$\mathring{A}\cap \mathring{B} = \varnothing.$$
+\end{defn}
+
+Now we highlight some basic properties.
+\begin{prop}[Topological properties of sets] \label{topological-properties-of-sets}
+	Let $A \subset X$, then:
+	\begin{itemize}
+		\item the sets $\mathring{A}$, $\partial A$ and $\text{ext}\left(A\right)$ are a partition of $X$;
+		\item $A$ is open $\iff A=\mathring{A} \iff A \cap \partial A = \varnothing$;
+		\item $\bar{A}= A \cup \partial A = \mathring{A} \cup \partial A$;
+		\item $A$ is closed $\iff A=\bar{A} \iff \partial A \subseteq A$;
+		\item $A'=\bar{A}\setminus \{\text{isolated points of A}\}$;
+		\item $\mathring{A}$ is the largest open set containing $A$;
+		\item $\bar{A}$ is the smallest closed subset of $X$ containing $A$.
+	\end{itemize}
+\end{prop}
+
+\begin{prop}[Topological property for family of sets] \label{topological-properties-of-families-of-sets}
+	Now, let $I$ be a family of indexes of any cardinality (countable or uncountable) and $\{A_j\}_{j \in I} \subset \Pc(X)$ and  $m \in I$:
+	\begin{itemize}
+		\item if $A_j$ is a open set $\forall j \in I$, then $\bigcup_{j\in I} A_j$ is open;
+		\item if $A_1, \ldots, A_m$ are open sets, then $\bigcap_{j=1}^m A_j$ is open;
+		\item if $A_j$ is a closed set $\forall j \in I$, then $\bigcap_{j\in I} A_j$ is closed;
+		\item if $A_1, \ldots, A_m$ are closed sets, then $\bigcup_{j=1}^m A_j$ is closed.
+	\end{itemize}
+\end{prop}
+So uncountable union of open set is an open set while uncountable intersection of closed set is a closed set.\\
+Notice that the first two properties are the complementary to the last two due to De Morgan's law.
+
+\paragraph{Sequences in metric spaces} Much of the previous definition about distances allow us to study the sequences defined in metric spaces, in particular we now discuss about their convergence. A sequence is, formally, a function which domain is $\NN$ (see definition \vref{function}). In a less formal language, a sequence can be considered an ordered set of elements which are indexed on $\NN$. We will denote a sequence as follows:
+$$
+\{x_n\}_{n \in \NN}
+.
+$$
+During theory deployment we will be interested in discover the behavior of a given sequence, for example if it converges or not. Here we start crafting tools useful for such goal.
+\begin{defn} \label{limit-in-metric-spaces}
+	Let $(X, d)$ be a metric space, $\{x_n\}$ be a sequence in $X$, $x^\star \in X$.\\
+	Then the \emph{limit} of the sequence $\{x_n\}$ is $x^\star$, namely $x_n\to x^\star$, as $n\to \infty$ if:
+	$$\forall\varepsilon > 0 \quad \exists \, \bar{n}=\bar{n}\left(\varepsilon\right): \ n>\bar{n}\; \implies\; d\left(x_n,x^\star\right)<\varepsilon$$
+	or, equivalently using open balls:
+	$$\forall\varepsilon > 0 \quad \exists \, \bar{n}=\bar{n}\left(\varepsilon\right): \ n>\bar{n}\; \implies\; x_n\in B_\varepsilon \left(x^\star\right).$$
+	When such limit does exist, then the sequence is said to be \emph{convergent}.
+\end{defn}
+
+From this definition comes three remarks: first, the limit is unique and any sub-sequence $\{x_{n_k}\}$ converges to the same limit: to prove this use the triangular inequality and the identity of indiscernibles. Second, considering two different but equivalent metrics the limit is the same, namely let $d_1, d_2$ be equivalent distances on set $X$, then $x_n \xrightarrow{d_1} x^* \iff x_n \xrightarrow{d_2} x^*$. Third, there is a relation between a set and the sequences which it contains, in particular we have the following theorem:
+
+\begin{theo}[theorem closure in metric spaces]\label{theo-closure-metric-spaces}
+	Let $(X,d)$ be a metric space and consider $A \subset X$. \\
+	The subset $A$ is closed if and only if, for any sequence $\{x_n\} \subset A$, we have that: 
+	$$
+		x_n \to x 
+		\implies x \in A
+	.
+	$$
+\end{theo}
+This theorem provides a characterization for closedness in metric space. The condition highlighted is known as \textit{sequentially closedness} and in case of metric space is completely equivalent to the closedness (see definition \vref{sequentially-closed-spaces-proposition}, and following results). We will see that this is not true for topological spaces.
+
+\begin{proof}[Necessary condition $(\implies)$]:\\
+	Having that $A$ is closed and any sequence $\{x_n\}$ such that $x_n \to x$, we have to prove that $x \in A$.\\
+	By contradiction assume that $x \in \left(X\setminus A\right)$, which is open by definition.\\
+	Then, it exist $r>0$ such that $B_r\left(x\right)\subset\left(X\setminus A\right)$ and, equivalently, $B_r\left(x\right)\cap A = \varnothing$. \\
+	By definition \vref{limit-in-metric-spaces} we can choose a point from the sequence which is arbitrarily close d to $x$, but for all $n$ we have $x_n \notin B_r\left(x\right)$, so we have a contradiction.
+	
+	\textit{Sufficient condition $(\impliedby)$:}\\
+	By hypothesis we have that any sequence $\{x_n\}_{n \in \NN}$ converges to $x$ which is a point of $A$.	Choose $x \in \bar{A}$; we will prove that $x \in A$. \\
+	Consider $B_{\frac 1 n}\left(x \right)$, by definition of adherence point we can choose a sequence $\{x_n\} \subset A$ such that:
+	$$
+		\forall n \ 
+		\exists \, x_n 
+		\in \left( A \cap B_{\frac 1 n}\left(x \right) \right)
+	.
+	$$
+	Notice that $d\left(x_n,x\right)<\frac 1 n \to 0$, and so $x_n \to x$. Having choose $x_n \in A$ we have, by hypothesis, that $x \in A$.\\
+	Thus $A = \bar{A}$ and $A$ is closed.
+\end{proof}
+
+Having considered ``all the possible sequences included in a set'', the following definition make sense:
+\begin{defn}
+	The \emph{sequence closure} of a set $X$ is: $$\{x \in X: \exists \, \{x_n\} \in X : x_n \to x \text{ in } (X,d)\}$$
+\end{defn}
+
+\paragraph{Bolzano--Weierstrass} Here we state a very useful result on which we will return to in next chapters.
+
+\begin{theo}[Bolzano--Weierstrass] \label{bolzano-weierstrass-theo}
+	Consider a metric space given by $\RR^N$ coupled with any metric.\\
+	Any bounded sequence contains at least one convergent subsequence.
+\end{theo}
+
+This theorem states that when working on $\RR^N$, having defined any metric, if we have any bounded sequence $\{x_n\}_{n \in \NN}$ it is always possible extract a subset of its elements obtaining a subsequence $\{x_{n_h}\}_{h \in \NN}$ which is convergent in the metric space. Note the convention of indexes and subindexes.

@@ -1,0 +1,269 @@
+%!TEX root = ../main.tex
+The goal here is to study functions between Banach spaces. In linear algebra we have already seen functions between finite spaces, but here the topic is to deal with the infinite dimensionality. \\
+Functions of this kind are called \emph{operators} or \emph{maps}. An operator from a vector space to $\RR$ is called \emph{functional}.\footnote{\itatrasl{funzionale}}
+
+
+\subsubsection{Definition of linear operator and boundedness}
+
+Throughout this section, let $(X,\norm{\cdot}_X)$ and $(Y,\norm{\cdot}_Y$) be two normed vector spaces on $\RR$. We'll use the compact notation ``$Tx$'' in place of ``$T(x)$'', if this does not imply contradictions.
+
+\medskip
+\begin{defn}
+	A map $T:X \to Y$ is called \emph{linear operator} if:
+	$$
+		T(\alpha x_1 + \beta x_2) 
+		= \alpha T x_1 + \beta T x_2 
+		\quad \forall \alpha, \beta \in \RR, 
+		\quad \forall x_1, x_2 \in X
+	.
+	$$
+\end{defn}
+
+Linearity immediately allows us to prove that $L(0)=0$. Indeed, $L(\alpha f) = \alpha L(f)$, choose $\alpha = 0$.
+
+\begin{defn}
+	We say that $T:X\to Y$ linear operator is \emph{bounded} if there exists $M > 0$ such that:
+	$$
+		\norm{Tx}_Y 
+		\leq M\norm{x}_X 
+		\quad \forall x \in X
+	$$
+	or, equivalently, if it maps bounded sets into bounded sets.
+\end{defn}
+Observe that, having not defined an ``operator norm'' yet, the boundedness relies only on the norm of the image set.
+
+Here some examples of linear operators in different spaces.
+\begin{exam}
+	Consider the finite case $X=\RR^N,$ $Y=\RR^m$.\\
+	The well-known representation theorem states that a linear operator $T : X \to Y$ can be represented by a matrix $ A \in \RR^{m\times n}$, which depends on the bases we chose for $X$ and $Y$, such that $Tx=Ax^T$. \\
+	Apply the euclidean norm:
+	$$
+		\norm{Tx}_2\leq M \norm{X}_2 
+		\quad \text{with}
+		\quad M 
+		= \left(\sum_{j=1}^{m}\sum_{i=1}^{n}|a_{ij}^2|\right)^{\frac 1 2}
+	.
+	$$
+	Thus any linear $T$ is bounded in any norm, as they are all equivalent.
+\end{exam}
+\begin{exam}
+	Consider $X=Y=L^2([0,1])$. Fix $k \in L^2([0,1]^2)$, and let:
+	$$Tu(x) \coloneqq \int_0^1 k(x,y) \, u(y) \, \dy.$$
+	This is known as the Hilbert--Schmidt operator: it is linear and bounded. We want to prove that $Tu \in L^2([0,1])$ for any $u \in L^2([0,1])$.
+	Via the Hölder inequality, we get:
+	$$	
+		(Tu(x))^2
+		=\left(\int_0^1 k(x,y) \, u(y) \,\dy\right)^2
+		\leq\left(\int_0^1 k(x,y)^2\,\dy\right) \left(\int_0^1 u(y)^2\,\dy\right)
+	.
+	$$
+	Integrating both sides in $x$ we get:
+	$$
+		\int_0^1 (Tu(x))^2 \,\dx
+		\leq \norm{k}^2_{L^2([0,1]^2)}  \norm{u}^2_{L^2([0,1])}
+	,
+	$$
+	where, defining $M = \norm{k}^2_{L^2([0,1]^2)}$, we have:
+	$$ \norm{Tu}^2_{L^2([0,1])} \leq M\norm{u}^2_{L^2([0,1])}.$$
+	Then $T$ is linear and bounded from $L^2([0,1])$ into itself.
+\end{exam}
+\begin{exam}
+	Consider $X=L^p(\Omega, \mm, \mu)$, $Y = L^q(\Omega, \mm, \mu)$, with $p$ fixed and conjugate of $q$; consider also $g \in Y$. \\
+	Then $$T_g:f \to T_g(f) = \int_\Omega fg \,\dmu$$ is a linear functional, and it is bounded via the Hölder inequality: $|T_g(f)| \le \int_\Omega |fg| \,\dmu \le \norm{f}_p \norm{g}_q$.
+\end{exam}
+
+\paragraph{Boundedness is equivalent to continuity} See this first result.
+\begin{theo}
+	Let $T:X\to Y$ be a linear operator. The following statement are equivalent:
+	\begin{itemize}
+		\item $T$ is bounded;
+		\item $T$ is Lipschitz continuous in $X$;
+		\item $T$ is continuous at $x=0$.
+	\end{itemize}
+\end{theo}
+\begin{proof} We will prove the pairwise implications.\\
+	\textit{A bounded linear operator is continuous in its domain.}\\
+	Let $x_0\in X$, $\{x_n\}_{n\in \NN} \subset X$ such that $x_n \to x_0$ in $X$. Then:
+	$$
+		\norm{Tx_n-Tx_0}_Y
+		=\norm{T(x_n-x_0)}_Y 
+		\leq M\norm{x_n-x_0}_X 
+		\to 0
+	\quad \text{as } n \to +\infty$$
+	Thus $T{x_n} \to Tx_0$ in $Y$.
+	
+	\textit{A linear operator continuous in its domain is continuous in $x=0$.}\\
+	This point is trivial.
+	
+	\textit{A linear operator continuous continuous in $x=0$ is bounded.}\\
+	Suppose, by contradiction, that:
+	$$
+	\forall n \in \NN_0 \quad
+	\exists\, x_n \in X \setminus \{0\} : \quad
+	\norm{Tx_n}_Y \geq n\norm{x_n}_X.
+	$$
+	Then take $z_n = \frac{x_n}{n\norm{x_n}_X}$. Observe that $z_n \to 0$ in $X$. Moreover:
+	$$
+	Tz_n 
+	= T \left( \frac{x_n}{n\norm{x_n}_X} \right)
+	=\frac{1}{n\norm{x}_X} Tx_n
+	$$
+	and
+	$$
+	\norm{Tz_n}_Y 
+	=\frac{1}{n\norm{x_n}_X}\norm{Tx_n}_Y
+	\geq 1.
+	$$
+	Notice that, for any linear operator $T$, we have $T(0) = 0$. However, $Tz_n \not\to T(0) = 0$, and thus $T$ is not continuous.
+\end{proof}
+Then, as when an operator is continuous in $0$ then is continuous everywhere, the point $0$ can be changed with any other point in this theorem: this, as we have seen in the proof, is possible due to linearity.
+
+
+\begin{exam}
+	Consider the normed vector space $X=(\Cc^1([-1,1]),\norm{\cdot}_\infty)$, which is not a Banach space, and consider a linear functional defined as follows:
+	$$
+		Tf 
+		= f'(0)
+		.
+	$$
+	Let $f_n(t) = \frac{\sin(nt)}{n}$ for $n \in \NN_0$: we have $\norm{f_n}_\infty \to 0$ as $n \to \infty$.\\
+	However, $Tf_n=1$ for any $n \in \NN_0$, thus $Tf_n \not \to T(0) = 0$ and so $T$ is not continuous at $0$, and it is \textit{not} bounded.
+\end{exam}
+
+In this example $X$ is not a Banach space: finding an example of linear unbounded operator between infinite dimensional Banach spaces, even a functional, is technically very difficult: the Axiom of Choice is required.
+
+\paragraph{Sets of linear operators and norms} Here we define the sets which contains linear operators.
+
+\begin{defn}
+	Let $X$ and $Y$ two real vector spaces. Then the \emph{set of linear operators} form $X$ to $Y$ is: 
+	$$\Lc(X,Y) = \{T:X\to Y\ : \ T \text{ linear operator}\}.$$
+	On the same setting, the \emph{set of linear bounded operators} is:
+	$$\Bc(X,Y) = \{T:X\to Y\ : \ T \text{ linear bounded operator}\}.$$
+\end{defn}
+
+Notice that, if $X$ is infinite-dimensional, then $\Bc(X,Y) \subsetneq \Lc(X,Y)$.
+
+Both of them are vector spaces:
+\begin{prop}
+	The spaces $\Lc(X,Y)$ and $\Bc(X,Y)$ are vector space with respect to the standard operations.
+\end{prop}
+
+Now, recalling that boundedness in defined on the norm of the image space, we define a norm for bounded operators:
+
+\begin{defn}
+	The norm for $\Bc$ is: 
+	$$
+		\norm{T}_{\Bc(X,Y)} 
+		\coloneqq \sup_{\norm{x}_X \leq 1} \norm{Tx}_Y
+	.
+	$$
+\end{defn}
+
+If $T \in \Bc(X,Y)$ then $\norm{Tx}_Y \leq M$ for all $x \in X$ such that $\norm{x}_X \leq 1$.\\
+Then follows that $$\sup_{\norm{x}_X \leq 1} \norm{Tx}_Y$$ is finite (the reader should prove here that this is a norm, do it!).\\
+So, with the norm previously defined, $\Bc(X,Y)$ is also a normed vector space.
+
+This norm can be rewritten in many other forms, providing different interpretations, like specified by the following.
+
+\begin{prop}
+	These equalities hold:
+	$$
+		\norm{T}_{\Bc(X,Y)}
+		\coloneqq \sup_{\norm{x}_X \leq 1} \norm{Tx}_Y
+		= \sup_{\norm{x}_X=1}\norm{Tx}_Y
+		= \sup_{x\in X}\frac{\norm{Tx}_Y}{\norm{x}_X}
+		.
+	$$
+\end{prop}
+Where the first alternative differs from the definition by the set they pick $x$.
+
+\begin{proof}
+	First, as $\{x : \norm{x}_X \leq 1\} \supseteq \{x : \norm{x}_X = 1\}$, we have: 
+	$$
+		\sup_{\norm{x}_X \leq 1}\norm{Tx}_Y 
+		\geq \sup_{\norm{x}_X = 1} \norm{Tx}_Y
+		.
+	$$
+	On the other hand, if $\norm{x}_X \leq 1$, then we have, if $x \neq 0$,
+	$$
+		\norm{Tx}_Y 
+		= \norm{x}_X\norm{T\left(\frac{x}{\norm{x}_X}\right)}_Y 
+		\leq \norm{T\left(\frac{x}{\norm{x}_X}\right)}_Y
+		= \frac{1}{\norm{x}_X} \norm{Tx}_Y
+		.
+	$$
+	We want to maximize the LHS, which is the same as minimizing the RHS, which can be done by taking $\norm{x}_X$ as biggest as possible ($\norm{x}_X=1$). Hence 
+	$$
+		\sup_{\norm{x}_X\leq 1}\norm{Tx}_Y 
+		= \sup_{\norm{x}_X=1}\norm{Tx}_Y
+		.
+	$$
+	The remaining equality is obvious for $x \neq 0$, since
+	$$
+		\frac{\norm{Tx}_Y}{\norm{x}_X} 
+		= \norm{T\left(\frac{x}{\norm{x}_X}\right)}_Y
+		.
+	$$
+\end{proof}
+
+Having defined those norms an observation is required; the operator norm is defined from the norm of the image space. Then, boundedness of the operator can depend on the norm of the image space.
+
+\paragraph{Dual spaces} In next chapters we will deeply develop the concept of duality. We present here this definition for a complete dissertation of the matter.
+
+\begin{defn} \label{defn-dual-star}
+	Consider $X$ vector space and $Y=\RR$.\\
+	The space $X' \coloneqq \Lc(X, \RR)$ is said to be the \emph{algebraic dual space} of $X$.\\
+	The space $X^\star \coloneqq \Bc(X, \RR)$ is said to be the \emph{topological dual space} of $X$.
+\end{defn}
+
+From now on in this book, when we write ``dual space'' without further specifications, we are referring to \textit{topological} dual space.
+
+Recalling that operators which have $\RR$ as image set are called functional, notice that here we defined the sets of linear functionals and bounded functionals respectively.
+
+\paragraph{The set of bounded linear operators can be a Banach space} Consider the following theorem.
+\begin{theo}\label{theo-Bc-banach}
+	If $Y$ is a Banach space, then $\Bc(X,Y)$ is a Banach space.
+\end{theo}
+
+Observe that the condition is on the image space, similarly to the boundedness that depends on the norm of the image space, also completeness relies on the same.
+
+\begin{proof}
+	Let $\{T_n\}_{n\in\NN}\subset \Bc(X,Y)$ be a fundamental sequence.\\
+	Then$\{T_n x\}_{n\in\NN_0}$ is also a fundamental sequence in $Y$ so it converges to some $y \in Y$ for each $x \in X$.\\
+	Set now $Tx = y$; the operator $T$ is clearly linear; we have to prove that T is bounded.
+	
+	Fixed some $\varepsilon > 0$, there exists $\bar n = \bar n(\eps) \in \NN$ such that:
+	$$
+		\norm{T_n x - T_m x}_Y
+		\leq \norm{T_n-T_m}_{\Bc(X,Y)}\norm{x}_X
+		< \eps\norm{x}_X
+		\quad \forall n,m \geq\ \bar n
+		\quad \forall x \in X
+		.
+	$$
+	Now let $n$ go to $+\infty$ and we have:
+	$$
+		\norm{Tx-T_mx}
+		<\eps\norm{x}_X
+		\quad \forall m \geq n
+		\quad \forall x \in X
+		.
+	$$
+	And so
+	$$
+		\norm{Tx}_Y
+		\leq \norm{Tx-T_m x}_Y + \norm{T_m x}_Y
+		\leq (\eps+M)\norm{x}_X
+		\quad \forall x \in X
+	$$
+	as $\{T_m\}_{m \in \NN}$ is bounded by some $M > 0$.\\
+	Therefore $T \in \Bc(X,Y)$ and
+	$$
+		\norm{T-T_m}_{\Bc(X,Y)} 
+		\leq \varepsilon 
+		\quad \forall m > n_0
+		.
+	$$
+\end{proof}
+
+Now observe that, since $\RR$ with $p$ norm is Banach, then for any $X$ the space $\Bc(X, \RR)$ is Banach as well.

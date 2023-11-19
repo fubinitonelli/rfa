@@ -1,0 +1,102 @@
+%!TEX root = ../main.tex
+This chapters contains the most important results of the real analysis; here we focus on calculus of one-valued functions, then, in the next chapter, we will consider also multi-valued functions. Some of those results are well-known also in lower calculus courses, but here we will approach the problem from a more technical point of view.
+
+%This chapter is a sort of revision on the theory of function of one value. We will see the generalization of some elemental results of calculus.\\
+%One of our goal is to find a link between differentiation and integration.\\
+%For example consider $a,b\in \RR$, $f\in \Cc([a,b])$, and $F(x) = \int_a^x f(t) \dt$. The theorem of calculus we all know states that $F$ is differentiable in $[a,b]$ and $F'(x)=f(x)$ for all $x \in [a,b]$. How can we extend this result also to Lebesgue integrable functions?
+
+\subsubsection{First fundamental theorem of calculus}
+
+We try to define a generic goal. Consider the measure space $([a,b],\Lc([a,b]),\lambda)$, take $f\in L^1([a,b],\Lc([a,b]),\lambda)$ and set 
+$$
+	F(x) 
+	= \int_a^x f(t)\dlam
+,
+$$
+which properties does $F$ have?
+
+\paragraph{Lebesgue points} First, our focus is on discontinuity points. The first step is to define a new notion for ``continuous points''; on those we are confident that there are no issues with integration and differentiation. 
+\begin{defn}
+A point $x\in[a,b]$ is a \emph{Lebesgue point} for a function $f$ if there exists a representative $\tilde{f}$ of $f$ ($\tilde f = f$ a.e.) such that:
+$$
+	\lim\limits_{h\to 0}
+	\frac 1 h 
+	\int_x^{x+h} |\tilde{f}(t) - \tilde{f}(x)|\, \dt 
+	= 0
+,
+$$
+where $h \to 0^+$ if $x=a$ or $h \to 0^-$ if $x=b$.
+\end{defn}
+The integral uses the $\lambda$ measure, the integral variable $t$ has been written in $\dt$ for clarity.
+
+Notice that $\tilde{f}$ is a representative of the equivalence class $[f]$, given by almost-everywhere equality; it's typical of $\Lc^1$ spaces. 
+
+Lebesgue points do not present discontinuity and are a sort of ``continuous points''; for instance, jump points are not a Lebesgue point; check it by considering:
+$$
+	f(t) = 
+	\begin{cases}
+		\frac{t}{|t|} & \text{if } t\in [-1,1] \setminus \{0\} \\
+		0 & \text{if } t=0
+	.
+	\end{cases}
+$$
+
+Having checked that jumps are not Lebesgue points, one can wonder if a continuity point is a Lebesgue point. We have the following result.
+
+\begin{theo}
+	If $x_0$ is a continuity point for $f$, then $x_0$ is a Lebesgue point for $f$.
+\end{theo}
+
+\begin{proof}
+	By definition of continuity:
+	$$
+		\forall \eps >0 \ \ \exists \, \delta :\ \ | x-x_0| < \delta \implies | f( x) -f( x_0)| < \eps ,
+	$$
+	we evaluate the quantity:
+	$$
+	\left| \frac{1}{h}\int_{x_0}^{x_0+h}| f( x) -f( x_0)| dt\right| \leq \frac{1}{| h| } \eps | \lambda ( x_0 +h-x_0)| =\frac{|h|}{|h|} \eps =\eps ,\ \forall \eps >0.
+	$$
+\end{proof}
+
+\begin{theo}\label{theo-lebesgue-points}
+	Let $f\in L^1([a,b],\Lc([a,b]),\lambda)$. \\
+	Then almost any point $x\in[a,b]$ is a Lebesgue point of $f$. \footnotemark{}
+\end{theo}
+\footnotetext{For further discussion and a proof, see: W. Rudin, Real and Complex Analysis, 1987, page 138, theorem 7.6.}
+
+
+\paragraph{The theorem} We are able to state a first description of the relation between differentiation and integration.
+\begin{theo}[First fundamental theorem of calculus]\label{theo-first-fundamental-calculus}
+	Let $f\in L^1([a,b],\Lc([a,b]),\lambda)$.\\
+	The integral function $F(x) = \int_a^x f(t)$ is differentiable a.e.\ and $F'=f$ a.e. in $[a, b]$.
+\end{theo}
+\begin{proof}
+	Let $x\in[a,b]$ be a Lebesgue point of $f$ and $h \neq 0$ such that $x+h \in [a,b]$.
+	Notice that we can rewrite the value of a function in the point as follow:
+	$$
+		f(x) 
+		= \lim\limits_{h \to 0}
+		\frac 1 h 
+		\int_x^{x+h} f(t) \, \dt.$$
+	Consider now the incremental quotient of the integral function $F$; we need it equal to function $f$. So we write:
+	$$
+		\frac{F(x+h)-F(x)}{h}-f(x) 
+		= \frac 1 h \int_{x}^{x+h} (f(t)-f(x)) \,\dt
+	,
+	$$
+	then, by triangular inequality (see \vref{prop-triang-ineq-integral}), we have:
+	$$
+		\left| \frac{F(x+h)-F(x)}{h}-f(x) \right| 
+		\leq \frac{1}{|h|} \int_x^{x+h} |f(t)-f(x)| \,\dt
+	.
+	$$
+	Taking the limit for $h \to 0$ or $h \to 0^+$, if $x=a$, or $h \to 0^-$, if $x=b$, we have: 
+	$$
+		 \frac{1}{|h|} \int_x^{x+h} |f(t)-f(x)| \,\dt
+		 \to 0
+	.
+	$$
+	We have proved the theorem for any Lebesgue point, through the previous theorem (\vref{theo-lebesgue-points}) we know that the set of non-Lebesgue points has measure zero; so the thesis is proven.
+\end{proof}
+
+But this theorem opens another question: is $F$ continuous in $[a,b]$?

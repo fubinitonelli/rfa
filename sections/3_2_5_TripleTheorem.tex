@@ -1,0 +1,199 @@
+%!TEX root = ../main.tex
+\subsubsection{Open mapping, bounded inverse mapping and closed graph theorem}
+In this chapter we state three theorems which are related to the uniform boundedness principle. As we'll see, those results are equivalent each other.
+
+%%%%% Questo andrebbe piazzato da qualche parte un po' meglio.
+%First, a general note. In general, a continuous functions does not map open sets into open sets only. For example, take:
+%$$f(x) = e^x \cos(x) \quad x \in \RR$$
+%$f((-\infty,0))$ is not open, and $f(\{-n\pi, n \in \NN \})$ is not closed.
+
+\paragraph{Open mapping and bounded inverse mapping theorems} As we have done with functions, here we discuss the condition on the inverse of a given operator.
+
+\begin{theo}[open mapping]
+	Let $(X, \norm{\cdot}_X)$, $(Y, \norm{\cdot}_Y)$ be Banach spaces. \\
+	If $T \in \Bc (X,Y)$ is surjective, namely $T(X) = Y$, then it maps open sets in open sets.
+\end{theo}
+
+The proof is based on Baire's theorem and is quite long.\footnote{For further discussion, see: H. Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, 2010, page 35, theorem 2.6.}
+
+\medskip
+\begin{theo}[bounded inverse mapping]\label{bounded-inverse-theo}
+	If $T\in \Bc(X,Y)$ bijective, then $T^{-1} \in \Bc(Y,X)$.
+\end{theo}
+Observe than $T$ is an isomorphism.
+
+\begin{proof}
+	Observe that $T^{-1}$ is well defined from $Y$ to $X$ with $T^{-1} \in \Lc(Y,X)$.\\
+	To prove that $T^{-1}$ is bounded, it's enough to prove its continuity. Consider a open set $A\subset X$, then $(T^{-1})^{-1}(A) = T(A)$ is open, thanks to the open mapping theorem.
+\end{proof}
+
+The problem of solving the equation $Tx=y$, where $T \in \Bc(X,Y)$ and $y \in Y$ is given is well posed if it has a unique solution $x$ for each fixed $y \in Y$ and such $x$ continuously depends on $y$.\\
+We can say that this problem is well posed if and only if for each $y \in Y$ the equation $Tx = y$ has a solution and $\ker(T)=0$.
+
+Here we can briefly discuss about norm equivalence in Banach space. Indeed, working with these spaces we can have a simpler criteria than definition \vref{equivalent-metrics}. The following result shows how.
+
+\begin{coro} \label{coro-equiv-norm-banach}
+	Let $(X,\norm{\cdot}_\spadesuit)$ and $(X, \norm{\cdot}_\clubsuit)$ be two Banach spaces. \\
+	If there exists $M > 0$ such that 
+	$$
+		\norm{x}_\spadesuit 
+		\leq M \norm{x}_\clubsuit 
+		\quad \forall x \in X
+		,
+	$$
+	then $\norm{\cdot}_\spadesuit$ and $\norm{\cdot}_\clubsuit$ are equivalent.
+\end{coro}
+
+\begin{proof}
+	Consider the identity operator $I:(X, \norm{\cdot}_\spadesuit) \to (X, \norm{\cdot}_\clubsuit)$. \\
+	As $I$ is bijective and continuous, due to \vref{bounded-inverse-theo}, its inverse $I^{-1} = I$ is continuous and there exists $k>0$ such that
+	$$
+		\norm{x}_\clubsuit 
+		\leq k \norm{x}_\spadesuit 
+		\quad \forall x \in X
+	;
+	$$
+	this thanks to the boundedness, having $\norm{I x} \leq k \norm{x}$.
+	
+	Set now $k = \frac{1}{m}$, we have:
+	$$
+		m \norm{x}_\clubsuit 
+		\leq \norm{x}_\spadesuit 
+		\quad \forall x \in X
+	,
+	$$
+	restoring the full condition.
+\end{proof}
+
+\paragraph{Closedness of an operator and closed graph theory} Consider this definition.
+
+\begin{defn}
+	If $X$, $Y$ are vector spaces and $T \in \Lc(X,Y)$ then:
+	$$ \Gc(T) = \{(x,y) \in X \times Y : y = Tx\}$$
+	is called \emph{graph} of $T$.
+\end{defn}
+
+Observe that $\Gc(T)$ is a subspace of $X \times Y$ which is a vector space in a canonical way.
+It is easy to prove that $T \in \Bc(X,Y)$ has a closed graph in $X \times Y$. Do it!
+
+\begin{prop}
+	Let $(X,\norm{\cdot}_X)$, $(Y,\norm{\cdot}_Y)$ be Banach spaces.\\
+	Then the vector space $X \times Y$ is a Banach space with respect to the norm:
+	$$ \norm{(x,y)}_{X\times Y} \coloneqq \norm{x}_X + \norm{y}_Y.$$
+\end{prop}
+This norm is equivalent to $\norm{(x,y)}_{p} = \left(\norm{x}_X^p+\norm{y}_Y^p\right)^{\frac 1 p}$ with $p \in [1, +\infty)$, or to $\norm{(x,y)}_\infty = \max\{\norm{x}_X, \norm{y}_Y\}$.
+
+\begin{defn}
+	We say that $T \in \Lc(X,Y)$ is \emph{closed} if 
+	$$
+		x_n \spaceto{X} x 
+		\quad \text{implies} \quad 
+		T x_n \spaceto{Y} Tx
+	.
+	$$
+	% if $(x_n \spaceto{X} x) \wedge (T x_n \spaceto{Y} y)$ implies $Tx = y$.
+\end{defn}
+
+The following result has a very simple proof, but its inverse, which is presented right after, is very important in the development of theory.
+\begin{prop}
+	If $T \in \Bc (X,Y)$, then $T$ is closed.
+\end{prop}
+
+\begin{proof}
+	If exists $T^{-1} \in \Bc(Y,X)$ then, fixing $y_0 \in Y$ and $x_0 = T^{-1}y_0$, we have:
+	$$
+		\forall \eps > 0 
+		\quad \exists \, \delta = \delta_0(\eps, y_0) > 0 : 
+		\  Tx \in \Bc_Y(y_0, \eps) 
+		\quad \forall x \in B_X(x_0,\delta)
+	.
+	$$
+\end{proof}
+
+\begin{theo}[closed graph theorem]
+	If $X$ and $Y$ are Banach spaces, then every closed linear operator is bounded.
+\end{theo}
+
+To prove the theorem we will use the following norm, known as the \emph{graph norm}:
+$$
+	\norm{x}_{\Gc} 
+	\coloneqq \norm{x}_X+\norm{Tx}_Y
+.
+$$
+Before the proof check that this is actually a norm
+
+\begin{proof} 
+	\textit{Step 1:} First, we have to prove that $(X,\norm{\cdot}_{\Gc})$ is a Banach space: consider a fundamental sequence $\{x_n\}_{n\in\NN} \subset X$: it is a fundamental sequence with respect to $\norm{x}_X$ and $\{Tx_n\}_{n\in \NN}$ is fundamental in $Y$.\\
+	Then $(X,Y)$ are Banach spaces, and, for some $x \in X$ and some $y \in Y$, we have:
+	$$
+		x_n \xrightarrow{(X,\norm{\cdot})} x 
+		\quad \text{and} \quad 
+		Tx_n \xrightarrow{(Y,\norm{\cdot}_Y)} y
+	.
+	$$
+	
+	Thus $T$ is closed, $y=Tx$, so $\{x_m\}_{n \in \NN}$ converges with respect to $\{\norm{\cdot}_{\Gc}\}$, namely: 
+	$$
+		x_n \xrightarrow{(X,\norm{\cdot}_{\Gc})} x
+	.
+	$$
+	Therefore we have $(X,\norm{\cdot}_X)$ $(X,\norm{\cdot}_{\Gc})$ Banach spaces.
+	
+	It is easy to see that:	$$\norm{x}_X \leq \norm{x}_{\Gc} \quad \forall x \in X.$$
+	
+	\textit{Step 2}: Now we can apply corollary \vref{coro-equiv-norm-banach},  the two norms are equivalent and, in particular, we have:
+	$$
+		\exists \, M > 1 : 
+		\quad \norm{x}_{\Gc} 
+		\leq M \norm{x}_X 
+		\quad \forall x \in X
+	.
+	$$
+	
+	Then, by definition of $\norm{x}_{\Gc}$:
+	$$
+		\exists \, M > 1 : 
+		\quad \norm{Tx}_Y \leq (M - 1) \norm{x}_X 
+		\quad \forall x \in X
+	.
+	$$
+	and thus $T$ is bounded.
+\end{proof}
+
+We have proven that open mapping implies bounded inverse, which in turn implies closed graph. However, it can also be proven that closed graph implies open mapping: therefore, these theorems are equivalent.
+
+Observe that a non-linear mapping may have a closed graph without being continuous:
+\begin{exam}
+	Take $f: \RR \to \RR$ defined by $f(t)=t^{-1}$ if $t \neq 0$ otherwise $f(0) = 0$.\\
+	This isn't linear nor continuous but it have a closed graph.
+\end{exam}
+
+\paragraph{Sum up} Let us retrace our steps: we have used Baire's theorem (1899) to prove the uniform boundedness principle (1927) and the open mapping theorem (Banach–Schauder, 1929), which is equivalent to bounded inverse and closed graph theorems.
+
+\begin{prop}
+	A linear operator $T\in \Lc(X,Y)$ is closed if and only if $\Gc(T)$ is a closed subspace of $X \times Y$.
+\end{prop}
+
+Hence we conclude 
+$T\in \Bc(x,y)$ if and only if $\Gc(T)$ is closed in $X\times Y$.
+
+\begin{exam}
+	A non-linear operator can have a closed graph without being continuous. For instance, take:
+	$$f(t) \coloneqq \begin{cases}
+	\frac 1 t & \text{if } t \neq 0 \\
+	0 & \text{if } t=0
+	\end{cases}
+	.
+	$$
+\end{exam}
+
+%\begin{rema}
+%	Let $X,Y$ Banach spaces, $T \in \Bc (X,Y)$. Is it true that for each $y \in Y$, there exists a unique $x \in X$ such that $Tx=y$, and when $y$ is \textit{small} (with respect to $\norm{\cdot}_Y$) then $x$ is \textit{small} (with respect to $\norm{\cdot}_X$)?
+%	
+%	That is equivalent to saying that the equation $Tx=y$ is \emph{well-posed}.
+%	
+%	Thanks to open mapping and bounded inverse, we have:
+%	$$Tx=y \text{ is well posed} \iff \Im(T)=Y \wedge \Ker(T) = \{0\}$$
+%	
+%	Notice that $T^{-1}$ is continuous, hence $y_n \spaceto{Y} y \implies x_n = T^{-1}y_n \spaceto{X} x = T^{-1}y$).
+%\end{rema}

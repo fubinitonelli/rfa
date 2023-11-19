@@ -1,0 +1,71 @@
+%!TEX root = ../main.tex
+\subsubsection{Other topological notions}
+Now we will examine same particular properties of spaces. First we discuss a remark on topological spaces, then we will present the sequentially closed space and the concepts of density and separability. Further sections will develop the theory with the notions of completeness and compactness.
+
+The following notion allow us to compare two topologies of the same set:
+\begin{defn}
+	Let $\tau_1$ and $\tau_2$ be topologies on $X$.\\
+	We say that $\tau_2$ is \emph{weaker} than $\tau_1$, and $\tau_1$ is \emph{stronger} than $\tau_2$, if: $$\tau_2 \subseteq \tau_1.$$
+\end{defn}
+
+So $\tau = \varnothing$ is the weakest topology, while $\tau = \Pc(X)$ is the strongest.
+
+Consider the setting of the definition and a continuous function $f:(X,\tau_2) \to (Y, \tau_y)$: then $f:(X,\tau_1) \to (Y, \tau_y)$ is continuous as well. This is easy to show as every preimage of an open set of $\tau_y$ is an open set belonging to $\tau_1$.
+
+These definitions are instead about metric spaces only:
+\begin{defn}\label{metric-totally-bounded}
+	Consider a metric space $\left(X,d\right)$, with $E\subset X$.\\
+	The \emph{diameter} of $E$ is $$\text{diam}(E)\coloneqq \sup_{x,y\in E}d(x,y).$$
+
+	We say that $E$ is \emph{bounded} if $\text{diam}(E) < + \infty$.
+
+	We say that $E$ is \emph{totally bounded} if it can be ``covered'' with finitely many balls:
+	$$\forall \varepsilon > 0 \ \exists \, \{x_i\}_{i = 1}^n : \quad E\subset \bigcup_{i=1}^{n}B(x_i, \varepsilon).$$
+\end{defn}
+
+\paragraph{Sequentially closed set} This is an alternative definition of closedness for sets.
+\begin{defn}
+	We say that $A \subset X$ is \emph{sequentially closed} if for every sequence $\{ x_n \} \subset A$, $x_n \to x^* \implies x^* \in A$.
+\end{defn}
+
+What is the relation between closed sets and sequentially closed sets? There are any differences between metric space and topological space environment? We summarize all those results in the following; recall theorem closure \vref{theo-closure-metric-spaces} to get the big picture.
+\begin{prop}\label{sequentially-closed-spaces-proposition}
+	Let $(X, d_X)$ be a metric space.\\
+	Then $A \in X$ is closed if and only if it is also sequentially closed.
+	
+	Let $(X, \tau_X)$ be a topological space.\\
+	If $A \in X$ is closed, then it is also sequentially closed. In general, the converse is not true.
+\end{prop}
+
+\paragraph{Density and separability} Topological spaces can have some particular properties that are very useful. Later in the theory we will discover which benefits separability implies.
+
+\begin{defn} \label{defn-density}
+	Let $(X,\tau)$ be a topological space and $A, B \subset X$, with $A \subset B$. \\
+	We say that $A$ is \emph{dense} in $B$ if $\bar A = B$.\\
+	We say that $A$ is \emph{everywhere dense} if $A$ is dense in $X$ itself.\\
+	We say that $A$ is \emph{nowhere dense}\footnotemark if $\mathring{\bar A} = \varnothing$\footnotemark.
+\end{defn}
+\addtocounter{footnote}{-1}
+\footnotetext{\itatrasl{mai denso}}
+\addtocounter{footnote}{1}
+\footnotetext{This means that a nowhere dense set is a set such that the interior of its closure is empty. In other words, a set is nowhere dense if its closure does not contain any balls.}
+% https://tex.stackexchange.com/questions/370600/how-to-make-multiple-footnotemark-and-footnotetext-match
+Recalling the definition of closure $\bar A$, $\bar A = B$ means that if $x\in B$ then every open neighborhood of $x$ intersects $A$.\\
+The same for $\bar A = X$: this means that $\forall D \in \tau D, \cap A \neq \varnothing$.
+
+\begin{exam}
+	$\QQ$ is everywhere dense in $\RR$, id est $\bar \QQ = \RR$. This because $\{ (a,b), a<b\}$ is a base for the standard topology of $\RR$, thus $\forall A \text{ open sets } \subset \RR : A \supset(a,b)$, one has $(a,b) \cap \QQ \neq \varnothing$ that means $\bar \QQ = \RR$.
+\end{exam}
+
+Remember that $\mathring{\QQ} = \varnothing$ and $\partial \QQ = \RR$.
+
+\begin{defn}\label{defn-separable-space}
+	A topological space $(X, \tau)$ is \emph{separable} if exists $A \subset X$ countable such that $\bar A = X$.
+\end{defn}
+
+\begin{exam}
+	The topological space $(\RR^N, \tau_e)$ is separable $\forall n \in \NN$.
+\end{exam}
+
+
+

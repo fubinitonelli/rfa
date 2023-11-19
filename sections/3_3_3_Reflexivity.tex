@@ -1,0 +1,258 @@
+%!TEX root = ../main.tex
+\subsubsection{Reflexivity}
+Since from a space we have constructed its topological dual, we can construct the topological dual of this last one. This is called bidual as we will state soon. But how many times we can redo this process? At a certain point must we stop? Sometimes yes, because the bidual is very similar to the original space, or even it can be the original space itself.
+
+\begin{defn}
+	Consider $(X, \norm{\cdot})$ be a real normed vector space.
+	The dual of its dual, namely $(X^{\star\star}, \norm{\cdot}_{\star\star})$, is called \emph{bidual}.
+\end{defn}
+
+Now we will try to figure out how $X^{\star\star}$ is related to $X$?
+
+Fix $x\in X$ and let
+$$\Lambda_x : X^\star \to \RR, \ 
+\Lambda_x L\mapsto Lx
+\quad \forall L \in X^\star.$$
+Observe that $\Lambda_x$ is linear and also bounded: indeed, we have: 
+$$|Lx|\leq \norm{L}_\star \norm{x} \quad \forall L \in X^\star.$$
+Thus we have $\Lambda_x \in X^{\star\star}$ and $\norm{\Lambda_x}_{\star\star} \leq \norm{x}$.
+
+Moreover, we can find $L\in X^\star$ such that $\norm{L}_\star = 1$ and $Lx=\norm{x}$ (see corollary \vref{prop-conseq-HB-1}), and thus the maximum is achieved:
+$$\norm{\Lambda_x}_{\star \star} = \norm{x}.$$
+
+\begin{defn}
+	Let  $\tau : X \to X^{\star\star}$ a map defined as $\tau x = \Lambda_x$ where
+	$\Lambda_x L\mapsto Lx$ $\forall L \in X^\star$.
+	Then $\tau$ is a linear isometry called \emph{canonical map}, and we have:
+	$$\norm{\Lambda_x}_{\star\star} = \norm x.$$
+\end{defn}
+
+Observe that $\tau(X)$ is a closed subspace of $X^{\star\star}$ but it does no coincide with it in general. 
+If they coincide we have:
+
+\begin{defn}
+	A normed vector space $X$ linearly isomorphic and isometric to $X^{\star\star}$ is said to be \emph{reflexive}.
+In that case we have:$$\tau(X) = X^{\star\star}.$$
+\end{defn}
+
+There are some Banach spaces $X$ which are not reflexive, but are linearly isometric and isomorphic to $X^{\star\star}$ through a different isomorphism.\footnote{This was proved by R. C. James in 1951}\\
+Moreover observe that any finite dimensional Banach space $(X,\norm{\cdot})$ is reflexive as they are linear isomorphic to $(\RR^N, \norm{\cdot}_2)$.
+
+\begin{prop}
+	If a normed vector space $X$ is reflexive, then it is also a Banach space.
+\end{prop}
+
+Indeed, $X$ is isomorphic to its bidual, which is always a Banach space.
+
+\begin{theo} \label{theo-lin-iso-reflex}
+	Let $(X,\norm{\cdot})$ be reflexive. \\
+	If $X$ is linearly isomorphic to $Y$, then $Y$ is reflexive too.
+\end{theo}
+
+\begin{proof}
+	Let $J:X \to Y$ be a linear isomorphism, and $L \in X^\star$. Then (see \vref{x-y-isomorphic-dual}) we know that there exists $\tilde J:X^\star \to Y^\star$.
+	
+	Consider $\tilde \Lambda \in Y^{\star\star}$, $\tilde L \in Y^{\star}$. Observe that
+	$$
+		\tilde \Lambda \tilde L = \tilde \Lambda \tilde J L
+	$$
+	We define $\Lambda : X^\star \to \RR, \Lambda \in X^{\star\star}, \ L\mapsto \tilde \Lambda \tilde L$.\\
+	Since $X$ is reflexive, there exists a unique $x \in X$ such that $\Lambda L = L x$. So we have
+	$$
+		\tilde \Lambda \tilde L = \Lambda L = L x = L J ^{-1} y = \tilde L y
+	$$.
+\end{proof}
+
+\begin{theo}\label{theo-x-ref-iff-x-star-ref}
+	A space $X$ is reflexive if and only if $X^{\star}$ is reflexive.
+\end{theo}
+
+\begin{proof}\textit{Necessary condition} $\implies$:\\
+	By contradiction: suppose $\tau(X) \subsetneq X^{\star\star}$, where $\tau$ is the canonical map.
+	Since $\tau$ is an isometry and $X^\star$ is a Banach space (see \vref{theo-Bc-banach}) and thus $\tau(X)$ is a closed subspace (see proposition \vref{prop-isometries}).\\
+	Therefore, there exists $G : X^{\star\star} \to \RR$, such that $G\not \equiv 0$ and $G|_{\tau(X)}=0$ (see \vref{prop-conseq-HB-3}).\\
+	Observe that $G$ belongs to the tridual of $X$, namely:	$G \in (X^{\star\star})^{\star}$.\\
+	We have:
+	$$G \Lambda_x = 0 \quad \forall x \in X,$$
+	where $\Lambda_x = \tau x \in \tau(X) \subsetneq X^{\star\star}$.
+		
+	But $X^\star$ is reflexive, thus $\tau(X^\star) = X^{\star\star\star}$ and, using the canonical map between $X^\star$ and $X^{\star\star\star}$,
+	we have that there exists only one $L\in X^\star$ such that: 
+	$$G \Lambda_x =
+	\Lambda_x L
+	\quad \forall \Lambda \in X^{\star\star}$$
+	with $L=\tau^{-1}(G)$. 
+	
+	Finally, using the canonical map between $X^\star$ and $X^{\star\star}$, one can observe that
+	$$G \Lambda_x =
+	\Lambda_x L=
+	Lx = 0
+	\quad \forall x \in X.$$
+	Therefore $L \equiv 0$ and $G \equiv 0$ as $\norm{L}_\star = \norm{G}_{\star\star\star}$ which is a contradiction.
+	
+	\textit{Sufficient condition} $\impliedby$:\\
+	If $X$ is reflexive then it is linear isometric and isomorphic to $X^{\star\star}$. Thus we can apply the previous problem: $X^{\star\star}$ is reflexive and then $X^{\star} $ is reflexive.
+\end{proof}
+
+\begin{theo}
+	If $X$ is reflexive, then any closed subspace of $X$ is reflexive.
+\end{theo}
+
+\begin{proof}
+	Let $Y \subset X$ be a non-empty closed subspace of $X$. $Y$ is a Banach space.\\
+	Let also $\Lambda_0 \in Y ^{\star\star}$, and the mapping $\Lambda_{\sharp} : X^\star \to \RR, \ L \mapsto \Lambda_0 (L|_Y) \in \RR$. $\Lambda_{\sharp} \in X^{\star\star}$.
+	$X$ is reflexive, and thus there exists a unique $x_0\in X$ such that $\Lambda_{\sharp} L = L x_0$.
+	
+	Suppose $x_0 \notin Y$ by contradiction. Then we can find $L_0 \in X^{\star}$ such that $L_0 x_0 \neq 0$, $L_0 |_Y =0$ (see proposition \vref{prop-conseq-HB-3}).
+	However
+	$$L_0 x_0 = \Lambda_{\sharp} L_0 = \Lambda_0 (L_0 |_Y) =0$$
+
+	Contradiction, therefore $x_0 \in Y$.
+	
+	Now, for any $\tilde L \in Y^\star$, there exists its Hahn-Banach extension $L \in X^\star$, and we have:
+	$$\Lambda_0\tilde L = \Lambda_0(L|_Y) = \Lambda_{\sharp} L = L x_0 = \tilde L x_0.$$
+\end{proof}
+
+\paragraph{Relation between dual spaces and separability} Now we have the tools to set up a proper discussion on how separability is kept or inherited by the dual.
+
+\begin{theo}
+	If $X^\star$ is separable then $X$ is separable as well.
+\end{theo}
+
+\begin{proof}
+	Let $\{L_n\}_{n\in\NN}\subset X^\star$ be dense in $X^\star$.\\
+	Then for any $n \in \NN$, there exists $x_n \in X$ such that $\norm{x_n}=1$ and
+	$$|L_n x_n| \geq \frac 1 2 \norm{L_n}_{\star}
+	= \frac 1 2 \sup_{\norm{x} = 1} |L_n x|.$$
+	Set now:
+	$$E = \left\{ \sum_{j=0}^{N} \alpha_j x_i : N \in \NN, \ \alpha_j \in \QQ \right\}$$
+	We have $E$ is countable and $Y=\widebar E\subset X$ is a closed subspace.
+	
+	By contradiction, suppose $Y \subsetneq X$. We find $L \in X^\star$ such that $L\not\equiv 0$ and $L|_Y =0$ (see corollary \vref{prop-conseq-HB-3}). Since $\{L_n\}_{n\in\NN}$ is dense, we have:
+	$$\forall \eps > 0 \quad \exists\, n_0 \in \NN : \enspace \norm{L-L_{n_0}} < \eps.$$
+	But the corresponding $x_{n_0}$ belongs to $E \subseteq Y$, and thus $Lx_{n_0} = 0$. Therefore:
+	\begin{align*}
+		\frac 1 2 \norm{L_{n_0}}_\star &\leq |L_{n_0}x_{n_0}|= |L_{n_0}x_{n_0}-Lx_{n_0}|\\
+		&\leq \norm{L_{n_0}-L}_\star\norm{x_{n_0}} < \eps.
+	\end{align*}
+	Summing up, we have
+	$$\norm{L}_{\star} \leq \norm{L-L_{n_0}}_\star + \norm{L_{n_0}}_\star \leq \eps + 2 \eps \quad \forall \eps > 0$$
+	and thus $L \equiv 0$, which is a contradiction.
+\end{proof}
+
+\begin{theo}\label{x-sep-ref-then-x-star-sep}
+	If $X$ is separable and reflexive then $X^\star$ is separable.
+\end{theo}
+
+\begin{proof}
+	If $X$ is reflexive and separable, then immediately we have that $X^{\star\star}$ is separable, you can check this.\\
+	Then, from the previous point, $X^\star$ is separable.
+\end{proof}
+
+
+
+\paragraph{Reflexivity on $L^p$ spaces} Also for functional spaces we can have reflexivity.\\
+Indeed, we can show that $L^p(\Omega, \mm, \mu)$ is reflexive for any $p \in (1,\infty)$.\\
+In general $L^1(\Omega, \mm, \mu)$ and $L^\infty(\Omega, \mm, \mu)$ are not reflexive. Consider the case $\Omega=\RR$ with the Lebesgue measure, $L^1$ is separable but $L^\infty$ is not. If $L^1$ were reflexive, it's separable, then (\vref{x-sep-ref-then-x-star-sep}) $(L^1)^\star$ would be separable. This would make $L^\infty \approx (L^1)^\star$ separable, which is false. On the other hand, if $L^\infty$ were reflexive, then $(L^1)^\star$ would be reflexive, then (\vref{theo-x-ref-iff-x-star-ref}) also $L^1$ would be reflexive: this is false as we've just seen.
+
+\paragraph{Sufficient condition for reflexivity} We know that if $X$ is reflexive, then any bounded sequence contains a weakly-converging subsequence.\\
+We can apply the first consequence of the Hahn--Banach theorem (see proposition \vref{prop-conseq-HB-1}),
+to $X^{\star\star}$, $\forall L \in X^\star \enspace \exists \, \Lambda_L \in X^{\star\star}$
+with norm 1 and such that $\Lambda_L L = \norm L_{\star}$.\\
+If $X$ is reflexive, then $\forall L \in x^\star \enspace \exists \, x = \tau^{-1} (\Lambda_L)$ with
+norm 1 and s.t. $Lx = \Lambda_L L = \norm L_{\star}$, \textit{i.e.} one for which the norm is attained.
+
+\begin{defn}
+	Consider a real Banach space $(X, \norm{\cdot})$.\\
+	We say that $X$ is \emph{strictly convex}, s.c., if for all distinct $x,y \in X$ such that $\norm{x}\leq 1$ and $\norm{y}$ it follows: 
+	$$
+		\norm{\frac{x+y}{2}} 
+		< 1
+		.
+	$$
+	We say that $X$ is \emph{uniformly convex}, u.c., if for all $\varepsilon > 0$ there exists $\delta > 0$ such that, if $x, y \in X$ are such that $\norm{x} \leq 1$, $\norm{y} \leq 1$, $\norm{x-y} > \varepsilon$ then 
+	$$
+		\norm{\frac{x+y}{2}}
+		< 1 - \delta
+		.
+	$$
+\end{defn}
+This last property entails that if two points $x$ and $y$ are in the closed unit ball, even on the boundary, then their mean point must lie deep inside that same unit ball.
+
+Observe that a uniform convex space is also strictly convex.
+
+The space $(\RR^N, \norm{\cdot}_p)$ with $N \geq 2$ is uniformly convex if and only if $p \in (1,\infty)$, but for $p=1$ and $p=\infty$ is not even strictly convex.
+
+It can be shown that, given a real normed vector space $X$, the Hahn--Banach extension is unique if $X^\star$ is strictly convex.\footnote{A.E. Taylor proved in 1939 that the condition is sufficient while S. Foguel in 1958 proved that is also necessary.}
+
+\begin{theo}[Milman--Pettis]\label{theo-milman-pettis}
+	Any real uniform convex Banach space is reflexive.
+\end{theo}
+
+The converse is not true. More precisely, there are some infinite-dimensional reflexive Banach spaces which are not linearly isomorphic to a uniformly convex space.\footnote{Proven by M.M. Day in 1941.}
+
+Remember that any finite-dimensional Banach space is reflexive: uniform continuity isn't, indeed, a necessary condition.
+
+Now consider the $\RR^N$ cases; the spaces $(\RR^2, \norm{\cdot}_\infty)$ and $(\RR^2, \norm{\cdot}_1)$ both have ``square'' unit balls: we can check that they are not uniformly convex spaces.\\
+However, we know that both of them are reflexive and linearly isomorphic to $(\RR^2, \norm{\cdot}_2)$ which is uniformly convex.
+Indeed,	we can prove that $(\RR^N, \norm{\cdot}_2)$ is reflexive for any $n$.\footnote{This via uniform convexity, via equivalence of weak and strong convergence and Bolzano-Weierstrass' theorem or via James' theorem.}\\
+Spaces $L^p(\Omega,\mm,\mu)$ with $p \in (1,+\infty)$ are reflexive.
+
+\paragraph{Clarkson's inequalities}We could also prove it via Milman--Pettis and the following inequalities.
+
+\begin{prop}
+	Let $f,g \in L^p(\Omega, \mm, \mu)$ with $p \in (1, \infty)$.\\
+	The \emph{Clarkson's inequalities} holds:
+	\begin{align*}
+		\norm{\frac{f+g}{2}}_p^p +
+		\norm{\frac{f-g}{2}}_p^p
+		&\le \frac 1 2
+		\left( \norm f_p^p + \norm g_p^p \right) \quad
+		&p \in [2,\infty)
+		\\
+		\norm{\frac{f+g}{2}}_p^q + 
+		\norm{\frac{f-g}{2}}_p^q
+		&\le \left( \frac 1 2 \norm f_p^p + 
+		\frac 1 2 \norm g_p^p \right)^{\nicefrac q p} \quad
+		& p \in (1,2)		
+	\end{align*}
+	Where $q$ is $p$'s conjugate.
+\end{prop}
+
+\paragraph{Characterization of reflexivity} As we have seen uniform convexity is only a sufficient conditions but there exist some necessary and sufficient conditions for reflexivity.
+
+\begin{theo}[James]
+	Let $X$ be a Banach space.
+	Then $X$ reflexive if and only if any $L \in X^\star$ has a maximum on the unit ball.
+\end{theo}
+
+The implication is trivial: if $L\in X^\star$ then by applying HB first corollary (\vref{prop-conseq-HB-1}) on $X^{\star}$ there exists $\Lambda \in X^{\star\star}$ such that $\norm{\Lambda}_{\star\star} =1$ and $\Lambda L=\norm{L}_\star$; therefore, for $x = \tau^{-1}(\Lambda)$ we have $Lx=\norm{L}_\star$ with $\norm{x} = 1$.
+
+
+%$X$ is reflexive if and only if $\forall L \in X^\star \exists \, x \in X$ with norm 1 such that:
+%$$Lx = \norm L_\star = \max_{\norm{\widetilde x} = 1} L \widetilde x$$
+%For $(\RR^N, \norm{\cdot}_2)$ we know that any $L \in (\RR^N)^\star$ has a unique representation vector $\vec a \in \RR^N$ such that $L \vec x = \sca{\vec a, \vec x}$.
+%Choosing $\vec x = \frac{\vec a}{\norm{\vec a}}$, we get:
+%$$L \vec x = \frac{\norm{\vec a}^2}{\norm{\vec a}} = \norm{\vec a} = \norm L_\star$$
+%The norm is attained and thus $(\RR^N, \norm{\cdot}_2)$ is reflexive.
+
+
+
+%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,316 @@
+%!TEX root = ../main.tex
+\subsubsection{Linear compact operators}
+Now we see a further property for linear operator. Here we require an improvement of the image of the operator that paves the way to new results.
+
+Throughout this section, let $(X, \norm{\cdot}_X)$, $(Y, \norm{\cdot}_Y)$ be Banach spaces.
+\begin{defn}
+	A linear operator $K \in \Lc(X,Y)$, $K:X \to Y$ is \emph{compact} if for any bounded set $B \subseteq X$ the image $KB$ is precompact in $Y$, i.e. $\overline{KB}$ is compact.
+	Their space is defined as $$\Kc(X,Y) \coloneqq \{ K \in \Lc(X,Y) \text{ compact} \}.$$
+\end{defn}
+
+The term precompact means that its closure is compact.
+
+In other words, any bounded sequence $\{y_n\}_n \subseteq KB$ contains a converging subsequence which limit needs not to be in $KB$.
+
+If $X=Y$, then often it is written as $\Kc(X)$.
+
+\begin{prop}
+	Any compact operator is bounded.
+	\label{prop-compact-bdd}
+\end{prop}
+\begin{proof}
+	Take the unit ball $B = B_1(0) \subseteq X$.\\
+	As $KB$ is precompact, $\overline{KB}$ is compact, so it is is also bounded.\\
+	Therefore there exists $M > 0$ such that:
+	$$
+		\norm K_\star 
+		= \sup\limits_{x \in \widebar B} \norm{Kx} 
+		\le M
+	$$ 
+	that is, $K \in \Bc(X,Y)$.
+\end{proof}
+
+\begin{defn}
+	A linear operator is \emph{finite-rank} if its image is finite dimensional. 
+\end{defn}
+
+\begin{prop}
+	A finite-rank bounded operator is also compact. 	
+\end{prop}
+Indeed, notice that if $T \in \Bc(X,Y)$ and $Y$ is finite-dimensional then $T$ is compact.\\
+However, there are compact operators which are not finite-rank: consider $(C([a,b]), \norm{\cdot}_\infty)$ and, for each $u \in C([a,b])$, set:
+$$Ku(t) = \int_a^t u(s) \ds \quad \forall t \in [a,b].$$
+The linear operator $K: C([a,b]) \to C([a,b])$ is compact (see Ascoli--Arzelà theorem \vref{theo-ascoli-arzela}), indeed we have $\Im(K)=\{f \in \Cc^1([a,b]): f(a) = 0\}$.
+
+Note also that if $X$ and $Y$ are infinite-dimensional, then $\Kc(X,Y) \subsetneq \Bc(X,Y)$. \\ 
+An example of bounded, non-compact operator is the identity map, if $X=Y$ infinite-dimensional.
+
+%\begin{rema}
+%	In terms of sequences: $\forall \{ x_n \} \subset X$ bounded $\exists \, \{x_{n_h}\}$ such that $\{ K x_{n_h}\}$ converges to some $y \in Y$
+%\end{rema}
+
+\begin{defn}
+	If $Y$ is a subspace of $X$ and the identity $I : Y \to X$ is compact we say that $Y$ is \emph{compactly embedded} in $X$ and we write: $$Y \hookrightarrow\hookrightarrow X.$$
+\end{defn}
+
+\begin{prop}
+	Let $X$ be an infinite dimensional Banach space.\\
+	Then a compact operator $K:X \to X$ cannot be bijective.
+\end{prop}
+
+\begin{proof}
+	By contradiction, take $\{y_n\}_{n \in \NN} \subset B$, where $B$ is the unit ball of $X$.\\
+	Consider now $x_n = K^{-1} y_n$: the sequence $\{x_n\}_{n \in \NN}$ is bounded, as $K^{-1}$ is bounded.\\
+	Since $\{y_n\}_{n \in \NN}$ contains a convergent sub-sequence, $B$ is compact, which is a contradiction to \vref{theorem-riesz}.
+\end{proof}
+
+
+\paragraph{Characterization for compact operators} To prove directly the compactness is not an easy task, anyway we can find a criterion to do the job.
+
+\begin{theo}[Compactness characterization] \label{theo-compact-charact}
+	If $K \in \Kc(X,Y)$ and $x_n \wto  x$, then: $$ K x_n \to Kx.$$
+	This means that $K$ is \emph{weak-strong continuous}.
+	
+	Moreover, if $X$ is reflexive and $K \in \Bc(X,Y)$ is weak-strong continuous, then $K$ is also compact.
+\end{theo}
+
+
+\begin{proof} The two parts will be proved separately.\\
+	\textit{Proof of the first part:}\\ 
+	Suppose $K \in \Kc(X,Y)$ and $x_n \wto x$. Being also bounded (see \vref{prop-compact-bdd}), $K$ is weak-weak continuous (see \vref{prop-bdd-weak-weak}), namely $Kx_n \wto Kx$.\\
+	If $\{x_n\}$ is bounded, we have that $\{Kx_n\}$ is also bounded and contains a strongly convergent subsequence, and $\{Kx_n\}$ has a non-empty and bounded class limit.
+	
+	Let $y$ be a limit point: there exists $\{K x_{n_h}\}_{h \in \NN}$ such that $Kx_{n_h} \to y$ and in particular $Kx_{n_h} \wto y$.\\
+	Therefore $y = Kx$ is the only limit point: we have that $K$ is weak-strong continuous, namely $Kx_n \to Kx$.
+	
+	\textit{Proof of the second part:}\\ 
+	Suppose now that $K \in \Bc(X,Y)$ is weak-strong continuous, consider a bounded set $E \subset X$  and the sequence $\{y_n\}_{n\in\NN} \subset KE$.\\
+	Then there exists $x_n \in E$ such that $Kx_n = y_n$ for every $n \in \NN$.\\
+	
+	Using the reflexivity of $X$ we can apply the corollary \vref{prop-coro-BA} to the BA theorem\footnote{Remember that separability was not necessary, even though to prove it without this assumption, we can't take advantage of the Banach-Alaoglu theorem.} and find $\{x_{n_h}\}_{h \in \NN}$ such that $x_{n_h}\wto x$. Hence $Kx_{n_h} \to Kx$ and $KE$ is precompact. This entails $K \in \Kc(X,Y)$.
+\end{proof}
+
+We have seen that $\Kc(X,Y)$ is a subspace of $\Bc(X,Y)$. We are now going to prove that $\Kc(X,Y)$ is closed.
+
+\begin{theo}
+	The space of compact operators $\Kc(X,Y)$ is a closed subspace of $\Bc(X,Y)$.\\
+	This means that $\Kc(X,Y)$ is a Banach space with respect to the induced norm.
+\end{theo}
+\begin{proof} \textit{For simplicity, we will prove the theorem when $X$ is also reflexive.}\\
+	Consider a converging sequence $\{K_n\}_{n\in\NN} \subset \Kc(X,Y)$, such that there exists: $$K \in \Bc(X,Y) : \enspace \norm{K_n-K}_{\Bc(X,Y)}\to 0 \quad \text{as } n \to +\infty.$$
+	We are left to prove that $K$ is compact, namely $K \in \Kc(X,Y)$, by showing that it is weak-strong continuous (see the theorem stating the characterization of the compactness \vref{theo-compact-charact}).
+	
+	Let $\{x_n\}$ such that $x_n \wto x$; as $\{x_n\}_{n\in\NN}$ is bounded there exists $M > 0$ such that $\norm{x_n}_X \leq M$, and we have:
+	\begin{align*}
+		\norm{Kx_n - Kx}_Y 
+		& \leq \norm{Kx_n-K_j x_n}_Y + \norm{K_jx_n- K_j x}_Y + \norm{K_j x- K x}_Y\\
+		& \leq 2M \norm{K-K_j}_{\Bc(X,Y)} + \norm{K_jx_n- K_j x}_Y
+	\end{align*}
+	Let $\eps > 0$ be fixed. Then exists $j_0 \in \NN$ such that $$\norm{K_j -K}_{\Bc(X,Y)} < \frac{\eps}{3M} \quad \forall j \geq j_0.$$
+	Therefore:
+	$$\norm{Kx_n - K_j x_n}_Y 
+	\leq M \cdot \norm{K-K_j}_{\Bc(X,Y)} < \tfrac \eps 3
+	\quad
+	\forall j \geq j_0
+	.$$
+	Moreover, since $x_n \wto x$, via lower semi-continuity we have:
+	$$
+	\norm{K_jx-Kx}_Y 
+	\leq \liminf_n \norm{K_j x_n-Kx_n}_Y \le \tfrac \eps 3
+	\quad
+	\forall j \geq j_0
+	.$$
+	Fix $j=j_0$. Since $K_{j_0} \in \Kc(X,Y)$, there exists $n_0 \in \NN$ such that:
+	$$
+	\norm{K_{j_0}x_n - K_{j_0}x}_Y 
+	< \tfrac \eps 3
+	\quad
+	\forall n \geq  n_0
+	.$$
+	
+	Summing up:
+	$$\forall \eps > 0 \quad \exists \, n_0=n_0(\eps) \in \NN : \enspace \norm{Kx_n -Kx}_y < \eps \quad \forall n \geq n_0$$
+	Thus $Kx_n \spaceto{Y} Kx$, and $K$ is compact.
+\end{proof}
+
+\paragraph{The approximation problem} The previous theorem has an immediate consequence:
+\begin{prop}
+	If we have a converging sequence of finite-rank linear  operators, then its limit is a compact operator.
+\end{prop}
+The converse of this proposition is known as \emph{approximation property}: is any $K \in \Kc(X,Y)$ the limit of a sequence of finite rank operators, with respect to the operator norm? 
+
+In general it is not: Per Enflo proved in 1973 that there exists a Banach space which is separable but it does not have any Schauder basis and so the approximation property does not hold.
+
+We know that the approximation property holds if $Y$ has a Schauder basis or if $Y$ is a Hilbert spaces (see definition \vref{defn-hilbert-spaces}).
+
+%neumann series, min 8 of lesson 30/11/2020
+
+\paragraph{First example of compact operator} We are now going to introduce a class of linear compact operators, from $L^p$ to $L^q$.\\
+Consider $(\Omega, \Lc(\Omega), \lambda)$ with $\Omega \in \Lc(\RR^N)$
+and $G \in L^q(\Omega \times \Omega)$ with respect to the Lebesgue measure in $\RR^{2N}$
+for some $q \in (1, \infty)$.
+
+For any $u \in L^p(\Omega)$, where $p$ is the conjugate of $q$, set
+$$K_G u(x) = \int_\Omega G(x,y) u(y) \,\dy$$
+for all $u \in L^p(\Omega)$ and for almost any $x \in \Omega$.
+The function $G$ is called \emph{kernel} of the operator $K_G$.
+
+Using Hölder's inequality we have:
+$$
+	|K_G u(x)|^q
+	\leq \left( \int_\Omega |G(x,y)| \ |u(y)| \,\dy \right)^q
+	\leq \norm{G(x, \cdot)}_q^q\norm{u}_p^q
+$$
+for almost any $x \in \Omega$. This implies that:
+$$
+	\norm{K_G}_{q}
+	\leq \norm{G}_{q} \norm{u}_{p}
+	\quad \forall u \in L^p(\Omega)
+	.
+$$
+Then we deduce that $K_G$ is linear and bounded from $X=L^p(\Omega)$ and $Y=L^q(\Omega)$.
+
+%Let us prove that $K_G \in \Kc(X)$; we can use the characterization given by \vref{theo-compact-charact}. %è certamente cannata ma può avere un suo perché
+Let $\{u_n\}_{n\in \NN} \subset L^p(\Omega)$ be such that $u_n \wto u$.\\
+Define the converging sequence:
+$$\Phi_n(x) = K_G(u_n - u)(x) = \int_\Omega G(x,y)(u_n - u)(y) \, \dy \to 0$$
+for almost any $x \in \Omega$. Notice that we have:
+$$|\Phi_n(x)|^q \leq \norm{G(x, \cdot)}^q_q \norm{u_n - u}_q^q \leq M \norm{G(x, \cdot)}_q^q  = F(x)$$
+for almost any $x \in \Omega$ since $\{u_n\}_{n \in \NN}$ is bounded in $L^p(\Omega)$.
+
+On the other hand, $F \in L^1(\Omega)$. Therefore (see dominated convergence theorem \vref{dominated-convergence}):
+$$ \norm{K_G(u_n -u)}_q \to 0 \text{ as } n \to \infty.$$
+Hence $K$ is weak-strong continuous so it's compact since $L^p(\Omega)$ is reflexive.
+
+In case of $p=q=2$ we have the following definition.
+
+\begin{defn}
+	Let $G \in L^2(\Omega \times \Omega)$, for all $u \in L^p(\Omega)$ the operator
+	$$K_G u(x) = \int_\Omega G(x,y) u(y) \,\dy$$
+	is called \emph{Hilbert--Schmidt} operator with kernel $G$.
+	
+	The set of all Hilbert--Schmidt operators is a subspace of $\Kc(L^2(\Omega))$.
+\end{defn}
+
+\paragraph{Second example of compact operator}
+Let's set: 
+$$X_p = \{f \in AC([a,b]): \ f' \in L^p((a,b))\} 
+\subseteq AC([a,b])$$
+where $p \in [1,\infty]$. We know that $X_p$ can be identified with some \textit{Sobolev space}
+$$W^{1,p}((a,b)) \coloneqq \{f \in L^p([a,b]) : \ Df \in L^p ((a,b))  \}$$
+where $Df$ is the distributional derivative, namely:
+$$\int_a^b Df \phi \, \dt =
+-\int_a^b f \phi' \, \dt
+\quad \phi \in \Cc_C^\infty(((a,b)).$$
+
+In particular we have that $AC([a,b])$ can be identified with $W_1^1((a,b))$ since each equivalence class contains one and only one continuous representative.
+
+It's easy to prove that $W^{1,p}(a,b)$ is a Banach space with respect to the norm:
+$$\norm{f}_{\spadesuit, p} = |f(a)| + \norm{Df}_p$$
+which is equivalent to 
+$$\norm{f}_{1, p} = \norm{f(a)}_{p} + \norm{Df}_p.$$
+
+Consider now the identity application:
+$$I: (W^{1,p}((a,b)), \norm{\cdot}_{\spadesuit, p}) \to (\Cc([a,b]), \norm{\cdot}_\infty), \quad I f=f.$$
+
+Using Ascoli--Arzelà theorem (\vref{theo-ascoli-arzela}) we can prove that $I$ is compact if $p \in (1,\infty]$.
+Thus we have
+$$W^{1,p} ((a,b)) \hookrightarrow \hookrightarrow \Cc([a,b]) \quad \forall p > 1.$$
+
+Let $\{f_n\}_{n \in \NN} \subset W^{1,p}((a,b))$ be bounded by a constant $M > 0$.
+Observe that
+$$f_n(t)= f_n(a) + \int_a^t Df_n(r) \, \dr \quad t \in [a,b].$$
+
+Then, using Hölder's inequality, we get
+\begin{align*}
+	|f_n(t)| & \geq |f_n(a)| + \int_a^b |Df_n(r)| \, \dr \\
+	& \geq |f_n(a)| + (b - a)^{\frac 1 q} \norm{Df_n}_p\\
+	& \max\{1, (b-a)^{\frac 1 q} \}\norm{f_n}_{\spadesuit,p}
+\end{align*}
+where $q \in [1, \infty)$ is the conjugate of $p$. Thus we find:
+$$\norm{f_n}_\infty \leq \max \{1, (b-a)^{\frac 1 q}\}M \quad \forall n \in \NN.$$
+
+Observe now that 
+$$f_n(t)- f_n(s) = \int_s^t Df_n(r)\, \dr \quad t,s \in [a,b].$$
+
+Using again Hölder's inequality we find:
+\begin{align*}
+	|f_n(t) - f_n(s)| &\leq |\int_s^t |Df_n(r) \, \dr|\\
+	& \leq |t-s|^{\frac 1 q} \norm{Df_n}_{p} \\
+	& \leq M |t-s|^{\frac 1 q}.
+\end{align*}
+
+Then $\{f_n\}_n\in\NN$ is bounded and equicontinuous. Using Ascoli--Arzelà theorem we deduce that there exists a subsequence $I f_{n_h} = f_{n_h}$ for $h \in \NN$ and $f\in C([a,b])$ such that $\norm{f_{n_h}-f}_\infty \to 0$ as $h \to \infty$. Thus $I$ is compact.
+
+\paragraph{The Fredholm alternative in Banach spaces}
+Surjectivity and injectivity of an operator are strongly related to the solvability of a certain equation somehow associated to the operator itself. The following results will handle a scenario where the operator $I-K$ for some $K$ compact.
+
+\begin{theo}
+	Let $X$ be a Banach space and $K \in \Kc(X)$. Then 
+	\begin{itemize}
+		\item $\Ker(I-K)$ is finite dimensional;
+		\item $\Im(I-K)$ is closed;
+		\item $\Ker(I-K) = \{0\}$ if and only if $\Im(I-K) =X$.
+	\end{itemize}
+\end{theo}
+This result will be proven for Hilbert spaces (see \vref{theo-fredholm-h-spaces}).
+
+\medskip
+\begin{coro}[Fredholm's alternative]
+	\label{coro-fredholm-b-spaces}
+	Let $K \in \Kc(x)$. Given $y \in X$, consider the functional equation:
+	$$
+		x-Kx=y
+	$$
+	Then either the equation has a unique solution for any $y \in Y$ or $x-Kx=0$ has at $n>1$ linearly independent solutions.
+\end{coro}
+
+\begin{coro}
+	Let $X$ finite dimensional and $K \in \Kc(X)$.\\
+	Then the operator $K$ is injective if and only if it is also surjective.
+\end{coro}
+
+Otherwise if $X$ is infinite-dimensional then there are linear operator which are injective but non surjective or viceversa.
+\begin{exam}
+		Consider $X=l^2$ and $x= \{x_1,x_2,\ldots,x_n,\ldots\} \in X$, take:
+		$$
+		Rx = \{0, x_1, x_2, \ldots, x_n, \ldots\}, \qquad Lx = \{x_2,x_3, \ldots, x_n, \ldots\}.
+		$$
+		We have that $R$, the right shift, is injective but not surjective while $L$, the left shift, is surjective but not injective.
+\end{exam}
+
+%
+%\begin{exam} Let us apply the theorem to Hilbert--Schmidt operators.
+%	
+%	Consider $K_G \in \Kc(x)$ where $X=L^2([0,1])$. Suppose that $\norm{G}_{L^2([0,1]^2)} < 1$. If there exists $u \in X$ such that $u-K_G u = 0$, then $u=0$. 
+%	
+%	Indeed, if $u=K_Gu$, then:
+%	$$\norm{u}_{L^2([0,1])} = \norm{K_G u}_{L^2([0,1])} \leq \norm{G}_{L^2([0,1])}\norm{u}_{L^2([0,1])} < \norm{u}_{L^2([0,1])}$$
+%	Thus $\norm{u}_{L^2([0,1])} = 0$ and $u = 0$.
+%	
+%	Therefore $\Ker(I-K_G) = \{0\}$. The second alternative is impossible, and thus $\forall v \in X, \exists! n \in X$ such that $n-K_G u = v$
+%\end{exam}	
+%
+%\medskip
+%\begin{exer}
+%	Set $G(X,Y) = \frac{\Lambda}{(X-Y)^\alpha}$ with $\alpha>0$ and $\lambda \neq 0$. Find $\lambda,\ \alpha$ such that $\norm{G}_{L^2([0,1])}<1$.
+%\end{exer}
+%
+%\medskip
+%\begin{exer}
+%	Show that any $K \in \Kc(x)$ cannot be both injective and surjective if $X$ is infinite-dimensional.
+%\end{exer}
+%
+%\begin{coro}
+%	Let $K \in \Kc(X)$. $I-K \in \Bc(X)$ is injective if and only if it is also surjective.
+%\end{coro}
+%
+%If the operator is only bounded, then this result does not hold in general.
+%\begin{exam}
+%	Consider $X=l^2$ and take:
+%	\begin{align*}
+%	T_\Omega(x_1,x_2, \ldots, x_n, \ldots) &= (0, x_1, x_2, \ldots, x_n, \ldots) \\
+%	T_l(x_1,x_2,\ldots,x_n,\ldots) &= (x_2,x_3, \ldots, x_n, \ldots)
+%	\end{align*}
+%\end{exam}
+%$T_\Omega$ is injective but not surjective. $T_l$ is surjective but not injective.

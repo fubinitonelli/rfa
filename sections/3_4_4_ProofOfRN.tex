@@ -1,0 +1,115 @@
+%!TEX root = ../main.tex
+\subsubsection{Proof of the Radon--Nikodym Theorem} \label{proof-radon-nikodym}
+The theorem is named after Johann Radon, who proved the theorem for the special case where the underlying space is $\RR^{N}$ in 1913, and after Otto Nikodym who proved the general case in 1930. It is a representation theorem: it provides, under suitable assumptions, a link between two measures.
+
+The theorem is explained in \vref{derivative-of-a-measure}, for a better use of this book we copy-pasted it here.  
+\begin{theo} [Radon--Nikodym]
+	Let $(\Omega, \mm,\mu)$ be a complete measure space, and $\nu$, $\mu$ two measures on $(\Omega, \mm)$.\\
+	If $\mu$ is $\sigma$-finite and $\nu\ll\mu$, then the Radon--Nikodym derivative $\frac{\de\nu}{\de\mu}$ exists.
+\end{theo} 
+
+This proof belongs to John von Neumann (1903--1957).
+
+\begin{proof}
+	
+	\textit{Set up:}\\
+	For simplicity we consider the w
+	Consider $\mu, \nu$ finite, namely $\mu(\Omega), \nu(\Omega) < \infty$), such that $\nu \ll \mu$.\\
+	Let $\lambda = \mu + \nu$. Then, for every non-negative and measurable function $f$ we have the \emph{additivity with respect to measure}:
+	$$\int_\Omega f \dlam = \int_\Omega f \dmu + \int_\Omega f \dnu$$
+	which is a direct consequence of the definition of Lebesgue interval.
+	
+	\textit{First step, use of the Hölder inequality and the Riesz's representation theorem:}\\
+	Suppose $f \in L^2_\lambda(\Omega)$. Applying the Hölder inequality we have:
+	\begin{align*}
+	\abs{\int_\Omega f \, \dnu}
+	&\leq \int_\Omega |f| \, \dnu\\
+	&\leq \int_\Omega |f| \, \dlam\\
+	&\leq \left( \int_\Omega |f|^2 \, \dlam \right)^{\frac 1 2}(\lambda(\Omega))^\frac{1}{2}\\
+	&= \norm{f}_{L^2_\lambda (\Omega)}(\lambda(\Omega))^\frac{1}{2}\\
+	&< +\infty
+	.
+	\end{align*}
+	Thus $F: f \mapsto \int_\Omega f \dnu$ is a linear bounded functional on $L^2_\lambda(\Omega)$, from which we deduce:
+	$$\norm{F}_{(L^2_\lambda (\Omega))^\star} \leq (\lambda(\Omega))^\frac{1}{2}.$$
+	
+	Applying Riesz's representation theorem (\vref{riesz-repr}) there exists $g \in L^2_\lambda(\Omega)$ such that:
+	$$ F(f) = \int_\Omega f \,\dnu = \int_\Omega f g \, \dlam \quad \forall f \in L^2_\lambda(\Omega).$$
+	
+	For any $E \in \mm$ such that $\lambda(E) > 0$, consider $f = \Ind_E$; we have:
+	$$ 0 
+	\leq \nu(E) 
+	= \int_\Omega f \,\dnu 
+	= \int_\Omega f g \, \dlam 
+	= \int_E g \, \dlam
+	= F(\Ind_E)
+	\leq \lambda(E)
+	.
+	$$
+	So $\nu(E) \leq \lambda(E)$ and then:
+	$$0 \leq \frac{1}{\lambda(E)} \int_E g \, \dx \leq 1.$$
+	
+	\textit{Second step:}\\
+	As $E$ is arbitrary we have $ 0 \leq g(x) \leq 1$ almost everywhere with respect to the measure $\lambda$, and thus with respect to $\nu$ and $\mu$.\\
+	We can suppose that there exists $\tilde \Omega \in \mm$ such that $0 \leq g(x) \leq 1$  for any $x \in \tilde\Omega$.\\
+	So $\lambda(\tilde\Omega\comp) = 0$, and we define $g(x) = 1$ for all $x \in \tilde\Omega\comp$.
+	
+	Then, for any $f \in L^2_\lambda(\Omega)$:
+	$$
+	\int_\Omega f \,\dnu 
+	= \int_\Omega f g \, \dlam 
+	= \int_\Omega f g \, \dmu + \int_\Omega f g \, \dnu
+	$$
+	and we can rewrite in this way:
+	$$
+	\int_\Omega (1-g)f \, \dnu 
+	= \int_\Omega f g \, \dmu.
+	$$
+	
+	\textit{Third step, convergences:}\\
+	Let $A = \{x \in \Omega : \ 0 \leq g(x) < 1 \}$, and $B = A\comp$.\\
+	Taking $f= \Ind_B$ in the previous identity we find $\mu(B)=0$.\\
+	By hypothesis $\nu \ll \mu$, and thus $\nu(B) = 0$.
+	
+	Define $$\Phi_n = \sum_{j=0}^{n+1} g^j.$$
+	
+	Take now $f=(1+g+g^2+\cdots+g^n)\Ind_E$ in the same identity, with $E \in \mm$, $n \in \NN$. We get:
+	$$
+	\int_E(1-g^{n-1}) \,\dnu 
+	= \int_E\Phi_n \,\dmu
+	.
+	$$
+		
+	Observe that as $n \to +\infty$ and $0 \leq 1-g^{n+1} \leq 1$ in $\Omega$ we have $1-g^{n+1} \to 1$ almost everywhere with respect to $\nu$ and, due to $\nu (B) = 0$:
+	$$\int_E(1-g^{n-1}) \,\dnu
+	= \int_{E \cap A}(1-g^{n-1}) \,\dnu
+	+ \underbrace{\int_{E \cap B}(1-g^{n-1}) \,\dnu}_{= 0 \ \forall n}
+	\ \to \ \nu(E \cap A) 
+	= \nu(E)
+	.
+	$$
+	
+	First, applying dominate convergence theorem which entails:
+	$$
+	\lim\limits_{n \to \infty} \int_E (1+g^{n+1}) \, \dnu 
+	= \nu(E)
+	.
+	$$
+	
+	Second, as $\Phi_n \uparrow \Phi$ monotonically and $\Phi = \lim_n \Phi_n$ is measurable, we can use monotone convergence theorem and obtain:
+	$$
+	\int_E \Phi_n \dmu 
+	\to \int_E \Phi \dmu
+	.
+	$$
+	
+	Thus we can conclude deducing:
+	$$
+	\nu(E) 
+	= \int_E \Phi \dmu 
+	\quad \forall E \in \mm
+	.
+	$$
+	
+	Note also that $\Phi$ is measurable and belongs to $L^1_\mu(\Omega)$ as $\nu$ and $\mu$ are finite.
+\end{proof}

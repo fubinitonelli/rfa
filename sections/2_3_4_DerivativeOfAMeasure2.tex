@@ -1,0 +1,82 @@
+%!TEX root = ../main.tex
+\subsubsection{Derivative of a measure: properties}
+Now we are ready to proceed in theory development about derivatives. With the definition of almost everywhere we can talk about uniqueness and some properties.
+
+\begin{prop}
+	If the hypothesis of the Radon--Nikodym theorem (\vref{theo-radon-nikodym}) hold, then the Radon--Nikodym derivative is unique almost everywhere.
+\end{prop}
+The reader can easily prove this result using proposition \vref{integral-inequality-sigma-finite}. Do it now before see the following proof!
+
+\begin{proof}
+	Consider two Radon--Nikodym derivatives for $\frac{\dnu}{\dmu}$: two positive and measurable function $\phi_1$ and $\phi_2$.\\
+	Then we have: $$\int_E \phi_1 \dmu = \int_E \phi_2 \dmu \quad \text{for all } E \in \mm.$$
+	From the previously referenced proposition we have both $\phi_1 \geq \phi_2$ and $\phi_2 \geq \phi_1$ a.e.\ in $\Omega$, hence the thesis.
+\end{proof}
+
+Moreover, it holds the following.
+\begin{prop}
+	If the Radon--Nikodym derivative $\phi$ exists and $\mu (\Omega) < +\infty$, then $\phi \in L^1(\Omega, \mm, \mu)$. 
+\end{prop}
+%
+%\begin{rema}
+%	$f:\Omega \to \RR$ is measurable. Then:
+%	$$f \in L^1(\Omega, \mm, \nu) \iff f \frac{\de\nu}{\de\mu} \in L^1(\Omega, \mm, \mu)$$
+%\end{rema}
+%The proof of this result is also left as an exercise for the reader.
+
+\paragraph{Basic properties} Here we present some properties of the Radon--Nikodym derivative.
+
+\begin{prop}[Change of measure]
+	For any measurable positive function $f:\Omega \to [0,\infty]$ we have:
+	$$ \int_\Omega f \, \de \nu = \int_\Omega f \, \frac{\de \nu}{\de \mu} \de \mu.$$
+\end{prop}
+
+\begin{prop}[Linearity of the derivative]
+	For all $c_1, c_2 \geq 0$ we have:
+	$$\dfrac{\de(c_1\nu_1+c_2\nu_2)}{\de\nu} = c_1 \dfrac{\de\nu_1}{\de\mu}+ c_2 \dfrac{\de\nu_2}{\de\mu}.$$
+\end{prop}
+
+\begin{prop}[Chain rule]
+	Consider three measures $\lambda$, $\nu$ and $\mu$ such that $\lambda \ll \nu \ll \mu$.\\
+	Then we have:
+	$$\dfrac{\dlam}{\de\mu} =
+	\dfrac {\de \lambda}{\de\nu} \dfrac{\de\nu}{\de\mu}.$$
+\end{prop}
+\begin{proof}
+	For every $E \in \mm$ observe that:
+	$$
+		\lambda(E)
+		= \int_E\frac{\dlam}{\de\nu} \,\de\nu
+		= \int_E \frac{\dlam}{\de\nu}\frac{\de\nu}{\de\mu} \,\dmu
+	;
+	$$
+	moreover, as $\lambda \ll \mu$, we have that:
+	$$
+		\lambda(E)
+		= \int_E \frac{\dlam}{\de\mu} \de\mu
+	,
+	$$
+	and then, on account of \vref{integral-inequality-sigma-finite}:
+	$$
+		\frac{\dlam}{\de\mu}
+		= \frac{\dlam}{\de\nu}\frac{\de\nu}{\de\mu}
+		\quad \text{a.e.}
+	.
+	$$
+\end{proof}
+
+\begin{prop}[Inverse derivative]
+	If $\nu \ll \mu$ and $\mu \ll \nu$ then we have:
+	$$\dfrac {\de\nu}{\de\mu} =
+	\left(\dfrac{\de\mu}{\de\nu}\right)^{-1}.$$
+\end{prop}
+\begin{proof}
+	For every $E \in \mm$ we have that:
+	$$\mu(E) =\int_E \de\mu 
+	= \int_E \frac{\de\mu}{\de\nu}\de\nu
+	= \int_E \frac{\de\mu}{\de\nu}\frac{\de\nu}{\de\mu}\de\mu$$
+	thus, always on account of \vref{integral-inequality-sigma-finite}:
+	$$1 =
+	\frac{\de\mu}{\de\nu}\frac{\de\nu}{\de\mu}
+	\quad \text{a.e.}.$$
+\end{proof}

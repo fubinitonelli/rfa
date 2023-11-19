@@ -1,0 +1,98 @@
+%!TEX root = ../main.tex
+\subsubsection{Vector spaces}
+
+We are now entering an infinite-dimensional world. %introduction to functional analysis
+
+Now we will introduce vector spaces on $\RR$. In some contexts other fields are considered, like $\CC$ for quantum mechanics applications.
+\begin{defn}\label{defn-vector-spaces}
+	Consider the set $V\neq \varnothing$.\\
+	A tuple $(V,+,\cdot,\RR)$ is a \emph{vector space} on $\RR$ if the \textit{sum of vectors} law $$u + v$$ follows these properties:
+	\begin{itemize}
+		\item \emph{commutativity}: $$u+v = v+u;$$
+		\item \emph{associativity}: $$u + (v+w) = (u+v)+ w;$$
+		\item \emph{existence of null element}, called zero vector: $$u+0 = u;$$
+		\item \emph{existence the inverse element}: $$u + (-u) = 0;$$ 
+	\end{itemize}
+	and the \textit{multiplication of a vector by a scalar} law $$\alpha v \text{ with }\alpha \in \RR$$ follows these properties:
+	\begin{itemize}
+		\item \emph{distributivity with respect to the scalar product}: $$\alpha(\beta v)=(\alpha \beta) v;$$
+		\item \emph{existence of the identity element}: 
+		$$1 u = u;$$
+		\item \emph{distributivity with respect to the sum in $\RR$}: $$(\alpha + \beta)v = (\alpha v)+(\beta v);$$  
+		\item \emph{distributivity with respect to the sum in $V$}: $$\alpha(v+u) = (\alpha v) + (\alpha u ).$$
+	\end{itemize}
+	The elements of $V$ are called \emph{vectors}.
+\end{defn}
+
+Generalizing the two operation we have the so called \textit{finite linear combination of vectors}: 
+$$
+\sum_{j=1}^N \alpha_j v_j
+.
+$$
+
+Numerical set $\RR^N$, with the foretold structure, is a vector space for any $n$.
+
+A vector space is simply an algebraic structure, there is no topology yet so there is no order. 
+
+\begin{defn}
+	Consider a vector space $V \subseteq \RR$. \\
+	A subset of vectors $A \subset V$ is \emph{linearly independent} if, for any $\{v_1,\ldots, v_N\} \subset A$ and for any $\alpha_1,\ldots,\alpha_N \in \RR$, we have:
+	$$\sum_{i=1}^N \alpha_i v_i = 0 \implies \alpha_1=\cdots =\alpha_N = 0.$$
+\end{defn}
+
+\paragraph{Basis and dimension} Can we write for each element of the space as a linear combination of a special restricted subset of other elements? Yes, that subset of elements is a basis for the vector space, and for each vector space we may have more than one basis.
+
+\begin{defn}
+	Consider a vector space $V \subseteq \RR$. \\
+	A subset of vectors $A\subset V$  is an \emph{algebraic} or \emph{Hamel basis} if it is linearly independent and maximal, that is there are no elements which can be added to it without losing linear independence.
+\end{defn}
+
+So, if $A$ is an algebraic basis if $V$, then every element of $V$ can be written as a finite linear combination of elements of $A$.
+
+\begin{theo}[foundamental theorem of linear algebra] \label{fond-lin-alg}
+	Every vector space on $\RR$ has at least one algebraic basis.
+\end{theo}
+To prove this theorem if $V$ has at least two elements, in the Zermelo--Fraenkel theory, we need the axiom of choice. To be more precise, Andreas Blass proved in 1984 that this theorem is equivalent to the axiom of choice.
+
+\begin{prop}
+	Let $V$ a vector space on $\RR$.\\
+	Then all its algebraic basis has the same cardinality.
+\end{prop}
+
+\begin{defn}
+	The \emph{dimension} of a vector space is the cardinality of one of its algebraic basis.
+\end{defn}
+
+\begin{exam}
+	For example consider the space of the algebraic polynomials:
+	$$
+	\Pc(x)
+	= \left\{ 
+	f(x) 
+	= \sum_{j=0}^n a_i x^i :\;  
+	n \in \NN; \; x, a_0, \ldots, a_n \in \RR 
+	\right\}
+	.
+	$$
+	Since the two canonical operations $P+Q$ and $\alpha P$ can be defined, then $\Pc$ is a vector space on $\RR$. We have that $\dim \Pc=\aleph_0$ and one of his algebraic basis is $\{1,x,x^2,x^3,\ldots,x^n,\ldots \}.$
+\end{exam}
+\begin{exam}
+	Consider also the space of continuous functions:
+	$$
+	\Cc(\RR)
+	=\{ 
+		f: \RR \to \RR \, :\,  
+		f \text{ continuous in } \RR
+	\}
+	.
+	$$
+	We can define the two canonical operations over $\Cc(\RR)$: indeed, $\alpha f + \beta g \in \Cc(\RR)$ for all $\alpha, \beta \in \RR$ and for all $f,g \in \Cc(\RR)$.\\
+	Then $\Cc(\RR)$ is a vector space on $\RR$ and $\dim\Cc(\RR) \geq \aleph_0$ since $\Pc(x)$, from the previous point, is a subspace of $\Cc(\RR)$.
+	
+\end{exam}
+	
+
+\begin{defn}
+	A set $W$ is a \emph{subspace} of the vector space $V$ if $$W \subset V$$ and it is closed with respect to vector sum and scalar product, namely
+	$$\alpha v + \beta u \in W$$ for all $\alpha, \beta \in \RR$ and for all $v, u \in W$.
+\end{defn}

@@ -1,0 +1,369 @@
+%!TEX root = ../main.tex
+\subsubsection{Normed vector spaces} In the section assigned to topology (see section \vref{topology-section}) we have extensively used the notion of distance between two elements. How to adapt that notion to ``label'' each element of a set, and in particular of a vector space, capturing its ``largeness''? Here we define the norm, which is a function that assign a real positive number to each element of the vector space. As we will see later, norm and distance are strictly related to each other, in particular the norm can be seen as the distance of the element from the zero element.
+
+\begin{defn}\label{defn-norm}
+	Let $X$ be a vector space.\\
+	A function $\norm{\cdot}_X : X \to \left[0, +\infty\right)$ is called \emph{norm} in $X$ if the following properties hold:
+	\begin{itemize}
+		\item \emph{non-negativity}:
+		$$
+		\norm x \geq 0
+		\quad \forall x \in X
+		;
+		$$
+		\item \emph{annihilation}:
+		$$
+		\norm{x}=0 
+		\iff x=0
+		;
+		$$
+		\item \emph{homogeneity with respect to scalar multiplication}:
+		$$
+		\norm{\alpha x}
+		=|\alpha| \norm{x}
+		\quad \forall \alpha \in \RR
+		\quad \forall x \in X
+		;
+		$$ 
+		\item \emph{triangular inequality}: 
+		$$
+		\norm{x+y}
+		\leq \norm{x}+\norm{y}
+		\quad \forall x, y \in X
+		.
+		$$
+	\end{itemize}
+	
+	The tuple $(X,\norm{\cdot}_X)$ is called \emph{normed vector space}.
+\end{defn}
+
+In the setting of Euclidean spaces, the norm is interpreted as the vector length; here we have a generalization.
+
+Notice that any normed vector space $(X,\norm{\cdot}_X)$ is always a metric space with respect to the metric induced by the norm. This can be done by defining the distance as follows: $$d(x,y)=\norm{x-y} \quad \forall x,y \in X.$$
+In particular, it is also a topological space with respect to the inducted topology.
+
+The backward implication is not always true; indeed, a metric space $(X,d)$ is not necessarily a normed vector space, for example consider a ball in $\RR^3$ with the euclidean distance; it is not closet with respect to the sum.
+
+Notice that a metric is necessarily induced by a norm unless it is translation invariant and homogeneous.
+
+\begin{prop}\label{norm-inequality}
+	The function $x \to \norm{x}$ is continuous with respect to the metric.\\
+	Indeed, the following formula holds:
+	$$
+		| \; \norm{x} - \norm{y} \; | 
+		\leq \norm{x-y}
+	.
+	$$
+\end{prop}
+This is a sort of inverse triangular inequality: it allows to control the  difference of norms. Prove it!
+
+\begin{prop}
+	Any norm on $\RR^N$ with canonical operations has the following form: 
+	$$
+		\norm{u}
+		= c|u| \quad \text{for some } c>0
+	.
+	$$
+\end{prop}
+
+Now consider some examples of norm.
+\begin{exam}
+	Consider $x\in X = \RR^N$, with $n \geq 2$, let $p \in [1, +\infty)$. The following are norms:
+	$$
+		\norm{x}_p \coloneqq \left(\sum_{j=1}^n |x_j|^p\right)^{1/p}
+		\qquad \norm{x}_\infty \coloneqq \max\{|x_1|,\ldots,|x_n|\}
+	.
+	$$
+\end{exam}
+\begin{exam}		
+	The space of all continuous function
+	$$
+		\Cc([a,b]) 
+		\coloneqq \{f : [a,b]\to \RR \text{ continuous in } [a,b]\}
+	$$
+	is a vector space. An example of a norm in $\Cc([a,b])$ is 
+	$$
+		\norm{f}_\infty 
+		\coloneqq \max_{t\in[a,b]}\abs{f(t)}
+		.
+	$$
+\end{exam}
+\begin{exam}
+	There exist examples of norms for other functional spaces: a norm for $L^1(\Omega, \mm, \mu)$ is 
+	$$
+		\norm{f}_1 
+		\coloneqq \int_\Omega |f(t)| \dmu
+	;
+	$$
+	while a norm for $L^\infty (\Omega, \mm, \mu)$ is 
+	$$
+		\norm{f}_\infty 
+		\coloneqq \esssup_\Omega |f(t)|
+	.
+	$$
+\end{exam}
+\begin{exam}
+	The set of converging series 
+	$$
+		l^p 
+		\coloneqq \left\{\{x_n\}_{n\in\NN} \subset \RR : \sum_{u\in \NN} |x_u|^p < +\infty \right\}
+	$$ 
+	is a vector space with respect to the canonical operations (you should prove it), consider $X=\{x_n\}_{n\in \NN} \in l_p$. Then 
+	$$
+		\norm{x}_p 
+		\coloneqq \left(\sum_{n\in \NN} |x_n|^p\right)^\frac 1 p
+	$$ 
+	is a norm in $l^p$.
+\end{exam}
+\begin{exam}
+	Take now 
+	$$
+		l^{\infty}  
+		\coloneqq \{\{x_n\}_{n\in\NN} \subset \RR : \{x_n\}_{n \in \NN} \text{ bounded}\}
+		;
+	$$ 
+	this is a normed vector space as well and a norm in $l^{\infty} $ is 
+	$$
+		\norm{x}_\infty
+		=\sup_{n\in \NN} |x_n|
+		.
+	$$
+\end{exam}
+
+\paragraph{Sequences} As we have done at the beginning with metric spaces, having define a notion of distance allow us to discuss about sequences and their convergence in those new spaces.
+\begin{defn}
+	Let $(X,\norm{\cdot})$ be a normed vector space.\\
+	We say that $\{x_n\}_{n \in \NN}\subset X$ \emph{converges} to an element $x\in X$ if:
+	$$
+		\forall \varepsilon > 0 \ 
+		\exists \, n_0 = n_0(\eps) \in \NN : \quad
+		d(x_n, x) = \norm{x_n-x} < \varepsilon \quad
+		\forall n > n_0
+		.
+	$$
+	In this case we write $\lim_{n \to \infty}x_n = x$ or, equivalently $x_n \to x$ as $n \to \infty$.
+\end{defn}
+
+Observe that $x_n \to x$ if and only if $\norm{x_n - x} \to 0$ as $n \to \infty$.
+
+Notice that we have (see proposition \vref{norm-inequality}):
+$$
+	x_n \to x 
+	\implies \norm{x_n} \to \norm{x} 
+	\quad \text{as } n \to +\infty
+.
+$$
+
+Remember that a converging sequence is fundamental but the converse is not true, think to $(\QQ, \norm{\cdot})$.
+
+\begin{defn}
+	Let $(X,\norm{\cdot})$ be a normed vector space.\\
+	$\{x_n\}_{n\in\NN}$ is a \emph{fundamental sequence} (or Cauchy sequence) in $X$ if: $$\forall \eps > 0 \ \exists\; n_0=n_0(\eps)\in \NN : \quad
+	\norm{x_n-x_m} < \eps \quad \forall n,m > n_0.$$
+\end{defn}
+
+A converging sequence is always fundamental as well, but the converse does not hold in general. For example consider the $\norm{f}_1$ in $\Cc([a,b])$.
+
+\begin{defn}
+	Let $(X,\norm{\cdot})$ be a normed vector space, \\
+	We say that $E \subset X$ is \emph{bounded} if exists $M >0$ such that:
+	$$E\subseteq \{x\in X: \ \norm{x} < M \} = B_M(0);$$
+	where $B_M(0)$ is a \emph{ball} centered in $0$ of radius $M$.
+\end{defn}
+
+As any sequences still remains a set of elements, this definition fit with sequences; indeed, it's easy to see that any fundamental sequence is bounded. As we will see, this will be still valid for series as well.
+Observe also that if $a_n \to a$ in $\RR$ and $x_n \to x$ in $(X, \norm{\cdot})$ then $a_n x_n \to a x$ in $X$.
+
+The following holds for both metric and topological spaces:
+\begin{prop}
+	Let $A \subset X$, where $X$ is a normed vector space.\\
+	Then $x^\star \in X$ is a cluster point\footnotemark{} for $A$ if and only if:
+	$$
+		\exists	\, \{x_n\} 
+		\subset A
+		: \ x_n 
+		\neq x^\star 
+		\quad \forall n 
+		\in \NN 
+		\quad \text{ and } 
+		\quad x_n
+		\to x^\star
+		.
+	$$
+\end{prop}
+\footnotetext{Recalling definition \vref{topological-structure-metric-spaces} or \vref{topological-structure-topological-spaces}, cluster points are also known as accumulation points. Those points are the ones which has at least one other point of the same set in any of their neighborhood.}
+
+Keep in mind that all the topological notion on those two kind of space depends only on the notion of sequence or neighborhoods respectively.
+
+
+\paragraph{Series} Having a vector space structure and a topology we can introduce something new which can't be explained with the theory of metric spaces only.
+
+\begin{defn}
+	Let $(X,\norm{\cdot})$ be a normed vector space.\\
+	Consider a sequence $\{x_n\}_{n \in \NN} \subset X$: the sequence of partial sums 
+	$$
+		S_n 
+		\coloneqq \sum_{j=0}^n x_j
+	,
+	$$
+	is called \emph{series} of the elements $x_n$ and is denoted by
+	$$
+		\sum_{n\in \NN} x_n
+	.
+	$$	
+	We say that such a series \emph{converges} to some $x\in X$ in $(X,\norm{\cdot})$ if we have 
+	$$
+		\norm{S_n - x} 
+		\to 0
+		\text{ as }
+		n \to \infty
+	.
+	$$
+\end{defn}
+
+It's important to remember that a series is defined upon a sequence, it is a new sequence of which the element $n$ is the sum from element $0$ to element $n$ of the given series. Now let's dive into this new concept.
+
+\begin{prop}[generalized triangular inequality] \label{generalized-triangular-inequallity}
+	If $\sum_{n\in \NN} x_n$ converges in $(X,\norm{\cdot})$, then we have: 
+	$$
+		\norm{\sum_{n\in\NN} x_n} 
+		\leq \sum_{n \in \NN} \norm{x_n}
+	.
+	$$
+\end{prop}
+
+\begin{proof}
+
+	\textit{Step 0:}\\
+	If $\sum_{n \in \NN} \norm{x_n}=+\infty$, the inequality holds.
+	
+	\textit{Step 1:}\\
+	We have to prove that the sequence of absolute values is fundamental; consider $m > n$ and define 
+	$S_m 
+	= \sum_{i=0}^m x_i$ 
+	and 
+	$S_n 
+	= \sum_{i=0}^m x_j$
+	:
+	$$
+		\norm{ S_m - S_n} 
+		= \norm{ \sum_{i=n+1}^m x_i} 
+		\leq \sum^m_{i=n+1}\norm{x_i} 
+		\xrightarrow{n,m \to +\infty} 0
+	,
+	$$
+	where the inequality is true due to the triangular inequality, and the limit is because $\norm{S_n -x } \to 0$ with $x$ finite. As the sequence of absolute values converges, it is fundamental.
+	
+	\textit{Step 2:}\\
+	Observe that $S_n \to \sum_{i \in \NN} x_i$ as $n \to \infty$, and thanks to the continuity of the norm, under the same conditions, we have that 
+	$$\norm{S_n} 
+	\to \norm{\sum_{i \in \NN} x_i}
+	.
+	$$
+	
+	\textit{Step 3:}\\
+	Again, using the triangular inequality, we have that:
+	$$
+	\norm{\sum_{i=1}^n x_i} 
+	\leq \sum_{i=1}^n \norm{x_i}
+	\quad \forall n \in \NN
+	;
+	$$
+	both the members of the inequality converges when $n \to \infty$ and we have the thesis.
+\end{proof}
+
+\paragraph{Separability} Here we remember some topological notions.
+
+\begin{defn}
+	Let $(X,\tau)$ be a topological space.\\
+	We say that $E\subset X$ is \emph{dense} in $X$ if $\widebar E = X$
+\end{defn}
+
+\begin{defn}
+	A topological space $(X,\tau)$ is \emph{separable} if $X$ contains a countable dense set.
+\end{defn} 
+
+\begin{exam}
+	The space of $\RR^N$ with the standard metric topology, like $(\RR^N, \norm{\cdot}_p)$, is separable $p\in[1,+\infty]$, with $E=\QQ^n$.
+	
+	Moreover, $(\Cc([a,b]),\norm{\cdot}_\infty) $ is separable, as we can see from the following result.
+\end{exam}
+
+At last, a relevant result about continuous function approximation.
+\begin{theo}[Stone--Weierstrass]\label{theo-stone-weierstrass}
+	Let $\Pc([a,b])$ be the subspace of algebraic polynomials. \\
+	Then $\Pc([a,b])$ is dense in $(\Cc([a,b]),\norm{\cdot}_\infty)$.
+\end{theo}
+This means that any continuous function can be approximated as precisely as desired by a polynomial.
+
+\paragraph{Norms equivalence} As we have done with metrics also for norm we have a notion of equivalence (see definition \vref{equivalent-metrics}).
+
+\begin{defn}
+	Let $(X,\norm{\cdot}_\clubsuit), (X,\norm{\cdot}_\spadesuit)$ be normed vector spaces. \\
+	We say that the norms $\norm{\cdot}_\clubsuit$ and $\norm{\cdot}_\spadesuit$ are \emph{equivalent} in $X$ if:
+	$$
+	\exists \, m,M >0 : \quad 
+	m\norm{\cdot}_\clubsuit 
+	\leq \norm{\cdot}_\spadesuit 
+	\leq M\norm{\cdot}_\clubsuit 
+	\quad \forall x \in X
+	.
+	$$
+\end{defn}
+
+Observe that two normed space on the same set with two equivalent norm have the same induced topology: same open sets, same closed sets, same convergent sequences.
+
+\begin{prop}
+	In a finite dimensional vector space, all norms are equivalent.
+\end{prop}
+
+\begin{proof}
+	Without loss of generality, we will prove that in $\RR^N$ all the norms are equivalent. 
+	Consider the norm $\norm{\cdot}_1$ and let $\norm{\cdot}$ be any other norm; we have to prove that:
+	$$
+	m \norm{x}_1 
+	\leq \norm{x} \leq M \norm{x}_1
+	.
+	$$
+	
+	\textit{Second inequality}:\\
+	Take the canonical basis in $\RR^N$: $\{\mathbf e_j\}^N_{j=1} = \{\mathbf e_1,\ldots, \mathbf e_N\}$, so that $\mathbf x=\sum_{j=1}^N \alpha_j \mathbf e_j$ and $\norm{\mathbf x}_1 = \sum^N_{j=1}|\alpha_j|$; we have:
+	$$
+	\norm{\mathbf x}
+	=\norm{\sum_{j=1}^{N}x_j \mathbf e_j} 
+	\leq \sum_{j=1}^{N} |x_i|\norm{\mathbf e_i} 
+	\leq M \sum_{i=1}^N|x_j| 
+	= M \norm{\mathbf x}_1
+	,
+	$$
+	where $M= \max\limits_{j\in\{1,\ldots,N\}}\norm{\mathbf e_i}$ and so $\norm{\mathbf x} \leq M \norm{\mathbf x}_1$.
+	
+	\textit{First inequality}:\\
+	Set $\phi(\mathbf x) = \norm{\mathbf x}$, by norm continuity $\phi$ is continuous in $\RR^N$; in particular, it is continuous on the compact set $K = \{\mathbf x \in \RR^N : \norm{\mathbf x}_1 = 1\}$, so we have:
+	$$ 
+	\abs{ \phi(\mathbf x) - \phi(\mathbf x_0) } 
+	\leq \norm{\mathbf x - \mathbf x_0} 
+	\leq M \norm{\mathbf x - \mathbf x_0}_1
+	.
+	$$
+	
+	Thus $\phi$ has a minimum $m\geq 0$ on $K$ due to the Weierstrass theorem, and we have:
+	$$
+	\phi\left(\frac{\mathbf x}{\norm{\mathbf x}_1}\right) 
+	\geq m \quad 
+	\forall \mathbf x \in \RR^N
+	.
+	$$
+	It must be $m>0$: indeed, if $m=0$ for some $\mathbf x_m$, then $\mathbf x_m = \mathbf 0 \notin K$.
+	
+	Finally we have $\norm{\mathbf x} = \phi(\mathbf x) \geq m \norm{\mathbf x}_1$ for all $\mathbf x \in \RR^N$.
+
+	Alternatively, one could use the BIM corollary \vref{coro-equiv-norm-banach} to prove this second point.
+\end{proof}
+
+It can be proved that any vector space $V \subseteq R^N$, with $K = \dim V$ is isomorphic to $\RR^K$, that is there exists a linear bijection $F: V\to \RR^K$.
+In particular, the previous theorem holds for any finite-dimensional vector space on $\RR^N$.
+
+Moreover, consider two vector spaces, namely $V_1$ and $V_2$, whose dimensions are $N_1$ and $N_2$ respectively. If they are linearly isomorphic, then $N_1=N_2$. In particular $\RR$ and $\RR^N$, with $N>1$, cannot be linearly isomorphic, even if they are equivalent as sets. 
+
+Examples of equivalent norms are presented together with examples of Banach spaces in next section.

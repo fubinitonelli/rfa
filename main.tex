@@ -1,0 +1,161 @@
+\documentclass[11pt,twoside]{article}
+\AtBeginDocument{ \newboolean{add-front-cover} \setboolean{add-front-cover}{true} }
+\AtBeginDocument{ \newboolean{stampa} \setboolean{stampa}{false} }
+\input{formatting/includes}
+\input{formatting/ftcommands}
+\input{formatting/theorems}
+\input{formatting/commands}
+\input{formatting/style}
+
+\title{Real and Functional Analysis}
+
+% Cit
+% ``Non sono Dio, ma...'' MG
+
+\begin{document}
+
+\pagestyle{empty}
+
+% Copertina
+\ifthenelse{\boolean{add-front-cover}}{
+	\includepdf{formatting/front-cover.pdf}\cleardoublepage
+}{}
+
+\newgeometry{left=1.5cm, right=1.5cm, top=2cm, bottom=2cm}
+\input{firstpages/cover.tex} \clearpage \restoregeometry
+\input{firstpages/cover-back.tex} \clearpage
+\input{firstpages/preface}
+
+\ifthenelse{\boolean{stampa}}{\setuptodonotes{disable}}{}
+
+\cleardoublepage
+
+\pagestyle{plain}
+
+% Table of contents
+\pdfbookmark[1]{Contents}{index}
+\setcounter{tocdepth}{3}
+\begin{spacing}{0.95} % tweaked manually to fit it in 2 pages
+	\tableofcontents
+\end{spacing}
+
+\cleardoublepage
+
+\section{Fundamentals of Set Theory and Topology}
+This chapter's aim is to provide some basic tool that are required before studying the Measure Theory. Here we try to figure out what is a \textit{set} and what is \textit{infinity}. Later we will introduce some notions of Topology.
+
+\subsection{Set Theory}
+\input{sections/1_1_1_ConventionsAndOperations}
+\input{sections/1_1_2_RelationsAndFunctions}
+\input{sections/1_1_3_MagnitudeAndInfinities}
+\input{sections/1_1_4_MoreOnAxiomaticTheory}
+
+\newpage
+\subsection{Topology}\label{topology-section}
+\input{sections/1_2_1_MetricSpaces}
+\input{sections/1_2_2_TopologyOnMetricSpaces}
+\input{sections/1_2_3_TopologicalSpaces}
+\input{sections/1_2_4_TopologyOnTopologicalSpaces}
+\input{sections/1_2_5_ContinuousFunctions}
+\input{sections/1_2_6_MoreOnSpaces}
+\input{sections/1_2_7_CompleteSpaces}
+\input{sections/1_2_8_CompactSpaces}
+\input{sections/1_2_9_CantorSetAndVitaliFunction} 
+
+%\input{sections/1_E_1_Cardinalities}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Real Analysis}
+Now that we have introduced some fundamental notions about set theory and topolgy, we can begin our study of Real Analysis, which is a branch of mathematical analysis that studies real numbers and the most common operations we can do with them: sequences, series, functions, integration.\\
+This raises some meaningful questions: how are they defined from a rigorous point of view? Which are their properties? Are there some operations that cannot be done for certain reasons? Which characterizations can we find to connect these structures?\\
+In this part we will first introduce measure theory, which as abstract as it may seem, it is essential to define the powerful Lebesgue integral later on. Measure theory also does some \textit{dotting the i's and crossing the t's} on something that the reader may have seen many times in previous courses: probability. Some concepts that maybe did not add up before, now will make sense. We will also explore in a meaningful way the concept of non-measurable sets, which is way more non-trivial than measurable sets.\\
+Then, starting from a formal definition of integration according to Lebesgue, we will see some relevant theorems and properties, useful both in pratical and theoretic fields.\\
+We will see the two fundamental theorems of calculus, something that the reader may have also seen in a simplified form in previous courses. To this end, we will explore new definitions of continuity.\\
+At last, we will give some definitions and useful theorems to deal with measures defined in product spaces.
+
+\newpage
+\subsection{Measure theory}
+\input{sections/2_1_1_MeasurableSpaces}
+\input{sections/2_1_2_MeasurableFunctions}
+\input{sections/2_1_3_PositiveMeasure}
+\input{sections/2_1_4_LebesgueMeasure}
+%\input{sections/2_1_E_ExercisesOnMeasureTheory}
+
+\newpage
+\subsection{Abstract integration}
+\input{sections/2_2_1_AbstractIntegral}
+\input{sections/2_2_2_BeppoLeviTeorem}
+\input{sections/2_2_3_DerivativeOfAMeasure}
+
+\newpage
+\subsection{Lebesgue Integral}
+\input{sections/2_3_1_IntegratingRealValuedFunctions}
+\input{sections/2_3_2_DominatedConvergenceTheorem}
+\input{sections/2_3_3_AlmostEverywhereConcept}
+\input{sections/2_3_4_DerivativeOfAMeasure2}
+\input{sections/2_3_5_L1SpaceAndConvergence}
+
+\newpage
+\subsection{Fundamental theorems of calculus}
+\input{sections/2_4_1_FirstFundamentalTheorem}
+\input{sections/2_4_2_AbsoluteContinuity}
+\input{sections/2_4_3_SecondFundamentalTheorem}
+\input{sections/2_4_4_LebesgueDecomposition}
+
+\newpage
+\subsection{Integrals on product spaces}
+\input{sections/2_5_1_ProductOnSigmaAlgebras}
+\input{sections/2_5_2_Integrals} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Functional Analysis}
+Real analysis is somehow a generalization of basic calculus notions. We have seen functions, integrals and in the end we have seen the second theorem of calculus which is a generalization of the Calculus Formula.\\
+At the beginning of this book we introduced topological spaces which are geometrical notions. From now on, these two parts will meet with functional analysis.\\
+This is the field of mathematics in which relations between functional spaces are studied. If in real analysis we worked in finite dimensional space, now we extend our scope to infinite dimensional spaces, which elements are functions.\\
+First we study such spaces which are, as we see, a generalization of euclidean spaces, and in a second step we will study operator between those spaces. We will focus on linear operators.
+
+\subsection{Banach spaces}
+\input{sections/3_1_1_VectorSpaces}
+\input{sections/3_1_2_NormedVectorSpaces}
+\input{sections/3_1_3_BanachSpaces}
+\input{sections/3_1_4_LSpaces}
+\input{sections/3_1_5_SeparabilityInLSpaces}
+
+\newpage
+\subsection{Linear operators}
+\input{sections/3_2_1_DefinitionsBoundedness}
+\input{sections/3_2_2_Isomorphism}
+\input{sections/3_2_3_BaireCategories}
+\input{sections/3_2_4_UniformBoundednessPrinciple}
+\input{sections/3_2_5_TripleTheorem}
+
+\newpage
+\subsection{Duality}
+\input{sections/3_3_1_DualSpace}
+\input{sections/3_3_2_HahnBanach}
+\input{sections/3_3_3_Reflexivity}
+\input{sections/3_3_4_WeakConvergence}
+\input{sections/3_3_5_LinearCompactOperators}
+
+\newpage
+\subsection{Hilbert spaces}
+\input{sections/3_4_1_HilbertSpaces}
+\input{sections/3_4_2_OrthogonalityAndProjections}
+\input{sections/3_4_3_DualOfHilbertSpace}
+\input{sections/3_4_4_ProofOfRN}
+\input{sections/3_4_5_BilinearForm}
+\input{sections/3_4_6_BasesInHilbertSpaces}
+\input{sections/3_4_7_LinearBoundedOperatorsInHilbertSpaces}
+
+\cleardoublepage
+\begin{appendices}
+\input{sections/A_1_1_limits}
+\input{sections/A_1_3_someproofs}
+\end{appendices}
+
+\cleardoublepage
+
+\end{document}

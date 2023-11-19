@@ -1,0 +1,66 @@
+%!TEX root = ../main.tex
+\subsubsection{Main results of the axiomatic theory} In our introduction we gave a taste of how deep is the theory behind set theory. Now, as this theory play a role in the fundamentals of analysis we now shows some details of those axioms which allow us to reach useful results. 
+
+Here we will present the aforementioned axiom of choice.
+
+\begin{defn}[Axiom of choice - AC] \label{axiom-of-choice}
+	There are different but equivalent formulation for the axiom:
+	\begin{itemize}
+		\item For any $X \neq \varnothing$ there exists a choice function $f: \Pc(X) \to X$, $f:A \mapsto f(A)\in A$ for any $A \neq \varnothing$;
+		\item Let $(E_{\alpha})_{\alpha \in A}$ be a family of non-empty sets $E_\alpha$, indexed by an index set $A$. then we can find a family $(x_\alpha)_{\alpha \in A}$ of elements $x_\alpha$ of $E_\alpha$, indexed by the same set $A$; \footnotemark{}
+		\item Any cartesian product of a family on non-empty sets is non-empty: let $\chi = \{X_\alpha\}_{\alpha \in J}$ be a family of sets indexed by a set $J \neq \varnothing$. The cartesian product $\prod_{\alpha \in J} X_\alpha$ is the defined as the set of all mappings $x:J \to \cup_{\alpha \in I} X_\alpha$ such that $x(\alpha) \in X_\alpha$ for each $\alpha \in J$. Each mapping $x$ is defined as choice mapping and $x(\alpha)$ is defined as $\alpha$th coordinate of $x$. Then if $X_\alpha \neq \varnothing$ for each $\alpha \in J$ then $\prod_{\alpha \in J} X_\alpha \neq \varnothing$;
+		\item Any member of a family of non-empty sets has at least one element.
+	\end{itemize}
+\end{defn}
+\footnotetext{See: T. Tao, An introduction to Measure Theory, page XV, notation, axiom 0.0.4 .}
+
+This axiom means that it is always possible to choose one element in each set of a collection of sets through a so-called choice function.
+
+The family is assumed to be non-countable; if it is just countable, a weaker version of the axiom, known as the \textit{countable} axiom of choice (CAC), holds.
+
+One interesting consequence arising from the axiom of choice is the following.
+\begin{prop}[Banach--Tarski paradox]
+	Given a solid ball in 3-dimensional space, there exists a decomposition of the ball into a finite number of disjoint subsets, which can then be put back together in a different way to yield two identical copies of the original ball.
+\end{prop}
+
+Despite the existence of this paradox, the axiom of choice is essential to prove even some of the most basic calculus theorems.
+
+\paragraph{Equivalent axioms} Other axioms can be take instead axiom of choice, and some of those has been proved to be equivalent: here we present two of those after having introduced some definitions.
+
+\begin{defn}\label{chain-defn}
+	Let $X, \preceq$ be a partially ordered set. His subset $A \subset X$ is called \emph{chain} if it's a totally ordered set.
+	
+	A chain is \emph{maximal} if it's not properly contained in another chain.
+	
+	An element $b$ of a partially ordered set $(X, \preceq)$ is an \emph{upper bound} for $A \subset X$ if $a\preceq b$ for all $a \in A$.
+	
+	A partially ordered set $(X, \preceq)$ is an \emph{inductive set} if every chain has an upper bound.
+\end{defn}
+
+\begin{prop} [Hausdorff's maximal principle]
+	Every chain in a partially ordered set is contained in a maximal chain.
+\end{prop}
+
+\begin{prop} [Zorn's lemma] \label{lemma-zorn}
+	Any inductive set has a maximal element.
+\end{prop}
+
+
+\paragraph{The Zermelo--Fraenkel theory and the axiom of choice}  Ernst Zermelo demonstrated in 1904 that every set can be well-ordered if we assume the axiom of choice. In fact, AC is independent from ZF axioms:  Kurt Gödel proved that the negation of AC isn't deducible form ZF in 1938 while Paul Cohen, in 1963, proved that AC neither can be deduced from ZF.
+
+From now on two (different) theories are possibles: the Zermelo--Fraenkel theory with AC (ZFC), in which cardinal numbers has a total order and it is possible to prove a number of important results even if there exist some counter-intuitive results, and the Zermelo--Fraenkel theory without AC. In this last case one can include only the countable axiom of choice and lots of results can be proved anyway.
+
+\paragraph{The continuum hypothesis} Remembering the ordinal number theory, we can assign to who particular transfinite ordinal two specific symbols. 
+The least transfinite ordinal is $\omega$ and we denote its cardinality with $\aleph_0$.
+The first transfinite uncountable ordinal, that is the set of all countable ordinals, has its cardinality denoted by $\aleph_1$. Those set are themselves ordinals, in the sense that they are representatives from their equivalence classes.
+
+\begin{defn} [Continuum hypothesis (CH)]
+	The continuum has the same cardinality of the first transfinite uncountable ordinal, namely:
+	$$ 2^{\aleph_0} = \aleph_1 $$
+\end{defn}
+
+So, this states that there is not an ``intermediate'' magnitude of infinities between the cardinality of $\NN$ and the cardinality of $\RR$ (see definition \vref{continuum}). 
+
+As for the axiom of choice, in 1940 Kurt Gödel proved that the negation of the CH is not a theorem in ZFC while in 1963 Paul Cohen showed that CF is not a theorem in ZFC; so the CH is another optional axiom of the ZF.
+
+From now on, we will use ZF + AC + CH as our reference theory.

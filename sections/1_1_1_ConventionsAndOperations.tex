@@ -1,0 +1,253 @@
+%!TEX root = ../main.tex
+Sets are of fundamental importance for mathematics, but it may be surprisingly difficult to understand what a set actually \textit{is}. This problem arises due to limitations in language: common language is not a reliable tool to deal with logical or abstract concepts. The entry ``set'' in the Oxford English Dictionary takes up a large number of pages, which just goes to show that understanding the topic is not an easy task. As if it was not enough, the \textit{mathematical} concept of set presents more difficulties, as explained by Bertrand Russel through the so-called ``Barber paradox'': 
+
+\begin{quote}
+	The barber is the ``one who shaves all those, and those only, who do not shave themselves''. The question is, does the barber shave himself?
+\end{quote}
+
+Another formulation, more formal, of the same paradox is the following: ``What is the set of all sets that are not members of themselves?''
+
+The mathematicians' solution for the definition of set is an \emph{axiomatic theory}, which is an abstract theory based on axioms: you don't have to explain something which is arbitrarily defined as true. This theory claims that there exist particular objects, called sets, which satisfy a list of axioms. That list was written in order to avoid paradoxes. Such kind of theory is really difficult to grasp, and was constructed by Ernst Zermelo and Abraham Fraenkel (ZF) at the beginning of the 20th century.\footnote{To understand how complex the theory is, just know that the definition of empty set is provided at page 200.}
+
+Nevertheless, Georg Cantor worked on a \textit{naïve set theory}, which simplifies many concepts from ZF theory in order to be more usable, at expense of rigor. We will follow this approach, which doesn't provide a rigorous definition of set, but it uses only its intuitive notion: this theory defines the set as a ``collection'' of objects called elements. The Cantor naïve set theory will be our reference framework for set theory.
+
+\subsubsection{Set conventions and main operations}
+
+\paragraph{Basic notions and definitions} First of all, now we provide the conventions that are used in this text:
+\begin{itemize}
+	\item \emph{sets} are denoted with upper case letters:
+	$$ A, \ B, \ X, \ Y $$
+	\item \emph{elements} of sets are denoted with lower case letter:
+	$$a, \ b, \ x, \ y $$
+	\item \emph{belonging} of an element to a set is denoted with the symbol ``$\in$'': the notation $a \in A$ means that the element ``$a$'' \textit{belongs to} the set ``$A$'';
+	
+	\item \emph{not belonging} of an element to a set is denoted with the symbol ``$\in$'': the notation $a \notin A$ means that the element ``$a$'' \textit{does not belongs to} the set ``$A$''.
+\end{itemize}
+
+The following is an example of recursive definition of a set: $A = \{ x: x \in A \}$, this namely means that $A$ is the set of all the elements $x$ of $A$.
+
+Intuitively, two sets $A$ and $B$ are equal if and only if each element of $A$ belongs to $B$ and each element of $B$ belongs to $A$; that is, in symbols:
+$$ 
+A
+=B 
+\iff \left(\forall a \in A \implies a \in B\right) 
+\wedge \left(\forall b \in B \implies b \in A\right)
+.$$
+
+A set with only one element, like $\{a\}$, is called \emph{singleton}.
+
+If $X$ has a ``reasonable" finite number of elements, say $a,\,b,\,c,\,d$ than we can represent the set listing its elements:
+$$ X=\{a,\,b,\,c,\,d\} =\{d,\,a,\,b,\,c\}$$
+Notice that order does not matter for sets.
+
+We state the following axiom: ``there exists a set such that no element belongs to it'', this particular set is named as \emph{emptyset}, and can be defined as follows: 
+$$
+\varnothing 
+= \{x: x \neq x\}
+.
+$$
+
+Observe that the empty set is unique; this can be proved by the condition on equality between two set that was stated before: if no element belongs to $A$ (thus $A$ is an empty set) and no element belongs to $B$ (thus $B$ is an empty set), then $A$ is equal to $B$.
+
+\begin{defn}
+	Sets can also exist as elements of another set, which is sometimes referred to as \emph{collection} or \emph{family} of sets, in particular:
+	\begin{itemize}
+	    \item \emph{inclusion}: $A \subseteq B$\\ The set $A$ is included in the set $B$, that is every element which belongs to $A$ also belongs to $B$:
+	    $$
+	    	x 
+	    	\in A 
+	    	\implies x \in B
+	    	.
+	    $$
+	    \item \emph{strict} or \emph{proper inclusion}: $A \subsetneq B$\\ The set $A$ is included in $B$ and some elements of $B$ doesn't belongs also to $A$:
+	    $$
+	    	\left(x \in A \implies x \in B\right)
+	    	\wedge A\neq B
+	    .
+	    $$
+	    
+	    Then, if $A$ is strictly contained in $B$, that is $A \subsetneq B$, the set $A$ is a \emph{proper subset} of $B$.
+	\end{itemize}
+\end{defn}
+
+A set $A$ can be determined, and defined, as the collection of all the elements belonging to a set ``universe'' $X$ which has a certain property $P(x)$, by writing:
+$$ 
+	A 
+	= \{x \in X: P(x) \text{is true}\}
+.
+$$
+
+\paragraph{Main set operations} Now we introduce the fundamental operations between sets:
+
+\begin{defn}\label{main-set-operations}
+	The following operation are defined for two sets, further some of them are defined in case of family of sets:
+	\begin{itemize}
+		\item \emph{union}: takes every elements which belong to at least one set:
+		$$
+			A \cup B 
+			\coloneqq \{x : \left(x \in A\right) \vee \left(x \in B\right)\}
+		;
+		$$
+		\item  \emph{intersection}: takes only the elements which belong to both of sets:
+		$$
+			A \cap B 
+			\coloneqq \{x : \left(x \in A\right) \wedge \left(x \in B\right)\}
+		;
+		$$
+		\item \emph{difference}:  takes only the elements which belong to the first set and do not belong to the second one:
+		$$
+			A \setminus B 
+			= A - B 
+			\coloneqq \{x \in A : x \notin B\}
+		;
+		$$
+		\item \emph{complement of a set} with respect to a given universe $X$ such that $A\subset X$:
+		$$
+			C_X A 
+			= A\comp 
+			\coloneqq\{x\in X : x \notin A\}
+		;
+		$$
+		\item \emph{symmetric difference}: takes only the elements which belong to only one of the two sets:
+		$$
+			A \vartriangle B
+			\coloneqq \left(A\cup B\right)\setminus\left(A \cap B\right)
+			=\{x: (x\in A \vee x \in B)	\wedge \overline{(x\in A \wedge x \in B)} \}
+		.
+		$$
+		
+		Moreover, if $A \cap B = \varnothing$ then $A$ and $B$ are \emph{disjoint}.
+	\end{itemize}
+\end{defn}
+
+
+
+Some operations can be defined also for been applied not only to two but to multiple set. In case of unions:
+\begin{itemize}
+	\item \emph{union for infinite sets}:
+	$$
+		\bigcup_{j = 0}^\infty A_i 
+		\coloneqq \{x : \exists \, i \in \NN: x \in A_j\}
+	;
+	$$
+	\item  \emph{union of sets indexed by a set}:
+	$$
+		\bigcup_{\alpha \in J} A_\alpha 
+		\coloneqq \{x : \exists \, \alpha \in J: x \in A_\alpha\}
+	;
+	$$
+	\item  \emph{union of sets belonging to a family of sets}:
+	$$
+		\bigcup_{A \in \Ac} A 
+		\coloneqq \{x : x \in A \text{ for some } A \in \Ac\}
+	.
+	$$
+\end{itemize}
+
+Similar in case of intersections:
+\begin{itemize}
+	\item \emph{intersection for infinite sets}:
+	$$
+		\bigcap_{j = 0}^\infty A_i 
+		\coloneqq \{x : \forall i \in \NN: x \in A_j\}
+	;
+	$$
+	\item  \emph{intersection of sets indexed by a set}:
+	$$
+		\bigcap_{\alpha \in J} A_\alpha 
+		\coloneqq \{x : \forall \alpha \in J: x \in A_\alpha\}
+	;
+	$$
+	\item  \emph{intersection of sets belonging to a family of sets}:
+	$$
+		\bigcap_{A \in \Ac} A 
+		\coloneqq \{x : \forall A \in \Ac x \in A\}
+	.
+	$$
+\end{itemize}
+
+Each operation has properties related to it. The most basic ones are for example \emph{commutativity} and \emph{associativity}. In the case of union and intersection of sets as defined above, we have these \emph{distributive} properties:
+$$ 
+	\left(A\cup B\right)\cap C 
+	= \left(A\cap C\right)\cup  \left(B\cap C\right), \ \ \left(A\cap B\right)\cup C 
+	= \left(A\cup C\right)\cap  \left(B\cup C\right)
+,
+$$
+and the \emph{De Morgan's Laws}: \label{de-morgans-laws}
+$$
+	\left(A\cup B\right)\comp 
+	= A\comp \cap B\comp, \ \ \left(A\cap B\right)\comp 
+	= A\comp \cup B\comp
+.
+$$
+
+These holds also for multiple sets, for instance:
+$$
+	\left(\bigcup_{\alpha \in J} A_\alpha\right)\comp 
+	= \bigcap_{\alpha \in J} A_\alpha\comp , \ \ \left(\bigcap_{\alpha \in J} A_\alpha\right)\comp 
+	= \bigcup_{\alpha \in J} A_\alpha\comp
+.
+$$
+
+Often a universe set $X$ is used: that is consider the set of all the possible elements. In this case, $\varnothing\comp = X$ and $X\comp = \varnothing$
+
+Consider now the case in which we need to slice a set into multiple subsets. If every element of the original set will belong to only one subsets than those sets are mutually disjoints, so we have construct a partition of a set:
+\begin{defn}
+	Let $X$ be a non-empty set: a \emph{partition} of the set $X$ is a family of subset of $X$ such that they are pairwise disjoint and their union is $X$ itself:
+	$$
+		X_i \in \Pc(X), 
+		\quad \bigcup_j X_j = X, 
+		\quad X_i \cap X_j = \varnothing 
+		\quad \forall i \neq y
+	.
+	$$
+\end{defn} 
+
+
+\paragraph{Power set} Now we will introduce two new set operations, which give as a result a different ``kind'' of set from the initial ones.
+
+\begin{defn}
+	The \emph{power set}\footnotemark{} of an another existing set $X$ is the set whose elements are all the possible subsets of X:
+	$$\Pc\left(X\right)=\{A : A \subseteq X\}$$
+\end{defn}
+\footnotetext{\itatrasl{insieme delle parti}}
+
+It is important to become familiar with the formalism and the correct notation. Given $a\in X$, notice that:
+\begin{itemize}
+	\item $a \in \Pc\left(X\right)$ is wrong, because $a$ is an element with respect to $X$, while the elements of $\Pc$ are sets with respect to $X$.
+	\item $\{a\} \in \Pc\left(X\right)$ is correct.
+\end{itemize}
+For the same reasons, writing $\{a\} \in X$ is wrong, and the correct notation is $\{a\} \subset X$.
+
+It should be known that the power set of the empty set is the set which contains the empty set, not the empty set itself:
+$$\Pc\left(\varnothing\right)=\{\varnothing\}$$
+
+\paragraph{Cartesian product} Now consider two non-empty set $A$ and $B$, we want to combine each element of $A$ with every element of $B$ into ordered pairs:
+$$a\in A, \; b\in B \mapsto \left(a,b\right)$$
+
+Notice that the first element of the couple belongs to the first set and similarly for the second element. So we consider the pair as a new element. We can define a set which contain all such elements:
+\begin{defn}
+	Let $A$ and $B$ two non-empty sets.\\
+	The set which contains all the possible couples $(a,b)$ where $a\in A$ and $b \in B$ is the \emph{cartesian product} of $A$ and $B$:
+	$$
+		A \times B 
+		\coloneqq \{\text{ all the ordered pairs } (a,b): a \in A, b \in B\}
+	.
+	$$
+\end{defn}
+
+Let's show some properties:
+\begin{itemize}
+	\item $(a,b) = (\tilde a, \tilde b)$ if and only if $a = \tilde{a}$ and $b = \tilde{b}$;
+	\item in general the cartesian product is not commutative, that is: $A \times B \neq B \times A$, unless $A = B$;
+	\item the cartesian product is associative: $(A \times B) \times C = A \times (B \times C)$;
+	\item thanks to the associative property we can define the cartesian product for multiple sets: $X_1 \times X_2 \times \cdots \times X_N$;
+	\item from the previous point we define the following: $X^N \coloneqq X \times \cdots \times X$, $N$ times.
+\end{itemize}
+
+\paragraph{The real number set $\RR$} The set of real number will be the setting in which we will work in next sections. We define a proper symbol for its cartesian product:
+$$
+	\RR^N 
+	=\underbrace{\RR \times \RR \times \cdots \times \RR}_{n \text{ times}}
+.
+$$

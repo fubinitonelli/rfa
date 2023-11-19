@@ -1,0 +1,67 @@
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\renewcommand*{\arraystretch}{1.2}
+\newcommand{\sectionbreak}{\cleardoublepage}
+%\newcommand{\subsubsectionbreak}{\clearpage}
+
+\renewcommand\qedsymbol{$\blacksquare$} %bollino nero al termine della proof
+\renewcommand*{\proofname}{\emph{Proof}}
+
+
+% Removes the header from odd empty pages at the end of chapters
+\makeatletter
+\renewcommand{\cleardoublepage}{
+\clearpage\ifodd\c@page\else
+\hbox{}
+\vspace*{\fill}
+\thispagestyle{empty}
+\newpage
+\fi}
+
+
+\setlength{\parindent}{0pt}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}% Clear header/footer
+  \fancyfoot[OR]{\thepage}
+  \fancyfoot[EL]{\thepage}
+  \renewcommand{\headrulewidth}{0.0pt}% Header rule of .4pt
+}
+\pagestyle{plain}
+
+\fancypagestyle{empty}{
+  \fancyhf{}
+}
+
+\titleformat{\section}
+  {\sffamily\bfseries\Large\color[HTML]{777777}}
+  {\thesection}
+  {1em}
+  {}
+
+\titleformat{\subsection}
+  {\sffamily\bfseries\large\color[HTML]{555555}}
+  {\thesubsection}
+  {1em}
+  {}
+
+\titleformat{\paragraph}[runin]
+  {\sffamily\bfseries\normalsize}
+  {\thesection}
+  {1em}
+  {}
+
+\renewcommand{\emph}[1]{{\sffamily\bfseries#1}}
+\renewcommand{\marginpar}{\marginnote}
+\newcommand{\MarginNote}[1]{\marginpar{\textit{\color[HTML]{555555} #1}}}
+
+%colors
+\definecolor{lightblue}{RGB}{49,130,189}
+\definecolor{grey250}{RGB}{250,250,250}
+\definecolor{grey245}{RGB}{245,245,245}
+\definecolor{grey240}{RGB}{240,240,240}
+\definecolor{blu}{RGB}{0,0,255}
+\definecolor{verde}{RGB}{0,255,0}
+\definecolor{rosso}{RGB}{255,0,0}
+\definecolor{giallo}{RGB}{255,255,0}
+\definecolor{verde+}{RGB}{38, 168, 31}

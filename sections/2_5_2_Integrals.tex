@@ -1,0 +1,120 @@
+%!TEX root = ../main.tex
+\subsubsection{Integrals and Fubini--Tonelli's theorems} We have build all the ingredients to define the abstract integral on a multidimensional space. Consider the measurable space $(X\times Y, \Mg \otimes \Ng, \mu \otimes \nu)$. In case $ E \in \Mg \otimes \Ng$ the \textit{reduction formula} for characteristic functions holds:
+$$\int_{X\times Y} \Ind_E \,\de(\mu \otimes \nu)
+= (\mu \otimes \nu)(E) = \int_X \nu (E_x) \dmu = \int_Y \mu (E_y) \dnu$$
+
+
+This formula can be generalized: the following result shows that it can be extended to measurable functions. This results is made of two theorem which are different assumptions but the same final result, the \textit{iterated integral formula}.
+
+As painful as it may be to state and comment this two theorems separately for an association named ``Fubini$\otimes$Tonelli'', this course requires to at least understand where each one comes from and why they work so well together.\footnote{Somehow like the pieces of Exodia.} 
+
+\begin{theo}[Tonelli] %1885-1946
+	Consider the measure space $(X\times Y,\, \Mg \otimes \Ng,\, \mu \otimes \nu)$, and let $f$ be a function $(\Mg \otimes \Ng)$-measurable and defined everywhere in $X\times Y$.\\
+	If the function is non-negative, namely $0\leq f \leq +\infty$, then we have the \emph{iterated integral formula}:
+	$$
+	\int_{X\times Y} f \, \de (\mu \otimes \nu)
+	= \int_X \left( \int_Y f^x \, \dnu \right) \, \dmu
+	= \int_Y \left( \int_X f^y \, \dmu \right) \, \dnu.
+	$$
+\end{theo}
+Observe that the first part of the iterated integral formula is actually an abstract integral, as it is defined on a measure.
+
+For this next theorem we require also completeness for both measures.
+
+\begin{theo}[Fubini]% 1879-1943
+	Consider the measure space $(X\times Y,\, \Mg \otimes \Ng,\, \mu \otimes \nu)$, and let $f$ be a function $(\Mg \otimes \Ng)$-measurable and defined everywhere in $X\times Y$.\\
+	If $f$ is such that $\int_{X\times Y} |f| \, \de (\mu \otimes \nu) < +\infty$, then we have: 
+	\begin{alignat*}{2}
+		f^x &\in L^1(Y, \Ng, \nu) \quad &&\text{for almost any } x \in X; \\
+		f^y &\in L^1(X, \Mg, \mu) \quad &&\text{for almost any } y \in Y.
+	\end{alignat*}
+	Moreover:
+	\begin{align*}
+		x & \mapsto \int_Yf^x\dnu\in L^1(X,\Mg, \mu); \\
+		y & \mapsto \int_Xf^y\dmu\in L^1(Y,\Ng, \nu).
+	\end{align*}
+	Finally, the iterated integral formula holds.
+\end{theo}
+
+%
+%\begin{theo}[Fubini--Tonelli] \label{fub-ton}
+%	Let $\mu$, $\nu$ $\sigma$-finite and complete respectively on $\Mg$, $\Ng$. \\
+%	Consider the measure space $(X\times Y,\, \Mg \otimes \Ng,\, \mu \otimes \nu)$, and let $f$ be a function $(\Mg \otimes \Ng)$-measurable and defined everywhere in $X\times Y$.
+%	
+%	\emph{Tonelli} \\%1885-1946
+%	If the function is non-negative, namely $0\leq f \leq +\infty$, then we have the \emph{iterated integral formula}:
+%		$$
+%			\int_{X\times Y} f \, \de (\mu \otimes \nu)
+%			= \int_X \left( \int_Y f^x \, \dnu \right) \, \dmu
+%			= \int_Y \left( \int_X f^y \, \dmu \right) \, \dnu.
+%		$$
+%	\emph{Fubini} \\ % 1879-1943
+%	If $f$ is such that $\int_{X\times Y} |f| \, \de (\mu \otimes \nu) < +\infty$, then we have: 
+%		\begin{alignat*}{2}
+%			f^x &\in L^1(Y, \Ng, \nu) \quad &&\text{for almost any } x \in X; \\
+%			f^y &\in L^1(X, \Mg, \mu) \quad &&\text{for almost any } y \in Y.
+%		\end{alignat*}
+%		Moreover:
+%		\begin{align*}
+%			x & \mapsto \int_Yf^x\dnu\in L^1(X,\Mg, \mu); \\
+%			y & \mapsto \int_Xf^y\dmu\in L^1(Y,\Ng, \nu).
+%		\end{align*}
+%		Finally, the iterated integral formula holds.
+%\end{theo}
+%Observe that the first part of the iterated integral formula is actually an abstract integral, as it is defined on a measure.\\ The completeness is required only for the Fubini part.
+
+\begin{coro}
+	Let $\mu$, $\nu$ $\sigma$-finite and complete respectively on $\Mg$, $\Ng$. \\
+	Consider the measure space $(X\times Y,\, \Mg \otimes \Ng,\, \mu \otimes \nu)$, and let $f$ be a function $(\Mg \otimes \Ng)$-measurable and defined everywhere in $X\times Y$.\\
+	If, in addition, we have that:
+	$$
+	\int_X \left( \int_Y |f^x| \,\dnu \right) \,\dmu
+	= \int_Y \left( \int_X |f^y| \,\dmu \right) \,\dnu
+	.
+	$$
+	Then we have:
+	$$\int_{X \times Y} |f| \,\de (\mu \otimes \nu) < +\infty$$
+	and the iterated integral formula holds.
+\end{coro}
+\begin{proof}[Proof of the corollary]
+	Consider $|f|$: using Tonelli's theorem, we deduce that:
+	$$\int_{X \times Y} |f| \,\de (\mu \otimes \nu) < +\infty,$$
+	so we can apply Fubini's theorem and obtain the iterated integral formula.
+\end{proof}
+
+Thanks to Fubini's theorem if we have $\sum_{i,j \in \NN}|a_{ij}| < +\infty$, then:
+$$\sum_{i \in \NN} \left(\sum_{j \in \NN} a_{ij}\right) =\sum_{j \in \NN} \left(\sum_{i \in \NN} a_{ij}\right),$$
+and the double series converges.\\
+Set $X=Y=\NN$, $\Mg = \Ng = \Pc(\NN)$ $\mu= \nu= \mu_c$, and the measure $\mu_c \otimes \mu_c$ is defined with the convention $0 \cdot \infty = 0$.
+	
+\paragraph{Completion of a product measure} Consider two complete measure space $(X, \Mc, \mu)$ and $(Y, \Nc, \nu)$ with $\sigma$-finite measure. Then $(X\times Y, \Mg \otimes \Ng, \mu \otimes \nu)$ is not complete, but we can consider its completion:
+$$(X\times Y, (\Mg \otimes \Ng)^*, (\mu \otimes \nu)^*).$$
+Then Fubini--Tonelli's theorem can be relaxed:
+
+\begin{theo}
+	If $(X\times Y, (\Mg \otimes \Ng)^*, (\mu \otimes \nu)^*)$ is the completion of $(X\times Y, \Mg \otimes \Ng, \mu \otimes \nu)$ and $f: X \times Y \to \RR$, or $[0, \infty]$, is $(\Mg \otimes \Ng)^*$-measurable, then Fubini--Tonelli's theorem hold but the inner integrals and the iterated integral formula are defined almost everywhere.
+\end{theo}
+
+If we case of the Lebesgue measure we have:
+\begin{prop}
+	The completion of
+	$$(\RR^N \times \RR^M, \; \Lc(\RR^N) \otimes \Lc(\RR^M),\; \lambda_N \otimes \lambda_M)$$
+	is
+	$$(\RR^{N+M}, \; \Lc \left( \RR^{N+M} \right), \; \lambda_{N+M}).$$
+\end{prop}
+
+Observe that $(\RR \times \RR, \; \Lc(\RR) \otimes \Lc(\RR),\; \lambda \otimes \lambda)$ is not complete.\\
+Take $A \in \Lc(\RR)$ such that $\lambda(A)=0$ and $B \in \Lc(\RR)$ such that $\lambda(B)>0$.\\
+Consider then a Vitali set $\Vc \subset B$. The rectangle $\Rc = A \times B$ is such that $(\lambda \otimes \lambda)(\Rc)=0$ but $A \times \Vc \subset \Rc$ and $(A \times \Vc)_x = \Vc \notin \Lc(\RR)$ so that $A \times \Vc \notin \Lc(\RR) \otimes \Lc(\RR)$. 
+
+%\subsubsection{Change of variables in $\RR^N$} %this part was not treated in slides.
+%
+%The following result holds:
+%\begin{theo}
+%	Let $\Omega$, $\Omega' \subseteq \RR^N$ be homomorphic open sets, and let $\boldsymbol\Phi:\Omega' \to \Omega$ be a diffeomorphism (\textit{i.e.} an homomorphism of class $\Cc^1$).\\
+%	Consider $E\subset \Omega, E' \subset \Omega'$ $\Lc$-measurable sets such that $\boldsymbol\Phi(E')=E$. Then:
+%	$$f\in \Lc^1(E,\Lc(E), \mu) \iff ( f\circ \boldsymbol){\Phi} |J \boldsymbol{\Phi}| \in \Lc^1 (E', \Lc(E'), \lambda)$$
+%	where $\frac{\dmu}{\dlam}=|\det J\boldsymbol{\Phi}|$. If so, then $\int_E \dmu=\int_{E'} (f \circ \boldsymbol{\Phi}) \frac{\dmu}{\dlam} \,\dlam$.
+%\end{theo}
+
+%What's the meaning of homomorphic? GG

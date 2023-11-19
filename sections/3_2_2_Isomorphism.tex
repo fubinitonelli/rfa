@@ -1,0 +1,137 @@
+%!TEX root = ../main.tex
+\subsubsection{Isomorphism} The notion of isomorphism is widely used in mathematics. When we have two analogous structures then a bijection between them which preserves their operation is an isomorphism.
+Here we discuss the linear isomorphism of normed vector spaces through linear operators and its implications. In this case we have to preserve the operation and the continuity. 
+
+\paragraph{Linear isomorphism} Here we analyze the intertwining of three properties of an operator, that are linearity, boundedness and invertibility. If an operator satisfy those properties then it preserve the structure of the spaces on which it works. Then we have an isomorphism.
+\begin{defn}
+	Let $X$ and $Y$ two normed vector spaces.\\
+	If there exists $T \in \Bc(X,Y)$, such that $T^{-1} \in \Bc(Y,X)$, then $X$ and $Y$ are \emph{isomorphic} and $T$ is a \emph{linear isomorphism}.
+\end{defn}
+Later we will prove a results which states that any bijective operator in $\Bc(Y,X)$ has those properties and it is a linear isomorphism (see bounded inverse mapping \vref{bounded-inverse-theo}).
+
+\begin{theo}
+	Every real normed vector space $X$ on $\RR$ of dimension $N$ is linearly isomorphic to $\RR^N$ with any given norm.
+\end{theo}
+
+\begin{coro}
+	Let $X$ be a normed vector space on $\RR$.\\
+	Then any finite dimension subspace of $X$ is closed in $X$.
+\end{coro}
+
+The proof of these last two results can be a good exercise for the reader. You should do this!
+
+\paragraph{Image and kernel} Consider the following definition.
+\begin{defn}
+	Let $T\in \Bc(X,Y)$. We define the following sets:
+	\begin{align*}
+	\Im(T) &\coloneqq \{y\in Y: \ \exists \, x \in X, \ Tx=y\} \subset Y,
+	\text{as the \emph{image} of $T$ and} \\
+	\Ker(T) &\coloneqq \{x \in X : \ Tx=0\} \subset X,
+	\text{as the \emph{kernel} of $T$.}
+	\end{align*}
+\end{defn}
+Those are subspaces of $Y$ and $X$, respectively.\\
+\begin{prop}
+	If a linear operator is bounded, then its kernel is closed.
+\end{prop}
+Try to prove this!
+
+\begin{prop}
+	The operator $T \in \Lc(X,Y)$ is injective if and only if $\Ker(T) = \{0\}$.
+\end{prop}
+
+\paragraph{Isometries} Consider the following definition. Observe that here we have no request on boundedness.
+
+\begin{defn}
+	We say that $T\in \Lc(X,Y)$ is an \emph{isometry} if:
+	$$\norm{Tx}_Y = \norm{x}_X \quad \forall x \in X.$$
+\end{defn}
+
+Observe that if $T$ is an isometry then is also bounded:
+\begin{prop} \label{prop-isometries}
+	If $T$ is an isometry, then $\norm{T}_{\Bc(X,Y)}=1$ and $T$ is injective.
+	Moreover, if $X$ is a Banach space, $\Im(T)$ is closed.
+\end{prop}
+
+
+\begin{exam}
+	Consider $Z=L^p(\Omega, \mm, \mu)$ for $p \in (1, \infty)$.\\
+	Take $g\in X = L^q(\Omega, \mm, \mu)$ where $q$ is the conjugate of $p$ and define
+	$$L_g(f)= \int_\Omega f g \, \dmu \quad \forall f \in Z.$$
+	It's easy to check that $L_g \in Y = Z^\star$.
+	The linear map $T:X \to Y$ defined by $T(g) = L_g$ is an isometry, indeed, we have:
+	$|L_g(f)| \leq \norm{f}_Z \norm{g}_X$ and, via Hölder inequality we get:
+	$$
+		\norm{L_g}_{X^\star}
+		= \sup_{\norm{f}_Z = 1} \abs{\int_\Omega fg \, \dmu}
+		\leq\norm{g}_X
+	.
+	$$
+	Moreover, if we choose $$\tilde f = \frac{|g|^{q-2}g}{\norm{g}_X^{q-1}},$$ provided that $g \neq 0$ and $p \neq 1$, we have $\tilde f \in Z$ and\footnote{Try this!}
+	$$
+		T(g)(\tilde f) 
+		= L_g(\tilde f) 
+		= \norm{g}_X
+		\text{ implies }
+		\norm{T(g)}_Y 
+		= \norm{g}_X
+	.
+	$$
+\end{exam}
+
+\paragraph{Continuous injections} Consider the following definition:
+\begin{defn}
+	Let $(X, \norm{\cdot}_X)$ and $(Y, \norm{\cdot}_Y)$ be normed vector spaces, and $X \subset Y$.\\
+	Define:
+	$$
+		J:X\to Y, 
+		\quad Jx 
+		= x 
+		\quad \forall x \in X
+		.
+	$$
+	If 
+	$$
+		x_n \spaceto{X} x \quad
+		\text{ then } \quad
+		x_n \spaceto{Y} x
+		,
+	$$
+	then the map $J$ is called \emph{continuous injection} from $X$ to $Y$, and it is denoted by 
+	$$
+		X 
+		\hookrightarrow Y
+		.
+	$$
+\end{defn}
+
+This definition holds even when the norms are different.
+
+\begin{exam}
+	Let $\Omega \in \Lc(\RR^N)$, with $\lambda(\Omega)<+\infty$.
+		$$L^r(\Omega) \hookrightarrow L^s(\Omega) \quad \forall r \geq s : \enspace r,s \in (1,+\infty]$$
+		Indeed, from $\norm{f}_x \leq C_{\lambda(\Omega)}\norm{f}_\Omega$, we have that $f_n \lto{r} f \implies f_n \lto{s} f$.
+\end{exam}
+\begin{exam}
+	 $l^r \hookrightarrow l^s \quad \forall r \leq s \; (r,s \in [1,\infty])$
+\end{exam}
+\begin{exam}
+	$(\Cc([a,b]), \norm{\cdot}_\infty) \hookrightarrow(\Cc([a,b],\norm{\cdot}_1)$
+\end{exam}
+\begin{exam}
+	$BV([a,b])\hookrightarrow L^1([a,b])$
+\end{exam}
+\begin{exam}
+	$AC([a,b]) \hookrightarrow (\Cc([a,b]),\norm{\cdot}_\infty)$
+\end{exam}
+Prove as an exercise the last two examples, using the fundamental theorem of calculus! Remember that $\norm{f}_{AC} = \norm{f}_1 + \norm{f'}_1$.
+
+\begin{prop}
+	Let $X\hookrightarrow Y$ and $C \subset X$. \\
+	Then $C$ closed in $Y$ implies $C$ closed in $X$.
+\end{prop}
+
+\begin{proof}
+	Indeed $J$ is continuous, so $J^{-1}(C)=C$ is closed in $X$.
+\end{proof}
+To prove the previous proposition one can argue that, as $J$ is continuous, $J^{-1}(C)=C$ and so it is closed in $X$.

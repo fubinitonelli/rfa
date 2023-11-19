@@ -1,0 +1,140 @@
+%!TEX root = ../main.tex
+\subsubsection{Hahn--Banach theorem and consequences}
+In this section we see the first very relevant theorem for dual spaces: we will see some of its implications, which are many. It was proved by these two mathematician independently in late Twenties. Here is reported the analytic version, but it was also proved a geometric version.\footnote{For further discussion, see: H. Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations, 2010, page 4, section 1.2.}
+\begin{theo}[Hahn--Banach]
+	Let $(X, \norm{\cdot})$ be a real normed vector space and $Y \subset X$ a non-empty subspace. \\
+	If $L_0 : Y^\star \to \RR$ then there exists $L \in X^\star$, called the extension of $L_0$ such that:
+	$$
+		\norm{L}_{X^\star} 
+		= \norm{L}_{Y^\star}, 
+		\quad L|_Y 
+		= L_0
+		.
+	$$
+\end{theo}
+
+\begin{proof}
+	
+	\textit{First step: construct an extension by adding a dimension to the original subspace.}\\
+	Let $x \notin Y$ and set the following:
+	$$Z_1 = \{y + \lambda x : \ y \in Y, \ \lambda \in \RR \},$$
+	$$L_1 (y + \lambda x) = L_0 y + \lambda \beta,$$
+	where $Z$ is a subspace of $X$ and $\beta \in \RR$ is such that we have a control for the norm:
+	$$
+		|L_1 ( y + \lambda x)|
+		=|L_0 y + \lambda \beta|
+		\leq \norm{L_0}_{Y^\star} \norm{y + \lambda x}
+		,
+	$$
+	for all $y \in Y$ and all $\lambda \in \RR$. This gives us $\norm{L_1}_{Z^\star_1} \le \norm{L_0}_{Y^\star}$. On the other hand:
+	$$Z^\star_1 \supset Y^\star \implies \norm{L_1}_{Z^\star_1} \geq \norm{L_1}_{Y^\star} = \norm{L_0}_{Y^\star}$$
+	Hence we have the equality:
+	$$\norm{L_1}_{Z^\star_1} = \norm{L_0}_{Y^\star}, \quad L_1|_Y = L_0.$$
+	
+	\textit{Second step: extension to the complete space.}\\
+	Consider now the non-empty family of all possible extensions:
+	$$ \Sc = \{ (L,Z): Y \subseteq Z \subseteq X, L \in Z^\star, \norm{L}_{Z^\star} = \norm{L_0}_{Y^\star}, L|_Y = L_0 \}.$$
+	Notice that $(L_1, Z_1) \in \Sc$.
+	Introduce the partial\footnote{The inclusion induces a partial order: having a set included in the other or viceversa are not the only two possibilities.} order relation:
+	$$(L',Z') \leq (L'', Z'') \iff Z' \subset Z'' \text{ with } L''|_{Z'} = L'.$$
+	
+	Consider a chain (totally ordered subset) $\Cc \neq \varnothing$ of $\Sc$ and set: 
+	$$ \tilde Z = \bigcup_{Z: (L,Z) \in \Cc} Z.$$
+	
+	Observe that $\tilde Z$ is a subspace of $X$, since at every step we're adding to the union another subspace.
+	
+	If $x \in \tilde Z$ then $x$ belongs to some $Z$ such that $(L,Z) \in \Cc$ and also to all $Z'$ such that $(L', Z') \in \Cc$ and $Z \subset Z'$.\\
+	Recalling that $L'|_Z = L$ we can define a linear bounded operator $\tilde L : \tilde Z \to \RR$ by setting:
+	$$\tilde Lx = Lx,$$
+	where $L$ is associated to the $Z$ where we first encounter $x$.\\
+	It's clear that $(\tilde L, \tilde Z)$ is an upper bound for $\Cc$.\\
+	Hence $\Sc$ is an inductive set (see definition \vref{chain-defn}) and, by Zorn's Lemma (see proposition \vref{lemma-zorn}), it has a maximal element, namely $(L^\cdot, Z^\cdot)$.\\
+	Suppose that $Z^\cdot \subsetneqq X$, then we can construct (see the beginning of this proof) an extension of $(L^\cdot, Z^\cdot)$ but this contradicts its maximality.\\
+	Thus $Z^\cdot = X$ and $L^\cdot$ is the required extension.
+\end{proof}
+
+Notice that we did not even require completeness for $X$.
+
+% \begin{prop}
+% 	If $Y$ is dense in $X$ and $X$ is a Banach space, then $L_0 : Y^\star \to \RR$ has a unique extension $L: X^\star \to \RR$.
+% \end{prop}
+% 
+% In general there is not any necessary and sufficient condition to uniqueness.
+
+% \begin{proof}\todo{check accurately this proof}
+% 	Let $x \in X \setminus Y$. Then there exists a sequence $\{y_n\} \subset Y$ such that $y_n \to x$. Thus:
+% 	$$|L_0y_n - L_0y_m| \leq M\norm{y_n - y_m}$$
+% 	Therefore $\{L_0 y_n\}$ is a Cauchy sequence and there exists $\beta \in \RR$ such that $Ly_n \to \beta$.
+% 	
+% 	Defining $Lx=\beta$, we have that $|Lx|\leq M \norm{x} \enspace \forall L \in X^\star$, and $L|_y =L_0 \enspace \forall x \in X$
+% \end{proof}
+
+%\begin{exam}
+%	Consider $X = L^\infty(\RR)$, $Y = C_c(\RR) \subset X$. Let $L_0 f \coloneqq f(0) \quad \forall f \in Y$. \\
+%	$L_0$ is linear and $|L f| \leq \norm{f}_\infty \ (M=1) \enspace \forall f \in X$
+%	
+%	Applying Hahn--Banach theorem, we deduce that:
+%	$$\exists \, L \in (L^\infty)^\star : \quad L |_y =L_0 \ \wedge \ |Lf| \leq \norm{f}_\infty \quad \forall f \in X$$
+%	
+%	However, there does not exist $g \in L^1(\RR)$ such that $L f = \int_{\RR} f g \,\dlam$. \\
+%	Indeed, consider $f \in \Cc(\RR)$ such that $f(0) = 0$. If we assume that a suitable $g$ exists, then $\int_{\RR} f g \dlam = 0$. This implies $g=0$ a.e. in $\RR$,\todo{proved at recitation} but then $L \equiv 0$, which is a contradiction.
+%	
+%	$$(L^\infty(\RR))^\star \supsetneq \todo{???}Y
+%	= \left\{ L_g \in (L^\infty)^\star: \enspace L_g f = \int_\RR f g \,\dlam \quad \forall f \in L^\infty (\RR) \right\}$$
+%\end{exam}
+
+\paragraph{Relevant consequences} Using the Hahn--Banach theorem we can prove the following three corollaries.
+
+\begin{coro} \label{prop-conseq-HB-1}
+	If $x \in X$, with $x\neq 0$, then there exits $L_x \in X^\star$ such that $\norm{L_x}_{X^\star} = 1$ and $L_xx = \norm{x}$.
+\end{coro}
+
+\begin{proof}
+	Let $Y  \{\lambda x : \lambda \in \RR \}$ and $L_0(\lambda x) = \lambda \norm{x}$. \\
+	So $L_0$ is linear and $|L_0(\lambda x)| \leq \norm{\lambda x} \; (M=1)$.\\	
+	Notice that $\norm{L_0}_{(Y)^\star}= 1$ so we can simply apply Hahn-Banach theorem.
+\end{proof}
+
+\begin{coro} \label{prop-conseq-HB-2}
+	Let $x,z \in X$ are such that $Lx=Lz$ for all $L \in X^\star$.\\
+	Then $x=z$, that is the elements of $X^\star$ separate the points in $X$.
+\end{coro}
+
+\begin{proof}
+	By contradiction: let $\tilde x = x-z \neq 0$. Then, using the previous corollary, we find $L\in X^\star$ such that $L\tilde x = \norm{x} \neq 0$, and $Lx \neq Lz$, which is absurd.
+\end{proof}
+
+\begin{coro} \label{prop-conseq-HB-3}
+	Let $Y \subsetneq X$ be a closed subspace and $x\notin Y$. \\
+	Then $L \in X^\star$ such that $Lx \neq 0$ and $L|_Y =0$.
+\end{coro}
+
+\begin{proof}
+	Let
+	$$Z = \{y+\lambda x : y \in Y, \lambda \in \RR\} \subset X \text{ and } L_0(\lambda x  + y) = \lambda.$$
+	Then $L_0$ is linear, $L_0 x = 1 \neq 0$, and $\Ker(L_0)= Y$ is closed.\\
+	Thus $L_0$ is bounded on $Z$ (due to \vref{theo-charact-bdd-functionals}), and we can apply Hahn--Banach theorem getting the thesis.
+\end{proof}
+
+\paragraph{Duality in $L^p$ spaces}\label{paragraph-duality-p-infinity} In the previous chapter we discussed duality when $p\in(1,\infty)$ (\vref{theo-duality-l-p-1-infinity}) and when $p=1$ (\vref{theo-duality-l-p-1}), now with these results we can discuss the remaining case: $p=\infty$.
+
+Consider a function $g\in L^1(\Omega, \Lc(\Omega), \lambda)$, we set:
+$$\Lambda_g(f) = \int_\Omega f g \dlam \quad \forall f \in L^\infty(\Omega, \Lc(\Omega), \lambda).$$
+We have that $\Lambda_g(f) \in (L^\infty(\Omega, \Lc(\Omega), \lambda))^\star)$ with the norm:
+$$\norm{\Lambda_g}_{(L^\infty(\Omega, \Lc(\Omega), \lambda))^\star} = \norm{g}_{L^1(\Omega, \Lc(\Omega), \lambda)}.$$
+Observe that the isometry $T: g \mapsto  \Lambda_g$ is not surjective. Indeed, consider $L:(\Cc_C(\RR^N), \norm{\cdot}_\infty) \to \RR$ defined by
+$$L(f) = f(0) \quad \forall f \in \Cc_C(\RR^N).$$
+Thanks to the Hahn--Banach theorem, $L$ can be extended to an element $\Lambda \in (L^\infty(\RR^N))^\star$.
+However, there is no $g \in L^1(\RR^N)$ such that: $$\Lambda(f) = \int_{\RR^N}fg \dlam \quad \forall f \in L^\infty(\RR^N).$$
+
+Suppose that such $g \in L^1(\RR^N)$ exists. Then:
+$$\int_{\RR^N} fg \dlam = 0 \quad \forall f \in \Cc_C^\infty(\RR^N) \text{ such that } f(0) = 0.$$
+
+We have the following result which is analogous to the vanishing lemma.
+\begin{prop}
+	If $\Omega \subseteq \RR^N$ is an open set and $u \in L^1(\Omega)$ is such that: $$\int_\Omega f u \dlam = 0 \quad \forall f \in \Cc_C^\infty (\Omega)$$
+	then $u=0$ almost everywhere in $\Omega$.
+\end{prop}
+
+Reloading the previous discussion we can take $\Omega = \RR^N \setminus\{0\}$ and conclude $g=0$ almost everywhere in $\RR^N$.\\
+Therefore $L(f) = f(0) = 0$ for all $f \in \Cc_C^\infty (\RR^N)$, and we have a contradiction.

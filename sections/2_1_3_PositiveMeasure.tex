@@ -1,0 +1,305 @@
+%!TEX root = ../main.tex
+\subsubsection{Positive measures}
+Here we introduce a first yet abstract notion of measure: it will not satisfy all of ours expectations but it is the first draft from which we will build an actual measure. 
+
+\begin{defn}\label{defn-positive-measure}
+  Let $\Omega$ be a non-empty set and $\mm$ one of its $\sigma$-algebras. We say that a set function $\mu : \mm \to [0, + \infty]$ is a \emph{positive measure} if:
+  \begin{enumerate}
+    \item the function $\mu$ is \emph{countably additive}, namely for all sequence of disjoint sets $\{ E_j \}_{j \in \NN} \subset \mm$  we have:
+    $$
+    	\mu \left( \bigcup_{j \in \NN} E_j \right) 
+    	= \sum_{j \in \NN} \mu(E_j)
+    ;
+    $$
+    \item it exists at least a set $E\in \Omega$ which has a finite measure, namely:
+    $$
+    	\mu(E) 
+    	< \infty
+    .
+    $$
+  \end{enumerate}
+  If $\mu$ is a positive measure $(\Omega, \mm, \mu)$ is called \emph{measure space}.
+\end{defn}
+
+Notice that in the countable additivity equality we may have infinity.
+
+If the measure satisfy some specific property it may gain a special name, for example:
+\begin{itemize}
+	\item a measure $\mu$ is \emph{finite} if $\mu(\Omega) < \infty$;
+	\item a finite measure $\mu$ is a \emph{probability measure} if $\mu(\Omega) = 1$;
+	\item a measure $\mu$ is \emph{$\sigma$-finite} if there exists $\{E_n\}_{n \in \NN} \subset \mm$ such that $\cup_{n\in \NN} E_n =\Omega$ and $\mu(E_n) < +\infty$;
+	\item a positive measure on $\Bc(\Omega)$ is called \emph{Borel measure}.
+\end{itemize}
+
+The following are examples of positive measures:
+\begin{exam}
+	Take $(\Omega, \Pc(\Omega))$.\\
+	The \emph{counting measure} $\mu_C$ is defined as follows:
+    $$\mu_C(E) \coloneqq \begin{cases}
+      n & \text{if } m(E) = n \\
+      +\infty & \text{if } m(E) \ge \aleph_0
+    \end{cases}
+    \quad \forall E \in \mm
+    $$
+    where $m(E)$ is the magnitude of $E$.
+\end{exam}
+\begin{exam}
+	Take $(\Omega, \Pc(\Omega))$.\\
+	The \emph{Dirac measure} (or Dirac mass) $\delta_{t}$ is defined as follows:
+    $$\delta_{t}(E) \coloneqq \begin{cases}
+      1 & \text{if }\ t \in E \\
+      0 & \text{if }\ t \notin E
+    \end{cases}
+    \quad \forall E \in \mm.
+    $$
+    Observe that $\delta_{t}$ is also a probability measure.
+\end{exam}
+\begin{exam}
+	Take $\Omega = \{x_n\}_{n \in \NN}$, $\mm = \Pc(\Omega)$.\\
+	Let $\{p_n\}_{n \in \NN} \subset \RR^+$ such that $\sum_{n \in \NN} p_n = 1$; $\mu(E) = \sum_{x_n \in E} p_n$ is a probability measure.
+\end{exam}
+
+\paragraph{Main properties} The following are seven basic properties of the positive measure. The setting is the measure space $(\Omega, \mm, \mu)$.
+
+\begin{prop}
+	Any positive measure of the empty set is zero: 
+	$$
+		\mu(\varnothing) 
+		= 0
+	.
+	$$
+\end{prop}
+\begin{proof}
+	Take $E \in \mm$ such that $\mu(E) < +\infty$, and let $E_0 = E$, $E_n = \varnothing$ with $n \in \NN_0$. Then we apply countable additivity:
+	$$\mu \left( \cup_{j \in \NN} E_j \right) = \sum_{j \in \NN} \mu(E_j)
+	\implies \mu(E) = \mu(E) + \sum_{n \in \NN_0} \mu(\varnothing).$$
+	Because $\mu(E)$ has finite measure, it has to be $\mu(\varnothing) = 0$.
+\end{proof}
+
+\begin{prop}
+	Any positive measure is \emph{finitely additive}, namely:
+	$$
+		\mu\left( \bigcup_{j = 0}^n \, E_j \right) 
+		= \sum_{j = 0}^n \mu(E_j)
+	.
+	$$
+\end{prop}
+\begin{proof}
+	Take a family of disjoint sets $\{E_0, \ldots, E_n\} \subset \mm$, and set $E_m = \varnothing$ for every $m > n$. Using countable additivity, we have:
+	$$\mu \left( \bigcup_{j = 0}^n \, E_j \right)
+	= \mu \left( \bigcup_{j \in \NN} \, E_j \right)
+	= \sum_{j \in \NN} \mu(E_j)
+	= \sum_{j = 0}^n \mu(E_j)$$
+	and thus $\mu$ is also finitely additive.
+\end{proof}
+
+\begin{prop}
+	Any positive measure is \emph{monotone increasing} with respect to the partial order given by inclusion, namely:
+	$$
+		\mu(E) 
+		\le \mu(F) 
+		\qquad \text{for all } E, F \in \mm 
+		\text{ such that } E \subseteq F
+	.
+	$$
+\end{prop}
+\begin{proof}
+	As $E$ and $(F \setminus E)$ are disjoint, we have:
+	$$\mu(F) = \mu(E \cup (F \setminus E)) = \mu(E) + \mu(F \setminus E) \ge \mu(E).$$
+\end{proof}
+
+\begin{prop}
+	Let $\mu$ be a positive measure and let $E, F \in \mm$ such that $E \subset F$ and $\mu(E) < +\infty$.\\
+	Then: 
+	$$
+		\mu(F \setminus E) 
+		= \mu(F) - \mu(E)
+	.
+	$$
+\end{prop}
+\begin{proof}
+	See the previous proof.
+\end{proof}
+
+\begin{prop}
+	Let $\mu$ be a positive measure and let $\{ E_n \}_{n \in \NN} \subset \mm$ be an ascending sequence, namely $E_n \subset E_{n+1}$.\\
+	Then:
+	$$
+		\mu(E_n) \to \mu\left( \bigcup_{n \in \NN} E_n \right).
+	$$
+\end{prop}
+\begin{proof}
+	We build a sequence $\{F_n\}_{n \in \NN}$ taking $F_n = E_n \setminus E_{n-1}$: so we have $F_0 = E_0$, $F_1 = E_1 \setminus E_0$, and so on.
+	$\{F_n\}$ is a family of disjoint sets, with $$\bigcup_{j \in \NN} F_j = \bigcup_{n \in \NN} E_n = E \quad \text{and} \quad \bigcup_{j=0}^n F_j = E_n.$$ 
+	Thus we have:
+	\begin{align*}
+		\mu(E_n) &= \mu \left( \bigcup_{j = 1}^n \, F_j \right)\\
+		&= \sum_{j=0}^n \mu(F_j) \xrightarrow{n \to +\infty}
+		\sum_{j \in \NN} \mu(F_j) = \mu\left(\bigcup_{j \in \NN} F_j\right) = \mu\left(\bigcup_{n \in \NN} E_n \right).
+	\end{align*}
+\end{proof}
+
+\begin{prop} \label{prop-mu-descending}
+	Let $\mu$ be a positive measure and let $\{ E_n \}_{n \in \NN} \subset \mm$ be a descending sequence, namely $E_n \supset E_{n+1}$.\\
+	If $\mu(E_0) < +\infty$, then:
+	$$
+		\mu(E_n) \to \mu\left( \bigcap_{n \in \NN} E_n \right).
+	$$
+\end{prop}
+This does not hold when $\mu(E_0) = +\infty$. For example, take the measure space $(\NN, \Pc(\NN), \mu_C)$ and the sequence $\{E_n\}_{n \in \NN}$, with $${E_n = \{ n^* : n^* \in \NN, n^* \ge n \} = \{ n, n+1, \ldots \}}$$. Then we have $E_0 \supset E_1 \supset E_2 \supset \cdots$ and $\mu(E_n) = + \infty$ for any $n$, but $E = \cap_{n \in \NN} E_n = \varnothing$.
+
+The reader should try to do this proof before seeing the one provided.
+\begin{proof}
+	We construct a sequence of ascending sets in order to take advantage of the previous proposition.
+	$$
+		F_n = E_0 \setminus E_n \quad \forall n \in \NN \qquad \text{so that} \quad F_n \subset F_{n+1}
+	.
+	$$
+	Moreover we have:
+	$$
+		\mu(F_n) = \mu(E_0)-\mu(E_n)
+		\qquad
+		\bigcup_{n \in \NN} F_n = E_0 \setminus \bigcap_{n \in \NN} E_n
+	,
+	$$
+	Using the previous property:
+	$$
+		\mu(F_n) \to \mu\left( \bigcup_{n \in \NN} F_n \right)  
+	$$
+	Thus we have
+	\begin{align*}
+		\mu(E_0 \setminus E_n) & \to \mu\left( E_0 \setminus \bigcap_{n \in \NN} E_n \right)\\
+		\mu(E_0) - \mu(E_n) & \to \mu(E_0) - \mu\left(\bigcap_{n \in \NN} E_n \right)\\
+		\mu(E_n) & \to \mu\left(\bigcap_{n \in \NN} E_n \right)\\
+	\end{align*}
+	as $n$ goes to $\infty$.
+\end{proof}
+
+\begin{prop}
+  Any positive measure $\mu$ is \emph{countably subadditive}, namely:
+  $$
+  	\mu \left( \bigcup_{j \in \NN} E_j \right) 
+  	\le \sum_{j \in \NN} \mu(E_j)
+  $$
+  for any sequence $\{ E_j \}_{j \in \NN} \subset \mm$, where the set are not necessarily disjoint.
+\end{prop}
+\begin{proof}
+  We start by proving that $\mu(E \cup F) \le \mu(E) + \mu (F)$, with $E, F \in \mm$.\\
+  We can apply finite additivity and monotonicity on the two disjoint sets $G_1 = E$, $G_2 = F \setminus E$:
+  $$
+  	\mu(E \cup F) 
+  	= \mu(G_1 \cup G_2)
+  	\overset{\textit{FA}}{=\vphantom{\le}} \mu(G_1) + \mu(G_2)
+  	\overset{\textit{M}}{\le} \mu(E) + \mu(F)
+  .
+  $$
+
+  Now we generalize this result to finite unions. Let $G_0 = E_0$, $G_n = E_n \setminus \left\{ \cup_{j=0}^{n-1} E_j \right\}$ for all $n>0$; we can easily see that the sets $\{G_j\}$ are disjoint, and thus:
+  $$
+  	\mu \left( \bigcup_{j = 0}^n E_j \right)
+  	= \mu \left( \bigcup_{j = 0}^n G_j \right)
+  	\overset{\textit{FA}}{= \vphantom{\le}} \sum_{j = 0}^n \mu(G_j)
+  	\overset{\textit{M}}{\le} \sum_{j = 0}^n \mu(E_j)
+  .
+  $$
+  The proof is complete letting $n \to +\infty$.
+\end{proof}
+
+\begin{exer}
+	Consider a set function $\mu$ that is countably subadditive and finitely additive, and prove it is also countably additive.
+\end{exer}
+
+At last, the characterization:
+\begin{prop}
+	Let $(\Omega, \mm)$ be a measurable space.\\
+	A set function $\mu: \mm \to [0,+\infty]$ is a positive measure if and only if it is finitely additive and countably sub-additive.
+\end{prop}
+
+\begin{proof}
+	The proof of the $\implies$ part is trivial: countable additivity implies sub-additivity and by choosing a suitable collection of sets one easily gets finite additivity.
+
+	To prove the converse we argue as follows.
+	Since $\mu \not\equiv+\infty$, there exists $E\in \mm$ such that $\mu(E)<+\infty $. Thus on account of finite additivity:
+	$$
+	\mu(E)=\mu(E\cup \varnothing)=\mu(E)+\mu(\varnothing),
+	$$
+	which implies $\mu(\varnothing)=0$. Moreover it's easy to see that $E\subset F$ implies $\mu(E)\le \mu(F)$, also for finite additivity:
+	$$
+	\mu(F)=\mu((F\setminus E)\cup E)=\mu(F\setminus E)+\mu(E)\geq \mu(E).
+	$$
+	Consider now $\{E_n\}\subset \mm$ a family of countable disjoint sets. For any $N\in \NN\setminus\{0\}$ using again finite additivity and the property we just showed:
+	$$
+	\mu\left( \bigcup_{n=1}^{\infty} E_n \right) \geq \mu\left( \bigcup_{n=1}^N E_n \right) = \sum_{n=1}^{N} \mu(E_n) 
+	$$
+	then taking the limit as $N\to \infty $ we get:
+	$$
+	\mu\left( \bigcup_{n=1}^{\infty} E_n \right) \geq \sum_{n=1}^{\infty } \mu(E_n) 
+	$$
+	on the other hand we have the other inequality from the countable sub-additivity, so we have and equality (i.e. countable additivity).
+\end{proof}
+
+\paragraph{Uniqueness of a measure} The following theorem is well known in probability for proving the uniqueness of the probability\footnote{In Italian that theorem is known as \textit{teorema delle classi monotone}. See F. Bernardi, G. Cerri, A. Di Nardo, G. Gabrielli, B. Guindani, S. Polito, A. Wussler, Appunti di Probabilità - Edizione $L^p$,	pages 32-34, section 3.1.1, theorem 3.4 .}.
+\begin{theo}[Dynkin's lemma] \label{dynkin} \label{unicity-positive-measure}
+  Let $\Omega \neq \varnothing$, $\Ec \subset \Pc(\Omega)$, such that $\Ec$ is closed with respect to finite intersection and let a sequence $\{E_n\} \subset \Ec$ exists such that $\Omega = \cup_{n} E_n$.\\
+  Let $\mu$ and $\nu$ be two measures on $\mm = \sca{\Ec}$.\\
+  If $\mu(E_n) < +\infty$, $\nu(E_n) < +\infty$ for all $n$, and $\mu|_\Ec \equiv \nu|_\Ec$\footnotemark{}, then $\mu \equiv \nu$.
+\end{theo}
+\footnotetext{That is $\mu(E) = \nu(E) \ \forall E \in \Ec$}
+
+\begin{exam}
+  Take $\Omega = \RR$, $\mm = \Bc(\RR) = \sca{\{ (a, b) : a, b \in \RR \}}$. \\
+  Suppose that it exists a Borel measure $\mu$ such that $\mu((a, b)) = b - a$: in this case $\mu$ is unique.
+  This example can be easily generalized to multidimensional case $(\RR^N, \Bc(\RR^N))$.
+\end{exam}
+
+\paragraph{Complete measure} This is another property that we will see is required in a number of further results.
+\begin{defn}\label{defn-complete-measure}
+  Let $(\Omega, \mm, \mu)$ be a measure space.\\
+  We say that $\mu$ is \emph{complete} if, for every $A \in \mm$ such that $\mu(A) = 0$ and for every $E \subset A$, E is $\mm$-measurable.
+  % Una misura è completa se tutti i sottoinsiemi di insiemi a misura nulla sono misurabili
+\end{defn}
+In plain language, a measure is complete if all the subsets of a zero-measure set are measurable. 
+
+\begin{theo}[Completion of a measure space]
+  Let $(\Omega, \mm, \mu)$ be a measure space. \\
+  Let also ${\mm^* 
+  	= \{ P \subset \Omega \ 
+  	|\ \exists\ E, F \in \mm : 
+  	E \subset P \subset F 
+  	\text{ and } \mu(F \setminus E) = 0 \}}
+  $, $\mu^*$ such that $\mu^*(P) = \mu(E)$ for every $P \in \mm^*$.
+
+  Then $\mm^*$ is a $\sigma$-algebra, $\mm^* \supset \mm$, and $\mu^*$ is a complete measure. \\
+  The measure space $(\Omega, \mm^*, \mu^*)$ is called \emph{completion} of $(\Omega, \mm, \mu)$.
+\end{theo}
+
+\begin{proof} 
+	\textit{Step 1, $\mm^*$ is a $\sigma$-algebra}:\\
+	We prove the consistency of the definition of $\mm^*$ with the definition of $\sigma$-algebra. 
+	\begin{itemize}
+		\item To check that $\varnothing \in \mm^*$, notice that $\varnothing \in \mm$; so we can simply take $P = E = F = \varnothing$.
+		\item To check that $\mm^*$ is closed under complementation, take $P \in \mm^*$, we have $E \subset P \subset F$ with $\mu(F \setminus E) = 0$, so $E\comp \supset P\comp \supset F\comp$ with $\mu(E\comp \setminus F\comp) = 0$, and thus $P\comp \in \mm^*$.
+		\item To check that $\mm^*$ is closed under countable union, let $\{P_n\}_{n \in \NN} \subset \mm^*$, then $E_n \subset P_n \subset F_n$ with $\mu(F_n \setminus E_n) = 0$ and $n \in \NN$. \\
+		Taking $E = \bigcup_{n \in \NN} E_n \in \mm$, $P \coloneqq \bigcup_{n \in \NN} P_n$, and $F = \bigcup_{n \in \NN} F_n \in \mm$, we have $E \subset P \subset F$. Also:
+		$$\mu(F \setminus E)
+		= \mu \left(\bigcup_{n \in \NN} (F_n \setminus E_n) \right)
+		\le \sum_{n \in \NN} \mu(F_n \setminus E_n) = 0$$
+		and thus $\bigcup_{n \in \NN} P_n \in \mm^*$.
+	\end{itemize}
+
+	\textit{Step 2, $\mu^*$ is a well-defined set function}:\\
+	Namely, we have to show that the value of $\mu^*(P) = \mu(E)$ does not change when choosing a different $E$. \\
+	Let $P, E_1, F_1, E_2, F_2 \in \mm$ such that $E_i \subset P \subset F_i$ and $\mu(F_i \setminus E_i) = 0$. \\
+	Then we have $E_1 \setminus E_2 \subset P \setminus E_2 \subset F_2 \setminus E_2$, and thus $\mu(E_1 \setminus E_2) \le \mu(F_2 \setminus E_2) = 0$.\\
+	Because $E_1 = (E_1 \setminus E_2) \cup (E_1 \cap E_2)$, we have $\mu(E_1) = \mu(E_1 \cap E_2)$. Similarly we can prove that $\mu(E_2) = \mu(E_2 \cap E_1)$, and finally that $\mu(E_1) = \mu(E_2)$.
+
+	\textit{Step 3, $\mu^*$ is a measure}:\\
+	Finally we check that $\mu^*$ is indeed a measure. First of all, $\mu^*(\varnothing) = 0$. Then, consider $\{P_n\}_{n \in \NN} \subset \mm^*$ such that $P_i \cap P_j = \varnothing$ when $i \neq j$. For every $n \in \NN$, $E_i \subset P_i \subset F_i$, and thus $E_i \cap E_j = \varnothing$ when $i \neq j$. Therefore:
+	$$
+		\mu^* \left( \bigcup_{n \in \NN} P_n \right)
+		= \mu \left( \bigcup_{n \in \NN} E_n \right)
+		= \sum_{n \in \NN} \mu(E_n)
+		= \sum_{n \in \NN} \mu^*(P_n)
+	.
+	$$
+\end{proof}

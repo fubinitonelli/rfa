@@ -1,0 +1,382 @@
+%!TEX root = ../main.tex
+\subsubsection{\texorpdfstring{$L^p$}{Lp} spaces} \label{chapter-Lp-spaces}
+As we have seen in Banach spaces examples, we are interested in investigating whether functional spaces are Banach. Our goal in this section is to prove that the spaces related to Lebesgue-integrable functions are Banach. First recall the definition of the space of Lebesgue-integral function $\Lc^1$  (see definition \vref{space-lebesgue-integrable-functions}) and the definition of the space $L^1$ (see definition \vref{L1-space}). Here we define many other spaces related to those; a relevant fact is that all these spaces have a vector space structure.
+
+\begin{defn}
+	Let $(\Omega,\mm,\mu)$ be complete measure space and fix $p \in [1,\infty)$.
+	$$
+	\Lc^p(\Omega, \mm, \mu) 
+	\coloneqq\{
+		f:\Omega \to \RR \text{ measurable} :
+		\enspace |f|^p \in \Lc^1(\Omega, \mm,\mu)
+		\}
+	;
+	$$
+	or, equivalently:
+	$$\Lc^p(\Omega, \mm, \mu) \coloneqq\{f:\Omega \to \RR \text{ measurable} : \enspace \int_\Omega |f|^p \dmu < \infty\}.$$
+	
+	In addition, we define:
+	$$
+	L^p(\Omega,\mm,\mu)
+	\coloneqq\frac{\Lc^p(\Omega,\mm, \mu)}{\sim}
+	$$
+	where the equivalence relation is $f \sim g \iff f=g$ almost everywhere with respect to  $\mu$ in $\Omega$. 
+\end{defn}
+
+Since the inequality 
+$$
+\left(\frac{x+y}{2} \right)^p 
+\leq \frac 1 2 |x|^p + \frac 1 2 |y| ^ p 
+\quad \forall	\, x,y 
+\geq 0
+$$
+holds, then $L^p(\Omega,\mm,\mu)$ is a vector space on $\RR$ with respect to the standard operations: $\{f\}+\{g\}$, $\alpha\{f\}$.
+
+For each of those spaces we can define its associated norm.
+\begin{defn}
+	Let $p\in[1, +\infty)$. \\
+	Then 
+	$$
+	\norm{f}_p 
+	\coloneqq\left(\int_\Omega |f|^p \dmu \right)^{\frac 1 p}
+	$$ 
+	is a norm in $L^p(\Omega, \mm, \mu)$.
+\end{defn}
+The reader should check this definition satisfy all the property required to a norm, except for the triangular inequality property which coincides with the Minkowsky's theorem (see \vref{prop-mink-ineq}), which will be presented here.
+
+\begin{defn}
+	We define:
+	$$
+		\Lc^\infty(\Omega, \mm, \mu) 
+		\coloneqq\{f:\Omega \to \RR \text{ measurable} : \enspace \esssup f < +\infty\}
+	;
+	$$
+	and with the same equivalence relation of the previous definition we set:
+	$$
+		L^\infty(\Omega,\mm,\mu) 
+		\coloneqq\frac{\Lc^\infty(\Omega,\mm, \mu)}{\sim}
+	.
+	$$
+\end{defn}
+
+Notice that also $L^\infty$ is a vector space on $\RR$. 
+
+\begin{defn}
+	The following
+	$$
+		\norm{f}_\infty
+		\coloneqq \esssup_\Omega \left(|f|\right)
+	$$ 
+	is a norm in $L^\infty(\Omega, \mm, \mu)$.
+\end{defn}
+
+Then we have for $p \in [1, \infty]$ that $(L^p(\Omega, \mm, \mu), \norm{\cdot}_p)$ are normed vector spaces.
+Notice that $L^p$ with those norms are not normed vector spaces as $\norm{f}=0$ implies that $f=0$ except for a null measure set, while the definition requires that this holds anywhere in $\Omega$.
+
+From those norm it's easy to obtain a notion of metric for each $p$, called $d_p$. We have already introduced those in the chapter about topology (\vref{topology-section}). With $L^p$ spaces, those distances defines metric spaces. However, $\Lc^p$ aren't a metric spaces with respect to $d_p$ as $d_p(f,g) = 0$ implies only that $f=g$ a.e.\ in $\Omega$.
+
+
+\paragraph{Relevant inequalities} Here are presented three well-known inequalities which are extremely useful for the development of the theory. In order to make the steps more clear, here we do not used the norm notation, but we added this convention at the end of each proposition.
+
+\begin{defn}
+	Let $p\in(1, +\infty)$.\\
+	The number $q \in (1, +\infty)$ is called the \emph{conjugate} of $p$ if 
+	$$\tfrac 1 p + \tfrac 1 q = 1.$$
+	By extension, the conjugate of $p=1$ is $q=\infty$ and of $p=\infty$ is $q=1$.
+\end{defn}
+
+Sometimes the conjugate of $p$ is written as $p^\star$.
+
+\begin{prop}[Young's inequality] \label{young-ineq}
+	For all $a,b > 0$ we have:
+	$$ab\leq \frac{a^p}{p} + \frac{b^q}{q},$$
+	where $p \in (1, \infty)$ and $q$ is its conjugate index.
+\end{prop}
+\begin{proof}
+	Fix $b>0$ and take $\phi(a) \coloneqq \frac{a^p}{p} + \frac{b^q}{q} - ab$ on $(0,\infty)$.\\
+	Proof follows from the fact that $\phi$ is convex with a positive absolute minimum.
+\end{proof}
+
+\begin{prop}[Hölder's inequality]
+	Consider two function $f\in L^p(\Omega,\mm,\mu)$, $g \in L^q(\Omega,\mm\,\mu)$, with $p \in (1, \infty)$ and $q$ its conjugate index.\\	
+	Then $f,g \in L^1(\Omega,\mm,\mu)$, and:
+	$$
+	\int_\Omega |fg|\,\dmu 
+	\leq 	\left( \int_\Omega |f|^p \, \dmu \right )^{1/p}
+			\left( \int_\Omega |g|^q \, \dmu \right )^{1/q}
+	.
+	$$
+	In terms of norms, this equality can be written as:
+	$$
+	\norm{fg}_1
+	\leq \norm{f}_p \cdot \norm{g}_q
+	.
+	$$
+\end{prop}
+\begin{proof}
+		Suppose $p\in(1, +\infty)$ and $f$, $g > 0$ a.e. Consider:
+		$$F(t)=\frac{f(t)}{(\int_\Omega|f(t)|^p \,\dmu)^{1/p}}
+		\quad \text{and} \quad
+		G(t)=\frac{g(t)}{(\int_\Omega|g(t)|^q \,\dmu)^{1/q}}$$
+		
+		Using Young's inequality (\vref{young-ineq}), we get:
+		\begin{align*}
+			|FG| &\leq \tfrac 1 p |F|^p + \tfrac 1 q |G|^q \\
+		   	\int_\Omega|FG| \,\dmu &\leq \tfrac 1 p \int_\Omega|F|^p \,\dmu + \tfrac 1 q \int_\Omega|G|^q \,\dmu \\
+			&\leq \tfrac 1 p \int_\Omega \abs{\frac{f(t)}{(\int_\Omega|f(t)|^p\,\dmu)^{1/p}}}^p \,\dmu + \tfrac 1 q \int_\Omega \abs{\frac{g(t)}{(\int_\Omega|g(t)|^q\,\dmu)^{1/q}}}^q \,\dmu \\
+			&= \tfrac 1 p + \tfrac 1 q = 1 \\
+			\int_\Omega |fg| \,\dmu &\leq \left(\int_\Omega |f|^p \,\dmu\right)^{1/p}\left( \int_\Omega |g|^q\right)^{1/q}
+		\end{align*}
+		
+		When $p=1, q=\infty$, the proof is trivial:
+		$$\int_\Omega|fg|\leq \int_\Omega |f| \esssup\limits_\Omega |g| \dmu = \esssup\limits_\Omega |g| \int_\Omega |f| \dmu$$
+		
+		When $p= +\infty$:
+		$$\int_\Omega|fg| \dmu \leq \esssup\limits_\Omega |f| \int_\Omega |g| \dmu$$
+\end{proof}
+
+Another proof consist of considering: $$\norm{fg} = \int_\Omega \frac{\norm{g}_q^{\frac 1 p}}{\norm{f}_p^{\frac 1 q}} f \cdot \frac{\norm{f}_p^{\frac 1 q}}{\norm{g}_q^{\frac 1 p}} g,$$ apply the young inequality and operate the proper calculations. 
+
+\begin{prop}[Minkowsky's inequality]\label{prop-mink-ineq}
+	Let $f, g \in L^p(\Omega,\mm,\mu)$ and $p \in (1, \infty)$.\\
+	Then:
+	$$\left(\int_\Omega |f+g|^p \dmu \right)^{\frac 1 p} \leq \left(\int_\Omega |f|^p \dmu\right)^{\frac 1 p}+\left(\int_\Omega |g|^p \dmu\right)^{\frac 1 p}.$$
+	In terms of norms, this equality can be written as:
+	$$
+	\norm{f+g}_p
+	\leq \norm{f}_p + \norm{g}_p
+	$$
+\end{prop}
+
+Observe that this result shows the triangular inequality for the $p$ norms.
+
+\begin{proof}
+	The prove in case of $p=1$ is trivial, here the general case:
+	\begin{align*}
+		\int_\Omega |f+g|^p \dmu &= \int_\Omega |f+g| |f+g|^{p-1} \dmu \\
+		&\leq \int_\Omega |f||f+g|^{p-1}\dmu + \int_\Omega |g||f+g|^{p-1} \dmu \\
+		& \leq \left(\int_\Omega |f|^p \dmu\right)^{\frac 1 p}
+		\left(\int_\Omega|f+g|^p \dmu\right)^{\frac{p-1}{p}} \\
+		&\qquad + \left(\int_\Omega |g|^p \dmu\right)^{\frac 1 p}\left(\int_\Omega|f+g|^p\dmu\right)^{\frac{p-1}{p}} \\
+		& = \left[\left(\int_\Omega |f|^p \dmu\right)^{\frac 1 p}+\left(\int_\Omega |g|^p \dmu\right)^{\frac 1 p}\right] \left( \int_\Omega |f+g| ^p \dmu\right)^{\frac{p-1}{p}}.
+	\end{align*}
+	As $f+g \in L^p(\Omega, \mm, \mu)$ the thesis follows.
+\end{proof}
+
+\paragraph{Relationship between $L^p$ spaces} Now we try to understand how those spaces are related and some of their properties. The $L^p$ spaces, if $\mu$ is finite, make up an ascending chain (see definition \vref{chain-defn}) with respect to the inclusion. The greater is $p$, the less functions belongs. Indeed we have the following result:
+\begin{prop}\label{prop-relations-between-Lp}
+	If $\mu(\Omega) < +\infty$ and $1 \leq s \leq r \leq \infty$, we have:
+	$$L^r(\Omega,\mm,\mu)\subseteq L^s(\Omega,\mm,\mu)$$
+	and the norm can be controlled:
+	$$\norm{f}_s \leq \left(\mu(\Omega)\right)^{\frac 1 s - \frac 1 r}\norm{f}_r.$$
+\end{prop}
+\begin{proof}
+	Suppose $r\leq \infty$ and take $f\in L^r(\Omega, \mm, \mu)$ and apply the Hölder's inequality with $q = \frac r s$ and $p = \frac{r}{r-s}$:
+	$$
+	\norm{f}_s^s
+	=\int_\Omega |f|^s \dmu 
+	= \int_\Omega 1 \cdot |f|^s 
+	\leq 
+		\left(\int_\Omega \dmu\right)^{\left(\frac{r-s}{r} \right)}
+		\left(\int_\Omega |f|^{s \cdot \frac r s} \dmu\right)^{\frac s r }
+	= \mu(\Omega)^{\left(\frac{r-s}{r} \right)}\norm{f}_r^s
+	$$
+	where and the thesis follows.
+	In case of $r=\infty$, we could repeat the same argument, but there is a simpler way:
+	$$
+	\int_\Omega |f|^s \dmu 
+	\leq \int_\Omega \esssup_\Omega (|f|^s) \dmu 
+	\leq \int_\Omega (\esssup_\Omega |f|)^s \dmu 
+	= \mu(\Omega)\norm{f}^s_\infty
+	.
+	$$
+\end{proof}
+In such case, $L^1$ contains all functions that belong to $L^p$ for any $p$.
+
+However, if $\mu(\Omega)=\infty$, then the former inclusion does not hold in general, consider the following example.
+\begin{exam}
+	Consider $(\RR, \Lc(\RR), \lambda)$ and let:
+	$$f_\alpha(x) \coloneqq \frac{1}{x^\alpha}\Ind_{[1,\infty]} \quad \text{with } \alpha \in (0,1).$$
+	So $f_\alpha \in L^r$ for any $r > \alpha^{-1}$, but $f_\alpha \notin L^s$ for any $s \in [1, \alpha^{-1}].$
+\end{exam}
+
+\paragraph{The $l^p$ spaces}  The chain of inclusions can be descending in a very special case. Indeed, we can define 
+$$
+l^p
+\coloneqq L^p(\NN,\Pc(\NN),\mu_c)
+$$
+and the following proposition holds:
+\begin{prop}
+	For $1 \leq s \leq r \leq \infty$ we have:
+	$$ l^s \subseteq l^r, \qquad \norm{f}_r \leq \norm{f}_s.$$
+	The inclusion is strict if $s \neq r$.
+\end{prop}
+\begin{proof}
+	We recall that $l^p$ spaces are correspondent to $L^p(\NN ,\Pc(\NN) ,\mu_c)$, with the counting measure.
+
+	\textit{Step 1}: Let us prove that $l^p \varsubsetneq l^{\infty}$ for any $p\in [ 1,+\infty )$.
+
+	Consider $x\in l^p$, then\footnote{This very first point is what can't be done in $L^p$ spaces, namely if $f\in L^p$ then not necessarily $f(x)\to 0$ as $x\to \infty $. Indeed take $p=1$ and consider $f(x) =\Ind_{\{n,n+1/n^2\}}(x)$ where $n\in \NN$. You can easily check that its $L^1$ norm converges $(\sum _{n\in \NN} 1/n^2 < +\infty)$, however its limit as $x\to \infty $ is not $0$.}
+	$$
+		\sum\limits _{n\in \NN}| x_n| ^{p} < +\infty \implies  | x_n| \to 0 \ \text{as} \ n\to  +\infty 
+	$$
+	In particular, $\{x_n\}_{n\in \NN}$ is bounded, so that $\sup _{n\in \NN}| x_n| < +\infty $, hence $x\in l^{\infty}$. Moreover $l^p \neq l^{\infty}$, indeed consider the sequence $x=\{x_n\}_{n\in \NN}$ defined as $x_n =1$ for any $n\in \NN$, which belongs to $l^{\infty}$ (its norm is $1$) but not to $l^p$, since $\sum _{n\in \NN} 1^{p}$ diverges.
+
+	\textit{Step 2}: Let us prove that $l^r \subset l^s$ for any $1\leq r< s< +\infty $.
+
+	Consider $x\in l^r$, we can assume $x\neq 0$ (the sequence with all zeros). Define now
+	$$
+		y=\{y_{n}\}_{n\in \NN} ,\ \ y_{n} =\frac{x_n}{\norm{x}_r} .
+	$$
+	Observe that $y\in l^r$, indeed $l^r$ is a vector space, and
+	$$
+		\norm{y}_r = \norm{\frac{x}{\norm{x}_r}}_r =\frac{1}{\norm{x}_r}\norm{x}_r =1
+	$$
+	This implies that
+	$$
+		|y_{n}| \leq 1,\ \forall n\in \NN \ \ \implies  \ \ | y_{n}| ^{s} \leq | y_{n}| ^{r} \ \ \implies  \ \ \sum\limits _{n\in \NN}| y_{n}| ^{s} \leq \sum\limits _{n\in \NN}| y_{n}| ^{r} < +\infty ,
+	$$
+	hence $y\in l^s$ and $x=y\cdot \norm{x}_r \in l^s$ (also $l^s$ is a vector space).
+
+	Moreover, $l^r \neq l^s$, indeed consider
+	$$
+		x=\{x_n\}_{n\in \NN} ,\ \ x_n =\frac{1}{n^{1/r}}
+	$$
+	then
+	\begin{align*}
+		\sum\limits _{n\in \NN}| x_n| ^{r} &=\sum\limits _{n\in \NN}\frac{1}{n} \ =+\infty \ \ \implies  \ \ x\notin l^r\\
+		\sum\limits _{n\in \NN}| x_n| ^{s} &=\sum\limits _{n\in \NN}\frac{1}{n^{s/r}} < +\infty \ \ \implies  \ \ x\in l^s
+	\end{align*}
+\end{proof}
+
+
+Remember that a function defined on $\NN$ can be seen as a sequence.
+
+\paragraph{$L^p$ spaces are Banach spaces} The following is a very relevant result.
+
+\begin{theo}\label{Lp-norm-banach}
+	$(L^p(\Omega,\mm,\mu), \norm{\cdot}_p)$ is a Banach space for any $p \in [1, +\infty]$.
+\end{theo}
+
+\begin{proof} \textit{Case $p \in [1, +\infty)$}:\\
+	We are going to use the characterization of Banach spaces through the convergence of series (see theorem \vref{theo-banach-space-charact}): a series converges only if converges the series of absolute values.
+	
+	\textit{Step 0}: Let $\{f_n\}_{n \in \NN} \subset L^p$ be such that $\sum_{n\in\NN} \norm{f_n}_p<+\infty$.\\
+	We need to prove that $\sum_{n\in\NN} f_n$ converges in $L^p(\Omega,\mm,\mu)$, from the characterization we have the thesis.
+	
+	\textit{Step 1, convergence in $\Omega$}: Set $g_h(t) = \sum_{n=0}^{h}|f_n(t)|$; from Minkowsky's inequality we have that $g_h \in L^p$  (see proposition \vref{prop-mink-ineq}):
+	$$
+		\norm{g_h}_{L^p} 
+		\leq \sum_{n=0}^h \norm{f_n}_p
+		\leq \sum_{n\in \NN} \norm{f_n}_p 
+		< + \infty \quad
+		\forall h \in \NN
+	.
+	$$
+	
+	Since $g_h$ is an increasing sequence, by monotone convergence (see theorem \vref{monotone-convergence}) we have:
+	$$
+		\lim_{h \to +\infty} \int_\Omega |g_h(t)|^p \,\dmu
+		= \int_\Omega \lim_{h \to +\infty} |g_h(t)|^p \,\dmu
+		= \int_\Omega g (t)^p \,\dmu
+	$$ 
+	where $g(t) = \lim_{h \to +\infty}g_h(t)$ and, as its norm is bounded, $g \in L^p$ (the absolute value can be removed as $g$ is positive by definition).\\
+	Thus $|g(t)| < +\infty$ for almost any $t$ in $\Omega$.
+	
+	Therefore we have 
+	$$
+		\sum_{n\in \NN} f_n(t) 
+		< +\infty
+		\quad \text{for almost any } t
+	,
+	$$ 
+	the series converges almost everywhere in $\Omega$.
+	
+	\textit{Step 2, convergence in $L^p$}: Set now:
+	$$
+		S(t)
+		=\sum_{n\in \NN} f_n(t) 
+		\text{ and } 
+		S_h(t)
+		=\sum_{n=0}^{h} f_n(t)
+	.
+	$$
+	For almost any $t \in \Omega$, using the triangular inequality, we have:
+	$$
+		|S(t) - S_h(t)|^p 
+		= \abs{\sum_{n = h+1}^{+\infty} f_n(t)}^p
+		\leq \left( \sum_{n \in \NN} |f_n(t)| \right)^p
+		= (g(t))^p \in L^1
+	.
+	$$
+	Then, using dominated convergence (see theorem \vref{dominated-convergence}), we have 
+	$\norm{S-S_h}_p \to 0 \text{ as } h\to +\infty$, that is $\sum_{n\in\NN} f_n$ converges in $L^p$.
+	
+	By the characterization theorem, the proof of the considered case is complete.
+	
+	\textit{Case $p = \infty$, step 1}:\\
+	Let $\{f_n\}_{n\in\NN}\subset L^\infty(\Omega,\mm,\mu)$ be a Cauchy sequence, and take those two sets:
+	\begin{align*}
+		A_n 
+		&= \{
+			t\in \Omega : 
+			\ |f_n(t)|>\norm{f_n}_\infty
+		\} \\
+		B_{m,n} 
+		&= \{
+			t\in \Omega : 
+			\ |f_n(t)-f_m(t)|>\norm{f_n-f_m}_\infty
+		\}
+	\end{align*}
+	where the inequalities are given by definition of the essential supremum. Notice that we defined those two sequences of sets which catch discontinuity points in the domain, for each $f_n$.\\
+	We have
+	$$
+		\mu(A_n) 
+		= \mu(B_{m,n})
+		= 0
+		\quad \forall m,n 
+		\in \NN
+	, 
+		\quad \text{and}
+		\quad E 
+		= \left(\bigcup_{n \in \NN} A_n \right)
+		\cup \left(\bigcup_{m,n\in \NN}B_{m,n}\right)
+	$$
+	has zero measure.
+	
+	Then, for all $t \in E\comp$, we have that the sequence $\{f_n(t)\}_{n\in\NN}$ converges to some measurable $f$. Moreover $f \in L^\infty(\Omega,\mm,\mu)$ since $\{f_n(t)\}_{n\in\NN}$ is bounded in $L^\infty(\Omega,\mm,\mu)$, as it is a fundamental sequence.
+	
+	\textit{Step 2}: On the other hand, for any $\varepsilon > 0$ there is $n_0 = n_0(\varepsilon) \in \NN$ such that, for all $t \in E\comp$, we have:
+	$$
+		| f_n(t) - f_m(t) | 
+		\leq \norm{f_n - f_m}_\infty < \varepsilon 
+		\quad \forall m,n > n_0
+	.
+	$$
+	As $m \to \infty$ we have:
+	$$
+		|f_n(t)-f|  
+		\leq \varepsilon 
+		\quad \forall n > n_0, 
+		\quad \forall t \in E\comp
+	$$
+	from which we deduce that $\norm{f-f_n}_\infty \to 0$ as $n \to \infty$.\\
+	And the proof is complete.
+\end{proof}
+
+
+\paragraph{The case $p \in (0,1)$} When $L^p$ spaces have $p$ less than $1$ things are not going straight. Those spaces does not have a vector space structure and is not possible to define a norm on them; but it is feasible to prove that $d_p(f,g)= \int_\Omega|f-g|^p \,\dmu$ is a metric and the corresponding $L^p(\Omega,\mm,\mu)$ is complete with respect to $d_p$.
+
+However, the reverse Minkowsky's inequality holds:
+$$
+	\left(\int_\Omega(|f|+|g|)^p\dmu \right)^{\frac 1 p}
+	\ge \left(\int_\Omega|f|^p\dmu\right)^{\frac 1 p}+\left(\int_\Omega|g|^p\dmu\right)^{\frac 1 p}
+.
+$$
+Thus $\left(\int_\Omega |f|^p \dmu\right)^{\frac 1 p }$ is not a norm, because it does not respect the triangular inequality.
+Anyway, inclusion chain follows the same rules as for $p>1$; if $\mu(\Omega)< \infty$ then we have:
+$$
+	L^r(\Omega, \mm, \mu) 
+	\subseteq L^s(\Omega, \mm, \mu)
+$$
+for $0 < s \leq r \leq \infty$.

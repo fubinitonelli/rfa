@@ -1,0 +1,64 @@
+%!TEX root = ../main.tex
+\subsubsection{Dual of a Hilbert Space and Riesz's representation theorem} \todo{accorpare al precedente?}
+In this chapter we will introduce a theorem which play an important role in application.\\
+Start with an observation. Consider a Hilbert Space, namely $(H, \sca{\cdot, \cdot})$ and fix one of his elements $y \in H$. Define the operator $L_y$ as follows:
+$$|L_yx| = |\sca{y,x} | \quad \forall x \in H.$$
+Then this operator belongs to the dual of $H$ and we will write $L_y \in H$. As $|L_yx| = |\sca{y,x} | \leq \norm{y} \norm{x}$, we have that $\norm{L_y}_{H^\star} \leq \norm{y}$: with the fact that $H$ is reflexive this implies that $\norm{L_y}_\star = \norm{y}$.\\
+Now we have to acknowledge that there exists an isometry $J : H \to H^\star, \ y \mapsto L_y = \sca{x, y}$.
+
+This reasoning can be revert: the converse is also true and we have
+
+\begin{theo}[Riesz's representation theorem] \label{riesz-repr}
+	Let $(H, \sca{\cdot, \cdot})$ be a Hilbert space.\\
+	An operator $L \in H^\star$ if and only if there exists a unique $y \in H$ such that $Lx = \sca{y, x}$ for all $x \in H$.
+	%$J: H \to H^\star$ is surjective. In other words:
+	%$$\forall L \in H^\star \quad \exists ! \, y \in H : \enspace Lx = \sca{y, x} \quad \forall x \in H$$
+\end{theo}
+In other words, $J: H \to H^\star$ is surjective.\\
+
+Observe that the reflexivity of $H$ can be proven using this theorem.\\
+Note also that as $n \to \infty$ we have $$\sca{x_n,y} \to \sca{x,y} \ \forall y \in H \text{ if and only if }x_n \wto x.$$
+
+We will prove the ``only if'' part as the ``if'' part can be deduced from the introduction. \todo{a better organization is more suitable for a book}
+
+\begin{proof}\textit{Proof of the necessary condition $\impliedby$.}\\
+	If $L \equiv 0$, then we choose $y=0$ and the thesis is obtained.\\
+	\textit{General case.}\\	
+	Consider $L \not \equiv 0$. Then $\Ker(L)$ is a closed proper subspace of $H$, that is $\{0\} \subsetneq \Ker(L)^\perp$.\\
+	Then, applying the projection theorem and then normalizing, we can find $z \in \Ker(L)^\perp$ such that $\norm{z}=1$; then for any $x \in H$  since:
+	$$L\left( x-\frac{Lx}{Lz}z \right)
+	= Lx - \frac{Lx}{Lz} Lz =0,$$
+	we have
+	$$x- \frac{Lx}{Lz} z
+	\in \Ker(L).$$
+	
+	Thus:
+	$$\sca{x - \frac{Lx}{Lz}z, z} = 0,$$
+	which implies 
+	$$\sca{x, z} = \sca{\frac{Lx}{Lz}z,z} = \frac{Lx}{Lz} \text{ and } Lx = \sca{x, (Lz)z} \quad \forall x \in H.$$ 
+	We choose $y =  (Lz)z \in Y$.
+	
+	\textit{The element $y$ is unique.}\\
+	If $Lx = \sca{y_1, x} = \sca{y_2, x}$ for all $x \in H$, then $ \sca{y_1-y_2, x} = 0$ $\forall x \in H$.\\
+	Choosing $x = y_1 - y_2$, we have $\norm{y_1-y_2}^2=0$, and finally $y_1 = y_2$.
+\end{proof}
+
+We can say that $H$ and $H^\star$ is linearly and isometrically isomorphic, through the linear isometry and isomorphism we introduced before $J$. This isomorphism is called \emph{Riesz map}. It can be defined also as $J: H^\star \to H$ by setting
+$$JL = y \text{ where } Lx = \sca{x, JL} \ \forall x \in H.$$
+As it is a linear bijection and an isometric isomorphism we have $\norm{JL} = \norm{L}_\star$.
+
+
+\begin{prop}
+	Consider the following inner product on $H^\star$:
+	$$\sca{L_1, L_2}_\star \coloneqq \sca{J^{-1}L_1, J^{-1} L_2} \quad \forall L_1, L_2 \in H^\star.$$
+	Then $(H^\star, \sca{\cdot, \cdot}_\star)$ is a Hilbert space.
+\end{prop}
+
+The induced norm is the existing norm in $H^\star$:
+$$\sca{L_1, L_2}_\star = \norm{JL_1}^2 = \norm{L_1}^2_\star$$
+because  $\norm{L_1}_\star =
+\sqrt{\sca{L_1, L_1}_\star \vphantom{\tilde L}} =
+\sqrt{\sca{J^{-1}L_1, J^{-1} L_2} } 
+= \norm{J^{-1} L_1} = \norm{L_1}_{H^\star}$.
+
+Taking advantage of the Riesz's representation theorem you can prove that any Hilbert space is reflexive: this is  a really though exercise.

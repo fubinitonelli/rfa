@@ -1,0 +1,223 @@
+%!TEX root = ../main.tex
+\subsubsection{Topological structure of topological spaces}
+
+As we have done for metric spaces, also for topological spaces we can define a topological structure (see definition \vref{topological-structure-metric-spaces} for a comparison):
+\begin{defn}\label{topological-structure-topological-spaces}
+	Let $(X, \tau)$ be a topological space, $A \subset X$, $x_0 \in X$. We say that:
+	\begin{itemize}
+		\item $U$ is an \emph{open neighborhood} of $x_0$ if: 		
+		$$U \in \tau\text{ and }x_0 \in U;$$
+		\item $x_0$ is an \emph{interior point} of $A$ if: 			
+		$$\exists \, U \in \tau\text{ such that }x_0 \in U \subseteq A;$$
+		\item $x_0$ is an \emph{exterior point} of $A$ if it is interior to $X \setminus A$, namely:
+		$$\exists \, U \in \tau\text{ such that }x_0 \in U \subseteq (X \setminus A);$$
+		\item $x_0$ is a \emph{boundary point} of $A$ if it is neither interior nor exterior;
+		\item $x_0$ is an \emph{adherent point} of $A$ if: 	
+			$$
+				 \forall U \in \tau, 
+				 \quad  x_0 \in U 
+				 \implies A \cap U \neq \varnothing
+			;
+			$$
+		\item $x_0$ is an \emph{accumulation point} of $A$ if: 		
+			$$
+				\forall U \in \tau,
+				\quad x_0 \in U
+				\implies (A \cap U) \setminus \{ x_0 \} \neq \varnothing
+			;
+			$$
+		\item $x_0$ is an \emph{isolated point} of $A$ if: 			
+		$$x_0 \in A\text{ and }x_0\text{ is not an accumulation point}.$$
+	\end{itemize}
+\end{defn}
+
+The notions of interior set ($\mathring{A}$), exterior set ($\ext(A)$), boundary set ($\partial A$), closure set ($\bar{A}$) and derived set ($A'$) are the same as for metric spaces, given this topological structure (see definition \vref{notable-set-portions}). Also their properties still hold (see propositions \vref{topological-properties-of-sets} and \vref{topological-properties-of-families-of-sets}).
+
+
+\paragraph{Base of topological spaces} The base of a topological space describes the space in its whole. It is a family of sets for which any set of the topological space can be expressed as an intersection of those.
+
+\begin{defn}\label{base-topological-spaces}
+	Let $(X, \tau)$ be a topological space.\\
+	We say that $\Bc \subset \Pc(X)$ is a \emph{base} for $(X, \tau)$ if for every $A \in \tau$ it exists a collection of sets $\{ B_i \}_{i \in I} \subset \Bc$ such that $A = \cap_{i \in I} \ B_i$.\\
+	Indexes set $I$ can be either finite, countable or uncountable.
+	
+	Moreover, let $x \in X$. We say that a family $\Nc(x) \subset \Pc(X)$ is a \emph{local base} of $(X, \tau)$ at $x$ if for every open neighborhood $A$ of $x$ it exists a set $B \in \Nc(x)$ such that $x \in B$, $B \subset A$.
+\end{defn}
+
+
+
+Considering a metric space $(X, d)$ and the topology induced by the metric: then a local base at $x$ is the set of all open balls centered in $x$: $\Nc(x) = \{ B_r(x) : r > 0 \}$. The union of these local bases is a base: $\Bc = \{ B_r(x) : x \in X, r > 0 \}$.
+
+\paragraph{Topological subspace} Can we build a topology for the subsets of $X$?
+
+\begin{defn}
+	Let $(X, \tau)$ be a topological space, and let $S$ be a non-empty subset of $X$.\\
+	On $S$ it is naturally defined the \emph{topology induced by $\tau$} as $$\sigma \coloneqq \{B \subset S: B = S\cap A \text{ where } A \in \tau\}.$$
+\end{defn}
+
+It's easy to prove that $(S, \sigma)$ is a topological space.
+
+Moreover if $\Bc = \{B_n\}_{n \in I}$ is a base for $\tau$, then $\Bc' = \{B_n \cap S\}_{n \in I}$ is a base for $\sigma$.
+
+\begin{exam}
+	Let $(\RR^N, \tau)$ be a topological space with a topology induced by the euclidean metric $d_e$, and $S = \widebar{B_1 (0)}$. Then $B_r(x)\cap S$ is open in the induced topology of $S$ even if it is not open as a subset of $\RR^N$.
+	\begin{figure}[htpb]
+		\centering
+		% Pattern Info
+		\tikzset{
+		pattern size/.store in=\mcSize, 
+		pattern size = 5pt,
+		pattern thickness/.store in=\mcThickness, 
+		pattern thickness = 0.3pt,
+		pattern radius/.store in=\mcRadius, 
+		pattern radius = 1pt}
+		\makeatletter
+		\pgfutil@ifundefined{pgf@pattern@name@_7vnkdbvc5}{
+		\pgfdeclarepatternformonly[\mcThickness,\mcSize]{_7vnkdbvc5}
+		{\pgfqpoint{0pt}{0pt}}
+		{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+		{\pgfpoint{\mcSize}{\mcSize}}
+		{
+		\pgfsetcolor{\tikz@pattern@color}
+		\pgfsetlinewidth{\mcThickness}
+		\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+		\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+		\pgfusepath{stroke}
+		}}
+		\makeatother
+		\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+		\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+		%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+		\draw [pattern=_7vnkdbvc5,pattern size=6pt,pattern thickness=0.75pt,pattern radius=0pt, pattern color=black!10!black, fill opacity=0.1] (210,160) .. controls (210,121.34) and (241.34,90) .. (280,90) .. controls (318.66,90) and (350,121.34) .. (350,160) .. controls (350,198.66) and (318.66,230) .. (280,230) .. controls (241.34,230) and (210,198.66) .. (210,160) -- cycle ;
+		\draw (190,160) -- (378,160) ;
+		\draw [shift={(380,160)}, rotate = 180] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (12,-3) -- (0,0) -- (12,3) -- cycle    ;
+		\draw (280,250) -- (280,62) ;
+		\draw [shift={(280,60)}, rotate = 90] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (12,-3) -- (0,0) -- (12,3) -- cycle    ;
+		\draw [draw opacity=0][line width=2.25]  (312.23,97.85) .. controls (328.53,106.31) and (341.08,121) .. (346.72,138.77) -- (280,160) -- cycle ;
+		\draw [line width=2.25]  (312.23,97.85) .. controls (328.53,106.31) and (341.08,121) .. (346.72,138.77) ;
+		\draw [dashed, very thin] (310,110) .. controls (310,93.43) and (323.43,80) .. (340,80) .. controls (356.57,80) and (370,93.43) .. (370,110) .. controls (370,126.57) and (356.57,140) .. (340,140) .. controls (323.43,140) and (310,126.57) .. (310,110) -- cycle ;
+		\draw [draw opacity=0][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ,fill opacity=0.1 ] (346.83,139.22) .. controls (344.63,139.73) and (342.35,140) .. (340,140) .. controls (323.43,140) and (310,126.57) .. (310,110) .. controls (310,105.66) and (310.92,101.53) .. (312.58,97.8) -- cycle ;
+		\draw [draw opacity=0][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ,fill opacity=0.1 ] (312.94,98.22) .. controls (329.06,106.83) and (341.41,121.57) .. (346.89,139.32) -- cycle ;
+		\draw [draw opacity=0][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ,fill opacity=1 ] (338,110) .. controls (338,108.9) and (338.9,108) .. (340,108) .. controls (341.1,108) and (342,108.9) .. (342,110) .. controls (342,111.1) and (341.1,112) .. (340,112) .. controls (338.9,112) and (338,111.1) .. (338,110) -- cycle ;
+
+		\draw (282,163.4) node [anchor=north west][inner sep=0.75pt]    {$0$};
+		\draw (352,163.4) node [anchor=north west][inner sep=0.75pt]    {$1$};
+		\draw (347,102.4) node [anchor=north west][inner sep=0.75pt]    {$x$};
+		\end{tikzpicture}
+	\end{figure}
+	\FloatBarrier
+\end{exam}
+
+\paragraph{Separation axioms}
+We have already seen in \vref{rem-metric-spaces-topology} how to build a topological space from a metric space. Under which conditions can we do the opposite, namely construct a distance coherent with the given topology? 
+
+\begin{defn}\label{first-second-countable}
+	A topological space $(X, \tau)$ is called \emph{first countable} if for any $x \in X$ it exists a local countable base $\Wc(x)$, and \emph{second countable} if it exists a countable base $\Bc$ for $\tau$ so that $|\Bc| = |\NN| = \aleph_0$.
+\end{defn}
+
+Metric spaces are always first countable with respect to the topology induced by the euclidean distance, but not always second countable: for example consider a space made of an uncountable number of isolated points. We can prove that $(\RR^N, d_e)$ is second countable: see proposition \vref{RR-second-countable}.
+
+
+\begin{defn}
+	A topological space $(X, \tau)$ is said to satisfy the \emph{Tychonoff property}\footnotemark{} if:
+	$$
+		\forall x,y \in X, \ 
+		\exists \, U,V \in \tau: \ 
+		x \in U,\  y \notin U, \ y \in V,\ x \notin V
+	.
+	$$
+\end{defn}
+\footnotetext{This property is referenced with ``T1''.}
+
+\begin{defn} \label{defn-hausdorff-space}
+	A topological space $(X, \tau)$ is called \emph{Hausdorff space} if for all $x, y \in X$, with $x \neq y$,  it exists a pair $U, V$ of open sets such that $x \in U$, $y \in V$, $U \cap V = \varnothing$.
+\end{defn}
+
+\begin{prop}
+	Any metric space is a Hausdorff space.
+\end{prop}
+\begin{proof}
+	Let $x \neq y$, $\rho \coloneqq d(x, y)$. Then $x \in U \coloneqq B_{\rho/4}(x)$, $y \in V \coloneqq B_{\rho/4}(y)$. By definition of ball, $U \cap V = \varnothing$, so the pair $U, V$ satisfies the requirements of the definition of Hausdorff spaces.
+\end{proof}
+An example of a topological space which is not Hausdorff is $(X, \tau_0)$ with $\tau_0 = \{\varnothing, X\}$ (see proof of proposition \vref{topological-larger-metric}). Another example is the following:
+\begin{exam}
+	Consider $X \neq \varnothing$ with infinitely many elements, and consider the following topology: $\tau=\{A \subset X : A=\varnothing \vee A\comp \text{ is finite}\}$; $(X, \tau)$ is a topological space.
+	
+	Now we show that it is not an Hausdorff space.
+	
+	Consider $x,y \in X$, $x\neq y$. Suppose by contradiction that $(X,\tau)$ is an Hausdorff space, then exists $U, V \in \tau$ such that $x\in U$, $y\in V$ and $U \cap V = \varnothing$.
+	
+	Since $U \in \tau$ then $U\comp$ is finite. For the same reason, $V\comp$ is finite. So we have:
+	$$ U\comp \cup V\comp = (X\setminus U) \cup (X \setminus V) = X \setminus (U \cap V) = X \setminus \varnothing = X$$
+	But, as $X$ is infinite it can't be a union of two finite set, then we have a contradiction.
+\end{exam}
+
+\begin{defn}
+	$(X, \tau)$ is called \emph{normal space} if, for any pair $A, B$ of closed disjoint sets, it exists a pair $U, V$ of open sets such that $A \subset U$, $B \subset V$, $U \cap V = \varnothing$.
+\end{defn}
+
+\begin{theo}[Urysohn's metrization theorem]
+	Let $(X, \tau)$ be a second countable topological space. \\
+	It is metrizable if and only if it is a Hausdorff, normal space.
+\end{theo}
+This result is said to be \textit{the first non-trivial theorem in topology}.
+
+\paragraph{A comparison between a metric space and the inducted topological space} In general we have the following result:
+\begin{prop} \label{topological-larger-metric}
+	Consider a metric space $(X,d)$ and the topological space $(X,\tau)$ which topology is inducted by the distance $d$, then:
+	$$\text{Metric space }(X,d) \subsetneq \text{ Topological space }(X,\tau).$$
+\end{prop}
+For example consider a topological space whose topology is not inducted by any distance, like $(X, \tau_0)$ where $X \neq \varnothing$ and $\tau={\varnothing, X}$ which is the trivial topology. If $X$ contains at least two elements, then $\tau_0$ is not induced by any distance.
+\begin{proof}
+	Suppose by contradiction that exists a distance $d$ on $X$ such that: $\tau_d =\{\text{open sets of }X\text{ according to the metric }d\}=\tau_0=\{\varnothing, X\}$.
+	
+	Let $x$,$y \in X$ such that $x \neq y$, then $d(x,y)=k>0$.
+	
+	We can consider $B_d(x, \frac k 2)$ and $B_d(y, \frac k 2)$.
+	
+	Both of these balls are non-empty and $B_d(x, \frac k 2) \cap B_d(y, \frac k 2) = \varnothing$.
+	
+	Since they are open and non-empty, the only non-empty open set in $\tau_0$ is $X$, so $B_d(x, \frac k 2) = B_d(y, \frac k 2) = X$, so their intersection can't be empty.
+\end{proof}
+
+\paragraph{Sequences in topological spaces} As we defined a limit for sequences in metric spaces using their topological structure we can define a notion of limit using the topological structure of the topological spaces: 
+\begin{defn} \label{limit-in-topological-spaces}
+	Let $(X, \tau)$ be a topological space, $\{x_n\}$ be a sequence in $X$, $x^\star \in X$, $U \subset X$ a neighborhood of $x$.\\
+	Then the \emph{limit} of the sequence $\{x_n\}$ is $x^\star$, namely $x_n\to x^\star$, as $n\to \infty$ if:
+	$${\forall U \in \tau : x^* \in U} \quad {\exists \, \bar{n} = \bar{n}(U)} : \ \forall n > \bar{n} \implies x_n \in U$$
+	When such limit does exist, then the sequence is said to be \emph{convergent}.
+\end{defn}
+In general, limits defined this way are not unique.
+\begin{exam}
+	Let $X \coloneqq \{ 1, 2, 3, 4 \}$, $\tau \coloneqq \{\varnothing, X, \{1\}, \{2, 3\}, \{1, 2, 3\} \}$, $x_n = 3 \ \forall n$. \\
+	The sequence $\{x_n\}$, by definition, converges to $3$ but also to $2$: in fact, every open set containing $2$ also contains $3$.
+\end{exam}
+
+\begin{prop}
+	If $(X, \tau)$ is a Hausdorff space, then the limit of any sequence is unique.
+\end{prop}
+In general the converse is not true, consider for instance the non-Hausdorff topological space $(X, \tau_0)$ with $\tau_0 = \{\varnothing, X\}$: we can show that if $\{x_n\}$ is a sequence in $X$ then it converges to any element $x^\star \in X$, indeed the only neighborhood of a point $x^\star$ is the whole $X$.
+
+\paragraph{Topological results on $\RR$} The base for the $\RR$ canonical topology (the topology induced by the euclidean distance $d_E$) can be generated by
+$$
+	\{(x_0-\delta, \, x_0 + \delta)_{x_0, \delta \in \RR \, \delta > 0}\}
+.
+$$
+A base for the canonical topology of $\RR^\star$ is generate by
+$$
+	\{\{[-\infty,s)_{s \in \RR}\}, \{(x_0-\delta, \, x_0 + \delta)_{x_0, \delta \in \RR \, \delta > 0}\}, \{(r, + \infty]_{r \in \RR}\}\}
+.
+$$
+
+\begin{prop}\label{RR-second-countable}
+	The topological spaces $(\RR, \tau_E)$ and $(\RR^N, \tau_E)$, where $\tau_E$ is the topology induced by the euclidean distance $d_E$, are second countable.
+\end{prop}
+This because we can choose as base for the induced topology the family of open balls with rational radii\footnote{Radii is the plural of radius, as it is a latin word.} and center with rational coordinates. See definition \vref{first-second-countable} for second countable.
+
+
+
+% pag 19 delle note vecchie: The R standard topology can be generated by:
+% τ R = {(x 0 − δ, x 0 + δ)}
+% x 0 ∈ R δ > 0

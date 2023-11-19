@@ -1,0 +1,65 @@
+%!TEX root = ../main.tex
+Till now we worked only with positive valued functions, but they are not suitable for many application. The work of Henry Lebesgue (1875 - 1941) was not limited to those function, but it covered the case of a generic real valued function. Our aim now is to define the well-know integral named after him.
+
+\subsubsection{Integrating real valued functions}
+
+The first step is to establish what functions are integrable. Indeed, we already have a notion of Lebesgue integral, even it is limited to real valued functions we can use it to distinguish between functions. Any absolute value of a real valued function is a positive valued function; so the notion we already have can be used to define a space of integrable functions.
+
+\begin{defn}\label{space-lebesgue-integrable-functions}
+	Let $(\Omega, \mm, \mu)$ be a measurable space.\\
+	We define the space of \emph{Lebesgue-integrable functions} as follows:
+	$$
+	\Lc_1(\Omega, \mm, \mu)
+	\coloneqq \{f:\Omega \to \RR:\; f \text{ measurable and such that } \int_\Omega |f| \,\de\mu 
+	< +\infty\}
+	.
+	$$
+\end{defn}
+
+Notice that need the hypothesis of measurability for this definition to have sense; take for instance the space $(\left[0,1\right],\Lc(\left[0,1\right]),\lambda)$, and consider the Vitali set $\Vc \subset [0, 1]$. Define $f$ as follows:
+$$
+	f(t) 
+	\coloneqq \begin{cases}
+		1 & \text{if }t \in \Vc \\
+		-1 & \text{if }t \in \Vc\comp
+	\end{cases}
+.
+$$
+While $f$ is not measurable, $|f|$ is.
+
+Here we can define an integral for real valued functions.
+
+\begin{defn}
+	Let $f \in \Lc^1 (\Omega, \mm, \mu)$. We define the \emph{Lebesgue abstract integral} of $f$ as follows:
+	$$\int_\Omega f \de\mu \coloneqq \int_\Omega f^+ \de\mu - \int_\Omega f^- \de\mu$$
+	where $f^+ = \max\{f,0\}$ and $f^- = -\min\{f,0\}$.\\
+	In this case $f$ is called \emph{Lebesgue integrable function}.
+\end{defn}
+
+Notice that $0\leq f^+ \leq |f|$ and $0\leq f_- \leq |f|$ are both finite, thus also $\int_\Omega f \de\mu$ is finite, indeed we have just defined the Lebesgue \textit{abstract} integral.
+
+For a complete discussion we present the following proposition. The notion of vector spaces will be discussed later (see definition \vref{defn-vector-spaces}).
+\begin{prop}\label{prop-triang-ineq-integral}
+	The set $\Lc^1(\Omega,\mm,\mu)$ is a vector space on $\RR$ with respect to the canonical operations $f+g$, $c \cdot f$ ($c \in \RR$).
+	Indeed, the following inequalities holds:
+	$$
+		\left| \int_\Omega f \,\de\mu \right| 
+		\leq \int_{\Omega} |f| \,\de\mu,
+		\qquad \int_\Omega |f+g| \, \de \mu 
+		\leq \int_\Omega|f| \, \de \mu + \int_\Omega |g| \, \de \mu
+	.
+	$$
+\end{prop}
+This last property, which is, in some sense, a generalization of triangular inequality, allow us to build an algebraic structure on this set.
+
+Integrating on $\RR$'s intervals, the sign of the integral depends on its orientation. Here we define the actual standard.
+\begin{defn}
+	Consider $(\RR, \Lc(\RR), \lambda)$, for any interval $(a,b) \subset \RR$ we set this rule to change the orientation of the interval:
+	$$\int_{a}^{b} f d \lambda \coloneqq \begin{cases}
+	\int_{a}^{b} f d\lambda & \text{if } a < b \\
+	0 & \text{if } a=b \\
+	- \int_{b}^{a} f d\lambda & \text{if } a > b.
+	\end{cases}$$
+\end{defn}
+
+Finally, a remark about series and the counting measure. Consider the measure space $(\NN, \Pc(\NN), \mu_c)$: the series $\{a_n\}_{n\in \NN}$ is Lebesgue integrable if and only if $\sum_{n \in \NN}|a_n| < +\infty$.

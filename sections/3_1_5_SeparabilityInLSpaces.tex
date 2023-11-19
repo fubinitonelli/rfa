@@ -1,0 +1,269 @@
+%!TEX root = ../main.tex
+\subsubsection{Convergence and separability in \texorpdfstring{$L^p$}{Lp} spaces}
+
+
+\paragraph{Convergence} Here some results on sequence of function convergence for those spaces.
+
+\begin{prop}
+	Let $p \in [1, +\infty)$, $\{f_n\} \subset L^p(\Omega,\mm,\mu)$ be a $L^p$-converging sequence.\\
+	Then $\{f_n\}$ contains a subsequence which converges a.e. in $\Omega$.
+\end{prop}
+
+\begin{proof} The case $p = \infty$ is obvious while the case $p=1$ is already proved (see \vref{convergence-mean-implie-subsequence-ae}). Let's argue for the other cases.
+	As $\{f_n\}_{n \in \NN} \to f$, we can apply the Chebyshev's inequality. Consider $\delta > 0$, we have:
+	\begin{align*}
+	\int_\Omega |f_n - f|^p \dmu
+	&\geq \int _{\{t \in \Omega:\ |f_n - f | > \delta\}} |f_n(t) - f(t)|^p \dmu \\
+	&\geq \delta^p \mu(\{t \in \Omega: \ |f_n - f| > \delta \}).
+	\end{align*}
+	This shows that $\{f_n\}_{n\in \NN}$ converges in measures, and the thesis follows (see theorem \vref{convergence-measure-implie-subsequence-ae}).
+	%	Observe that $\{f_n\}_{n\in \NN}$ is a Cauchy sequence in $L^p$. Then we can construct a subsequence $\{f_{n_h}\}$ such that:
+	%	$$\norm{f_{n_{h+1}}-f_{n_h}}_p\leq \frac{1}{h^2}$$
+	%	Let $F_h \coloneqq f_{n_{h+1}}-f_{n_h}$. Therefore we have $\sum_{n \in \NN} \norm{F_h}_p < +\infty$.
+	%	Then, arguing as in the proof of theorem \vref{theo-banach-space-charact}\todo{Check ref}, we deduce that $\sum_{h\in \NN_0} F_h$ converges a.e. to some $\tilde f \in L^p$. Then we have:
+	%	\begin{align*}
+	%	f_{n_{h+1}} &=f_{n_1}+\sum_{k=1}^h\left(f_{n_{h_{k+1}}}-f_{n_{h_k}} \right) \\
+	%	f_{n_{h+1}} &\to f_{n_1}+\tilde f \in L^p \quad \text{a.e. in }\Omega
+	%	\end{align*}
+\end{proof}
+
+Moreover we have the following result:
+
+\begin{prop}
+	Let $\{f_n\}\subset L^p(\Omega,\mm,\mu)$ with $p \in [1,\infty)$. \\
+	If $f_n \to f$ in $L^p$ and $f_n \to g$ a.e. in $\Omega$, then $f=g \ a.e.$ in $\Omega$.
+\end{prop}
+
+\begin{proof}
+	\begin{align*}
+	\int_\Omega |f-g|^p \, \dmu
+	&= \int_\Omega \lim\limits_{n\to+\infty}|f-f_n|^p \,\dmu\\ 
+	&\leq \liminf_{n \to +\infty}\int_\Omega |f-f_n|^p \,\dmu & \text{(Fatou's lemma)}\\
+	& = 0
+	\end{align*}
+	Thus $f=g$ a.e. in $\Omega$.
+\end{proof}
+
+
+\paragraph{A compactness criterion in $L^p$ spaces} Here we present a historically relevant result. First we introduce the notion of the shift operator.
+
+\begin{defn}
+	Given a function $f : \RR \to E$ and a shift value $h \in \RR$, the \emph{shift operator} is defined as follows:
+	$$
+	\tau_h f(x) 
+	\coloneqq f(x+h)
+	.
+	$$
+\end{defn}
+
+The shift operator essentially evaluate the function after changing its argument, increasing or decreasing it.
+
+\begin{theo}[Kolmogorov--Riesz--Frechét]\label{theo-KRF}
+	Let $p\in [1, +\infty)$, and a bounded set $\Fc \subset L^p(\RR^N, \Lc(\RR^N),\lambda)$.\\
+	If\footnote{This hypothesis can be equivalently formulated as follows: $\norm{\tau_h f - f} \to 0 \text{ as }\norm{h}_2 \to 0 \text{ uniformly in }\Fc$.} $\forall \eps > 0 \enspace \exists\, \delta = \delta (\eps) > 0$ such that:
+	$$
+	\norm{\tau_hf-f}_p < \eps \quad
+	\forall f \in \Fc \quad
+	\forall h \in \RR^N :\ \norm{h}_2 < \delta,
+	$$
+	for all $h\in\RR^N$ such that $|h| < \delta$ and any $f \in \Fc$, then $\Fc|_\Omega$ is precompact\footnote{A precompact set, also known as relatively compact subspace, is a subset whose closure is compact.} in $L^p(\RR^N, \Lc(\RR^N),\lambda)$ for any $\Omega \subset \RR^N$ of finite measure.
+	
+	Viceversa, if $E|_\Omega$ is precompact the above condition holds along with the \textit{tail condition}: for any $\eps > 0$ there exists $\Omega \subset \RR^N$ bounded and measurable such that $L^p$-norm of $f$ on $\Omega\comp$ is less then $\eps$ for all $f \in E$.
+	%	$\forall \Omega \in \Lc(\Omega)$ such that $\lambda(\Omega)<+\infty$ we have that:\todo{Triple check}
+	%	$$\overline{\Fc |_\Omega}^{\,L^p} = \overline{\left\{f|_\Omega : f \in \Fc \right\}}^{\,L^p} \text{ is compact in } L^p(\Omega, \Lc(\Omega), \lambda)$$
+\end{theo}
+%
+%
+%\begin{coro}
+%	Let the hypotheses of the previous theorem hold.
+%	If the following \emph{tail condition} also holds:
+%	\begin{equation}
+%	\forall \eps > 0 \quad \exists \, \Omega \in \Lc (\RR^N) \text{ bounded}:
+%	\quad \norm{f}_{L^p(\RR^N \setminus \Omega)} <\eps \quad \forall f \in \Fc
+%	\label{theo-rfk-tail-cond} \tag{$\star\star$}
+%	\end{equation}
+%	then $\widebar{\Fc}^{L^p}$ is compact in $L^p(\RR^N,\Lc(\RR^N),\lambda)$.
+%	Moreover \eqref{theo-rfk-cond-1} and \eqref{theo-rfk-tail-cond} are also necessary.
+%\end{coro}
+
+
+
+\paragraph{Separability of $L^p(\RR)$} Here we discuss of $L^p$ spaces defined on $\RR$. Our goal now is to prove the following theorem (recall definition \vref{defn-separable-space}); to do that we need some other result.
+\begin{theo}\label{Lp-separable}
+	$L^p(\RR^N, \Lc(\RR^N), \lambda)$ is separable for all $p \in [1, +\infty)$.
+\end{theo}
+Observe that $p = \infty$ is excluded, we will face this case later. The proof will handle only the case $N = 1$. 
+
+The pathway to prove this result will be the following.
+\begin{enumerate}
+\item[0.] $\Pc_{\QQ}([a,b])$ is dense in $\Cc([a,b])$ with the infinity norm (Stone--Weierstrass theorem).
+\item Approximation of finite supported functions with $g\in \Cc_C(\RR)$ (Lusin theorem).
+\item $\Sc(\RR)$ dense in $L^p(\RR)$ but not countable.
+\item $\Cc_C(\RR)$ dense in $L^p(\RR)$ but not countable.
+\item $\{P_m\Ind_{[-n,n]}\}$, the set of algebraic polynomials with restricted support, dense in $L^p(\RR)$ and countable.
+\end{enumerate}
+
+Meanwhile, notice the following, which is a weaker result highlighting the importance of topology:
+\begin{prop}
+	Let $\Omega \in \Lc(\RR)$ and take $E \coloneqq \{v \in L^p(\RR): v=0 \enspace \text{a.e. in }\Omega\comp\}$. \\
+	Then $E$ is separable for any $p \in [1,\infty)$ with respect to the inherited topology, that is the topology on $E$ created by intersecting the open sets of $L^p(\RR)$ with $E$ itself.
+\end{prop}
+% (Indeed an open disc in $ \RR^3$ è chiuso perchè le sfere non entrano nel disco. se invece prendo l'intersezione delle sfere con il disco allora posso dire che è aperto)
+% So it is important to specify the topology.
+
+
+\paragraph{Continuous function with compact support} Let's build the tools that we will use for the proof.
+
+\begin{defn}
+	Let $g = \Omega \subseteq \RR \to \RR$ be continuous.\\
+	The following set is called the \emph{support} of $g$:
+	$$\supp(g) \coloneqq \overline{\{x \in \Omega: g(x) \neq 0\}}.$$
+\end{defn}
+In other words, the support is the subset of the domain of a function in which it has a value different from zero.
+
+\begin{exam}
+	Let: $$g(x) \coloneqq \begin{cases}
+	e^{-\frac{1}{1-x^2}} & \text{if }|x| < 1 \\
+	0 & \text{if }|x| \geq 1
+	\end{cases}$$
+	In this case $\supp(g) = [-1,1]$.
+\end{exam}
+
+Support is hence a set, and we know that there exist many kind of sets. In particular we are interested in the case of such set is compact.
+
+\begin{defn}
+	Let $\Omega \subseteq \RR$.
+	$$
+		\Cc_C(\Omega) 
+		\coloneqq \{ f: \Omega \to \RR \text{ continuous with compact support} \}
+	.
+	$$
+\end{defn}
+
+We have define the set of continuous functions with compact support; the following result states that any Lebesgue measurable function can be approximated with one of those functions (similar to Stone--Weierstrass \vref{theo-stone-weierstrass}).
+
+\begin{theo}[Lusin]\label{theo-lusin}
+	Let $f:\RR\to \RR $ be Lebesgue measurable and let $\Omega \in \Lc(\RR)$ such that $\lambda (\Omega) < +\infty$. \\
+	If $f(x)=0$ for any $\forall x \in \Omega \comp$, then for all $\eps > 0$ exists a function $g \in \Cc_C (\RR)$ such that:
+		$$
+		\lambda(
+			\{
+				x \in \RR : f(x) \neq g(x))
+			\}
+		) 
+		<\eps
+		,
+		$$
+	and one can always choose $g$ such that:
+		$$
+		\sup_{\RR}(g) 
+		\leq \sup_{\RR}(f)
+		.
+		\footnotemark{}
+		$$
+\end{theo}
+\footnotetext{For further discussion and a proof, see: W. Rudin, Real and Complex Analysis, 1987, page 55, theorem 2.24.}
+
+
+\paragraph{Density of simple functions with finite measure support} Here we define another set of functions.
+
+\begin{defn}
+	Let $\Sc(\RR)$ be the \emph{set of simple functions with finite measure support}, namely:
+	$$
+	\Sc 
+	\coloneqq 
+	\left\{
+		s:\RR\to\RR\text{ simple function such that }
+		\lambda(\{ t\in\RR, s(t) \neq 0 \}) 
+		< +\infty
+	\right\}
+	.
+	$$
+\end{defn}
+
+Observe that, if $s \in \Sc(\RR)$ then it necessarily takes non-zero values on finite measure sets only. Therefore $s \in L^p(\RR)$ for all $p \in [1, \infty)$ since its range is finite.
+
+\begin{theo}
+	The set of simple functions with finite measure support	$\Sc(\RR)$ is dense in $L^p(\RR)$ for all $p \in [1,\infty)$.
+\end{theo}
+
+\begin{proof}
+	Observe first that $\Sc(\RR) \subset L^p(\RR)$.\\
+	Let $f\in L^p$ non-negative. We already know that there exists a sequence of simple functions $\{s_n\}_{n\in\NN}$ such that $0\leq s_n \leq f$ and $s_n \uparrow f$ a.e. in $\RR$ as $n \to +\infty$.\\	
+	Since $f\in L^p$, $s_n \in L^p$. For $s_n$ to be both piece-wise constant and integrable, it must be zero as $t \to \pm\infty$, and thus $s_n \in \Sc$. \\
+	Observing that $0\leq|f - s_n|^p \leq |f|^p$ a.e. in $\RR$, via dominated convergence we have that $\norm{f - s_n}_p \to 0$ as $n \to +\infty$.
+\end{proof}
+
+\paragraph{Density of $\Cc_C(\RR)$} Also the set of continuous function has some interesting density property.
+\begin{theo}
+	The set of continuous function with compact support $\Cc_C (\RR)$ is dense in $L^p(\RR)$ for all $p \in [1,\infty)$.
+\end{theo}
+
+Moreover consider $L^p(\RR)$ as a metric space with distance $d_p(f,g) = \norm{f-g}_p$ is the completion of the metric space $(\Cc_C(\RR), d_p)$ for each $p \in [1, \infty)$. If $p=1$, this fact essentially says that the Lebesgue integral is the ``natural'' generalization of the Riemann integral.
+
+\begin{proof}
+	Fix $\eps>0$ and consider $f \in L^p(\RR)$.
+	Thanks to the density of $\Sc(\RR)$ we can find a simple function $s\in \Sc(\RR)$ such that:
+	$$ \norm{f-s}_p < \eps.$$
+	Then, using Lusin's theorem (\vref{theo-lusin}), we can find  a function $g\in \Cc_C(\RR)$ such that  $\norm{g}_\infty \leq \norm{s}_\infty$ and
+	$$\lambda\{(x \in \RR: \ g(x) \neq s(x))\} < \frac{\eps^p}{2}.$$
+	
+	Therefore,
+	\begin{align*}
+	\norm{g-s}_p^p & =\int_{\RR}| g-s|^p \de\lambda =\int_{E}| g-s|^p \de\lambda \\
+				   & \leq \int_{E}(|g|+|s|)^p \de\lambda \leq \lambda (E) \cdot 2\norm{s}_{\infty}^p < \frac{\eps^p}{2} 2\norm{s}_{\infty}^p =( \eps \norm{s}_{\infty})^p
+	\end{align*}
+	so we conclude:
+	$$\norm{f-g}_p \leq \norm{f-s}_p + \norm{g-s}_p < \eps + \eps \norm{s}_\infty$$.
+\end{proof}
+
+\paragraph{Proof of the separability of $L^p(\RR)$} Now we have all tools to proceed with this proof.
+\begin{proof}[Proof of \vref{Lp-separable}, case $N=1$ and $p \in [1,\infty)$.]
+	Let $f\in L^p(\RR)$ and fix $\eps >0$. Because $\Cc_C(\RR)$ is dense in $L^p(\RR)$, there exists $g \in \Cc_C(\RR)$ such that $$\norm{g-f}_p < \frac{\eps}{2}.$$
+	
+	Since $\supp(g)$ is compact, and thus bounded, there exists $n \in \NN_0$ such that $\supp(g) \subseteq [-n,n]$. Moreover, there exists a polynomial $P_m$ with rational coefficients such that:
+	$$
+		\norm{g-P_m}_\infty 
+		< \frac{\eps}{2(2n)^{\frac 1 p}}
+	,
+	$$
+	this because the set of polynomials, which is countable, contains any approximation of a continuous function by Stone--Weierstrass (see theorem \vref{theo-stone-weierstrass}).
+	
+	Thus we have (recall proposition on relationship between $L^p$ spaces \vref{prop-relations-between-Lp}):
+	\begin{align*}
+	\norm{f - P_m\Ind_{[-n,n]}}_p &\leq \norm{f-g}_p+\norm{g - P_m\Ind_{[-n,n]}}_p\\
+	&\le \frac \eps 2 + \left( \int_{-n}^{n}| g - P_m\Ind_{[-n,n]}|^p \,\dlam \right)^\frac{1}{p}\\
+	&< \frac \eps 2 + \norm{[g- P_m\Ind_{[-n,n]}]}_\infty(2n)^{\frac 1 p}\\
+	&< \eps
+	\end{align*}
+	The set $\{P_m\Ind_{[-n,n]}\}$ is countable and dense in $L^p$, and then the thesis is proven.
+\end{proof}
+
+\paragraph{Non-separability of $L^\infty(\RR)$} We concentrated to specific cases avoiding a too much large generality to avoid excessive complexity. This is the remaining case: the prove here is for the mono-dimensional case but it can easily extended.
+
+\begin{theo}
+	The space $L^\infty(\RR^N, \Lc(\RR^N), \lambda)$ is \textit{not} separable for any $N$.
+\end{theo}
+
+\begin{proof}[Proof of case $N=1$.]
+	Consider the following uncountable set:
+	$$\{\Ind_{[-\alpha,\alpha]}\}_{\alpha > 0} \subset L^\infty(\RR).$$
+	
+	Observe that $\norm{\Ind_{[-\alpha,\alpha]} - \Ind_{[-\beta,\beta]}} = 1$ if $\alpha \neq \beta$.
+	
+	Thus the following family of balls
+	$$B_{\alpha} = \left\{ f\in L^\infty(\RR) : \norm{f-\Ind_{[-\alpha,\alpha]}}_\infty < \tfrac 1 2 \right\}$$
+	are mutually disjoint and uncountable.
+	
+	Suppose now $L^\infty(\RR)$ is separable, that is there exists $E \subset L^\infty(\RR)$ which is countable and dense. Then any ball $\Bc_{\alpha}$ must contain at least one element of $E$. The balls are disjoint, and thus every ball must contain a different element of $E$. However $E$ is countable and we have uncountably many balls, so we have a contradiction: we cannot find any countable dense set in $L^\infty(\RR)$.
+\end{proof}
+
+\paragraph{Some final results} The following remarks complete our discussion.
+
+In general, $L^\infty(\Omega)$ is not separable when $\mu(\Omega) = \infty$.
+
+The space $l^p$ is separable if $p\in [1,\infty)$: $l^\infty$ is not separable.
+
+The metric space $(\Cc_C(\RR),d_p)$ where $p\in [1,+\infty)$ and $d_p(f,g) = \norm{f-g}_p$ is not complete, its completion is $(L^p(\RR), d_p)$; the metric space $(\Cc_C(\RR), d_\infty)$ is not complete as well, but its completion is $(\Cc_0(\RR), d_\infty)$ where $$\Cc_0(\RR) \coloneqq \{f \in \Cc(\RR): \ \lim\limits_{|x| \to \infty} f(x) = 0\}.$$ 
+
+The Banach space $(\RR^N, \norm{\cdot}_p)$ can be identified with an $L^p$ space; indeed, set $E=\{1, \ldots, N\}$ and consider $L^p(E, \Pc(E), \mu_c)$ with $p \in [1,\infty]$.

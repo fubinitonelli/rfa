@@ -1,0 +1,68 @@
+\newtheoremstyle{break}% <name>
+{3pt}% <Space above>
+{3pt}% <Space below>
+{\addtolength{\leftskip}{1.3em}}% <Body font>
+{-1.13em}% <Indent amount>
+{\bfseries}% <Theorem head font>
+{}% <Punctuation after theorem head>
+{\newline}% <Space after theorem head>
+{}% <Theorem head spec (can be left empty, meaning `normal')>
+
+\newtheoremstyle{breakit}% <name>
+{3pt}% <Space above>
+{3pt}% <Space below>
+{}% <Body font>
+{0em}% <Indent amount>
+{}% <Theorem head font>
+{.}% <Punctuation after theorem head>
+{ }% <Space after theorem head>
+{\textit{\thmname{#1} \thmnumber{#2}}\thmnote{: #3}}% <Theorem head spec (can be left empty, meaning `normal')>
+
+\newtheoremstyle{bold}% <name>
+{3pt}% <Space above>
+{3pt}% <Space below>
+{\addtolength{\leftskip}{1.3em}}% <Body font>
+{-1.13em}% <Indent amount>
+{\bfseries}% <Theorem head font>
+{:}% <Punctuation after theorem head>
+{.5em}% <Space after theorem head>
+{}% <Theorem head spec (can be left empty, meaning `normal')>
+
+\newcounter{counter} \numberwithin{counter}{subsection}
+\theoremstyle{break}
+
+\mdfsetup{topline=false, bottomline=false, rightline=false, linewidth=3pt}
+
+\newtheorem{theostar}[counter]{Theorem}
+\newenvironment{theo}%
+{\medskip \begin{mdframed}[linecolor=blu]\begin{theostar}}%
+{\end{theostar}\end{mdframed}}
+
+\newtheorem{propstar}[counter]{Proposition}
+\newenvironment{prop}%
+{\medskip \begin{mdframed}[linecolor=blu]\begin{propstar}}%
+{\end{propstar}\end{mdframed}}
+
+\newtheorem{corostar}[counter]{Corollary}
+\newenvironment{coro}%
+{\medskip \begin{mdframed}[linecolor=blu]\begin{corostar}}%
+{\end{corostar}\end{mdframed}}
+
+\newtheorem{lemmstar}[counter]{Lemma}
+\newenvironment{lemm}%
+{\medskip \begin{mdframed}[linecolor=blu]\begin{lemmstar}}%
+{\end{lemmstar}\end{mdframed}}
+
+\newtheorem{defnstar}[counter]{Definition}
+\newenvironment{defn}%
+{\medskip \begin{mdframed}[linecolor=verde+]\begin{defnstar}}%
+{\end{defnstar}\end{mdframed}}
+
+\newtheorem{remastar}[counter]{Remark}
+\newenvironment{rema}%
+{\medskip \begin{mdframed}[linecolor=giallo]\begin{remastar}}%
+{\end{remastar}\end{mdframed}}
+
+\theoremstyle{breakit}
+\newtheorem{exam}[counter]{Example}
+\newtheorem{exer}[counter]{Exercise}

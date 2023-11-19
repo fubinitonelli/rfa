@@ -1,0 +1,88 @@
+%!TEX root = ../main.tex
+Measures are about sets, but how about functions? Abstract and theoretical concepts that we explored up to now can be employed to produce a notion of integral.
+
+Riemann integral, which is studied in lower calculus courses, take with him many issues and in many cases it does not provide the answers we are looking for. In order to develop a more powerful integral the first steps here are to define a very general notion of integral, the abstract integral, which can be used only on a very basic kind of function, called simple functions, and study some immediate yet useful result.
+
+Before find the solution of our problem in the next section, we will discuss also some fundamental result of derivatives.
+
+\subsubsection{Abstract integral}
+
+The setting is very general; we will not fix neither the measure space nor the measure, for instance we could use the Lebesgue measure as the counting measure. From now on, we only require that $(\Omega, \mm, \mu)$ is a compete measure space.
+
+\begin{defn} \label{defn-int-simple-f}
+	We define the \emph{abstract integral} of a simple function
+	$s$ as follows:
+	$$
+		\int_E s \,\de\mu 
+		\coloneqq \sum_{j=1}^N a_j \mu(E \cap E_j)
+	.
+	$$
+\end{defn}
+
+Simple functions are defined in definition \vref{simple-function}. Notice that $\int_E s \, \de\mu = \int_\Omega s \Ind_E\, \de\mu$.
+
+Given a simple function and the notion of integral it's possible to define a new measure.
+\begin{prop}
+	The set function $\nu(E) = \int_E s \, \de\mu$, defined on any $E \in \mm$, is a measure on $\mm$. 
+\end{prop}
+You can prove this proposition... do it! This result has a great importance as we will see after.
+
+First thing to improve the notion of abstract integral is to expand the range of function that can be measured. The improvement we made in the next definition consist of extend the notion to any positive function; this thanks to combining the abstract integral with the notion of limit.
+
+\begin{defn}
+	For any measurable function $f:\Omega\to[0,+\infty]$, we define its
+	\emph{Lebesgue abstract integral for positive functions}:
+	$$
+		\int_E f \,\de\mu 
+		\coloneqq \sup\limits_{0\le s\le f} \int_E s \,\de\mu 
+		\in [0, +\infty]
+	$$
+	where $s$ is a simple function.
+\end{defn}
+To guarantee the measurability of sums ($f+g$) and products ($fg$) of measurable functions we implicitly used an arithmetization similar to the one on $\RR^\star$; the following rules holds for $a \geq 0$:
+\begin{gather*}
+	a + \infty = + \infty + a = + \infty;\\
+	a \cdot (+ \infty) = (+ \infty) \cdot a = +\infty;\\
+	0 \cdot (+ \infty) = (+ \infty) \cdot 0 = +\infty.
+\end{gather*}
+This is formally a partial arithmetization on $[0, +\infty]$.
+
+This integral is a much more general notion compared to the Riemann integral on $\RR$.
+With Riemann integrals, we had very strict criteria for integrability;
+now almost any function has a Lebesgue integral.
+Moreover, with Lebesgue we do not have to build a supplementary notion of improper integral.
+
+The Riemann integral is built starting from intervals (which have an easily
+computable size) on $\Omega$, the domain of integration. With the Lebesgue
+integral, one is splitting the codomain into intervals instead. Since their
+preimages may not be intervals, one needs a measure to define the size of
+such preimages. For the Riemann integral, the Peano measure for intervals 
+is implicitly used.
+
+\begin{prop}[Basic properties of the Lebesgue integral]
+	The following properties holds:
+	\begin{enumerate}
+		\item \emph{monotonicity with respect to functions}: 
+			\begin{center}
+				if $f \le g$, then $\int_E f \de\mu \le \int_E g \de\mu \quad \forall E \in \mm$;
+			\end{center}
+		\item \emph{monotonicity with respect to sets}: 
+			\begin{center}
+				if $E,F \in \mm$ and $E \subseteq F$, then $\int_E f \, \de\mu \le \int_F f \, \de\mu$;
+			\end{center}
+		\item \emph{homogeneity}: 
+			\begin{center}
+				for any $\alpha\ge 0$, $\int_E \alpha f \, \de\mu  = \alpha\int_E f \, \de\mu$;
+			\end{center}
+		\item \emph{annihilation with respect to null functions}
+			\begin{center}
+				if $f=0$ in $E$, then $\int_E f \, \de\mu = 0$;
+			\end{center}
+		\item \emph{annihilation with respect to zero-measure sets}
+		 	\begin{center}
+		 		if $\mu(E) = 0$, then $\int_E f \de\mu = 0$.
+		 	\end{center}
+	\end{enumerate}
+\end{prop}
+
+The proofs can be easily achieved from foretold definitions. 

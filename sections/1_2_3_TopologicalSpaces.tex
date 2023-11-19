@@ -1,0 +1,64 @@
+%!TEX root = ../main.tex
+\subsubsection{Topological spaces}
+
+Here we try a different approach to deal with ``closedness'': alongside metric spaces we define the topological spaces from which we will obtain similar results.
+
+\begin{defn} \label{topological-spaces}
+  Let $x \neq \varnothing$ and $\tau \subseteq \Pc(X)$.\\
+  We say that $\tau$ is a \emph{topology} if:
+  \begin{itemize}
+    \item it contains the set itself and the empty set: 			
+    $$
+    	X \in \tau,
+    	\quad \varnothing \in \tau
+    ;
+    $$
+    \item it is closed with respect to finite intersections: 	
+    $$
+    	A, B \in \tau 
+    	\implies A \cap B \in \tau
+    ;
+    $$
+    \item it is closed with respect to uncountable unions: 		
+    $$
+    	\{ A_i \}_{i \in I} \subset \tau 
+    	\implies \bigcup_{i \in I} \, A_i \in \tau
+    .
+    $$
+  \end{itemize}
+  In this case, we also say that $(X, \tau)$ is a \emph{topological space}.\\
+  Moreover, we call \emph{open sets} each set belonging to $\tau$.
+\end{defn}
+
+As we see, this definition also contains the notion of openness, and here is generalized (see definition \vref{open-close-set-metric-spaces} for the definition of open set in metric spaces). Anyway, there exists a link between metric spaces and topological spaces:
+\begin{defn}\label{rem-metric-spaces-topology}
+	Let $(X,d)$ be a metric space.\\
+	We define the \emph{topology induced by the distance} $d$ as follows:
+	$$
+	\tau
+	= \{ A \subset X : A \text{ is open with respect to } d\}
+	.
+	$$
+\end{defn}
+
+We can prove that two metric spaces $(X, d_1)$ and $\left(X, d_2\right)$, with $d_1$ equivalent to $d_2$ (see definition \vref{equivalent-metrics}), produce the same topology; this result is obtainable using the characterization of the closure in metric spaces.
+
+As we define the open set as the set belonging to the topology, closed sets are the sets whose complement are open, namely $A \subset X$ is closed if $X \setminus A$ is open ($X \setminus A \in \tau$).
+
+We can also identify a topological space by considering its closed subsets instead of the open ones. This is possible by the De Morgan's law (see section \vref{de-morgans-laws}) which allow us to define the \textit{dual properties}. Consider $\Cc$ as the collection of all the closed subsets of $X$, then if satisfy the dual properties, which are: $$X, \varnothing, X \in \Cc; \quad C, D \in \Cc \implies C \cup D \in \Cc; \quad \{ D_i \} \text{ family of }\Cc \implies \cap_i D_i \in \Cc;$$
+then the family of the complements $\{ f\comp : f \in \Cc \}$ is a topology.
+
+Observe that $\varnothing$ and $X$ are \textit{both} open and closed.
+
+Consider now some examples: if $X \neq \varnothing$, $\tau = \Pc(X)$ is the topology associated with the discrete metric (indeed, all the set are open with respect to this metric), while $\tau = \{ \varnothing, X \}$ is called the \emph{trivial topology}; let $X = \{ 1, \ldots, 4 \}$: a possible topology of $X$ is given by $\tau = \{ \varnothing, X, \{ 1 \}, \{ 2, 3 \}, \{ 1, 2, 3\} \}$.
+
+% At last, a topology can be induced by a generic set:
+% \begin{defn}
+% 	Let $(X,\tau)$ be a topological space.\\
+% 	We define the \emph{topology induced by the a set} $E$ as follow:
+% 	$$
+% 	\tau_E 
+% 	= \{ A \subset X : A = U \cap E \text{ with } U \in \tau\}
+% 	.
+% 	$$
+% \end{defn} \todo{check}

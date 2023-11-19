@@ -1,0 +1,34 @@
+%!TEX root = ../main.tex
+\section{Additional proofs}
+
+\begin{prop}\label{prop-poly-with-int-coeff-count}
+	The set of polynomials with integer coefficients is countable.
+\end{prop}
+
+\begin{proof}
+	First consider the set $P_n$ of polynomials of degree $n$ with nonnegative integer coefficients. First, since there are infinitely many primes, there exists an injective map $p: \NN \rightarrow Q$ which enumerates the set of prime numbers $Q \subset \NN$. Then there is a map
+	$$
+	f: P_n \rightarrow \NN
+	$$
+	given by
+	$$
+	f\left(a_n x^n+\cdots+a_1 x+a_0\right)=2^{a_0} 3^{a_1} 5^{a_2} \cdots p(n+1)^{a_n}
+	$$
+	By unique factorization, this map is one-to-one (the same argument as the proof that $A \times B$ is countable if $A$ and $B$ are countable $-$ one could also show that $P_n$ is equinumerous to $\NN \times \NN \times \NN \times \cdots \times \NN$ where there are $n$ factors). Thus $P_n$ is countable. Finally, the set of polynomials $P$ can be expressed as
+	$$
+	P=\bigcup_{n=0}^{\infty} P_n
+	$$
+	which is a union of countable sets, and hence countable.
+\end{proof}
+
+\begin{prop}\label{prop-algebraic-numbers-countable}
+	The set of algebraic numbers is countable.
+\end{prop}
+
+\begin{proof}
+	By \vref{prop-poly-with-int-coeff-count}, we know that the set $P$ of polynomials is countable. Each polynomial of degree $n$ has at most $n$ roots, thus for any polynomial $p$, the set $R_p$ of roots of $p$ is countable. Thus the set $A$ of algebraic numbers can be expressed as
+	$$
+	A=\bigcup_{p \in P} R_p
+	$$
+	is a countable union of countable sets, and hence countable.
+\end{proof}

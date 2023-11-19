@@ -1,0 +1,107 @@
+%!TEX root = ../main.tex
+\subsubsection{Absolute continuity}
+Which functions can be written as integral functions of their derivatives? In order to answer this question we must first to analyze the properties of $F$, and find a property that is stronger than simple continuity.
+
+\begin{defn}\label{def:absolute-continuity}
+	A function $f:[a,b]\to \RR$ is \emph{absolutely continuous (AC)} in $[a,b]$ if for every $\varepsilon > 0$ it exists $\delta > 0$ such that:
+	$$
+		\sum_{n=1}^{N} |f(b_n)-f(a_n)|
+		< \varepsilon
+	,
+	$$
+	for all $N\in \NN$, where the intervals $\{(a_n,b_n)\}_{n=1}^N$ are mutually disjoint and such that:
+	$$
+		\bigcup_{n=1}^{N} (a_n, b_n) 
+		\subseteq [a,b] 
+		\text{ and } \sum_{n=1}^{N} (b_n - a_n)
+		< \delta
+	.
+	$$
+\end{defn}
+
+The definition still holds if $\{(a_n,b_n)\}_{n \in \NN}$ are countable. This notion is more general then uniform continuity or continuity (\vref{uniformly-continuous-functions} and \vref{continuous-functions-general} respectively), indeed the following holds:
+\begin{prop}
+	If $f$ is absolutely continuous in $[a,b]$, then it is also uniformly continuous in $[a,b]$.
+\end{prop}
+The converse is false in general, consider this function as a counterexample:
+$$
+	f(x) = 
+	\begin{cases}
+		x \sin \frac 1 x & \text{if } x \in [-1,1]\setminus\{0\}\\
+		0 & \text{if } x=0
+	.
+	\end{cases}
+$$
+We see that $f$ is continuous in $[a,b]$, and thus $f$ is also uniformly continuous (see theorem \vref{Heine-Cantor-theorem}).\\
+However, $f$ is not AC in $[a,b]$ by the definition.
+
+\paragraph{Lipschitz continuity} There exists another property of continuity:
+\begin{defn}\label{defn-lipschitz-continuity}
+	Let $f:[a,b] \subset \RR \to \RR$. We say that $f$ is \emph{Lipschitz continuous} if exists $k > 0$ such that:
+	$$
+		|f(x)-f(y)| \leq k|x-y| 
+		\quad \forall x,y \in [a,b]
+	.
+	$$
+\end{defn}
+Observe that the derivative of any Lipschitz continuous function is bounded.
+
+\begin{prop}
+	If $f$ is Lipschitz continuous in $[a,b]$, then it is also absolutely continuous in $[a,b]$.
+\end{prop}
+
+Again, the converse implication is not guaranteed: consider $[a,b] = [0,1]$ and $f(x)=\sqrt{x}$. While $f$ is uniformly and absolutely continuous, it is not Lipschitz continuous as $\sup_{[0,1]}f'(x)=+\infty$.
+
+\paragraph{Summary of the continuity notions for functions} \todo{complete this with all the definitions of continuity}
+\begin{itemize}
+	\item The usual (strong) definition of continuity, a function $f:[a,b]\to \RR$ is continuous in $x_0$ if $\forall \eps > 0, \exists\, \delta > 0 : |x-x_{0}|<\delta \implies |f(x)-f(x_0)|<\eps$.
+	\item Continuity almost everywhere, see \vref{def:continuity-almost-everywhere}.
+	\item Lipschitz continuity, see \vref{defn-lipschitz-continuity}.
+	\item Absolute continuity, see \vref{def:absolute-continuity}.
+\end{itemize}
+
+\paragraph{Absolute continuity of the integral}
+
+\begin{theo} \label{theo-abs-continuity-int}
+	Let $f\in L^1(\Omega, \mm, \mu)$. Then:
+	$$\forall \eps > 0 \quad \exists\, \delta > 0 : \quad \int_E |f| \,\de\mu < \eps \qquad \forall E \in \mm : \ \mu(E) < \delta.$$
+\end{theo}
+\begin{proof}
+	Let $\eps >0$. Suppose $f\geq 0$ for simplicity (otherwise is possible to use the same proof for $f^-$ and $f^+$).\\
+	There exists a sequence of simple functions $\{s_n\}_{n \in \NN}$ bounded and measurable, such that $0\leq s_n \leq f$ and $s_n \lto{1} f(t)$ in $\Omega$; so (see monotone convergence \vref{monotone-convergence} or dominated convergence \vref{dominated-convergence}) there exists also a measurable and bounded function $g$ such that $$\int_E |f-g| \dmu \leq \frac \eps 2.$$
+	
+	Set $M=\esssup_{t\in \Omega}|g(t)|>0$ and $\delta=\frac{\eps}{2M}$. Then:
+	$$
+		\int_E |f| \dmu 
+		\leq \int_E |f-g| \dmu + \int_E |g| \dmu 
+		< \frac{\eps}{2} + M\mu(E)
+		< \frac{\eps}{2} + M\delta
+		= \frac{\eps}{2} + M\frac{\eps}{2M}
+		= \eps
+	$$
+	with $\mu(E) < \delta$.
+\end{proof}
+
+This corollary applies the previous theorem to the case of the integral function:
+\begin{coro} \label{absolute-continuity-integral}
+	Let $f\in L^1 ([a,b], \Lc[a,b],\lambda)$, and set:
+	$$F(x) = \int_a^x f(t) \,\dlam.$$
+	Then the integral function $F$ is absolutely continuous in $[a,b]$.
+\end{coro}
+\begin{proof}
+	Fix $\eps> 0$ and let $\delta > 0 $ given by the previous theorem \vref{theo-abs-continuity-int}. \\
+	Let also $N\in\NN$, and $\{(a_n,b_n)\}_{n=1:N }\subset [a,b]$ be a collection of mutually disjoint intervals such that $\sum_{n=1}^{N}(b_n-a_n)< \delta$ and $E=\bigcup_{n=1}^{N} (a_n,b_n)$ with $\lambda(E)<\delta$.\\
+	Then we have:
+	$$\sum_{n=1}^N |F(b_n)-F(a_n)| 
+	= \sum_{n=1}^N \left| \int_{a_n}^{b_n} f(t) \,\dlam \right|
+	\leq \sum_{n=1}^N \int_{a_n}^{b_n}|f(t)| \,\dlam
+	= \int_E |f(t)| \,\dlam < \eps.$$
+	Thus, by the definition, $F$ is absolutely continuous in $[a,b]$.
+\end{proof}
+
+For example take $f(t)= \frac 1 {2\sqrt{t}}\in \Lc^1([0,1],\Lc([0,1]),\lambda)$; then we have:
+$$ \int_0^x \frac 1 {2\sqrt{t}} \dlam = \sqrt{x}.$$
+Thanks to the previous theorem we have that $\sqrt{x}$ is absolutely continuous in $[0,1]$. However we already know that it is not Lipschitz-continuous.
+
+\paragraph{The space of absolute continuous functions} It is easy to see that the set of the function which are absolute continuous on a closed interval is closed with respect to sum and scalar product. Indeed, if $f$ and $g$ are absolutely continuous in $[a,b]$, then $\alpha f + \beta g$ is absolutely continuous too. So the space $$AC([a,b])\coloneqq \{f:[a,b] \to \RR : f  \ AC\text{ in } \Omega\},$$ is a vector space on $\RR$ with respect to the canonical operations.
+

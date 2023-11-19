@@ -1,0 +1,458 @@
+%!TEX root = ../main.tex
+\subsubsection{Bilinear Forms and Lax Milgram lemma}
+Here we will generalize the concept of inner product. In fact, the following definition will make it clear that the inner product is an operation which belongs to a much general class.
+
+\begin{defn}
+	Let $(H, \sca{\cdot, \cdot})$ be a Hilbert space.\\
+	An application $a: \, H \times H \to \RR$ is called \emph{bilinear form} if:
+	\begin{align*}
+		u &\mapsto a(u,v) \text{ is linear for each fixed } v \in H,\\
+		v &\mapsto a(u,v) \text{ is linear for each fixed } u \in H.
+	\end{align*}
+\end{defn}
+
+\begin{defn}
+	A bilinear form $a: \, H \times H \to \RR$ is \emph{coercive} if there exists $\alpha > 0$ such that:
+	$$a(u,u) \geq \alpha\norm{u}^2 \quad \forall u \in H.$$
+\end{defn}
+
+\begin{prop}
+	A bilinear form $a: \, H \times H \to \RR$ is continuous if and only if there exists $M > 0$ such that:
+	$$ \abs{a(u,v)} \leq M\norm{u}\norm{v} \quad \forall u, v \in H.$$
+\end{prop}
+
+Observe that the inner product of an Hilbert space is a continuous and coercive bilinear form.
+
+Consider $H = \RR^N$ with the euclidean scalar product $\sca{\cdot, \cdot}_2$ and a matrix $A \in \RR^{N \times N}$.
+Then $a(x,y) = \sca{Ax, y}_2$ for all $x, y \in \RR^N$ is a continuous bilinear form.
+
+The following is a lemma which generalize the last representation theorem.
+
+\begin{theo}[Lax--Milgram]\label{theo-lax-milgram}
+	Let $a:\, H \times H \to \RR$ be a continuous and coercive bilinear form.\\
+	Then for any $l \in H^\star$ there exists a unique $u \in H$ such that:
+	$$a(u,v) = Lv \quad \forall v \in H.$$
+	Moreover we have
+	$$\norm{u} \leq \frac{1}{\alpha}\norm{L}_\star$$
+	where $\alpha$ is the coercivity constant.
+\end{theo}
+
+\begin{proof}
+	Fix $u \in H$ and observe that:
+	$$
+		v \in H:\
+		v \mapsto a(u,v) \in \RR
+	$$
+	is an element of $H^\star$.
+	Therefore there is a unique $h \in H$ such that:
+	$$
+		a(u,v) 
+		= \sca{h,v} 
+		\quad \forall v \in H
+		.
+	$$
+	Thus we can define a linear operator $A:H \to H$ by setting $Au = h$. This operator is also bounded. Indeed:
+	$$
+		\norm{Au}^2 
+		= \sca{Au, Au} 
+		= a(u, Au) 
+		\leq M \norm{u} \norm{Au}
+	$$
+	so that $\norm{Au} \leq M \norm{u}$.
+	
+	Moreover, we have:
+	$$
+		\alpha\norm{u}^2 
+		\leq a(u,u) 
+		= \sca{Au, u} 
+		\leq \norm{Au}\norm{u}
+	$$
+	so $A$ is also injective.
+	
+	On the other hand, there is a unique $w \in H$ such that (see Riesz's representation theorem \vref{riesz-repr}):
+	$$
+		Lv 
+		= \sca{w, v} 
+		\quad \forall v \in V
+		.
+	$$
+	Therefore the thesis can be reformulated as follows: for any $w \in H$ find a unique $u \in H$ such that:
+	$$
+		\sca{Au, v} 
+		= \sca{w,v} 
+		\quad \forall v \, \in V
+	$$
+	so we're left to show that $A$ is surjective.
+	
+	Let's prove first that $\Im(A)$ is a closed subspace of $H$.\\
+	Indeed let $\{y_n\}_{n\in \NN} \subset \Im(A)$ be such that $y_n \to y$ as $n \to \infty$.\\
+	We know that there exists a unique $u_n \in H$ such that $A u_n = y_n$.\\
+	Moreover, we have
+	$$
+		\alpha \norm{u_n - u_m} 
+		\leq \norm{A u_n - A u_m} 
+		= \norm{y_n - y_m}
+	$$
+	therefore $\{u_n\}_{n \in \NN}$ converges in $H$ to some $u$ and, because $A$ is continuous, it follows
+	$$
+		A u_n 
+		\to A u 
+		\quad n \to \infty
+		.
+	$$
+	Hence $y=Au \in \Im(A)$ and $\Im(A)$ is closed.
+	
+	We can now prove that $A$ is surjective.\\
+	By contradiction suppose that $\Im(A) \subsetneq H$. Then there exists $y_0 \in H$ such that $y_0 \neq 0$ and $y_0 \in \Im(A)^\perp$. However, we have
+	$$
+		0 
+		= \sca{A y_0, y_0} = a(y_0,y_0) 
+		\geq \alpha\norm{y_0}^2 
+		\implies y_0 = 0
+		.
+	$$
+	This is a contradiction.
+	
+	Finally, we recall that
+	$$
+		\alpha\norm{u} 
+		\leq \norm{Au} 
+		= \norm{w} 
+		= \norm{L}_\star
+		.
+	$$
+\end{proof}
+
+\paragraph{Inner product} Even if a scalar product is a continuous and coercive bilinear form, a continuous and coercive bilinear form is not necessarily a scalar product: this because it might be not symmetric.\\
+Due to this point, the Lax--Milgram lemma can be seen as a generalization of the Riesz representation theorem (\vref{theo-projection}).
+
+\begin{prop}
+	Let $a: \, H \times H \to \RR$ be a continuous and coercive bilinear form.\\
+	If $a$ is symmetric, namely:
+	$$
+		a(u,v) 
+		= a(v,u) 
+		\quad \forall u,v \in H
+		.
+	$$
+	then $a$ is a scalar product in $H$ and its induced norm is equivalent to the norm in $H$.
+\end{prop}
+
+\begin{proof}
+	By coercivity and the other hypothesis we have:
+	$$
+		\alpha \norm{u}^2 
+		\leq a(u,u) \leq M\norm{u}^2 
+		\quad \forall u \in H
+	$$
+	where $\norm{\cdot}$ is the norm in $H$.\\
+	
+	Hence $a(u,u) \geq 0$ for all $u \in H$ and $a(u,u) = 0$ if and only if $u = 0$.
+	
+	Thus $a(\cdot, \cdot)$ is a scalar product in $H$ and its induced norm
+	$$
+		\norm{u}_a 
+		= \sqrt{a(u,u)}
+	$$
+	is equivalent to $\norm{\cdot}$.
+\end{proof}
+
+
+\paragraph{An application of the Lax--Milgram lemma}\label{app-lax-milgram} All this theory has a practical purpose. Here we will see in action the tools we built solving a differential problem.\\
+Consider the following boundary value problem: find $u$ such that
+$$
+	\begin{cases}
+	-(  \alpha(x) u' + \beta(x) u)' + \gamma(x)u 
+	= f(x)
+	\quad x \in (a,b)\\
+	u(a) 
+	= u(b) 
+	= 0
+	\end{cases}
+$$
+where $\alpha, \beta \in \Cc^1([a,b])$ and $\gamma, f \in C([a,b])$.
+
+Suppose $w \in \Cc^2([a,b])$ is a classical solution to the problem.
+
+Consider $\phi \in \Cc^\infty((a,b))$ multiply the equation by $\phi$ and integrate over $(a,b)$.
+Integrating by parts we get the identity:
+$$
+	\int_a^b \left[
+	\left(\alpha(x)w'(x)
+	+ \beta(x)w(x) \right)\phi'(x)
+	+ \gamma(x)w(x)\phi(x)\right]\,\dx 
+	= \int_a^bf(x) \phi(x) \, \dx
+	.
+$$
+
+Setting
+$$
+	V_0
+	= \{v \in H^1((a,b))
+	: \ v(a)
+	=v(b)
+	=0\}
+$$
+where $H^1((a,b)) = W^{1,2}((a,b))$, we observe that $V_0$ is a closed subspace of $H^1((a,b))$. Moreover the scalar product
+$$
+	(v_1, v_2) 
+	= \int_a^b v_1'(x) v_2'(x) \, \dx
+$$
+induces a norm
+$$
+	\norm{v}_0 
+	= \norm{v'}_2
+$$
+which is equivalent to the standard norm in $H^1((a,b))$.\\
+(This because the Poincaré's inequality $\norm{v}_2 \leq (b-a)\norm{v'}_2$.)\\
+
+We can prove that $C_C^\infty((a,b))$ is dense in $V_0$ (this is a density theorem: density theorems allow to establish approximations) which allows us to deduce that our solution $w$ satisfies the identity
+$$ 
+	\int_a^b [(\alpha(x)w'(x) + \beta(x)w(x))v'(x) + \gamma(x)w(x)v(x)]\,\dx = \int_a^bf(x) v(x) \, \dx \quad \forall v \in V_0. 
+$$
+
+We can now look at our problem from a more general standpoint.
+
+Let us set, for all $u,v \in V_0$
+$$
+	a(u,v)
+	= \int_a^b [(\alpha(x)u'(x) 
+	+ \beta(x)u(x))v'(x) 
+	+ \gamma(x)u(x)v(x)]\,\dx
+$$
+and observe that $a: \, V_0 \times V_0 \to \RR$ is a bilinear form.
+
+Thus we can give to the original problem a weaker formulation, namely find $w \in V_0$ such that
+$$
+	a(w,v)
+	=Lv
+	\quad \forall v \in V_0
+$$
+where $L \in V^\star_0$ is defined by 
+$$
+	Lv 
+	= \int_a^b f(x)v(x)\, \dx 
+	\quad \forall v \in V_0
+	.
+$$
+
+Now we want to apply Lax--Milgram lemma. Let's check the hypothesis.
+
+Observe that $a(\cdot, \cdot)$ is continuous as 
+\begin{align*}
+	\abs{a(u,v)} 
+	&\leq \int_a^b \abs{(\alpha(x)u'(x) 
+	+ \beta(x)u(x))v'(x) 
+	+ \gamma(x)u(x)v(x)}\,\dx\\
+	&\leq \norm{\alpha}_\infty \int_a^b \abs{u'v'}\,\dx
+	+\norm{\beta}_\infty \int_a^b \abs{uv'}\,\dx
+	+\norm{\gamma}_\infty \int_a^b \abs{uv}\,\dx\\
+	&\leq \norm{\alpha}_\infty \norm{u'}_2 \norm{v'}_2
+	+ \norm{\beta}_\infty \norm{u}_2 \norm{v'}_2
+	+ \norm{\gamma}_\infty \norm{u}_2 \norm{v}_2
+\end{align*}
+
+for all $u,v \in V_0$.\\
+Then, using again the Poincaré's inequality we have:
+$$
+	\abs{a(u,v)}\leq \norm{\alpha}_\infty \norm{u'}_2 \norm{v'}_2
+	+ (b-a)\norm{\beta}_\infty \norm{u'}_2 \norm{v'}_2
+	+ (b-a)^2 \norm{\gamma}_\infty \norm{u'}_2 \norm{v'}_2
+	.
+$$
+
+Hence, setting 
+$$
+	M = \norm{\alpha}_\infty
+	+ (b-a)\norm{\beta}_\infty
+	+ (b-a)^2\norm{\gamma}_\infty
+	,
+$$
+we have
+$$
+	\abs{a(u,b)} 
+	\leq M \norm{u}_0\norm{v}_0 
+	\quad \forall u, v \in V_0
+	.
+$$
+
+We can add other assumption to the coefficients $\alpha$, $\beta$ and $\gamma$ that hold for any $x \in [a,b]$, like the following:
+$$
+	\alpha_0
+	= \min\limits_{x\in[a,b]} \alpha(x)
+	> (b-a) \norm{b}_\infty
+	\text{ and }
+	\gamma(x) 
+	\geq 0
+	.
+$$
+
+Collecting the results we obtained we have:
+\begin{align*}
+	a(u,u)
+	&= \int_a^b \alpha(x)(u'(x))^2 \, \dx
+	+ \int_a^b \beta(x)u(x)u'(x) \, \dx
+	+ \int_a^b \gamma(x)(u(x))^2 \, \dx \\
+	& \geq \alpha_0\norm{u'}_2
+	+ \int_a^b \beta(x)u(x)u'(x) \, \dx.
+\end{align*}
+
+We can find an upper bound for the middle term as well:
+$$
+	\abs{\int_a^b \beta(x)u(x)u'(x) \, \dx}
+	\leq \norm{\beta}_\infty \norm{u}_2 \norm{u'}_2 
+	\leq (b-a) \norm{\beta}_\infty \norm{u'}_2^2
+	,
+	$$
+	so we get:
+	$$
+	a(u,u)
+	\geq [\alpha_0 -(b-a)\norm{\beta}_\infty] \, \norm{u'}_2
+	$$
+	we can set:
+	$$
+	\alpha 
+	= [\alpha_0 -(b-a)\norm{\beta}_\infty]
+	> 0
+	.
+$$
+
+Then, finally we have:
+$$
+	a(u,u)
+	\geq \alpha \norm{u}_0
+	.
+$$
+and we can conclude that $a(\cdot, \cdot)$ is coercive.
+
+Now we can apply the Lax--Milgram lemma and we deduce the following proposition:
+If $\alpha$, $\beta$, $\gamma$, $f \in C([a,b])$ and 
+$$
+	\min\limits_{x\in[a,b]} \alpha(x)
+	> (b-a) \norm{b}_\infty
+	\text{ and }
+	\gamma(x) 
+	\geq 0
+	\quad \forall x \in [a,b]
+	$$
+	then there exists a unique $u \in V_0$ such that:
+	$$
+	a(u,v) 
+	= Lv \quad \forall v \in V_0
+	.
+$$
+
+The solution $u$ given by the Lax--Milgram lemma is a weak solution to the original boundary value problem.
+
+We can further weaken the assumptions on the coefficients by taking $\alpha$, $\beta$, $\gamma \in L^\infty((a,b))$.
+
+In addiction $f$ can be taken in $V_o^\star$: assume $f \in L^2((a,b))$ or even a linear bounded functional link, for instance,
+$$
+	Lv
+	= v(x_0)
+	\quad \forall v \in V_0
+$$
+where $x_0 \in (a,b)$. It's easy to check that $L \in V_0^\star$.
+
+Consider now the linear application $K:L^2((a,b)) \to L^2((a,b))$
+defined by
+$K:f\mapsto u$
+where $u$ satisfies
+$$
+	a(u,v) 
+	= \int_a^b fv 
+	\quad \forall v \in V_0
+	.
+$$
+
+We have that $\Im(K) \subseteq V_0$ and we know that 
+$$
+	V_0
+	\hookrightarrow \hookrightarrow C([a,b])
+	\hookrightarrow L^2((a,b))
+	.
+$$
+
+Therefore
+$$
+	V_0
+	\hookrightarrow \hookrightarrow L^2((a,b))
+	.
+$$
+Hence $K$ is a compact operator.
+
+From Lax--Milgram we have also a stability estimate:
+$$
+	\norm{u}_0
+	\leq \frac 1 \alpha \norm{L}_{V_0^\star}
+	.
+$$
+
+If $f \in L^2((a,b))$ then, using Poincaré's inequality:
+$$
+	\abs{Lv}
+	= \abs{\int_a^b f v \, \dx}
+	\leq \norm{f}_2\norm{v}_2
+	\leq (b-a)\norm{f}_2\norm{v}_0
+$$
+so that
+$$
+	\norm{L}_\star
+	\leq (b-a)\norm{f}_2
+$$
+and
+$$
+	\norm{u}_0
+	\leq \frac{(b-a)}{\alpha} \norm{f}_2
+	.
+$$
+
+If
+$$Lv 
+	= v(x_0) 
+	\quad \forall v \in V_0
+$$
+
+where $x_0 \in (a,b)$, then, using Hölder's inequality:
+$$
+	\abs{Lv}
+	= \abs{v(x_0)}
+	= \abs{\int_a^{x_0} v'(y) \, \dy}
+	\leq (b-a)^{(\frac 1 2)} \norm{v}_0
+$$
+
+so that
+$$
+	\norm{L}_\star
+	\leq (b-a)^{\frac 1 2}
+$$
+and
+$$
+	\norm{u}_0
+	\leq
+	\frac{(b-a)^{\frac 1 2}}{\alpha}
+	.
+$$
+
+The bilinear form $a(\cdot, \cdot)$ is not symmetric because of $\beta$.\\
+If $\beta \equiv 0$ then we deal with following boundary value problem
+$$
+	\begin{cases}
+	-(\alpha(x)u')' 
+	+ \gamma(x)u 
+	= f(x) 
+	\quad x \in (a,b)\\
+	u(a) 
+	= u(b) 
+	= 0
+	\end{cases}
+$$
+and its weak formulation has a unique solution provided that, for instance
+$$
+	\alpha = \min_{x\in [a,b]} \alpha (x) > 0
+	, 
+	\quad \gamma(x)\geq 0 
+	\quad x \in [a,b]
+	.
+$$
+However, in this case we can just apply the Riesz representation theorem since $a(\cdot, \cdot)$ is an inner product in $V_0$ whose induced norm is equivalent to $\norm{\cdot}_0$.

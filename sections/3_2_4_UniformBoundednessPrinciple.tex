@@ -1,0 +1,104 @@
+%!TEX root = ../main.tex
+\subsubsection{Uniform boundedness principle} Here we see how Baire's theorem has a topological relevance.
+
+\begin{defn}
+	A family $\Fc \subset \Bc(X,Y)$ is \emph{point-wise bounded} if for each $x \in X$ there exists $M_x >0$ such that:
+	$$
+	\sup_{T \in \Fc} \norm{Tx}_Y
+	\leq M_x.$$
+\end{defn}
+
+\begin{defn}
+	A family $\Fc \subset \Bc(X,Y)$ is \emph{uniformly bounded} in $\Fc \subset \Bc(X,Y)$ if exists $M>0$ such that:
+	$$
+	\sup_{T \in \Fc} \norm{T}_{\Bc(X,Y)}
+	\leq M.$$
+\end{defn}
+
+Then we have the following, which is known also as \emph{uniform boundedness principle}.
+
+\begin{theo}[Banach--Steinhaus] \label{theo-banach-steinhaus}
+	Let $(X,\norm{\cdot}_X)$, $(Y,\norm{\cdot}_Y)$ be real Banach spaces, and consider a family $\Fc \subset \Bc(X,Y)$.\\
+	If $\Fc$ is point-wise bounded then it is uniformly bounded.
+\end{theo}
+\begin{proof}
+	For each $n \in \NN_0$, define:
+	$$C_n = \{x \in X : \norm{Tx}_Y \leq n \enspace \forall T \in \Fc \}.$$
+	Each $C_{n}$ is closed, indeed consider $x_n \in C_n,x_n\to x$. Since $T$ and the norm are continuous, $\norm{Tx}_Y =\lim\nolimits _{n\to +\infty} \norm{Tx_n}_Y \leq n_0$ then $x\in C_{n_0}$.\\
+	Moreover, on account of the point-wise boundedness, we have
+	$$ X = \bigcup_{n\in\NN} C_n.$$
+	
+	Via Baire's theorem, at least one of the $C_n$ is not nowhere dense, namely there is $n_0 \in \NN$ such that $\mathring{C_{n_0}} \neq \varnothing$.
+	
+	Hence there exists $\eps >0$ and $x_0 \in X$ for which we find a ball $\overline{\Bc(x_0,\eps)} \subset C_{n_0}$.
+	
+	Now, if $\norm{z}_X \leq \eps$, then $x_0 + z \in \overline{B(x_0,\eps)}$. Therefore, $\forall T \in \Fc$:
+	$$\norm{Tz}_Y \leq \norm{T(x_0+z)}_Y + \norm{Tx_0}_Y \leq 2 n_0 \quad \forall T \in \Fc.$$
+	
+	Finally, observe that, for any $T \in \Fc$ and for $x \neq 0$:
+	$$\norm{Tx}_Y = \frac{\norm{x}_X}{\varepsilon} \norm{T\left( \frac{\eps x}{\norm{x}_X} \right)}_Y \leq \frac{2 n_0}{\eps}\norm{x}_X.$$
+	
+	Thus, setting $M = \frac{2 n_0}{\eps}$, we get the thesis.
+\end{proof}
+
+Actually, we do not need $(Y, \norm{\cdot}_Y)$ to be a Banach space. Indeed, we applied Baire's theorem using the completeness hypothesis only on $X$.
+
+\paragraph{Consequences} This theorem has many consequences:
+
+\begin{coro}
+	Let $X$, $Y$ be Banach spaces and consider $\Fc \subset \Bc(X,Y)$.\\
+	If $\Fc$ is not uniformly bounded then there exists a $G_\delta$-set $G$ dense in $X$ such that:
+	$$ \sup_{T \in \Fc} \norm {Tx}_Y = \infty \quad \forall x \in G.$$
+\end{coro}
+
+Recall that $G_\delta$-sets are countable intersection of open sets.
+
+\begin{proof}
+	Consider the family of closed sets $\{C_n\}_{n\in \NN}$ defined in the proof of Banach--Steinhaus theorem \vref{theo-banach-steinhaus}. Then $\mathring{C}_n= \varnothing \enspace \forall n \in \NN$: otherwise we could find a uniform bound as before.
+	
+	Define now:
+	$$ A_n = C_n\comp = \{x\in X : \exists \, T\in \Fc \text{ s.t. } \norm{Tx}_Y > n\};$$
+	so $A_n$ is open and dense in $X$.
+	
+	Then set 
+	$$G = \bigcap_{n\in\NN} A_n.$$
+	Notice that $G$ is $G_\delta$ and is dense in $X$ (see corollary \vref{coro-inters-dense}).
+	
+	Therefore:
+	$$\sup_{T \in \Fc}\norm{Tx}_Y > n \quad \forall x \in G \quad \forall n \in \NN_0.$$
+\end{proof}
+
+\begin{theo}[Alternative formulation of Banach--Steinhaus]
+	Let $X$, $Y$ be Banach spaces and consider $\Fc \subset \Bc(X,Y)$. \\
+	Then either $\Fc$ is uniformly bounded or it's unbounded on a $G_\delta$-set dense in X.
+\end{theo}
+
+As an exercise, prove that for any fixed $\alpha \in \RR$, setting $L_\alpha x= \alpha x$ for all $x \in X$ where $X$ is a Banach space, the family $\{T_\alpha\}_{\alpha \in \RR}$ is unbounded at any $x \neq 0$.
+
+\begin{coro} \label{coro-UBP-conv}
+	Let $\{T_n\}_{n\in\NN}\subset\Bc(X,Y)$ such that $\{T_n x\}$ converges in $X$. \\
+	Then there exists a unique $T \in \Bc(X,Y)$ such that: $$T_n x \spaceto{Y} Tx \quad \forall x \in X \quad \text{ as } n \to \infty.$$
+\end{coro}
+
+\begin{proof}
+	By hypothesis, $T_n x \to y$ in $Y$ as $n \to +\infty$. Therefore we can define a unique $T\in \Lc(X,Y)$ by setting $Tx=y$. Moreover, every $T_n$ is bounded, and so:
+	$$
+	\forall x \quad \exists \, M_x>0: \quad
+	\sup_{n\in\NN}\norm{T_nx }_Y \leq M_x.
+	$$
+	Via Banach--Steinhaus theorem, $\exists \, M > 0$ such that $\sup_{n \in \NN} \norm{T_n}_{\Bc(X,y)}\leq M$. Then:
+	$$\norm{Tx}_Y = \lim_{n \to \infty}\norm{T_n x}_Y \leq \left( \limsup_{n\to \infty} \norm{T_n}_{\Bc(X,Y)}\right) \norm{x}_X \leq M \norm{x}_X $$
+	and this implies $T \in \Bc(X,Y)$.
+\end{proof}
+
+In general $\norm{T_n - T}_{\Bc(X,Y)} \not\to 0$.
+
+It's easy to check that there exists $T \in \Lc(X,Y)$ defined as the point-wise limit on $X$ of the sequence $\{T_n\}_{n \in \NN}$.\\
+Therefore, thanks to the uniform boundedness principle, we have that $\{T_n\}_{n \in \NN}$ is uniformly bounded by some constant $M>0$.\\
+Hence we have:
+$$
+	\norm{Tx}_Y
+	= \lim\limits_{n \to \infty} \norm{T_nx}_{Y}
+	\leq M \norm{x}_X
+$$
+so that $T$ is also bounded.

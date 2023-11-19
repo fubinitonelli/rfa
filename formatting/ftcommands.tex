@@ -1,0 +1,135 @@
+%% Formattazione
+\newcommand{\Fixvmode}{\leavevmode\vspace{-\baselineskip}}
+\newcommand{\DoCo}[1][n]{(\Omega, \Ac, \PP) \rightarrow \ifthenelse{\equal{#1}{1}}{(\RR, \Bc)}{(\RR^{#1}, \Bc^{#1})}}
+\newcommand{\Dom}{(\Omega, \Ac, \PP)}
+\newcommand{\Ex}[1]{\EE \left[ #1 \right]}
+\newcommand{\IS}[0]{È}
+\newcommand{\notindep}{\centernot{\indep}}
+\newcommand{\Ind}{\mathds{1}}
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+\newcommand{\seq}[1]{\underline{#1}}
+\newcommand{\e}[1]{\vec{e_{#1}}}
+\newcommand{\zws}{\hspace{0pt}}  % Zero width space
+\newcommand{\comp}{^{\mathrm{C}}} % alternative ^{\mathrm{C}} ^{\mathrm{c}} ^{\mathsf{c}}
+
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\sca}[1]{\left\langle#1\right\rangle}
+\newcommand{\smallnorm}[1]{\lVert#1\rVert}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\Span}{span}
+\let\Im\undefined  % redefine \Im
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\rng}{rng}
+\DeclareMathOperator*{\esssup}{ess\ sup}
+\DeclareMathOperator*{\essinf}{ess\ inf}
+\DeclareMathOperator*{\supp}{supp}
+\DeclareMathOperator{\tv}{V}
+\DeclareMathOperator{\ext}{ext} % exterior
+
+% Correggere gli errori di scrittura:
+\let\coloneq\coloneqq
+
+% Vettori sottolineati
+\renewcommand{\u}{\underline}
+\newcommand{\uu}[1]{\underline{\underline{#1}}}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\tilde}{\widetilde}
+
+%Lettere fighe/corsive
+\newcommand{\Ac}{\mathcal A}
+\newcommand{\Bc}{\mathcal B}
+\newcommand{\Cc}{\mathcal C}
+\newcommand{\Dc}{\mathcal D}
+\newcommand{\Ec}{\mathcal E}
+\newcommand{\Fc}{\mathcal F}
+\newcommand{\Gc}{\mathcal G}
+\newcommand{\Hc}{\mathcal H}
+\newcommand{\Ic}{\mathcal I}
+\newcommand{\Jc}{\mathcal J}
+\newcommand{\Kc}{\mathcal K}
+\newcommand{\Lc}{\mathcal L}
+\newcommand{\Mc}{\mathcal M}
+%\newcommand{\mm}{\mathscr m} %per la misura di Lebesgue
+\newcommand{\Nc}{\mathcal N}
+\newcommand{\Oc}{\mathcal O}
+\newcommand{\Pc}{\mathcal P}
+\newcommand{\Qc}{\mathcal Q}
+\newcommand{\Rc}{\mathcal R}
+\newcommand{\Sc}{\mathcal S}
+\newcommand{\Tc}{\mathcal T}
+\newcommand{\Uc}{\mathcal U}
+\newcommand{\Vc}{\mathcal V}
+\newcommand{\Wc}{\mathcal W}
+\newcommand{\Xc}{\mathcal X}
+\newcommand{\Yc}{\mathcal Y}
+\newcommand{\Zc}{\mathcal Z}
+
+%Lettere Gotiche per insiemi
+\newcommand{\mm}{\mathfrak M} %for pata's sigma algebra
+\newcommand{\Bg}{\mathfrak B}
+\newcommand{\Mg}{\mathfrak M}
+\newcommand{\Ng}{\mathfrak N}
+
+%% Doppia barra
+\renewcommand{\AA}{\mathbb A}
+\newcommand{\BB}{\mathbb B}
+\newcommand{\CC}{\mathbb C}
+\newcommand{\DD}{\mathbb D}
+\newcommand{\EE}{\mathbb E}
+\newcommand{\FF}{\mathbb F}
+\newcommand{\GG}{\mathbb G}
+\newcommand{\HH}{\mathbb H}
+\newcommand{\II}{\mathbb I}
+\newcommand{\JJ}{\mathbb J}
+\newcommand{\KK}{\mathbb K}
+\newcommand{\LL}{\mathbb L}
+\newcommand{\MM}{\mathbb M}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\OO}{\mathbb O}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\RR}{\mathbb R}
+\renewcommand{\SS}{\mathbb S}
+\newcommand{\TT}{\mathbb T}
+\newcommand{\UU}{\mathbb U}
+\newcommand{\VV}{\mathbb V}
+\newcommand{\WW}{\mathbb W}
+\newcommand{\XX}{\mathbb X}
+\newcommand{\YY}{\mathbb Y}
+\newcommand{\ZZ}{\mathbb Z}
+
+% d nell'integrale
+\newcommand{\de}{\mathrm d}
+\newcommand{\dl}{\de l}
+\newcommand{\dn}{\de n}
+\newcommand{\dq}{\de q}
+\newcommand{\dr}{\de r}
+\newcommand{\ds}{\de s}
+\newcommand{\dt}{\de t}
+\newcommand{\du}{\de u}
+\newcommand{\dv}{\de v}
+\newcommand{\dw}{\de w}
+\newcommand{\dx}{\de x}
+\newcommand{\dX}{\de X}
+\newcommand{\dy}{\de y}
+\def\dz{\de z}
+\newcommand{\dP}{\de P}
+\newcommand{\dPP}{\de \PP}
+\newcommand{\dthe}{\de \vartheta}
+\newcommand{\drho}{\de \rho}
+\newcommand{\dphi}{\de \varphi}
+\newcommand{\dlam}{\de \lambda}
+\newcommand{\dmu}{\de \mu}
+\newcommand{\dnu}{\de \nu}
+\newcommand{\dsig}{\de \sigma}
+\newcommand{\dtau}{\de \tau}
+\newcommand{\dpa}{\partial}
+\newcommand{\dOmega}{\de \Omega}
+\newcommand{\dS}{\de S}

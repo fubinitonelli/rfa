@@ -1,0 +1,166 @@
+%!TEX root = ../main.tex
+\subsubsection{Limits and continuity for functions}
+With the tools that we have been developed, now we face the definition of a notion of continuity for functions (recall the definition \vref{function}). A general notion for continuous functions is the following:
+\begin{defn}\label{continuous-functions-general}
+	A function said to be is continuous if it transforms open sets into open sets.
+\end{defn} 
+A formal definition need to specify on which structure we are working, for which we develop the two different cases in the followings; as we are going to see, the definition of limits differs and the definition of continuity is strictly related to the definition of limit. For metric spaces see theorem \vref{continuous-functions-general-metric}, for topological spaces see theorem \vref{continuous-functions-general-topological}.
+We could also equivalently define continuous functions as the ones mapping closed sets in closed sets, but using open sets theory is simpler.
+
+\paragraph{Limits and continuity for functions in metric spaces}
+First, we develop and study the continuity in the context of metric spaces. The following definition is similar to \vref{limit-in-metric-spaces} where we defined the limit for sequences, now we extend that definition to functions in general.
+\begin{defn} \label{limit-function-in-metric-spaces}
+	Let $(X, d_X)$, $(Y, d_Y)$ be metric spaces and consider a function $f: X \to Y$.\\
+	Then the \emph{limit} of $f(x)$ is $y_0$, namely $f(x) \to y_0$, as $x \to x_0$, with $x_0$ accumulation point for $X$, if:
+	$$
+		\forall \varepsilon > 0 \quad \exists \, \delta = \delta(x_0, \eps) > 0: \ d_X(x, x_0) < \delta \implies d_Y(f(x), y_0) < \eps$$
+	or, equivalently using open balls:
+	$$\forall \varepsilon > 0 \quad \exists \, \delta = \delta(x_0, \eps) > 0: \ f(B_{d_X}(x_0, \delta) \setminus \{x_0\})\subset B_{d_Y}(y_0, \eps).$$
+	When such limit does exist, then we say that the function \emph{converges} to $y_0$ in $x_0$, using the following notation:
+	$$ \lim\limits_{x \to x_0}f(x)=y_0.$$
+\end{defn}
+As for sequences, the limit, if exists, is unique.
+
+Now we can provide the ``classical'' definition of continuous function:
+\begin{defn} \label{continuous-functions-metric}
+	Let $(X, d_X)$, $(Y, d_Y)$ be metric spaces and consider a function $f: X \to Y$.
+	
+	We say that $f$ if \emph{continuous} in $x_0$ if one of the following condition is satisfied:
+	\begin{itemize}
+		\item $x_0$ is an accumulation point of $X$ and $f(x) \to f(x_0)$ as $x \to x_0$;
+		\item $x_0$ is an isolated point for $X$.
+	\end{itemize}
+	
+	We say that $f$ is \emph{continuous in a set} $D \in X$ if it is continuous in every point of $D$.
+\end{defn}
+
+A stronger version of continuity is the following:
+\begin{defn}\label{uniformly-continuous-functions}
+	Let $(X, d_X)$, $(Y, d_Y)$ be metric spaces and consider a function $f: X \to Y$.\\
+	We say that $f$ is \emph{uniformly continuous} in $D \subset X$ if:
+	$$
+		\forall \varepsilon > 0 
+		\quad \exists \, \delta = \delta(\eps) > 0 
+		\quad \forall x, y \in D : 
+		\ d_X(x, x_0) < \delta 
+		\implies d_Y(f(x), f(y)) 
+		< \eps
+	.
+	$$
+\end{defn}
+Notice that in this definition $\delta$ does not depend on $x$, but only on $\eps$.
+\begin{prop}
+	Let $(X, d_X)$, $(Y, d_Y)$ be metric spaces and consider a function $f: X \to Y$.\\
+	If $f$ is uniformly continuous in $D$, then $f$ is continuous in $D$. The converse isn't true in general.
+\end{prop}
+
+
+The following is a particular definition of continuity that occurs when functions converges like sequences in their domain:
+\begin{defn} \label{defn-seq-continuity-metric-sp}
+	Let $(X, d_X)$, $(Y, d_Y)$ be metric spaces and consider a function $f: X \to Y$.\\
+	We say that $f$ is \emph{sequentially continuous} in $x_0$ if:
+	$$\forall \{x_n\} \subset X \quad x_n \to x_0 \implies f(x_n) \to f(x_0).$$
+\end{defn}
+
+\begin{prop}
+	Let $(X, d_X)$, $(Y, d_Y)$ be metric spaces and consider a function $f: X \to Y$.\\
+	The function $f$ is continuous in $x_0$ if and only if $f$ is sequentially continuous in $x_0$.
+\end{prop}
+
+\begin{proof}
+	If $x_0$ is an isolated point the thesis is trivial. Otherwise, let $x_0$ be an accumulation point.
+	
+	\textit{Necessary condition} $\implies$:\\
+	Consider a sequence $\{x_n\} \subseteq X$ such that $x_n \to x_0$ and fix $\eps > 0$.
+	
+	We gain two consequences, $f$ is continuous at $x_0$, namely: 
+	$$
+		\forall \varepsilon > 0 
+		\ \exists \, \delta > 0:
+		\ 0<d_X(x_n, x_0) < \delta 
+		\implies d_Y(f(x), f(x_0)) < \eps
+	$$ 
+	and that $x_n$ converges to $x$, namely: 
+	$$\exists \, \bar{n} > 0: \ \forall n > \bar{n} \implies d_X(x_n,x_0) < \delta.$$
+	
+	Then if $n > \bar{n}$ we have $d_Y(f(x_n),f(x_0)) < \eps$, that is $f(x_n) \to f(x_0)$: this prove the implication.
+	
+	\textit{Sufficient condition} $\impliedby$:\\
+	By contradiction, if $f$ isn't continuous in $x_0$ then:
+	\[
+		\exists \, \bar\eps > 0 :
+		\ \forall \delta > 0 
+		\ \exists \, x_\delta \in X :
+		\ 0<d_X(x_j, x_0) < \delta
+		\quad \text{and} 
+		\quad d_Y(f(x_\delta), f(x_0)) \geq \bar\eps
+	. 
+	\tag{$\star$}
+	\]
+	
+	Let $\delta_n = \frac 1 n$, with $n\in\NN$ and let $x_n = x_{\delta_n}$. Then $\{x_n\}\subseteq X$ and $d_X(x_n,x_0)<\frac 1 n$ meaning that $x_n \to x_0$.
+	
+	By $(\star)$ we have $d_Y(f(x_n),f(x_0))\geq \bar{\eps}$, that is $f(x_n)$ doesn't converges to $f(x_0)$ so $f$ is not sequentially continuous. This prove the co-implication.
+\end{proof}
+
+The general definition for continuity \vref{continuous-functions-general} can be written as follows in terms of metric spaces:
+\begin{theo}[Characterization of continuity in metric spaces]\label{continuous-functions-general-metric}
+	Let $(X, d_X)$, $(Y, d_Y)$ be metric spaces and consider a function $f: X \to Y$.\\
+	Then the function $f$ is continuous in $X$ if $\forall A \subset Y$ open set we have that $f^{-1}(A) \subset X$ is an open set.
+\end{theo} 
+
+The continuity is invariant with respect to equivalent distances:
+\begin{prop}
+	Let $(X, d_1)$, $(X, d_2)$ be metric spaces, where $d_1$ is equivalent to $d_2$. \\
+	A function $f: (X, d_1) \to (X, d_1)$ is continuous if and only if $f: (X, d_2) \to (X, d_2)$ is also continuous.
+\end{prop}
+
+\begin{prop}
+	Let $(X, d_X)$, $(X, \tilde d_X)$ be metric spaces, such that $\exists\, C_1 > 0 : d_x \le C_1 \tilde d_x$. \\
+	Let also $(Y, d_Y)$, $(Y, \tilde d_Y)$ be metric spaces, such that $\exists\, C_2 > 0 : \tilde d_y \le C_2 d_y$.\\
+	If $f: (X, d_X) \to (Y, d_Y)$ is continuous, then $f: (X, \tilde d_X) \to (Y, \tilde d_Y)$ is also continuous.
+\end{prop}
+
+\begin{proof}
+	Let $x_0$ in $X$. By hypothesis, we have:
+	$$\forall \eps > 0 \quad \exists \, \delta = \delta(x_0, \eps) : \ d_X(x, x_0) < \delta \implies d_Y(f(x), f(x_0)) < \eps$$
+	Take $\tilde\eps > 0$ and define $\tilde\delta(\tilde\eps) \coloneqq \frac{1}{C_1} \cdot \delta \left( \frac{\tilde\eps}{C_2} \right)$. Then we have:
+	\begin{align*}
+	\tilde d_X(x, x_0) < \tilde\delta(\tilde\eps)
+	&\implies d_X(x, x_0) < \delta \left( \tfrac{\tilde\eps}{C_2} \right) \\
+	&\implies d_Y(f(x), f(x_0)) < \tfrac{\tilde\eps}{C_2} \\
+	&\implies \tilde d_Y(f(x), f(x_0)) < \tilde\eps
+	\end{align*}
+	Because $\tilde\eps$ is arbitrary, $f: (X, \tilde d_X) \to (Y, \tilde d_Y)$ is continuous by definition.
+\end{proof}
+
+\paragraph{Limits and continuity for functions in topological spaces} The notion of continuity function is slightly different.
+\begin{defn}
+	Let $(X, \tau_X)$, $(Y, \tau_Y)$ be topological spaces, and consider a function $f: X \to Y$.\\
+	Then the \emph{limit} of $f(x)$ is $y_0$, namely $f(x) \to y_0$, as $x \to x_0$, with $x_0$ accumulation point for $X$, if:
+	$$\forall B \in \tau_Y : y_0 \in B \quad \exists \, A \in \tau_X : x \in A, \, f(A \setminus \{x_0\}) \subset B.$$
+	When such limit does exist, then we say that the function \emph{converges} to $y_0$ in $x_0$, using the following notation:
+	$$ \lim\limits_{x \to x_0}f(x)=y_0.$$
+\end{defn}
+As for sequences in topological spaces, and as opposed to the metric space definition, the limit can be not unique.
+
+The definitions of continuity and sequential continuity are the same ones already given for metric spaces (see definitions \vref{continuous-functions-metric} and \vref{defn-seq-continuity-metric-sp}), simply with a different notion of convergence. Anyway, there is a difference in their implications:
+
+\begin{prop}
+	Let $(X, \tau_X)$, $(Y, \tau_Y)$ be topological spaces, and consider a function $f: X \to Y$.\\
+	If $f$ is continuous in $x_0$, then $f$ is sequentially continuous in $x_0$.
+\end{prop}
+The converse is not true in general, as topological spaces cannot be described by sequences. But, if $(X, \tau_X)$ is a first countable topological spaces (see \vref{first-second-countable}), then the double implication holds.
+
+As we done in \vref{continuous-functions-general-metric}, we will now provide another version of the definition of continuity based on open sets (see \vref{continuous-functions-general}), version adequate to the context of topological spaces:
+
+\begin{theo}[Characterization of the continuity in topological spaces]\label{continuous-functions-general-topological}
+	Let $(X, \tau_X)$, $(Y, \tau_Y)$ be topological spaces, and consider a function $f: X \to Y$.\\
+	Then the function $f$ is \emph{continuous} in $X$ if:
+	$$
+		\forall A \in \tau_Y 
+		\quad \text{we have} 
+		\quad f^{-1}(A) \in \tau_X
+	.
+	$$
+\end{theo} 

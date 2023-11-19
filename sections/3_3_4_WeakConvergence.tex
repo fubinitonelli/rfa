@@ -1,0 +1,245 @@
+%!TEX root = ../main.tex
+\subsubsection{Weak convergence}
+From now on, let $(X, \norm{\cdot})$ be a Banach space.
+\begin{defn}
+	We say that he sequence $\{x_n\} \subset X$ \emph{weakly converges} to $x \in X$ if, for all $ L \in X^\star$ we have:
+	$$L x_n \to L x \text{ as }  n \to \infty;$$
+	in such case we will write:
+	$$x_n \wto X.$$
+\end{defn}
+
+From now on, we will refer to $x_n \to x$ as \emph{strong convergence}.\\
+Observe that the strong convergence implies the weak one. Indeed, if $x_n \to x$ in $X$, then $|Lx_n-Lx| \leq \norm{L}_\star \norm{x_n-x} \to 0$ for any $L \in X^\star$, and thus $x_n \wto x$.\\
+In general, the converse is not true; consider the following example:
+\begin{exam}
+	Take $X=L^2([-1,1])$ and let $f_n(t) = \sin(nt)$, with $n \in \NN$.\\
+	Clearly $f_n \not \to 0$, but it is easy to prove that $f_n \wto 0$: since $(L^1)^\star \approx L^\infty$, 
+	we have:
+	$$\int_{-1}^1 f_n(t) g(t) \, \dt \to 0 \quad \forall g \in L^\infty ([-1,1]).$$
+	Check this as an exercise.
+\end{exam}
+
+You can show also that if $X$ is finite dimensional then the converse holds.\\
+Indeed: consider $(\RR^N, \norm{\cdot}_2)$. If $x_n \wto x$, then $L x_n \to L x \enspace \forall L \in (\RR^N)^\star$. \\
+But, $\forall L \in (\RR^N)^\star$, $\exists! \ a \in \RR^N: L y=\sca{a, y}$, thus:
+$$\sca{a, x_n} \to \sca{a, x} \quad \forall a \in \RR^N$$
+Taking $ a = e_j$, we have $x_n^j \to x^j$, i.e. strong convergence in each coordinate.
+
+This implies that $x_n \to x$ in $\norm{\cdot}_\infty$ so, by equivalence: $ x_n \to x$ in $\norm{\cdot}_2$ and in every norm which makes $\RR^N$ a Banach space.
+
+By isometry, we deduce that in any finite dimensional Banach space the weak convergence implies the strong one.
+
+Finally notice that weak and strong convergence are equivalent in $l^1$.%\footnote{Proven by Schur.}
+
+\paragraph{Basic properties} We can easily deduce some properties of this new kind of convergence.
+
+\begin{prop}
+	The weak limit is unique.
+\end{prop}
+\begin{proof}
+	Suppose $(x_n \wto x) \wedge (x_n \wto \tilde x)$ with $x \neq \tilde x$.\\
+	Then for any $L \in X^\star$, $(Lx_n \to L x )$ and $(Lx_n \to L\tilde x)$.\\
+	The strong limit is unique, so $Lx = L\tilde x$ for any $L \in X^\star$, and finally using HB second corollary \vref{prop-conseq-HB-2} we get $x = \tilde x$.
+\end{proof}
+
+\begin{prop}
+	If $x_n \wto x$, then $\{x_n\}$ is bounded in $X$.
+\end{prop}
+\begin{proof}
+	A sequence $\{Lx_n\}$ is bounded for each $L \in X^\star$ since it's a convergent sequence in $\RR$.\\
+	Set $T_n L = L x_n$ for any $L \in X^\star$.
+	Applying the uniform boundedness principle (see theorem \vref{theo-banach-steinhaus}) to $\{T_n\} \subset X^\star$ we have that there exists $M>0$ such that: $$\norm{T_n}_{\star\star} \leq M.$$
+	Moreover, for each $n \in \NN$, we can find (\vref{prop-conseq-HB-1}) $L_n \in X^\star$ such that $\norm{L_n}_\star = 1$ and $L_nx_n = \norm{x_n}$.
+	So we have: $$\norm{x_n}= |L_nx_n| = |T_nL_n| \leq \norm{T_n}_{\star\star} \underbrace{\norm{L_n}_\star}_{=1} \leq M.$$
+\end{proof}
+
+\begin{prop}
+	The norm function is lower semi-continuous with respect to the weak convergence, namely if $x_n \wto x$ then: $$\norm{x} \leq \liminf\limits_{n\to\infty} \norm{x_n}.$$
+\end{prop}
+\begin{proof}
+	Using HB first corollary (\vref{prop-conseq-HB-1}), let $L \in X^\star$ such that norm $\norm{L} = 1$ and $Lx = \norm{x}$. We have that:
+	$$0 < \norm{x} = L x
+	= \lim_{n\to +\infty}L x_n
+	= \lim_{n\to +\infty}|L x_n|
+	= \liminf_{n\to +\infty}|L x_n|\leq \liminf_{n\to\infty}\norm{x_n}.$$
+	We can put the absolute value in $|Lx_n|$ because the limit is the norm of $x$, which is non negative.
+\end{proof}
+
+\begin{prop}
+	If $x_n \wto x$ and $L_n \xrightarrow{X^\star} L$, then $L_n x_n \to L x$.
+\end{prop}
+\begin{proof} As $n \to +\infty$ we have:
+	\begin{align*}
+		L_n x_n - L x_n &= |(L_n-L)|x_n \leq \norm{L_x -L}_\star M \to 0 \\
+		&\\
+		L_n x_n - Lx &= L_n x_n - L x_n + Lx_n - Lx \\
+		&= (L_n x_n - L x_n) + L(x_n - x) \to 0.
+	\end{align*}
+\end{proof}
+
+What happens to the weak convergence when $Y\neq \RR$? We have the following result.
+
+\begin{prop}
+	Let $X$, $Y$ be Banach spaces and $T \in \Bc(X,Y)$.
+	Then $ x_n \wto x$ implies $T x_n \wto Tx$.
+	In this case we say that $T$ is \emph{weak-weak continuous}. 
+	\label{prop-bdd-weak-weak}
+\end{prop}
+\begin{proof}
+	Let $L \in Y^\star$.\\
+	The mapping $x \mapsto LTx$ is an element of $X^\star$.\\
+	Now set $\Lambda x = L T x$ with $\Lambda \in X^\star$.\\
+	We have $\Lambda x_n \to \Lambda x$ as $x_n \wto x$; so we have:
+	$$LTx_n \to LTx \quad \forall L \in Y^\star$$
+	that is the definition of $Tx_n \wto Tx$.
+\end{proof}
+
+\begin{prop}
+	Let $X$ be reflexive.
+	If $\{Lx_n\}$ converges for any $L \in X^\star$, then there exists a unique $x \in X$ such that $x_n \wto x$.
+\end{prop}
+\begin{proof}
+	Fix $n\in \NN$, then let $\{T_n\}_{n\in \NN}\subset X^{\star\star}$ such that $T_nL = L x_n$ for each $L \in X^\star$.\\
+	We have (see corollary \vref{coro-UBP-conv}) that $\{T_n\}$ converges point-wise to some $T \in X^{\star\star}$.\\
+	Setting $x = \tau^{-1}(T)$ we have $Lx_n = T_n L \to TL = Lx$ for any $L \in X^\star$.
+	The thesis is proven.	
+\end{proof}
+
+\paragraph{Weak$^{\star}$ convergence} Analogously, we can define a weak convergence notion also for functionals.
+\begin{defn}
+	We say that $\{L_n\}\subset X^\star$ \emph{weakly$^\star$ converges} to $L \in X^\star$ if, for all $x \in X$ we have:
+	$$L_n x \to Lx\text{ as }n \to \infty;$$
+	in such case we will write:
+	$$L_n \wsto L.$$
+\end{defn}
+
+In $X^\star$, both weak convergence and weak$^\star$ convergence are defined, but the latter is weaker. Indeed:
+\begin{alignat*}{4}
+	L_n \wsto L && \iff & \; L_n x \to L x \quad &&\forall L\in X \\
+	L_n \wto L && \iff & \; \Lambda L_n \to \Lambda L \quad &&\forall \Lambda\in X^{\star\star} \vphantom{\wsto} \\
+	L_n \wsto L && \implies & \; \Lambda L_n \to \Lambda L \quad &&\forall \Lambda \in \tau(X)
+\end{alignat*}
+where $ \Lambda L_n = L_n x$, $ \Lambda L = L x$. Therefore, such convergences are equivalent if and only if $\tau(X)=X^{\star\star}$, that is if and only if $X$ is reflexive.
+ 
+If $X$ is not reflexive we still have $L_n \wto L \implies L_n \wsto L$.
+
+
+Arguing as before we have the following properties
+\begin{prop}
+	\Fixvmode
+	\begin{itemize}
+		\item The weak$^\star$ limit is unique;
+		\item If $L_n \wsto L$ then $\{L_n\}$ is bounded in $X^\star$;
+		\item The norm is lower semi-continuous with respect to the weak$^\star$ convergence, that is, if $L_n \wsto L$ then $\norm{L}\leq \liminf\limits_{n \to \infty}\norm{L_n}_\star$;
+		\item If $(x_n \to x)$ and $(L_n \wsto L)$ then $L_x x_n \to L X$.
+	\end{itemize}
+\end{prop}
+
+\paragraph{A weak$^\star$ compactness criterion}
+
+\begin{theo}[Banach--Alaoglu] \label{theo-banach-alaoglu}
+	Let $X$ be a separable Banach space. \\
+	Then any bounded sequence $\{L_n\}_{n \in \NN} \subset X^\star$ contains a subsequence which weakly$^\star$ converges to some $L\in X^\star$.
+\end{theo}
+
+Separability is necessary, consider the following example.
+\begin{exam}
+	Take $X = l^\infty$ and $\{L_n\}_{n\in\NN} \subset X^\star$ such that:
+	$$L_n x = x_n \quad \forall x = \{x_n\}_n \in l^\infty.$$
+	Notice that $L_n$ is obviously bounded, namely $\norm{L_n}_\star \le 1$, because $\abs{L_n x} \le \norm{x}_\infty$. \\
+	Anyway $L_n$ does not contain any weakly$^\star$ convergent sub-sequence: if there exists any $\{L_{n_k}\}_k$, taking $x = \{(-1)^{n_k}\}_{n_k \in \NN}$ we reach a contradiction $L_{n_k} x = (-1)^{n_k}$ does not converge as $n \to +\infty$.
+\end{exam}
+
+\begin{proof}
+	First, let $M = \sup_{n\in\NN}\norm{L_n}_\star \in [0, +\infty)$.\\
+	Consider a sequence $\{x_k\}_{k\in \NN} \subset X$ dense in $X$.\\
+	Take the sequence $\{L_n x_0\}_{n \in \NN} \subset \RR$ which is bounded. By Bolzano--Weierstrass theorem (\vref{bolzano-weierstrass-theo})  there exists a converging subsequence $\{L_{n_{j_0}}x_0\}_{j_0 \in \NN}$.\\
+	Take also the bounded sequence $\{L_{n_{j_0}} x_1\}$: there exists a converging subsequence $\{L_{n_{j_1}} x_1\}_{j_1 \in \NN}$.\\
+	
+	By diagonalization (see for analogy the proof of Ascoli--Arzelà theorem  \vref{theo-ascoli-arzela}) we can extract $\{L_{n_h}\}_{h \in \NN}$ such that $\{L_{n_j} x_k\}_{j\in \NN}$ converges for any $k \in \NN$ with respect to $j$.
+	
+	Consider $x \in X$ and fix $\eps >0$. Via separability, we can find $x_k$ such that $\norm{x-x_k}\leq \frac{\eps}{2M}$.
+
+	Observe now that:
+	$$ |L_{n_i}x-L_{n_j}x| \leq |L_{n_i} x - L_{n_i}x_k|+|L_{n_i}x_k-L_{n_j}x_k|+|L_{n_j}x_k-L_{n_j}x|. $$
+	We have:
+	\begin{align*}
+		|L_{n_i} x - L_{n_i}x_k| &\leq M \norm{x-x_k}\leq \tfrac \eps 2, \\
+		|L_{n_j}x_k-L_{n_j}x| &\leq M \norm{x-x_k}\leq \tfrac \eps 2.
+	\end{align*}
+	Moreover, $\{L_{n_j} x_k\}_{j\in\NN}$ converges as it is a fundamental sequence, and we can find $j' \in \NN$ such that:
+	$$|L_{n_i} x_k - L_{n_j}x_k | \leq \eps \quad \forall i,j \geq j'.$$
+	Summing up:
+	$$|L_{n_i}x-L_{n_j}x| \leq 2 \eps \quad \forall i, j \ge j'.$$
+
+	Therefore $\{L_{n_j} x\}$ is a Cauchy sequence and converges. Via an implication of the uniform boundedness principle (see corollary \vref{coro-UBP-conv}), there exists $L \in X^\star$ such that $L_{n_j}x \to L x \enspace \forall x \in X$. An this concludes the proof.
+\end{proof}
+
+\begin{exam}
+	Consider the space $(\Omega, \Lc(\Omega), \lambda)$ with $\Omega \subseteq \RR^N$ and $\lambda(\Omega) >0$, and a sequence $\{f_n\}_{n\in\NN}\subset L^\infty (\Omega)$. \\
+	Set: $$L_n(g) = \int_\Omega f_n g \, \dlam \quad \forall g \in L^1(\Omega).$$
+	If $\{f_n\}_{n\in\NN}$ is bounded, then $\{L_n\}_{n \in \NN}$ is bounded in $(L^1(\Omega))^\star$.\\
+	By Banach--Alaoglu theorem, as $L^1(\Omega)$ is separable, we can extract a subsequence $\{L_{n_h}\}_{h \in \NN}$ which weakly$^\star$ converges to an $L \in (L^1(\Omega))^\star$, namely: $$L_{n_h} (g) \to L(g) \quad \forall g \in L^1(\Omega) \quad \text{as }h \to \infty.$$
+	Moreover, we know that exists a unique $f \in L^\infty (\Omega)$ such that:
+	$$L(g) = \int_\Omega f g \, \dlam \quad \forall g \in L^1(\Omega).$$
+	Therefore the weak$^\star$ convergence can be written in terms of integrals as follows:
+	$$\int_\Omega f_{n_h} g \,\dlam \to \int_\Omega f g \,\dlam \quad \forall g \in L^1(\Omega, \mm, \mu) \quad \text{as }h \to \infty.$$
+\end{exam}
+
+This is an example of the statement ``for any bounded sequence in $L^\infty(\Omega)$ we can extract a weakly$^\star$ convergent subsequence''.
+
+Remember also that $L^1(\Omega,\mm,\mu)$ is separable if, for instance, $\Omega \in \Lc(\RR^N) = \mm$.
+It may not be separable in some extremely pathological cases.
+
+
+
+\paragraph{Considering also the reflexivity} Reflexivity is a strong assumption. Can we say more if $X$ is also reflexive?
+\begin{prop}
+	If $X$ is separable and reflexive, then any of its bounded sequences contains a weakly-converging sub-sequence.
+	\label{prop-coro-BA}
+\end{prop}
+\begin{proof}
+	Let $\{x_n\}_{n\in\NN}\subset X$ a bounded sequence.\\
+	As $X^\star$ is separable we can apply the Banach--Alaoglu theorem to $\{\tau(x_n)\}_{n \in \NN}\subset X^{\star\star}$, which is bounded since $x_n$ is a bounded sequence and the canonical map is isometric, and find $\{\tau(x_{n_h})\}_{h \in \NN}$ such that $$\tau(x_{n_h}) \wsto \Lambda$$ as $h \to \infty$ for some $\Lambda \in X^{\star\star}$.\\
+	Thanks to the reflexivity of $X$ we have that $x = \tau^{-1}(\Lambda)$ and $$x_{n_h} \wto x$$ as $h\to\infty$.
+\end{proof}
+
+\paragraph{Another characterization for reflexivity} Actually we can say much more: separability is not necessary in statement \vref{prop-coro-BA}. Moreover the converse holds:
+\begin{theo}[Eberlin--Šmulian] \label{theo-eberlin-smulian}
+	If $X$ is a Banach space in which any bounded sequence contains a weakly-converging subsequence, then $X$ is reflexive.
+\end{theo}
+
+	Let $\{f_n\}_n \subseteq L^p(\Omega, \Lc(\Omega), \lambda)$ with $p \in (1,+\infty)$ and $\lambda(\Omega) > 0$.\\
+	We know that $L^p$ is separable, and hence $(L^p)^\star \approx L^q$, with $p,q$ conjugates: operators on $L^p$ can be represented as integrals with an appropriate $L^q$ function.\\
+	If $\{f_n\}$ is bounded, then there exists a subsequence $\{f_{n_k}\}$ and a function $f \in L^p$ such that $\int_\Omega f_{n_k} g \,\dlam \to \int_\Omega fg \,\dlam \enspace \forall g \in L^q$, and, in particular, $L_g f = \int_\Omega fg \,\dlam$ and $L_g \in (L^p)^\star \approx L^q$.\\
+	Summing up, if $p\in(1,\infty)$, from any bounded sequence in $L^p(\Omega)$ we can extract a weakly convergent subsequence.
+%
+%\paragraph{A sufficient condition for strong convergence}
+%\begin{prop}
+%	Let $(X, \norm \cdot)$ be an uniformly convex Banach space. \\
+%	If a sequence $\{x_n\}_n \subseteq X$ is such that $x_n \wto x$ and $\limsup_{n} \norm{x_n} \le \norm x$, then $x_n \to x$.
+%\end{prop}
+%The assumptions of the theorem imply the lower semi-continuity of the norm, namely $\norm x \le \liminf \norm{x_n}$, and thus the convergence of the norm: $\norm{x_n} \to \norm x$.\todo{Ref?}
+%
+%\begin{proof}
+%	The case $x=0$ is trivial. If $x \neq 0$, set $\lambda_n \coloneqq \max\{\norm{x_n}, \norm x\} \enspace \forall n \in \NN$.
+%	The convergence of the norm entails that $\lambda_n \to \norm x$.
+%	
+%	Now set $y_n \coloneqq \frac{x_n}{\lambda_n}$ and $y \coloneqq \frac{x}{\norm x}$.
+%	The reader should check that, as $n = +\infty$, $y_n \wto y$.
+%	
+%	Via the semi-continuity of the norm, since $\frac{y_n + y}{2} \wto \frac{2y}{2} = y$, we have:
+%	\begin{align*}
+%	\norm y &\le \liminf \norm{\frac{y_n+y}{2}}
+%	\intertext{But $\norm y = 1$ and $\norm{y_n} \le 1$, hence:}
+%	1 = \norm y &\le \liminf \norm{\frac{y_n+y}{2}} \le \limsup \norm{\frac{y_n+y}{2}} \\
+%	&\le \limsup \tfrac 1 2 \norm{y_n} + \tfrac 1 2 \norm{y} \le \tfrac 1 2 + \tfrac 1 2 = 1
+%	\end{align*}
+%	That is, $\lim_{n} \norm{\frac{y_n+y}{2}} = 1$.
+%	
+%	Suppose now, by contradiction, that $y_n \not\to y$. Then we can find a non-Cauchy subsequence, namely there exist $\eps_0 > 0$ and $\{y_{n_k}\}$ such that:
+%	$$\norm{y_{n_k}-y_{n_k'}} > \eps_0 \quad \forall k,k' \in \NN$$
+%	Since $X$ is uniformly convex:
+%	$$\exists \, \delta_0 > 0 : \enspace 1-\delta > \norm{\frac{y_{n_k}+y_{n'_k}}{2}} \not\to 1$$ which is a contradiction, and thus $y_n \to y$. Since $\lambda_n \to \norm x$ as well, one has $x_n \to x$.
+%\end{proof}
+%
